@@ -1,7 +1,3 @@
-
-
-
-
 import { UserContext } from "@/app/context/user.context";
 import { useContext } from "react";
 
