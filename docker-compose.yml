@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+  backend:
+    container_name: gamp
+    build: ./gamp-recipes
+    ports:
+      - 3000:3000
+    working_dir: /app-backend
+    # Caso queira que o container esteja atualizado durante o desenvolvimento, sem que você precise ficar fazendo down e up dos containers, descomente as 3 linhas abaixo
+    volumes: 
+      - ./gamp-recipes:/app-backend/
+    healthcheck:
+      test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
+      timeout: 10s
+      retries: 5
+  
