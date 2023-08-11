@@ -1,14 +1,18 @@
-'use-client'
-
+// coloca no lado do cliente
+'use client'
+// coloca no lado do cliente
 import LoginForm from "./components/loginForm"
 
 
 export default function Login() {
-  return (
-    <div>
-    
+  const content =  (
+    <section>
+
     <LoginForm />
     
-    </div>
+    </section>
+    
   )
+
+  return content
 }

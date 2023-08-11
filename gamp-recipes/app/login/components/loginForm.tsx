@@ -1,4 +1,6 @@
-'use client'
+
+
+
 
 import { UserContext } from "@/app/context/user.context";
 import { useContext } from "react";
@@ -6,25 +8,17 @@ import { useContext } from "react";
 
 const LoginForm = () => {
 
-const {user, login} = useContext(UserContext)
-  // const handleEmailChange = (event:React.FormEvent) => {
-  //   setUsername(event.target.value);
-  // };
+const { login} = useContext(UserContext)
 
-  // const handlePasswordChange = (event) => {
-  //   setPassword(event.target.value);
-  // };
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // Aqui você pode adicionar a lógica de autenticação
   
     console.log('login!');
   };
 
-  return (
-    <div>
-      <h2>Login</h2>
+  const content =  (
+    <>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email">Email:</label>
@@ -48,8 +42,10 @@ const {user, login} = useContext(UserContext)
           <button type="submit">Login</button>
         </div>
       </form>
-    </div>
+      </>
   );
+
+  return content
 };
 
 export default LoginForm;
