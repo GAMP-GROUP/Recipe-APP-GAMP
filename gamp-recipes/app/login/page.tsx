@@ -7,9 +7,7 @@ import LoginForm from "./components/loginForm"
 export default function Login() {
   const content =  (
     <section>
-
     <LoginForm />
-    
     </section>
     
   )
