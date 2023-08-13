@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       width: {
         'big': '125px',
-        'small': '100px',
+        'small': '75px',
       },
       colors: {
         'yellow': '#F2E635',

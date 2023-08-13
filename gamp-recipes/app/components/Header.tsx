@@ -22,8 +22,8 @@ export default function Header() {
         >
             <Image
                 src='/icons/menu.png'
-                width='35'
-                height='35'
+                width='32'
+                height='32'
                 alt='Three stripes positioned horizontally one above the other, representing the menu icon'
             />
             <picture>
@@ -36,14 +36,14 @@ export default function Header() {
             </picture>
             <span
                 id='search-element'
-                className={ `bg-black p-3 rounded-full flex justify-between transition-all duration-300 ${ !searchStatus ? 'w-12' : 'w-44' }`}
+                className={ `bg-black p-3 rounded-full flex justify-between transition-all duration-300 ${ !searchStatus ? 'w-12' : 'w-56' }`}
                 onClick={ () => searchClick() }
             >
                 <input
                     id='search-input'
-                    className='w-28 bg-black text-white'
+                    className='w-40 bg-black text-white'
                     type='text'
-                    placeholder='Recipe'
+                    placeholder='Recipe or ingredient'
                     hidden={ true }
                 />
                 <Image
