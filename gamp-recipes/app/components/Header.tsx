@@ -26,17 +26,17 @@ export default function Header() {
                 height='35'
                 alt='Three stripes positioned horizontally one above the other, representing the menu icon'
             />
-            <Image
-                id='gamp-logo'
-                width='125'
-                height='125'
-                src='/images/logo-black.png'
-                className={`transition-width ${!searchStatus ? 'w-125' : 'w-100'}`}
-                alt='Our logo'
-            />
+            <picture>
+                <img
+                    id='gamp-logo'
+                    className={ `transition-all duration-300 ${ !searchStatus ? 'w-big' : 'w-small' }` }
+                    src='/images/logo-black.png'
+                    alt='Our logo'
+                />
+            </picture>
             <span
                 id='search-element'
-                className='bg-black p-3 rounded-full flex justify-between'
+                className={ `bg-black p-3 rounded-full flex justify-between transition-all duration-300 ${ !searchStatus ? 'w-12' : 'w-44' }`}
                 onClick={ () => searchClick() }
             >
                 <input

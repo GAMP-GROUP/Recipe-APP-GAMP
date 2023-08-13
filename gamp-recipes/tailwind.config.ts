@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      width: {
+        'big': '125px',
+        'small': '100px',
+      },
       colors: {
         'yellow': '#F2E635',
         'brown': '#F2BA52',
