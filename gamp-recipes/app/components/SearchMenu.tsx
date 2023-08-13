@@ -1,4 +1,4 @@
-export default function SearchBar() {
+export default function SearchMenu() {
     return (
         <div></div>
     )

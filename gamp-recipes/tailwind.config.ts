@@ -9,8 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'yellow': '#FAE500',
-        'brown': '#9E7032',
+        'yellow': '#F2E635',
+        'brown': '#F2BA52',
+        'orange': '#D94B18',
+        'red': '#F23545',
+        'wine': '#A62E38',
       }
     },
   },
