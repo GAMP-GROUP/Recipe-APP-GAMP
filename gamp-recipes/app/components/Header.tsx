@@ -30,7 +30,7 @@ export default function Header() {
                 <img
                     id='gamp-logo'
                     className={ `transition-all duration-300 ${ !searchStatus ? 'w-big' : 'w-small' }` }
-                    src='/images/logo-black.png'
+                    src='/images/logo-color.png'
                     alt='Our logo'
                 />
             </picture>
