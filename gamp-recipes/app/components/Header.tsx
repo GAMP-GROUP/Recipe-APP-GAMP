@@ -37,7 +37,6 @@ export default function Header() {
             <span
                 id='search-element'
                 className={ `bg-black p-3 rounded-full flex justify-between transition-all duration-300 ${ !searchStatus ? 'w-12' : 'w-56' }`}
-                onClick={ () => searchClick() }
             >
                 <input
                     id='search-input'
@@ -52,6 +51,7 @@ export default function Header() {
                     height='25'
                     alt='A magnifiyng glass vectorized, representing the search icon'
                     className='place-content-end'
+                    onClick={ () => searchClick() }
                 />
             </span>
         </header>
