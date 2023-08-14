@@ -1,7 +1,9 @@
-import { ChangeEvent, ReactEventHandler, createContext } from 'react';
-import { ContextUser } from '../types/user.context';
+import { ChangeEvent, createContext } from 'react';
+import { ContextUser } from '../../gamp-recipes/app/types/user.context';
 import { useState } from "react";
-import { UserProps } from "../types/user.props";
+import { UserProps } from '@/types';
+
+
 
 export const UserContext = createContext<ContextUser>({} as ContextUser );
 
