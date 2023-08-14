@@ -1,5 +1,5 @@
 import { ChangeEvent } from "react"
-import { UserProps } from "./user.props"
+
 
 
 type UserProps = {
@@ -9,6 +9,6 @@ type UserProps = {
 }
 
 type ContextUser = {
-  user:UserProps  | null,
+  user:UserProps 
   handleInputChange: (event:ChangeEvent<HTMLInputElement>) => void
 }
