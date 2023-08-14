@@ -1,6 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
-import { UserContext } from "../context"
+import { UserContext } from "../../contextAPI/context"
 import { useContext } from "react"
 
 export default function ProfilePage() {
