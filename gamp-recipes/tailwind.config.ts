@@ -15,9 +15,12 @@ const config: Config = {
       colors: {
         'yellow': '#F2E635',
         'brown': '#F2BA52',
-        'orange': '#D94B18',
-        'red': '#F23545',
-        'wine': '#A62E38',
+        'orange': '#7035F2',
+        'apple': '#3603A6',
+        'magenta': '#7035F2',
+      },
+      borderRadius: {
+        'arch': '4555px'
       }
     },
   },
