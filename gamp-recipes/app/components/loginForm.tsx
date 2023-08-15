@@ -2,13 +2,14 @@ import { UserContext } from "@/contextAPI/context";
 import { useContext } from "react";
 import { useState } from "react";
 import { validateEmail, validateLogin, validatePassword, validateUsername } from "@/app/lib/input.validations";
+import Image from "next/image";
 
 
 const LoginForm = () => {
 
 const [buttonClicked, setButtonClicked] = useState(false)
 
-const { handleInputChange, user} = useContext(UserContext)
+const { handleInputChange, user, handleLoginCardDisplay} = useContext(UserContext)
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -18,22 +19,37 @@ const { handleInputChange, user} = useContext(UserContext)
 
   const handLoginBtm = () =>{
     const validation = validateLogin(user.email, user.password, user.username)
-    if (validation){
-      setButtonClicked(true)
-    }
+    console.log(validation);
     
+    if (validation && user.email && user.password && user.username){
+      handleLoginCardDisplay()
+    
+    }
+    setButtonClicked(true);
+ 
   }
 
   const content =  (
-    <div>
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign up
-        </h2>
-      <form onSubmit={handleSubmit}  className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+
+    
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white shadow-lg px-4 pb-8 sm:px-4 md:px-10 lg:px-10 py-8 rounded-lg w-11/12 max-w-md">
+        <div className="  sm:mx-auto sm:w-full sm:max-w-sm">
+          <Image  
+          className= 'mx-auto h-20 w-'
+          src='/images/logo-color.png'
+          alt="logo marca"
+          height={100}
+          width={120} 
+              />
+          <h2 className="tracking-wide  uppercase text-center text-2xm font-bold leading-9  text-gray-900">
+            Sign Up
+          </h2>
+        </div>
+      <form onSubmit={handleSubmit}>
         <div className="bg-white text-slate-950  flex-row items-center justify-between p-5 " >
 
          <label 
-         className="block text-gray-700 text-sm font-bold mb-2"
+         className="block text-sm font-bold mb-2"
          htmlFor="username" 
          >Username:</label>
 
@@ -46,7 +62,7 @@ const { handleInputChange, user} = useContext(UserContext)
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
         />
            {buttonClicked  && !validateUsername( user.username ) && (
-          <p className="text-red-500 text-xs italic">Your username must be at least 4 characters long</p>
+          <p className="text-rose-500 text-xs italic">Your username must be at least 4 characters long</p>
         )}
         <br />
 
@@ -62,7 +78,7 @@ const { handleInputChange, user} = useContext(UserContext)
             placeholder="name@flowbite.com"
           />
              {buttonClicked  && !validateEmail( user.email ) && (
-          <p className="text-red-500 text-xs italic">Your email must be in this format: example@example.com.</p>
+          <p className="text-rose-500 text-xs italic">Your email must be in this format: example@example.com.</p>
         )}
         <br />
 
@@ -76,23 +92,32 @@ const { handleInputChange, user} = useContext(UserContext)
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
         />
            {buttonClicked  && !validatePassword( user.password ) && (
-          <p className="text-red-500 text-xs italic">Your password must be 6 characters long.</p>
+          <p className="text-rose-500 text-xs italic">Your password must be 6 characters long.</p>
         )}
         <br />
+          <div className="flex flex-row items-center justify-between py-3 ">
 
-
-          <button 
+          <button
+          type="submit"
+          onClick={() =>  handleLoginCardDisplay()}
+          className="bg-red hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+            >
+            Cancel
+            </button>
+          <button
           type="submit"
           onClick={() => handLoginBtm()}
-          className="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
+          className="bg-yellow hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow"
             >
-            Login</button>
-
-
+            Login
+            </button>
+            </div>
         </div>
 
       </form>
+
       </div>
+      
   );
 
   return content

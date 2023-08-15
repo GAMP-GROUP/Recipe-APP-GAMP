@@ -9,6 +9,8 @@ type UserProps = {
 }
 
 type ContextUser = {
+  logging: boolean
   user:UserProps 
+  handleLoginCardDisplay:() => void
   handleInputChange: (event:ChangeEvent<HTMLInputElement>) => void
 }
