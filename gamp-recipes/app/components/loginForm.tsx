@@ -5,7 +5,7 @@ import { validateEmail, validateLogin, validatePassword, validateUsername } from
 import Image from "next/image";
 
 
-const LoginForm = () => {
+export default function  LoginForm (){
 
 const [buttonClicked, setButtonClicked] = useState(false)
 
@@ -17,20 +17,18 @@ const { handleInputChange, user, handleLoginCardDisplay} = useContext(UserContex
     console.log('login!');
   };
 
-  const handLoginBtm = () =>{
+  const handLoginBtm = () => {
+    setButtonClicked(true);
+    if(user.email && user.password && user.username) {
     const validation = validateLogin(user.email, user.password, user.username)
     console.log(validation);
-    
-    if (validation && user.email && user.password && user.username){
+    if (validation) {
       handleLoginCardDisplay()
-    
-    }
-    setButtonClicked(true);
- 
   }
+    }
+}
 
-  const content =  (
-
+  const content = (
     
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white shadow-lg px-4 pb-8 sm:px-4 md:px-10 lg:px-10 py-8 rounded-lg w-11/12 max-w-md">
         <div className="  sm:mx-auto sm:w-full sm:max-w-sm">
@@ -123,4 +121,3 @@ const { handleInputChange, user, handleLoginCardDisplay} = useContext(UserContex
   return content
 };
 
-export default LoginForm;

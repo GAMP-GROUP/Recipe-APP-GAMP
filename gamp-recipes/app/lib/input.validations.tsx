@@ -14,7 +14,9 @@ export const validateUsername = (username: string) => {
 };
 
  export const validateLogin = (email: string, password:string, username: string): boolean => {
-  const teste = !(validateEmail(email) && validatePassword(password) && validateUsername(username));
+  const teste = (validateEmail(email) && validatePassword(password) && validateUsername(username));
+  console.log(teste);
+  
   return teste
 };
 
