@@ -3,10 +3,7 @@ import { ContextUser } from '../../gamp-recipes/app/types/user.context';
 import { useState } from "react";
 import { UserProps } from '@/types';
 
-
-
 export const UserContext = createContext<ContextUser>({} as ContextUser );
-
 
 export function UserProvider ({ children }:{children: React.ReactNode})  {
   const [user, setUser] = useState<UserProps>({
@@ -31,4 +28,3 @@ export function UserProvider ({ children }:{children: React.ReactNode})  {
       </UserContext.Provider>
     )
 }
-

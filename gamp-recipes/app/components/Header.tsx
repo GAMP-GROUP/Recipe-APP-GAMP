@@ -1,9 +1,12 @@
 'use client';
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Image from "@/node_modules/next/image";
+import { useBehaviorContext } from "@/contextAPI/context/behavior.context";
+import { toggleMenu } from "./SideMenu";
 
 export default function Header() {
     const [searchStatus, setSearchStatus] = useState(false);
+    const { menu, setMenu } = useBehaviorContext();
 
     function searchClick(): void {
         const searchTextInput = document.getElementById('search-input');
@@ -25,6 +28,7 @@ export default function Header() {
                 width='32'
                 height='32'
                 alt='Three stripes positioned horizontally one above the other, representing the menu icon'
+                onClick={ () => toggleMenu(menu, setMenu) }
             />
             <picture>
                 <img
