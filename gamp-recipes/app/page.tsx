@@ -16,30 +16,29 @@ export default async function Home() {
         <LoginForm />
       </section>
       <main>
-        {
-          dataAllMeals.map(({strMeal, idMeal, strMealThumb}, index) => {
-           return index < 12
-           && (
-            <div key={index}>
-              {/* <Link href={}> */}
-            <RecipesCard 
-              strMeal={strMeal}
-              idMeal={idMeal}
-              strMealThumb={strMealThumb}
-            />
-            {/* </Link> */}
-            <button>
-             Favorite
-            </button>
-            </div>
-           )
-          })
-        }
-        
-        
+        <section className="p">
+          {
+            dataAllMeals.map(({ strMeal, idMeal, strMealThumb,strArea, strCategory }, index) => {
+              return index < 12
+                && (
+                  <div key={index}>
+                    {/* <Link href={}> */}
+                    <RecipesCard
+                      strMeal={strMeal}
+                      idMeal={idMeal}
+                      strMealThumb={strMealThumb}
+                      strArea={strArea}
+                      strCategory={strCategory}
+                    />
+                    {/* </Link> */}
+                  </div>
+                )
+            })
+          }
+        </section>
       </main>
-      </div>
+    </div>
 
   )
-  
+
 }
