@@ -1,27 +1,24 @@
-'use client'
+// 'use client'
 
 import { UserContext } from "@/contextAPI/context";
 import { useContext } from "react";
 import LoginForm from "./components/loginForm";
+import { getAllMeals } from "./lib/externalAPI";
 
 
-export default function Home() {
-  const {logging} = useContext(UserContext)
-
+export default async function Home() {
+  const dataAllMeals = await getAllMeals()
   return (
-      <div>
-        <h1>RECIPES</h1>
-        <div>
-          {
-
-          }
-        </div>
-        {
-        logging &&
+    <div>
+      <section>
         <LoginForm />
-        }
+      </section>
+      <main>
+        <h1>RECIPES</h1>
+        
+        
+      </main>
       </div>
-   
 
   )
   
