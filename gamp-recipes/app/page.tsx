@@ -4,6 +4,8 @@ import { UserContext } from "@/contextAPI/context";
 import { useContext } from "react";
 import LoginForm from "./components/loginForm";
 import { getAllMeals } from "./lib/externalAPI";
+import RecipesCard from "./components/RecipesCard";
+import Link from "next/link";
 
 
 export default async function Home() {
@@ -14,7 +16,25 @@ export default async function Home() {
         <LoginForm />
       </section>
       <main>
-        <h1>RECIPES</h1>
+        {
+          dataAllMeals.map(({strMeal, idMeal, strMealThumb}, index) => {
+           return index < 12
+           && (
+            <div key={index}>
+              {/* <Link href={}> */}
+            <RecipesCard 
+              strMeal={strMeal}
+              idMeal={idMeal}
+              strMealThumb={strMealThumb}
+            />
+            {/* </Link> */}
+            <button>
+             Favorite
+            </button>
+            </div>
+           )
+          })
+        }
         
         
       </main>

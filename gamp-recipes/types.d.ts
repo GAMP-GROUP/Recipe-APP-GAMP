@@ -13,6 +13,15 @@ type ContextUser = {
   handleInputChange: (event:ChangeEvent<HTMLInputElement>) => void
 }
 
+type mealProps = {
+  idMeal: string,
+  strMealThumb: string,
+  strMeal: string,
+}
+
+type ContextMeals = {
+  allRecipes: MealRes[],
+}
 
 type externalAPI = drinkAPI | mealAPI
 
