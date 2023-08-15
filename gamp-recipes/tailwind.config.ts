@@ -14,14 +14,9 @@ const config: Config = {
       },
       colors: {
         'yellow': '#F2E635',
-        'brown': '#F2BA52',
-        'orange': '#7035F2',
-        'apple': '#3603A6',
-        'magenta': '#7035F2',
+        'gold': '#F2BA52',
+        'red': '#F21D55',
       },
-      borderRadius: {
-        'arch': '4555px'
-      }
     },
   },
   plugins: [],
