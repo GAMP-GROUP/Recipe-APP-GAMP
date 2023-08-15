@@ -25,7 +25,10 @@ const { handleInputChange, user} = useContext(UserContext)
   }
 
   const content =  (
-    <>
+    <div>
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+            Sign up
+        </h2>
       <form onSubmit={handleSubmit}  className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="bg-white text-slate-950  flex-row items-center justify-between p-5 " >
 
@@ -89,7 +92,7 @@ const { handleInputChange, user} = useContext(UserContext)
         </div>
 
       </form>
-      </>
+      </div>
   );
 
   return content

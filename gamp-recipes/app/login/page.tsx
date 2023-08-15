@@ -6,7 +6,7 @@ import LoginForm from "./components/loginForm"
 
 export default function Login() {
   const content =  (
-    <section className="flex min-h-screen flex-col items-center justify-between p-24 " >
+    <section className="flex min-h-screen  bg-white flex-col items-center justify-between p-24 " >
     <LoginForm />
     </section>
     
