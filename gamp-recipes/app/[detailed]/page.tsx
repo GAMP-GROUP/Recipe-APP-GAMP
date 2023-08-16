@@ -50,7 +50,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 
   return (
     <main
-      className='flex flex-col items-center gap-4'
+      className='flex flex-col items-center gap-4 w-full'
     >
       <h1
         className='text-4xl font-semibold antialiased'
@@ -76,9 +76,9 @@ export default async function Details ({ params: { detailed } }: detailedParams)
         className='w-9/12'
       >
         <h2
-          className='text-2xl text-center'
+          className='text-3xl text-center uppercase'
         >
-          INSTRUCTIONS
+          Instructions
         </h2>
         <p
         className='text-justify'
@@ -86,7 +86,9 @@ export default async function Details ({ params: { detailed } }: detailedParams)
           {recipe.get("instructions")}
         </p>
       </section>
-      <h2>Ingredients</h2>
+      <h2
+        className='text-2xl uppercase'
+      >Ingredients</h2>
       <ul>
         {ingredients.map((ingredient, index) => { return (
           <li
@@ -98,7 +100,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
       </ul>
 
       <div
-        className='wd-10/12 mx-auto'
+        className='aspect-video w-9/12 mb-32'
       >
         {
           api === 'drink' 
@@ -106,9 +108,9 @@ export default async function Details ({ params: { detailed } }: detailedParams)
           : <iframe
               className='rounded-md'
               id="recipe video"
+              width="100%"
+              height="100%"
               title={`video recipe for ${recipe.get('title')}`}
-              width="300"
-              height="190"
               src={`https://www.youtube.com/embed/${recipe.get("videoURL") as string}`}
             />
         }
