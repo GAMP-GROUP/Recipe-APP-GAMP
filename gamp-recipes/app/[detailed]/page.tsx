@@ -1,4 +1,4 @@
-import { externalAPI, drinkAPI, mealAPI } from '@/types';
+import { externalAPI } from '@/types';
 
 type params = {
   params: { detailed: string }
@@ -24,7 +24,7 @@ export default async function Details ({ params: { detailed } }: params) {
     ]);
     inDrink
     ? render.set("isAlcoholic", detailed.strAlcoholic) 
-    : render.set("videoURL", detailed.strYoutube)
+    : render.set("videoURL", detailed.strYoutube.split('=')[1])
     const range = type === 'drinks' ? 15 : 20
     const measurements = []
     const ingredients = []
@@ -41,7 +41,8 @@ export default async function Details ({ params: { detailed } }: params) {
     render.set("measurements", measurements)
     return render
   }
-  const mealURL =  `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+
+  const mealURL = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
   const drinkURL = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
   const req = api === 'meal' ? await fetch(mealURL) : await fetch(drinkURL);
   const res = await req.json()
@@ -51,7 +52,6 @@ export default async function Details ({ params: { detailed } }: params) {
 
   return (
     <>
-      <p>{id}</p>
       <h1>{recipe.get("title")}</h1>
       <picture>
         <img 
@@ -62,6 +62,7 @@ export default async function Details ({ params: { detailed } }: params) {
         />
       </picture>
       <p>{`Category: ${recipe.get("category")}`}</p>
+      <p>{`Tags: ${recipe.get("tags")}`}</p>
       <p>{`Instructions: ${recipe.get("instructions")}`}</p>
 
       <h2>Ingredients</h2>
@@ -74,6 +75,20 @@ export default async function Details ({ params: { detailed } }: params) {
           </li>
         )})}
       </ul>
+
+      <div>
+        {
+          api === 'drink' 
+          ? <p>{`Type: ${recipe.get('isAlcoholic')}`}</p> 
+          : <iframe
+              id="recipe video"
+              title={`video recipe for ${recipe.get('title')}`}
+              width="300"
+              height="200"
+              src={`https://www.youtube.com/embed/${recipe.get("videoURL") as string}`}
+            />
+        }
+      </div>
     </>
   )
 }
