@@ -1,10 +1,8 @@
-import { externalAPI } from '@/types';
+import { externalAPI, detailedParams } from '@/types';
 
-type params = {
-  params: { detailed: string }
-}
 
-export default async function Details ({ params: { detailed } }: params) {
+
+export default async function Details ({ params: { detailed } }: detailedParams) {
   const [api, id] = detailed.split('-');
 
   if (api !== 'meal' && api !== 'drink') return <h1>Invalid route {api}</h1>
@@ -51,20 +49,43 @@ export default async function Details ({ params: { detailed } }: params) {
   const measurements = recipe.get("measurements") as string[];
 
   return (
-    <>
-      <h1>{recipe.get("title")}</h1>
+    <main
+      className='flex flex-col items-center gap-4'
+    >
+      <h1
+        className='text-4xl font-semibold antialiased'
+      >{recipe.get("title")}</h1>
       <picture>
-        <img 
+        <img
+          className='rounded-md w-10/12 mx-auto'
           src={recipe.get("thumb") as string}
           alt={recipe.get("title") as string}
-          height={100}
-          width={100}
         />
       </picture>
-      <p>{`Category: ${recipe.get("category")}`}</p>
-      <p>{`Tags: ${recipe.get("tags")}`}</p>
-      <p>{`Instructions: ${recipe.get("instructions")}`}</p>
-
+      <div
+      className='flex flex-row gap-8'
+      >
+        <p
+          className='text-xs'
+          >{`Category: ${recipe.get("category")}`}</p>
+        <p
+          className='text-xs'
+          >{`Tags: ${recipe.get("tags")}`}</p>
+      </div>
+      <section
+        className='w-9/12'
+      >
+        <h2
+          className='text-2xl text-center'
+        >
+          INSTRUCTIONS
+        </h2>
+        <p
+        className='text-justify'
+        >
+          {recipe.get("instructions")}
+        </p>
+      </section>
       <h2>Ingredients</h2>
       <ul>
         {ingredients.map((ingredient, index) => { return (
@@ -76,19 +97,22 @@ export default async function Details ({ params: { detailed } }: params) {
         )})}
       </ul>
 
-      <div>
+      <div
+        className='wd-10/12 mx-auto'
+      >
         {
           api === 'drink' 
           ? <p>{`Type: ${recipe.get('isAlcoholic')}`}</p> 
           : <iframe
+              className='rounded-md'
               id="recipe video"
               title={`video recipe for ${recipe.get('title')}`}
               width="300"
-              height="200"
+              height="190"
               src={`https://www.youtube.com/embed/${recipe.get("videoURL") as string}`}
             />
         }
       </div>
-    </>
+    </main>
   )
 }

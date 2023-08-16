@@ -13,6 +13,10 @@ type ContextUser = {
   handleInputChange: (event:ChangeEvent<HTMLInputElement>) => void
 }
 
+type detailedParams = {
+  params: { detailed: string }
+}
+
 type externalAPI = drinkAPI | mealAPI
 
 type externalRes = MealRes[] | DrinkRes[]
