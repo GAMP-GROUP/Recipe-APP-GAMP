@@ -1,7 +1,4 @@
-// 'use client'
-
-import { UserContext } from "@/contextAPI/context";
-import { useContext } from "react";
+import SideMenu from "./components/SideMenu"
 import LoginForm from "./components/loginForm";
 import { getAllMeals } from "./lib/externalAPI";
 import RecipesCard from "./components/RecipesCard";
@@ -15,7 +12,8 @@ export default async function Home() {
       <section>
         <LoginForm />
       </section>
-      <main>
+      <SideMenu />
+      <main className='h-screen'>
         <section className="p">
           {
             dataAllMeals.map(({ strMeal, idMeal, strMealThumb,strArea, strCategory }, index) => {
@@ -38,7 +36,5 @@ export default async function Home() {
         </section>
       </main>
     </div>
-
   )
-
 }

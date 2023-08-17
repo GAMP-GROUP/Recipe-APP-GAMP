@@ -3,10 +3,7 @@ import { ContextUser } from '@/types';
 import { useState } from "react";
 import { UserProps } from '@/types';
 
-
-
 export const UserContext = createContext<ContextUser>({} as ContextUser );
-
 
 export function UserProvider ({ children }:{children: React.ReactNode})  {
   const [logging, setLogging] = useState(false)
@@ -38,4 +35,3 @@ export function UserProvider ({ children }:{children: React.ReactNode})  {
       </UserContext.Provider>
     )
 }
-
