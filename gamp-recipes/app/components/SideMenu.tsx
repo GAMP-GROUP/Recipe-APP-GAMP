@@ -1,3 +1,4 @@
+'use client'
 import Link from "@/node_modules/next/link";
 import { useBehaviorContext } from "@/contextAPI/context/behavior.context";
 import { Dispatch, SetStateAction } from "react";

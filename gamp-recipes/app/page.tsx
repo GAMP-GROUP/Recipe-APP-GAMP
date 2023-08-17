@@ -4,7 +4,6 @@ import { getAllMeals } from "./lib/externalAPI";
 import RecipesCard from "./components/RecipesCard";
 import Link from "next/link";
 
-
 export default async function Home() {
   const dataAllMeals = await getAllMeals()
   return (
@@ -13,7 +12,7 @@ export default async function Home() {
         <LoginForm />
       </section>
       <SideMenu />
-      <main className='h-screen'>
+      <main className='h-full'>
         <section className="p">
           {
             dataAllMeals.map(({ strMeal, idMeal, strMealThumb,strArea, strCategory }, index) => {
