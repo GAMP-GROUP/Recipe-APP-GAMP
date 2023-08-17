@@ -6,4 +6,10 @@
   body {
     @apply bg-white
   }
+  h3 {
+    @apply text-5xl font-bold
+  }
+  h4 {
+    @apply text-xs my-1
+  }
 }

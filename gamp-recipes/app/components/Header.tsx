@@ -1,9 +1,13 @@
 'use client';
 import { useState } from "react";
 import Image from "@/node_modules/next/image";
+import { UserContext } from "@/contextAPI/context";
+import { useContext } from "react";
 
 export default function Header() {
     const [searchStatus, setSearchStatus] = useState(false);
+
+    const {handleLoginCardDisplay} = useContext(UserContext)
 
     function searchClick(): void {
         const searchTextInput = document.getElementById('search-input');
@@ -26,6 +30,11 @@ export default function Header() {
                 height='32'
                 alt='Three stripes positioned horizontally one above the other, representing the menu icon'
             />
+            <button 
+            type="button"
+            onClick={() => handleLoginCardDisplay()}
+
+            >Sign up</button>
             <picture>
                 <img
                     id='gamp-logo'
