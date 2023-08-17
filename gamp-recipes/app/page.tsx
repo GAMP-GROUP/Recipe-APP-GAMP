@@ -1,28 +1,44 @@
-'use client'
+// 'use client'
 
 import { UserContext } from "@/contextAPI/context";
 import { useContext } from "react";
 import LoginForm from "./components/loginForm";
+import { getAllMeals } from "./lib/externalAPI";
+import RecipesCard from "./components/RecipesCard";
+import Link from "next/link";
 
 
-export default function Home() {
-  const {logging} = useContext(UserContext)
-
+export default async function Home() {
+  const dataAllMeals = await getAllMeals()
   return (
-      <div>
-        <h1>RECIPES</h1>
-        <div>
-          {
-
-          }
-        </div>
-        {
-        logging &&
+    <div>
+      <section>
         <LoginForm />
-        }
-      </div>
-   
+      </section>
+      <main>
+        <section className="p">
+          {
+            dataAllMeals.map(({ strMeal, idMeal, strMealThumb,strArea, strCategory }, index) => {
+              return index < 12
+                && (
+                  <div key={index}>
+                    {/* <Link href={}> */}
+                    <RecipesCard
+                      strMeal={strMeal}
+                      idMeal={idMeal}
+                      strMealThumb={strMealThumb}
+                      strArea={strArea}
+                      strCategory={strCategory}
+                    />
+                    {/* </Link> */}
+                  </div>
+                )
+            })
+          }
+        </section>
+      </main>
+    </div>
 
   )
-  
+
 }
