@@ -1,11 +1,14 @@
 'use client';
-import { useState, useContext } from "react";
+import { useState, useEffect } from "react";
 import Image from "@/node_modules/next/image";
 import { useBehaviorContext } from "@/contextAPI/context/behavior.context";
 import { toggleMenu } from "./SideMenu";
 
 export default function Header() {
     const [searchStatus, setSearchStatus] = useState(false);
+    const [userScroll, setUserScroll] = useState(true);
+    const [scrollPosition, setScrollPosition] = useState(0);
+    
     const { menu, setMenu } = useBehaviorContext();
 
     function searchClick(): void {
@@ -19,9 +22,26 @@ export default function Header() {
         setSearchStatus(!searchStatus);
     }
 
+    function scrollPage(): void {
+        const currentScrollY = window.scrollY;
+        const showHeader = scrollPosition > currentScrollY;
+
+        setUserScroll(showHeader);
+        setScrollPosition(currentScrollY);
+    }
+
+    useEffect(() => {
+        window.addEventListener('scroll', scrollPage);
+        return () => {
+            window.removeEventListener('scroll', scrollPage);
+        }
+    }, [scrollPosition]);
+
     return (
         <header
-            className="w-full h-24 p-4 bg-yellow flex justify-between items-center"
+            id="header"
+            className={ `w-full h-24 p-4 bg-yellow flex justify-between items-center sticky top-0 transition-transform duration-300
+            ${ userScroll ? 'transform translate-y-0' : '-translate-y-full' }` }
         >
             <Image
                 src='/icons/menu.png'

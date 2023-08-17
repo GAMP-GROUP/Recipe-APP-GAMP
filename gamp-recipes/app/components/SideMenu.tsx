@@ -9,27 +9,37 @@ export function toggleMenu(menu: boolean, setMenu: Dispatch<SetStateAction<boole
 
 export default function SideMenu() {
     const { menu, setMenu } = useBehaviorContext();
-    const menuItems = ['Sign Up', 'Meals', 'Drinks', 'Profile']
+    const menuItems = ['Login', 'Meals', 'Drinks', 'Favorites']
 
     return (
-        <main className={ `w-screen absolute top-0
+        <main id='menu-screen' className={ `w-screen absolute top-0
         ${ menu ? 'translate-x-0' : '-translate-x-full' }
         transition-transform ease-in-out duration-300 flex` }>
             <nav
-                className={`h-screen w-3/6 bg-stone-800 `}
+                id='menu'
+                className={`h-screen w-4/6 bg-stone-800 text-white`}
             >
-                    <ul className="text-white flex-row w-full">
+                    <ul className="flex-row w-full">
                         { menuItems.map((item, index) => (
                             <li
                                 key={ index }
-                                className='flex-1 py-4 pl-4 w-full text-xl font-bold'>
+                                className={ `flex-1 py-4 pl-4 w-full text-xl font-bold ${ index === 0 ? 'text-yellow bg-black uppercase font-extrabold' : 'font-medium' } flex items-center` }>
+                                    <picture>
+                                        <img
+                                            src={ `/icons/${item.toLowerCase()}.png` }
+                                            alt={ `${item} icon` }
+                                            className="w-6 mr-4"
+                                        />
+                                    </picture>
                                     { item }
+                                    <hr />
                             </li>
                         ))}
                     </ul>
             </nav>
             <aside
-                className={ `h-screen w-3/6 }` }
+                id='outside-menu'
+                className='h-screen w-2/6'
                 onClick={ () => toggleMenu(menu, setMenu) }
             >
             </aside>
