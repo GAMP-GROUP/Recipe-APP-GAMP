@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import Image from "@/node_modules/next/image";
 import { useBehaviorContext } from "@/contextAPI/context/behavior.context";
 import { toggleMenu } from "./SideMenu";
+import { UserContext } from "@/contextAPI/context";
+import { useContext } from "react";
 
 export default function Header() {
     const [searchStatus, setSearchStatus] = useState(false);
@@ -10,6 +12,8 @@ export default function Header() {
     const [scrollPosition, setScrollPosition] = useState(0);
     
     const { menu, setMenu } = useBehaviorContext();
+
+    const {handleLoginCardDisplay} = useContext(UserContext)
 
     function searchClick(): void {
         const searchTextInput = document.getElementById('search-input');
@@ -50,6 +54,11 @@ export default function Header() {
                 alt='Three stripes positioned horizontally one above the other, representing the menu icon'
                 onClick={ () => toggleMenu(menu, setMenu) }
             />
+            <button 
+            type="button"
+            onClick={() => handleLoginCardDisplay()}
+
+            >Sign up</button>
             <picture>
                 <img
                     id='gamp-logo'
