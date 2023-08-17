@@ -1,3 +1,4 @@
+import Link from "@/node_modules/next/link";
 import { useBehaviorContext } from "@/contextAPI/context/behavior.context";
 import { Dispatch, SetStateAction } from "react";
 
@@ -9,7 +10,7 @@ export function toggleMenu(menu: boolean, setMenu: Dispatch<SetStateAction<boole
 
 export default function SideMenu() {
     const { menu, setMenu } = useBehaviorContext();
-    const menuItems = ['Login', 'Meals', 'Drinks', 'Favorites']
+    const menuItems = ['Login', 'Profile', 'Meals', 'Drinks', 'Favorites']
 
     return (
         <main id='menu-screen' className={ `w-screen absolute top-0
@@ -21,19 +22,20 @@ export default function SideMenu() {
             >
                     <ul className="flex-row w-full">
                         { menuItems.map((item, index) => (
-                            <li
-                                key={ index }
-                                className={ `flex-1 py-4 pl-4 w-full text-xl font-bold ${ index === 0 ? 'text-yellow bg-black uppercase font-extrabold' : 'font-medium' } flex items-center` }>
-                                    <picture>
-                                        <img
-                                            src={ `/icons/${item.toLowerCase()}.png` }
-                                            alt={ `${item} icon` }
-                                            className="w-6 mr-4"
-                                        />
-                                    </picture>
-                                    { item }
-                                    <hr />
-                            </li>
+                            <Link href={ `/${item.toLowerCase()}` } key={ index }>
+                                <li
+                                    className={ `flex-1 py-4 pl-4 w-full text-xl font-bold ${ index === 0 ? 'text-yellow bg-black uppercase font-extrabold' : 'font-medium' } flex items-center` }>
+                                        <picture>
+                                            <img
+                                                src={ `/icons/${item.toLowerCase()}.png` }
+                                                alt={ `${item} icon` }
+                                                className="w-6 mr-4"
+                                            />
+                                        </picture>
+                                        { item }
+                                        <hr />
+                                </li>
+                            </Link>
                         ))}
                     </ul>
             </nav>
