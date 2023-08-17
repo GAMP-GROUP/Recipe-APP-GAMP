@@ -1,6 +1,4 @@
 import { ChangeEvent } from "react"
-import { UserProps } from "./user.props"
-
 
 type UserProps = {
   username:string
@@ -9,12 +7,24 @@ type UserProps = {
 }
 
 type ContextUser = {
-  user:UserProps  | null,
+  logging: boolean
+  user:UserProps 
+  handleLoginCardDisplay:() => void
   handleInputChange: (event:ChangeEvent<HTMLInputElement>) => void
 }
 
 type detailedParams = {
   params: { detailed: string }
+}
+
+type mealProps = {
+  idMeal: string,
+  strMealThumb: string,
+  strMeal: string,
+}
+
+type ContextMeals = {
+  allRecipes: MealRes[],
 }
 
 type externalAPI = drinkAPI | mealAPI
@@ -28,7 +38,6 @@ type drinkAPI = {
 type mealAPI = {
   [meals: string]: externalRes,
 }
-
 type MealRes = {
   "idMeal": string,
   "strMeal": string,

@@ -14,11 +14,9 @@ const config: Config = {
       },
       colors: {
         'yellow': '#F2E635',
-        'brown': '#F2BA52',
-        'orange': '#D94B18',
-        'red': '#F23545',
-        'wine': '#A62E38',
-      }
+        'gold': '#F2BA52',
+        'red': '#F21D55',
+      },
     },
   },
   plugins: [],
