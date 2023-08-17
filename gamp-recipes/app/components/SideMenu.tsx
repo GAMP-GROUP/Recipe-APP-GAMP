@@ -14,7 +14,7 @@ export default function SideMenu() {
     const menuItems = ['Login', 'Profile', 'Meals', 'Drinks', 'Favorites']
 
     return (
-        <main id='menu-screen' className={ `w-screen absolute top-0
+        <main id='menu-screen' className={ `w-screen fixed top-0
         ${ menu ? 'translate-x-0' : '-translate-x-full' }
         transition-transform ease-in-out duration-300 flex` }>
             <nav
