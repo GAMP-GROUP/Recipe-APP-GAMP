@@ -35,6 +35,11 @@ type drinkAPI = {
   [drinks: string]: externalRes,
 }
 
+type ButtonProps = {
+  id: string,
+  type: string,
+}
+
 type mealAPI = {
   [meals: string]: externalRes,
 }
