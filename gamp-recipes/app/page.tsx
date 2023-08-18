@@ -22,9 +22,9 @@ export default async function Home() {
                 && (
                   <div key={index}>
                     <RecipesCard
-                     type="meal"
-                      id={strMeal}
-                      title={idMeal}
+                      type="meal"
+                      id={idMeal}
+                      title={strMeal}
                       thumb={strMealThumb}
                       area={strArea}
                       category={strCategory}

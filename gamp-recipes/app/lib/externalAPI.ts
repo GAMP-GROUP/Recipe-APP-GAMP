@@ -1,5 +1,5 @@
 import { DrinkRes, MealRes } from "@/types"
-import { DRINKS_NAME_URL, MEALS_NAME_URL } from "./endpoints"
+import { DRINKS_NAME_URL, MEALS_NAME_URL, DETAILS_DRINKS, DETAILS_MEALS } from "./endpoints"
 
 
 export const getAllMeals = async ():Promise<MealRes[]> => {
@@ -14,7 +14,14 @@ export const getAllDrinks = async ():Promise<DrinkRes[]> => {
   return data.drinks
 }
 
+export const getDrinkById = async (id: string): Promise<DrinkRes> => {
+  const drink = await fetch(DETAILS_DRINKS + id);
+  const data = await drink.json();
+  return data.drinks[0];
+}
 
-
-
-
+export const getMealById = async (id: string): Promise<DrinkRes> => {
+  const drink = await fetch(DETAILS_MEALS + id);
+  const data = await drink.json();
+  return data.meals[0];
+}
