@@ -1,0 +1,11 @@
+.overlay {
+    position: fixed;
+    top: 10;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+    z-index: 998;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
