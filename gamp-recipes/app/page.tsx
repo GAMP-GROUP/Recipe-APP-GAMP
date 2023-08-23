@@ -1,7 +1,4 @@
-import UserMenu from "./components/UserMenu"
-import LoginForm from "./components/LoginForm";
 import RecipesCard from "./components/RecipesCard";
-import SearchBar from "./components/SearchBar";
 import { getAllMeals } from "./lib/externalAPI";
 // import Link from "next/link";
 
@@ -9,9 +6,6 @@ export default async function Home() {
   const dataAllMeals = await getAllMeals()
   return (
     <div>
-      <LoginForm />
-      <UserMenu />
-      <SearchBar />
       <main className='h-full'>
         <section className="p">
           {

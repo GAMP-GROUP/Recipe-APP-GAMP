@@ -14,7 +14,7 @@ export default function UserMenu() {
     const menuItems = ['Profile', 'Meals', 'Drinks', 'Favorites']
 
     return (
-        <main id='menu-screen' className={ `w-screen fixed top-18` } hidden={ menu === false ? true : false }>
+        <main id='menu-screen' className='w-screen fixed top-16 z-[50]' hidden={ menu === false ? true : false }>
             <nav
                 id='menu'
                 className={`h-screen w-full bg-white`}
@@ -23,6 +23,7 @@ export default function UserMenu() {
                         { menuItems.map((item, index) => (
                             <Link href={ `/${item.toLowerCase()}` } key={ index }>
                                 <li
+                                    onClick={ () => setMenu(false) }
                                     className={ `flex-1 py-4 pl-4 w-full text-lg font-bold ${ index === 0 ? 'font-extrabold text-black' : 'font-medium text-gray-500' } flex items-center border-b-gray-500 border-1 shadow` }>
                                         <picture>
                                             <img

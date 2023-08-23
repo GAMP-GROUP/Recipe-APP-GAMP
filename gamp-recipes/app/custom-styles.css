@@ -1,11 +1,23 @@
 .overlay {
     position: fixed;
-    top: 10;
+    top: 4rem;
     left: 0;
     width: 100vw;
     height: 100vh;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.overlay::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
-    z-index: 998;
+    opacity: 1;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }

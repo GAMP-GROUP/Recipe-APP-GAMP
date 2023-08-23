@@ -7,11 +7,13 @@ export default function SearchBar() {
     const { searchBar, setSearchBar } = useBehaviorContext();
 
     return (
-        <section> {/* A tela toda */}
+        <section
+            id='searchBar'
+            className='z-[99] relative'
+            hidden={ searchBar === true ? false : true }>
+            {/* A tela toda */}
             <section
-                className={`w-screen h-16 fixed top-0 bg-white py-3 px-6 flex justify-between items-center transition-transform duration-0 ${
-                    searchBar ? 'transform translate-y-0' : 'transform -translate-y-full'
-                }`}
+                className={`w-screen h-16 fixed top-0 bg-white py-3 px-6 flex justify-between items-center`}
             > {/* O container branco */}
                 <fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center'>
                     <input type="text" placeholder="Recipe or ingredient"
@@ -36,7 +38,7 @@ export default function SearchBar() {
                         </picture>
                     </button>
             </section>
-            { searchBar && <div className="overlay" onClick={() => setSearchBar(false)}></div> }
+            { searchBar && <div className="overlay overlay-active" onClick={() => setSearchBar(false)}></div> }
             {/* Resto da tela além da barra de pesquisa */}
         </section>
     )
