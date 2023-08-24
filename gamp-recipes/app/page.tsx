@@ -1,30 +1,50 @@
+import SideMenu from "./components/SideMenu"
+import LoginForm from "./components/loginForm";
+import { getAllDrinks, getAllMeals } from "./lib/externalAPI";
 import RecipesCard from "./components/RecipesCard";
-import { getAllMeals } from "./lib/externalAPI";
-// import Link from "next/link";
 
 export default async function Home() {
   const dataAllMeals = await getAllMeals()
+  const dataAllDrinks = await getAllDrinks()
   return (
     <div>
       <main className='h-full'>
+
         <section className="p">
           {
             dataAllMeals.map(({ strMeal, idMeal, strMealThumb,strArea, strCategory }, index) => {
-              return index < 12
+              return index < 6
                 && (
                   <div key={index}>
-                    {/* <Link href={}> */}
                     <RecipesCard
-                      strMeal={strMeal}
-                      idMeal={idMeal}
-                      strMealThumb={strMealThumb}
-                      strArea={strArea}
-                      strCategory={strCategory}
+                      type="meal"
+                      id={idMeal}
+                      title={strMeal}
+                      thumb={strMealThumb}
+                      area={strArea}
+                      category={strCategory}
                     />
-                    {/* </Link> */}
                   </div>
                 )
-            })
+            }) 
+          }
+
+          {
+              dataAllDrinks.map(({ strDrink, idDrink, strDrinkThumb, strAlcoholic, strCategory }, index) => {
+                return index < 6
+                && (
+                  <div key={index}>
+                    <RecipesCard
+                      type="drink"
+                      id={idDrink}
+                      title={strDrink}
+                      thumb={strDrinkThumb}
+                      area={strAlcoholic}
+                      category={strCategory}
+                    />
+                  </div>
+                 ) }
+              ) 
           }
         </section>
       </main>
