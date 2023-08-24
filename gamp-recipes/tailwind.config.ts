@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       width: {
-        'big': '125px',
+        'big': '105px',
         'small': '75px',
       },
       colors: {

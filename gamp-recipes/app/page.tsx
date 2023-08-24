@@ -3,16 +3,11 @@ import LoginForm from "./components/loginForm";
 import { getAllDrinks, getAllMeals } from "./lib/externalAPI";
 import RecipesCard from "./components/RecipesCard";
 
-
 export default async function Home() {
   const dataAllMeals = await getAllMeals()
   const dataAllDrinks = await getAllDrinks()
   return (
     <div>
-      <section>
-        <LoginForm />
-      </section>
-      <SideMenu />
       <main className='h-full'>
 
         <section className="p">

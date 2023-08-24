@@ -9,28 +9,27 @@ export function toggleMenu(menu: boolean, setMenu: Dispatch<SetStateAction<boole
     menu === false ? body!.classList.add('overflow-hidden') : body!.classList.remove('overflow-hidden');
 }
 
-export default function SideMenu() {
+export default function UserMenu() {
     const { menu, setMenu } = useBehaviorContext();
-    const menuItems = ['Login', 'Profile', 'Meals', 'Drinks', 'Favorites']
+    const menuItems = ['Profile', 'Meals', 'Drinks', 'Favorites']
 
     return (
-        <main id='menu-screen' className={ `w-screen fixed top-0
-        ${ menu ? 'translate-x-0' : '-translate-x-full' }
-        transition-transform ease-in-out duration-300 flex` }>
+        <main id='menu-screen' className='w-screen fixed top-16 z-[50]' hidden={ menu === false ? true : false }>
             <nav
                 id='menu'
-                className={`h-screen w-4/6 bg-stone-800 text-white`}
+                className={`h-screen w-full bg-white`}
             >
                     <ul className="flex-row w-full">
                         { menuItems.map((item, index) => (
                             <Link href={ `/${item.toLowerCase()}` } key={ index }>
                                 <li
-                                    className={ `flex-1 py-4 pl-4 w-full text-xl font-bold ${ index === 0 ? 'text-yellow bg-black uppercase font-extrabold' : 'font-medium' } flex items-center` }>
+                                    onClick={ () => setMenu(false) }
+                                    className={ `flex-1 py-4 pl-4 w-full text-lg font-bold ${ index === 0 ? 'font-extrabold text-black' : 'font-medium text-gray-500' } flex items-center border-b-gray-500 border-1 shadow` }>
                                         <picture>
                                             <img
                                                 src={ `/icons/${item.toLowerCase()}.png` }
                                                 alt={ `${item} icon` }
-                                                className="w-6 mr-4"
+                                                className={ `invert w-6 mr-6 ${ index === 0 ? 'opacity-100' :  'opacity-20' }` }
                                             />
                                         </picture>
                                         { item }
@@ -42,7 +41,7 @@ export default function SideMenu() {
             </nav>
             <aside
                 id='outside-menu'
-                className='h-screen w-2/6'
+                className='h-screen'
                 onClick={ () => toggleMenu(menu, setMenu) }
             >
             </aside>
