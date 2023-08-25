@@ -9,8 +9,8 @@ export default function Footer() {
             <section className='mb-6 font-normal'>
                 <Image
                     src='/images/logo-black.png'
-                    width='175'
-                    height='175'
+                    width='155'
+                    height='155'
                     alt='Gamp logo in black lines only'
                     className='mx-auto'
                 />
