@@ -29,8 +29,8 @@ export default function ProfilePage() {
           <section className='flex-row justify-evenly pt-24 text-center'>
             <h1 className='mx-auto font-bold text-2xl'>@mariosanseverino</h1>
             <span className='text-sm'>Porto Alegre, BRA</span>
-            <section className='flex justify-evenly pt-10'>
-              <div className='bg-red text-white p-3 rounded-3xl'>
+            <section className='flex justify-evenly pt-10 items-center'>
+              <div className='bg-red text-white p-3 rounded-3xl shadow-md'>
                 <h2 className='text-6xl font-bold py-3'>16</h2>
                 <div className='flex items-center'>
                   <img src='/icons/favorites.png' alt='Fav icon' className='w-4 h-4 mr-2' />
