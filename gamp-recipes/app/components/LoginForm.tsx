@@ -29,7 +29,7 @@ export default function LoginForm() {
   }
 
   const content = logging ? (
-    <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white shadow-2xl py-4 px-4 rounded-lg w-11/12 max-w-md">
+    <div className="z-[99] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white shadow-2xl py-4 px-4 rounded-lg w-11/12 max-w-md">
             <button
               type="submit"
               onClick={() => handleLoginCardDisplay()}
