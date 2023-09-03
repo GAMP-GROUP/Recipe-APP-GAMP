@@ -26,6 +26,28 @@
     width: 2rem;
 }
 
+.active-container {
+    display: flex;
+    width: 5rem; /* Adjust as needed */
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.75rem; /* Adjust as needed */
+    border-style: solid;
+    border-bottom-color: #ED64A6; /* Adjust color as needed */
+    border-bottom-width: 0.5rem; /* Adjust as needed */
+}
+
+.inactive-container {
+    display: flex;
+    width: 5rem; /* Adjust as needed */
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 0.75rem; /* Adjust as needed */
+    border-style: solid;
+    border-bottom-color: #ffffff; /* Adjust color as needed */
+    border-bottom-width: 0.5rem; /* Adjust as needed */
+}
+
 .inactive-profile-icon {
     width: 1.8rem;
     opacity: 40%;
