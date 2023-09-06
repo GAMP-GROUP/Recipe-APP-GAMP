@@ -5,12 +5,28 @@ services:
     build: ./gamp-recipes
     ports:
       - 3000:3000
+    environment:
+      - DATABASE_URL=$DATABASE_URL
     working_dir: /app-backend
     # Caso queira que o container esteja atualizado durante o desenvolvimento, sem que você precise ficar fazendo down e up dos containers, descomente as 3 linhas abaixo
     volumes: 
       - ./gamp-recipes:/app-backend/
+    depends_on:
+      gamp_db:
+        condition: 'service_healthy'
     healthcheck:
       test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
       timeout: 10s
       retries: 5
-  
+  gamp_db:
+    image: mysql:8.0.32
+    container_name: gamp_db
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+    restart: 'always'
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
