@@ -18,7 +18,7 @@ model User {
   password_hash    String
   nationality      String
   created_at       DateTime           @default(now())
-  Recipes          Recipes[]
+  Author_Recipe    Author_Recipe[]
   Favorite_Recipes Favorite_Recipes[]
 }
 
@@ -34,16 +34,28 @@ model Ingredients {
   Ingredients_Recipes Ingredients_Recipes[]
 }
 
+model Author_Recipe {
+  id          Int @id @default(autoincrement())
+  author_id   Int
+  recipe_id   Int @unique
+  author      User  @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipes     Recipes @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+}
+
 model Recipes {
   id                  Int                   @id @default(autoincrement())
   recipe_name         String
-  description         String
+  instructions        String @db.VarChar(3000)
+  image               String
+  tags                String
+  video_source        String?
+  area                String?
+  alcoholic           String?
   recipe_type_id      Int
-  author_id           Int
   created_at          DateTime              @default(now())
   updated_at          DateTime              @updatedAt
-  author              User                  @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   recipe_type         Recipe_types          @relation(fields: [recipe_type_id], references: [id])
+  Author_Recipe       Author_Recipe[]
   Ingredients_Recipes Ingredients_Recipes[]
   Favorite_Recipes    Favorite_Recipes[]
 }
@@ -61,7 +73,7 @@ model Favorite_Recipes {
   id         Int      @id @default(autoincrement())
   user_id    Int
   recipe_id  Int
-  user       User     @relation(fields: [user_id], references: [id])
-  recipe     Recipes  @relation(fields: [recipe_id], references: [id])
+  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  recipe     Recipes  @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
   created_at DateTime @default(now())
 }
