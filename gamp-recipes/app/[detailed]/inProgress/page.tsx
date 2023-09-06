@@ -3,6 +3,7 @@ import { getMealById, getDrinkById } from "@/app/lib/externalAPI";
 import Image from "next/image";
 import { detailedParams } from "@/types";
 import IngredientList from "@/app/components/IngredientLIst";
+
 export default async function InProgress({
   params: { detailed },
 }: detailedParams) {
@@ -16,9 +17,9 @@ export default async function InProgress({
 
   return (
     <div>
-      <section>
+      <section className="text-center">
         <picture>
-          <img className="w-40" src={recipe.thumb} alt="recipe image"></img>
+          <img className="w-full" src={recipe.thumb} alt="recipe image"></img>
         </picture>
         <h2>{recipe.title}</h2>
         <br />
