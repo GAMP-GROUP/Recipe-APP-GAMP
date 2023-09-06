@@ -6,7 +6,8 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "scripts": {
-    "dev": "prisma generate && prisma db push && next dev",
+    "restart": "docker restart gamp && docker logs gamp -f",
+    "dev": "prisma generate && prisma migrate reset --force && next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

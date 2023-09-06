@@ -1,5 +1,12 @@
 import { PrismaClient } from "@prisma/client";
-import { usersData, ingredientsData } from "./data";
+import { 
+  usersData,
+  ingredientsData,
+  recipeTypesData,
+  recipeData,
+  ingredientAmount,
+  favorites
+} from "./data";
 
 const prisma = new PrismaClient();
 
@@ -13,8 +20,28 @@ const load = async () => {
     await prisma.ingredients.createMany({
       data: ingredientsData,
     });
-
     console.log("Added ingredients data");
+
+    await prisma.recipe_types.createMany({
+      data: recipeTypesData,
+    });
+    console.log("Added recipe types data");
+
+    await prisma.recipes.createMany({
+      data: recipeData,
+    })
+    console.log("Added recipes data");
+
+    await prisma.ingredients_Recipes.createMany({
+      data: ingredientAmount,
+    })
+    console.log("Added ingredients amount");
+    
+    await prisma.favorite_Recipes.createMany({
+      data: favorites,
+    })
+    console.log("Added favorites data");
+
   } catch (e) {
     console.error(e);
     process.exit(1);
