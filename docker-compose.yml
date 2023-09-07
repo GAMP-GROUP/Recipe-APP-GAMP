@@ -15,7 +15,7 @@ services:
       gamp_db:
         condition: 'service_healthy'
     healthcheck:
-      test: ["CMD", "lsof", "-t", "-i:3001"] # Caso utilize outra porta interna para o back, altere ela aqui também
+      test: ["CMD", "lsof", "-t", "-i:3000"] # Caso utilize outra porta interna para o back, altere ela aqui também
       timeout: 10s
       retries: 5
   gamp_db:
