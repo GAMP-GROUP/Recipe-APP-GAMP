@@ -22,6 +22,12 @@ export function UserProvider ({ children }:{children: React.ReactNode})  {
   };
 
   const handleLoginCardDisplay = () => {
+    const body = document.querySelector('body')
+      if (body?.classList.contains('overflow-hidden')) {
+        body.classList.remove('overflow-hidden')
+      } else {
+        body?.classList.add('overflow-hidden')
+      }
     setLogging(previousLoggingState => !previousLoggingState);
   }
     return (
