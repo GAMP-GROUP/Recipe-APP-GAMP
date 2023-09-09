@@ -1,5 +1,5 @@
-import { PrismaClient } from "@prisma/client";
-import { 
+import prisma from "./client";
+import {
   usersData,
   ingredientsData,
   recipeTypesData,
@@ -9,8 +9,6 @@ import {
   author,
 } from "./data";
 import { scrap } from "./scrapRecipe"
-
-const prisma = new PrismaClient();
 
 const load = async () => {
   try {
@@ -60,9 +58,8 @@ const load = async () => {
 
     await prisma.author_Recipe.createMany({
       data: author,
-    })
+    });
     console.log("Added author data");
-
   } catch (e) {
     console.error(e);
     process.exit(1);
