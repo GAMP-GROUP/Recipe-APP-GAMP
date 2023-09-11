@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "setup": "cd gamp-recipes && npm install && cd .. && docker compose up -d && docker logs gamp -f"
+  }
+}
