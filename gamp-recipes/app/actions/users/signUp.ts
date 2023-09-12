@@ -17,7 +17,7 @@ export const signUp = async (
 	});
 
 	if (user) {
-		return 'User with that email already exists.';
+		return false;
 	}
 
 	const passwordHash = bcrypt.hashSync(password, 10);
@@ -31,5 +31,5 @@ export const signUp = async (
 		},
 	});
 
-	return 'Successfully created new user!';
+	return true;
 };

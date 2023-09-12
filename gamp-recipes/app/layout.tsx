@@ -7,9 +7,9 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import UserMenu from './components/UserMenu';
 import SearchBar from './components/SearchBar';
-import LoginForm from './components/LoginForm';
+import LoginForm from './components/SignUpForm';
 import React from 'react';
-import AuthProvider from './api/[..nextauth]/authProvider';
+import AuthProvider from './api/[...nextauth]/authProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 

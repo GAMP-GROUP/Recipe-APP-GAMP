@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 
 type UserProps = {
+	nationality: string;
 	username: string;
 	email: string;
 	password: string;

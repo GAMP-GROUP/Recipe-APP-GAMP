@@ -1,4 +1,5 @@
 'use client';
+
 import { UserContext } from '@/contextAPI/context';
 import { useContext } from 'react';
 import { useState } from 'react';
@@ -6,16 +7,22 @@ import {
 	validateEmail,
 	validateLogin,
 	validatePassword,
+	validateNationality,
 	validateUsername,
 } from '@/app/lib/input.validations';
 import Image from 'next/image';
 import React from 'react';
+import { signUp } from '../actions/users/signUp';
 
-export default function LoginForm() {
+export default function SignUpForm() {
 	const [buttonClicked, setButtonClicked] = useState(false);
 
-	const { handleInputChange, user, handleLoginCardDisplay, registering } =
-		useContext(UserContext);
+	const {
+		handleInputChange,
+		user: { email, password, nationality, username },
+		handleLoginCardDisplay,
+		registering,
+	} = useContext(UserContext);
 
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
@@ -23,19 +30,34 @@ export default function LoginForm() {
 		console.log('login!');
 	};
 
-	const handLoginBtm = () => {
-		setButtonClicked(true);
-		if (user.email && user.password && user.username) {
-			const validation = validateLogin(
-				user.email,
-				user.password,
-				user.username
-			);
-			console.log(validation);
-			if (validation) {
-				handleLoginCardDisplay();
-			}
+	const validations = (
+		email: string,
+		password: string,
+		nationality: string,
+		username: string
+	) => {
+		if (email && password && nationality && username) {
+			const validation = validateLogin(email, password, nationality, username);
+			return validation;
 		}
+	};
+
+	const handleSignUpBtn = async () => {
+		setButtonClicked(true);
+		const validationsResult = validations(
+			email,
+			password,
+			nationality,
+			username
+		);
+		if (validationsResult) return window.alert('Invalid input');
+
+		const req = await signUp(email, password, username, nationality);
+
+		if (!req) {
+			return window.alert('User with that email already exists.');
+		}
+		return window.alert('Successfully created new user!');
 	};
 
 	const content = registering ? (
@@ -57,54 +79,68 @@ export default function LoginForm() {
 					<label className='block text-sm font-bold mb-2' htmlFor='username'>
 						Username:
 					</label>
-
 					<input
 						type='text'
 						name='username'
-						value={user?.username}
+						value={username}
 						onChange={handleInputChange}
 						placeholder='username'
 						className='mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					/>
-					{buttonClicked && !validateUsername(user.username) && (
+
+					{buttonClicked && !validateUsername(username) && (
 						<p className='text-rose-500 text-xs italic'>
 							Your username must be at least 4 characters long
 						</p>
 					)}
 					<br />
-
+					<label className='block text-sm font-bold mb-2' htmlFor='Nationality'>
+						Nationality:
+					</label>
+					<input
+						type='text'
+						name='nationality'
+						value={nationality}
+						onChange={handleInputChange}
+						placeholder='BR'
+						className='mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+					/>
+					{buttonClicked && !validateNationality(nationality) && (
+						<p className='text-rose-500 text-xs italic'>
+							Your nationality must be 2 characters long
+						</p>
+					)}
 					<label className='block text-gray-700 text-sm font-bold mb-2 mt-1'>
 						Email:
 					</label>
 					<input
 						type='email'
 						name='email'
-						value={user?.email}
+						value={email}
 						onChange={handleInputChange}
 						id='helper-text'
 						aria-describedby='helper-text-explanation'
 						className='mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-stone-800 leading-tight focus:outline-none focus:shadow-outline '
 						placeholder='exemple@email.com'
 					/>
-					{buttonClicked && !validateEmail(user.email) && (
+					{buttonClicked && !validateEmail(email) && (
 						<p className='text-rose-500 text-xs italic'>
 							Your email must be in this format: example@example.com.
 						</p>
 					)}
 					<br />
-
 					<label className='block text-stone-800 text-sm font-bold mb-2 mt-1'>
 						Password:
 					</label>
 					<input
 						type='password'
 						name='password'
-						value={user?.password}
+						value={password}
 						onChange={handleInputChange}
 						placeholder='******'
 						className='mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-stone-800  leading-tight focus:outline-none focus:shadow-outline'
 					/>
-					{buttonClicked && !validatePassword(user.password) && (
+					{buttonClicked && !validatePassword(password) && (
 						<p className='text-rose-500 text-xs italic'>
 							Your password must be 6 characters long.
 						</p>
@@ -113,7 +149,7 @@ export default function LoginForm() {
 					<div className='flex flex-row items-center justify-between py-3 '>
 						<button
 							type='submit'
-							onClick={() => handLoginBtm()}
+							onClick={() => handleSignUpBtn()}
 							className='w-80 bg-yellow hover:bg-gray-100 text-black text-md font-bold py-2 rounded-xl mx-auto shadow'
 						>
 							SIGN UP
