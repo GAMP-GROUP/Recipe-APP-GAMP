@@ -4,7 +4,6 @@ import {
 	recipeTypesData,
 	author,
 } from './data';
-import { scrap } from './scrap/scrapRecipe';
 import { scrapv2 } from './scrap/v2';
 
 const load = async () => {
