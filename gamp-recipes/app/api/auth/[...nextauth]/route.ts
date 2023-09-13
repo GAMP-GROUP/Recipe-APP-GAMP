@@ -35,7 +35,6 @@ export const authOptions: AuthOptions = {
 						email,
 					},
 				});
-
 				if (!user) {
 					return null;
 				}
