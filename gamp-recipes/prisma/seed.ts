@@ -5,6 +5,7 @@ import {
 	author,
 } from './data';
 import { scrap } from './scrap/scrapRecipe';
+import { scrapv2 } from './scrap/v2';
 
 const load = async () => {
 	try {
@@ -18,9 +19,26 @@ const load = async () => {
 		});
 		console.log('Added recipe types data');  
 
-		const recipes = await Promise.all(scrap.map(async({recipeData, ingredients, amount}) => {
+		const categories = Array.from(new Set<string>(scrapv2.map((recipe) => recipe.category.toLowerCase())));
+		const data = categories.map((each) => ({ name: each}));
+		await prisma.category.createMany({
+			data,
+		});
+
+		const recipes = await Promise.all(scrapv2.map(async({recipeData, ingredients, amount, category}) => {
+			const catId = await prisma.category.findFirst({
+				where: {
+					name: category
+				}
+			});
+
+			const newData = {
+				...recipeData,
+				category: catId?.id as number
+			};
+
 			const recipe = await prisma.recipes.create({
-				data: recipeData,
+				data: newData
 			});
 			return { id: recipe.id, ingredients, amount };
 		})

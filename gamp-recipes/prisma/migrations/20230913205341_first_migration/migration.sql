@@ -12,6 +12,14 @@ CREATE TABLE `User` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `Category` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Recipe_types` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
@@ -44,6 +52,7 @@ CREATE TABLE `Recipes` (
     `instructions` VARCHAR(3000) NOT NULL,
     `image` VARCHAR(191) NOT NULL,
     `tags` VARCHAR(191) NOT NULL,
+    `category` INTEGER NOT NULL,
     `video_source` VARCHAR(191) NULL,
     `area` VARCHAR(191) NULL,
     `alcoholic` VARCHAR(191) NULL,
@@ -79,6 +88,9 @@ ALTER TABLE `Author_Recipe` ADD CONSTRAINT `Author_Recipe_author_id_fkey` FOREIG
 
 -- AddForeignKey
 ALTER TABLE `Author_Recipe` ADD CONSTRAINT `Author_Recipe_recipe_id_fkey` FOREIGN KEY (`recipe_id`) REFERENCES `Recipes`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Recipes` ADD CONSTRAINT `Recipes_category_fkey` FOREIGN KEY (`category`) REFERENCES `Category`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE `Recipes` ADD CONSTRAINT `Recipes_recipe_type_id_fkey` FOREIGN KEY (`recipe_type_id`) REFERENCES `Recipe_types`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

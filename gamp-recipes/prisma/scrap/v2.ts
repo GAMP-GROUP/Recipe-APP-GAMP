@@ -1,5 +1,4 @@
 
-
 export async function scrapper() {
 	const dataD = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
 	const dataM = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
@@ -35,7 +34,8 @@ export async function scrapper() {
 	return format;
 }
 
-export const scrap = [
+
+export const scrapv2 = [
 	{
 		recipeData: {
 			recipe_type_id: 1,
@@ -48,7 +48,8 @@ export const scrap = [
 			instructions: 'Pour the Galliano liqueur over ice. Fill the remainder of the glass with ginger ale and thats all there is to it. You now have a your very own GG.'
 		},
 		ingredients: [ 'Galliano', 'Ginger ale', 'Ice' ],
-		amount: [ '2 1/2 shots ', null, null ]
+		amount: [ '2 1/2 shots ', null, null ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -62,7 +63,8 @@ export const scrap = [
 			instructions: 'Pour all ingredients into a cocktail shaker, mix and serve over ice into a chilled glass.'
 		},
 		ingredients: [ 'Gin', 'Grand Marnier', 'Lemon Juice', 'Grenadine' ],
-		amount: [ '1 3/4 shot ', '1 Shot ', '1/4 Shot', '1/8 Shot' ]
+		amount: [ '1 3/4 shot ', '1 Shot ', '1/4 Shot', '1/8 Shot' ],
+		category: 'Cocktail'
 	},
 	{
 		recipeData: {
@@ -76,7 +78,8 @@ export const scrap = [
 			instructions: 'Shake all the ingredients in a cocktail shaker and ice then strain in a cold glass.'
 		},
 		ingredients: [ 'Gin', 'Grenadine', 'Heavy cream', 'Milk', 'Egg White' ],
-		amount: [ '2 shots ', '1/2 shot ', '1/2 shot ', '1/2 shot', '1/2 Fresh' ]
+		amount: [ '2 shots ', '1/2 shot ', '1/2 shot ', '1/2 shot', '1/2 Fresh' ],
+		category: 'Cocktail'
 	},
 	{
 		recipeData: {
@@ -90,7 +93,8 @@ export const scrap = [
 			instructions: 'pour kaluha, then Baileys, then Frangelico not chilled and not layered -- SERVE!!!'
 		},
 		ingredients: [ 'Kahlua', 'Baileys irish cream', 'Frangelico' ],
-		amount: [ '1/3 part ', '1/3 part ', '1/3 part ' ]
+		amount: [ '1/3 part ', '1/3 part ', '1/3 part ' ],
+		category: 'Shot'
 	},
 	{
 		recipeData: {
@@ -104,7 +108,8 @@ export const scrap = [
 			instructions: 'Add the crème de cassis to the bottom of the glass, then top up with wine.'
 		},
 		ingredients: [ 'Creme de Cassis', 'Champagne' ],
-		amount: [ '1 part ', '5 parts ' ]
+		amount: [ '1 part ', '5 parts ' ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -118,7 +123,8 @@ export const scrap = [
 			instructions: 'Layered in a shot glass.'
 		},
 		ingredients: [ 'Amaretto', 'Baileys irish cream', 'Cognac' ],
-		amount: [ '1/3 ', '1/3 ', '1/3 ' ]
+		amount: [ '1/3 ', '1/3 ', '1/3 ' ],
+		category: 'Shot'
 	},
 	{
 		recipeData: {
@@ -132,7 +138,8 @@ export const scrap = [
 			instructions: 'Add both ingredients to shot glass, shoot, and get drunk quick'
 		},
 		ingredients: [ '151 proof rum', 'Wild Turkey' ],
-		amount: [ '1/2 shot Bacardi ', '1/2 shot ' ]
+		amount: [ '1/2 shot Bacardi ', '1/2 shot ' ],
+		category: 'Shot'
 	},
 	{
 		recipeData: {
@@ -146,7 +153,8 @@ export const scrap = [
 			instructions: 'Pour Vodka and Gin over ice, add Tonic and Stir'
 		},
 		ingredients: [ 'Absolut Vodka', 'Gin', 'Tonic water' ],
-		amount: [ '1 oz ', '1 oz ', '4 oz ' ]
+		amount: [ '1 oz ', '1 oz ', '4 oz ' ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -160,7 +168,8 @@ export const scrap = [
 			instructions: 'Throw it all together and serve real cold.'
 		},
 		ingredients: [ 'Red wine', 'Peach schnapps', 'Pepsi Cola', 'Orange juice' ],
-		amount: [ '1/3 part ', '1 shot ', '1/3 part ', '1/3 part ' ]
+		amount: [ '1/3 part ', '1 shot ', '1/3 part ', '1/3 part ' ],
+		category: 'Punch / Party Drink'
 	},
 	{
 		recipeData: {
@@ -174,7 +183,8 @@ export const scrap = [
 			instructions: 'Layer the Kahlua, Sambucca and Grand Marnier into a shot glas in that order. Better than B-52'
 		},
 		ingredients: [ 'Kahlua', 'Sambuca', 'Grand Marnier' ],
-		amount: [ '1/3 shot ', '1/3 shot ', '1/3 shot ' ]
+		amount: [ '1/3 shot ', '1/3 shot ', '1/3 shot ' ],
+		category: 'Shot'
 	},
 	{
 		recipeData: {
@@ -188,7 +198,8 @@ export const scrap = [
 			instructions: 'In a shaker half-filled with ice cubes, combine all of the ingredients. Shake well. Strain into a cocktail glass.'
 		},
 		ingredients: [ 'Dark rum', 'Lemon juice', 'Grenadine' ],
-		amount: [ '2 oz ', '1 oz ', '1 tsp ' ]
+		amount: [ '2 oz ', '1 oz ', '1 tsp ' ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -202,7 +213,8 @@ export const scrap = [
 			instructions: 'Poor in the 151 first followed by the 101 served with a Coke or Dr Pepper chaser.'
 		},
 		ingredients: [ '151 proof rum', 'Wild Turkey' ],
-		amount: [ '1 oz Bacardi ', '1 oz ' ]
+		amount: [ '1 oz Bacardi ', '1 oz ' ],
+		category: 'Shot'
 	},
 	{
 		recipeData: {
@@ -216,7 +228,8 @@ export const scrap = [
 			instructions: 'Mix the whisky and Baileys Cream in a beer-glass (at least 50 cl). Fill the rest of the glass with coffee.'
 		},
 		ingredients: [ 'Whisky', 'Baileys irish cream', 'Coffee' ],
-		amount: [ '4 cl ', '8 cl ', null ]
+		amount: [ '4 cl ', '8 cl ', null ],
+		category: 'Coffee / Tea'
 	},
 	{
 		recipeData: {
@@ -230,7 +243,8 @@ export const scrap = [
 			instructions: 'Layer ingredients into a shot glass. Serve with a stirrer.'
 		},
 		ingredients: [ 'Baileys irish cream', 'Grand Marnier', 'Kahlua' ],
-		amount: [ '1/3 ', '1/3 ', '1/4 ' ]
+		amount: [ '1/3 ', '1/3 ', '1/4 ' ],
+		category: 'Shot'
 	},
 	{
 		recipeData: {
@@ -251,7 +265,8 @@ export const scrap = [
 			'Grenadine',
 			'Powdered sugar'
 		],
-		amount: [ '1/2 oz ', '1 oz ', '1/2 oz ', '1/2 tsp ', '1 tsp ', null ]
+		amount: [ '1/2 oz ', '1 oz ', '1/2 oz ', '1/2 tsp ', '1 tsp ', null ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -265,7 +280,8 @@ export const scrap = [
 			instructions: 'Pour all ingredients into a mixing glass with ice. Stir. Strain into a cocktail glass. Garnish with a sprig of fresh mint in the drink.'
 		},
 		ingredients: [ 'gin', 'Peach Bitters', 'Mint' ],
-		amount: [ '6 cl', '2 dashes', '2 Fresh leaves' ]
+		amount: [ '6 cl', '2 dashes', '2 Fresh leaves' ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -279,7 +295,8 @@ export const scrap = [
 			instructions: 'Shake ingredients with ice, strain into a cocktail glass, and serve.'
 		},
 		ingredients: [ 'Applejack', 'Grapefruit juice' ],
-		amount: [ '1 1/2 oz ', '1 oz ' ]
+		amount: [ '1 1/2 oz ', '1 oz ' ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -293,7 +310,8 @@ export const scrap = [
 			instructions: 'Stir in mixing glass with ice and strain\r\n'
 		},
 		ingredients: [ 'Orange Bitters', 'Green Chartreuse', 'Gin', 'Sweet Vermouth' ],
-		amount: [ '1 dash', '1 oz', '1 oz', '1 oz' ]
+		amount: [ '1 dash', '1 oz', '1 oz', '1 oz' ],
+		category: 'Cocktail'
 	},
 	{
 		recipeData: {
@@ -307,7 +325,8 @@ export const scrap = [
 			instructions: 'fill glass with crushed ice. Add vodka. Add a splash of grand-marnier. Fill with o.j.'
 		},
 		ingredients: [ 'Vanilla vodka', 'Grand Marnier', 'Orange juice' ],
-		amount: [ '2 1/2 oz ', '1 splash ', 'Fill with ' ]
+		amount: [ '2 1/2 oz ', '1 splash ', 'Fill with ' ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -321,7 +340,8 @@ export const scrap = [
 			instructions: 'Put a copper coin in a coffe-cup and fill up with coffee until you no longer see the coin, then add alcohol until you see the coin. Norwegian speciality.'
 		},
 		ingredients: [ 'Coffee', 'Grain alcohol' ],
-		amount: [ '1 part ', '2 parts ' ]
+		amount: [ '1 part ', '2 parts ' ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -335,7 +355,8 @@ export const scrap = [
 			instructions: 'Brew espresso. In a coffee mug, place 1 teaspoon of unsweetened powdered cocoa, then cover a teaspoon with honey and drizzle it into the cup. Stir while the coffee brews, this is the fun part. The cocoa seems to coat the honey without mixing, so you get a dusty, sticky mass that looks as though it will never mix. Then all at once, presto! It looks like dark chocolate sauce. Pour hot espresso over the honey, stirring to dissolve. Serve with cream.'
 		},
 		ingredients: [ 'Espresso', 'Honey', 'Cocoa powder' ],
-		amount: [ null, 'Unsweetened ', null ]
+		amount: [ null, 'Unsweetened ', null ],
+		category: 'Coffee / Tea'
 	},
 	{
 		recipeData: {
@@ -349,7 +370,8 @@ export const scrap = [
 			instructions: 'add all and pour black coffee and add whipped cream on top.'
 		},
 		ingredients: [ 'Sambuca', 'Baileys irish cream', 'White Creme de Menthe' ],
-		amount: [ '2 cl ', '2 cl ', '2 cl ' ]
+		amount: [ '2 cl ', '2 cl ', '2 cl ' ],
+		category: 'Coffee / Tea'
 	},
 	{
 		recipeData: {
@@ -385,7 +407,8 @@ export const scrap = [
 			'1 oz',     '1 tsp',
 			'1 tsp',    '1 tsp',
 			'1 drop'
-		]
+		],
+		category: 'Cocktail'
 	},
 	{
 		recipeData: {
@@ -405,7 +428,8 @@ export const scrap = [
 			'Vodka',
 			'Light cream'
 		],
-		amount: [ '1/2 oz white ', '1/2 oz ', '1/2 oz ', '1/2 oz ', '1 oz ' ]
+		amount: [ '1/2 oz white ', '1/2 oz ', '1/2 oz ', '1/2 oz ', '1 oz ' ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -424,7 +448,8 @@ export const scrap = [
 			'Cranberry juice',
 			'Club soda'
 		],
-		amount: [ '2 oz ', '2 oz ', '2 oz ', null ]
+		amount: [ '2 oz ', '2 oz ', '2 oz ', null ],
+		category: 'Ordinary Drink'
 	},
 	{
 		recipeData: {
@@ -466,7 +491,8 @@ export const scrap = [
 			'1/4 tsp', '1/4 tsp',
 			'4 cups ', '1 cup ',
 			'Pinch'
-		]
+		],
+		category: 'Side'
 	},
 	{
 		recipeData: {
@@ -480,7 +506,8 @@ export const scrap = [
 			instructions: 'Fry the finely chopped onions and minced meat in oil. Add the salt and pepper. Grease a round baking tray and put a layer of pastry in it. Cover with a thin layer of filling and cover this with another layer of filo pastry which must be well coated in oil. Put another layer of filling and cover with pastry. When you have five or six layers, cover with filo pastry, bake at 200ºC/392ºF for half an hour and cut in quarters and serve.'
 		},
 		ingredients: [ 'Filo Pastry', 'Minced Beef', 'Onion', 'Oil', 'Salt', 'Pepper' ],
-		amount: [ '1 Packet', '150g', '150g', '40g', 'Dash', 'Dash' ]
+		amount: [ '1 Packet', '150g', '150g', '40g', 'Dash', 'Dash' ],
+		category: 'Side'
 	},
 	{
 		recipeData: {
@@ -538,7 +565,8 @@ export const scrap = [
 			'2 tbs',  '3 tbs',
 			'1 tbs',  '1 tbs',
 			'1'
-		]
+		],
+		category: 'Seafood'
 	},
 	{
 		recipeData: {
@@ -563,7 +591,8 @@ export const scrap = [
 			'Red Pepper',
 			'Red Chile Flakes'
 		],
-		amount: [ '2 large', '2 tbs', '150g', '1 large', '1 large', 'Pinch' ]
+		amount: [ '2 large', '2 tbs', '150g', '1 large', '1 large', 'Pinch' ],
+		category: 'Side'
 	},
 	{
 		recipeData: {
@@ -598,7 +627,8 @@ export const scrap = [
 			'4 tbs',
 			'1 cup ',
 			'1 pinch'
-		]
+		],
+		category: 'Beef'
 	},
 	{
 		recipeData: {
@@ -632,7 +662,8 @@ export const scrap = [
 			'2 tsp',       '1 tsp ',
 			'1/2 tsp',     'Spinkling',
 			'As required'
-		]
+		],
+		category: 'Vegetarian'
 	},
 	{
 		recipeData: {
@@ -641,7 +672,6 @@ export const scrap = [
 			image: 'https://www.themealdb.com/images/media/meals/1bsv1q1560459826.jpg',
 			tags: '',
 			area: 'Tunisian',
-			
 			alcoholic: null,
 			video_source: 'https://www.youtube.com/watch?v=-TFf-Zu-xQU',
 			instructions: 'Peel potatoes and cut into 5cm cubes.\r\n' +
@@ -668,7 +698,8 @@ export const scrap = [
 			'1 tbs',      '500g',
 			'24 Skinned', 'Pinch',
 			'Pinch'
-		]
+		],
+		category: 'Vegetarian'
 	},
 	{
 		recipeData: {
@@ -704,7 +735,8 @@ export const scrap = [
 			'500g',              '400ml',
 			'125g',              '50g',
 			'Topping'
-		]
+		],
+		category: 'Pasta'
 	},
 	{
 		recipeData: {
@@ -713,7 +745,6 @@ export const scrap = [
 			image: 'https://www.themealdb.com/images/media/meals/wuxrtu1483564410.jpg',
 			tags: 'Curry,Vegetarian,Cake',
 			area: 'Indian',
-			
 			alcoholic: null,
 			video_source: 'https://www.youtube.com/watch?v=J4D855Q9-jg',
 			instructions: 'Wash and soak toor dal in approx. 3 cups of water, for at least one hours. Dal will be double in volume after soaking. Drain the water.\r\n' +
@@ -743,7 +774,8 @@ export const scrap = [
 			'2 tsp shredded', '2 tbs ',
 			'1/2 tsp',        '1/2 tsp',
 			'1 tsp',          '1/4 tsp'
-		]
+		],
+		category: 'Vegetarian'
 	},
 	{
 		recipeData: {
@@ -752,7 +784,6 @@ export const scrap = [
 			image: 'https://www.themealdb.com/images/media/meals/1525876468.jpg',
 			tags: 'MainMeal',
 			area: 'Chinese',
-
 			alcoholic: null,
 			video_source: 'https://www.youtube.com/watch?v=9h9No18ZyCI',
 			instructions: 'Combine pork, garlic, ginger, soy sauce, sesame oil, and vegetables in a bowl.\r\n' +
@@ -789,7 +820,8 @@ export const scrap = [
 			'1 Packet',
 			'Fry',
 			'Bottle'
-		]
+		],
+		category: 'Pork'
 	},
 	{
 		recipeData: {
@@ -808,7 +840,8 @@ export const scrap = [
         'Ladle gravy over the fries and cheese, and serve immediately.'
 		},
 		ingredients: [ 'Vegetable Oil', 'Beef Gravy', 'Potatoes', 'Cheese Curds' ],
-		amount: [ 'Dash', '1 Can', '5 thin cut', '2 cups' ]
+		amount: [ 'Dash', '1 Can', '5 thin cut', '2 cups' ],
+		category: 'Miscellaneous'
 	},
 	{
 		recipeData: {
@@ -842,7 +875,8 @@ export const scrap = [
 			'1 beaten', '¾ cup',
 			'3 tbs',    'for frying',
 			'garnish'
-		]
+		],
+		category: 'Dessert'
 	},
 	{
 		recipeData: {
@@ -851,7 +885,6 @@ export const scrap = [
 			image: 'https://www.themealdb.com/images/media/meals/4er7mj1598733193.jpg',
 			tags: '',
 			area: 'Egyptian',
-			
 			alcoholic: null,
 			video_source: 'https://www.youtube.com/watch?v=y0d2ZMZBW4Y',
 			instructions: 'Cook the lentils. Bring lentils and 4 cups of water to a boil in a medium pot or saucepan over high heat. Reduce the heat to low and cook until lentils are just tender (15-17 minutes). Drain from water and season with a little salt. (Note: when the lentils are ready, they should not be fully cooked. They should be only par-cooked and still have a bite to them as they need to finish cooking with the rice).\r\n' +
@@ -883,7 +916,8 @@ export const scrap = [
 			'1 large',
 			'Sprinking',
 			'1/2 cup '
-		]
+		],
+		category: 'Vegetarian'
 	},
 	{
 		recipeData: {
@@ -924,7 +958,8 @@ export const scrap = [
 			'2 tsp',      'Pinch',
 			'2 tsp',      '1 1/2 tsp ',
 			'1 1/2 tsp ', '1/2 tsp'
-		]
+		],
+		category: 'Beef'
 	},
 	{
 		recipeData: {
@@ -962,7 +997,8 @@ export const scrap = [
 			'2 tbs',  '3 tbs',  '1 cup ',
 			'1',      '1 tsp ', 'Splash',
 			'Sliced', 'Sliced', '6'
-		]
+		],
+		category: 'Chicken'
 	},
 	{
 		recipeData: {
@@ -1007,7 +1043,8 @@ export const scrap = [
 			'750g',  '2',
 			'500ml', 'Grated',
 			'Pinch', 'Pinch'
-		]
+		],
+		category: 'Pork'
 	},
 	{
 		recipeData: {
@@ -1040,7 +1077,8 @@ export const scrap = [
 			'Topping',   'Topping',
 			'1 Bulb',    '1',
 			'3rd',       '100 Grams'
-		]
+		],
+		category: 'Lamb'
 	},
 	{
 		recipeData: {
@@ -1075,7 +1113,8 @@ export const scrap = [
 			'2 tbs',   '1 chopped',
 			'1 tsp ',  '2 tsp',
 			'300g'
-		]
+		],
+		category: 'Seafood'
 	},
 	{
 		recipeData: {
@@ -1118,7 +1157,8 @@ export const scrap = [
 			'Large handful',    'Handful',
 			'Grated zest of 1', '25g grated',
 			'Juice of 1'
-		]
+		],
+		category: 'Seafood'
 	},
 	{
 		recipeData: {
@@ -1127,7 +1167,6 @@ export const scrap = [
 			image: 'https://www.themealdb.com/images/media/meals/wssvvs1511785879.jpg',
 			tags: 'Tart',
 			area: 'French',
-			
 			alcoholic: null,
 			video_source: 'https://www.youtube.com/watch?v=vT0q5c880Rg',
 			instructions: 'For the pastry, sift the flour and salt into the bowl of a food processor, add the butter and lard, then whizz together briefly until the mixture looks like fine breadcrumbs. Tip the mixture into a bowl, then stir in the cheese and enough of the water for the mixture to come together. Tip out onto a lightly floured surface and knead briefly until smooth. Roll out thinly and line a 23cm x 4cm loose-?bottomed fluted flan tin. Prick the base with a fork. Chill for 20 minutes.\r\n' +
@@ -1152,7 +1191,8 @@ export const scrap = [
 			'½ tsp',      '60g',
 			'60g',        '50g',
 			'2 tbs'
-		]
+		],
+		category: 'Vegetarian'
 	},
 	{
 		recipeData: {
@@ -1184,7 +1224,8 @@ export const scrap = [
 			'to serve',
 			'to serve',
 			'to serve'
-		]
+		],
+		category: 'Dessert'
 	},
 	{
 		recipeData: {
@@ -1214,7 +1255,8 @@ export const scrap = [
 			'150g',  '1 beaten',
 			'3 tbs', '400g',
 			'4 tbs', '350g'
-		]
+		],
+		category: 'Beef'
 	},
 	{
 		recipeData: {
@@ -1236,7 +1278,8 @@ export const scrap = [
 			'ginger cordial',
 			'Mint'
 		],
-		amount: [ '500g', '400ml', '3 x 7.5cm', '1 tbsp', 'sprigs of fresh' ]
+		amount: [ '500g', '400ml', '3 x 7.5cm', '1 tbsp', 'sprigs of fresh' ],
+		category: 'Dessert'
 	},
 	{
 		recipeData: {
@@ -1245,7 +1288,6 @@ export const scrap = [
 			image: 'https://www.themealdb.com/images/media/meals/wrustq1511475474.jpg',
 			tags: 'LowCalorie',
 			area: 'Japanese',
-			
 			alcoholic: null,
 			video_source: 'https://www.youtube.com/watch?v=5Iy0MCowSvA',
 			instructions: 'Boil some water in a large saucepan. Add 250ml cold water and the udon noodles. (As they are so thick, adding cold water helps them to cook a little bit slower so the middle cooks through). If using frozen or fresh noodles, cook for 2 mins or until al dente; dried will take longer, about 5-6 mins. Drain and leave in the colander.\r\n' +
@@ -1269,7 +1311,8 @@ export const scrap = [
 			'10',       '4',
 			'4 tbsp',   '2 tbs',
 			'1 tblsp ', '1 tblsp '
-		]
+		],
+		category: 'Vegetarian'
 	},
 	{
 		recipeData: {
@@ -1303,6 +1346,7 @@ export const scrap = [
 			'3',        '1 tbs',
 			'1/2 ',     'To taste',
 			'To taste', 'Top'
-		]
+		],
+		category: 'Beef'
 	}
 ];
