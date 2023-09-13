@@ -9,6 +9,7 @@ import NextAuth from 'next-auth/next';
 export const authOptions: AuthOptions = {
 	providers: [
 		CredentialsProvider({
+			id: 'credentials',
 			name: 'credentials',
 
 			credentials: {

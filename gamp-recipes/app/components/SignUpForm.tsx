@@ -21,7 +21,6 @@ export default function SignUpForm() {
 		handleInputChange,
 		user: { email, password, nationality, username },
 		handleLoginCardDisplay,
-		registering,
 	} = useContext(UserContext);
 
 	const handleSubmit = (event: React.FormEvent) => {
@@ -37,7 +36,7 @@ export default function SignUpForm() {
 		username: string
 	) => {
 		if (email && password && nationality && username) {
-			const validation = validateLogin(email, password, nationality, username);
+			const validation = validateLogin(email, password, username, nationality);
 			return validation;
 		}
 	};
@@ -50,7 +49,7 @@ export default function SignUpForm() {
 			nationality,
 			username
 		);
-		if (validationsResult) return window.alert('Invalid input');
+		if (!validationsResult) return window.alert('Invalid input');
 
 		const req = await signUp(email, password, username, nationality);
 
@@ -60,7 +59,7 @@ export default function SignUpForm() {
 		return window.alert('Successfully created new user!');
 	};
 
-	const content = registering ? (
+	const content = (
 		<div className='z-[99] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white shadow-2xl py-4 px-4 rounded-lg w-11/12 max-w-md'>
 			<button
 				type='submit'
@@ -121,7 +120,7 @@ export default function SignUpForm() {
 						id='helper-text'
 						aria-describedby='helper-text-explanation'
 						className='mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-stone-800 leading-tight focus:outline-none focus:shadow-outline '
-						placeholder='exemple@email.com'
+						placeholder='example@email.com'
 					/>
 					{buttonClicked && !validateEmail(email) && (
 						<p className='text-rose-500 text-xs italic'>
@@ -158,7 +157,7 @@ export default function SignUpForm() {
 				</div>
 			</form>
 		</div>
-	) : null;
+	);
 
 	return content;
 }

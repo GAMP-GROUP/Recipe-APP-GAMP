@@ -7,7 +7,6 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import UserMenu from './components/UserMenu';
 import SearchBar from './components/SearchBar';
-import LoginForm from './components/SignUpForm';
 import React from 'react';
 import AuthProvider from './api/[...nextauth]/authProvider';
 
@@ -28,7 +27,7 @@ export default function RootLayout({
 			<body className={`${inter.className} flex-col`}>
 				<Providers>
 					<SearchBar />
-					<LoginForm />
+
 					<UserMenu />
 					<Header />
 					<AuthProvider>{children}</AuthProvider>

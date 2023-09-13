@@ -4,8 +4,6 @@ import Link from '@/node_modules/next/link';
 import { useState, useEffect } from 'react';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { toggleMenu } from './UserMenu';
-import { UserContext } from '@/contextAPI/context';
-import { useContext } from 'react';
 import React from 'react';
 
 export default function Header() {
@@ -14,8 +12,6 @@ export default function Header() {
 
 	const { menu, setMenu } = useBehaviorContext();
 	const { setSearchBar } = useBehaviorContext();
-
-	const { handleLoginCardDisplay } = useContext(UserContext);
 
 	function scrollPage(): void {
 		const currentScrollY = window.scrollY;
@@ -64,12 +60,11 @@ export default function Header() {
 					/>
 				</picture>
 			</Link>
-			<button
-				className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
-				onClick={() => handleLoginCardDisplay()}
-			>
-				Sign Up
-			</button>
+			<Link href='/auth/signup'>
+				<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
+					Sign Up
+				</button>
+			</Link>
 		</header>
 	);
 }

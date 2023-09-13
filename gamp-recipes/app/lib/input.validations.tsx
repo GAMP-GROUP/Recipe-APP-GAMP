@@ -1,22 +1,30 @@
 export const validateEmail = (email: string) => {
 	const re = /\S+@\S+\.\S+/;
-	return re.test(email);
+	if (re.test(email)) return true;
+
+	return false;
 };
 
 export const validatePassword = (password: string) => {
 	const characters = 6;
 
-	return password.length > characters;
+	if (password.length > characters) return true;
+
+	return false;
 };
 
-export const validateNationality = (password: string) => {
+export const validateNationality = (nationality: string) => {
 	const characters = 2;
-	return password.length === characters;
+	if (nationality.length === characters) return true;
+
+	return false;
 };
 
 export const validateUsername = (username: string) => {
 	const characters = 3;
-	return username.length > characters && username.length < 10;
+	if (username.length > characters && username.length < 10) return true;
+
+	return false;
 };
 
 export const validateLogin = (
@@ -30,7 +38,6 @@ export const validateLogin = (
 		validatePassword(password) &&
 		validateUsername(username) &&
 		validateNationality(nationality);
-	console.log(teste);
 
 	return teste;
 };
