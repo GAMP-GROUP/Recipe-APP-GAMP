@@ -13,6 +13,7 @@ import {
 import Image from 'next/image';
 import React from 'react';
 import { signUp } from '../actions/users/signUp';
+import { signIn } from 'next-auth/react';
 
 export default function SignUpForm() {
 	const [buttonClicked, setButtonClicked] = useState(false);
@@ -153,6 +154,13 @@ export default function SignUpForm() {
 						>
 							SIGN UP
 						</button>
+						<br />
+						<p>Or sign in with:</p>
+						<div className='flex flex-row items-center justify-between py-3 '>
+							<button type='button' onClick={() => signIn('google')}>
+								GOOGLE
+							</button>
+						</div>
 					</div>
 				</div>
 			</form>

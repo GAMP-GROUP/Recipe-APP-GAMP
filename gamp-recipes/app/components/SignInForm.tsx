@@ -3,7 +3,7 @@
 import { UserContext } from '@/contextAPI/context';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import React from 'react';
 
@@ -34,11 +34,20 @@ export default function SignInForm() {
 				return window.alert('Invalid credentials');
 			} else {
 				router.refresh();
+				router.push('/');
+				const { status } = useSession();
+				console.log(status);
 			}
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	useEffect(() => {
+		if (status === 'authenticated') {
+			router.push('/');
+		}
+	}, [status]);
 
 	const content = (
 		<div className='z-[99] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white shadow-2xl py-4 px-4 rounded-lg w-11/12 max-w-md'>
@@ -74,16 +83,16 @@ export default function SignInForm() {
 						placeholder='******'
 						className='mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-stone-800  leading-tight focus:outline-none focus:shadow-outline'
 					/>
-					<br />
-					<div className='flex flex-row items-center justify-between py-3 '>
-						<button
-							type='button'
-							onClick={() => handleSignUpBtn()}
-							className='w-80 bg-yellow hover:bg-gray-100 text-black text-md font-bold py-2 rounded-xl mx-auto shadow'
-						>
-							SIGN IN
-						</button>
-					</div>
+				</div>
+
+				<div className='flex flex-row items-center justify-between py-3 '>
+					<button
+						type='button'
+						onClick={() => handleSignUpBtn()}
+						className='w-80 bg-yellow hover:bg-gray-100 text-black text-md font-bold py-2 rounded-xl mx-auto shadow'
+					>
+						SIGN IN
+					</button>
 				</div>
 			</form>
 		</div>

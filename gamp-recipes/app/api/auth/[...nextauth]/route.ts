@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import prisma from '@/prisma/client';
 import { Account, AuthOptions, Profile, Session, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -5,9 +6,22 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { JWT } from 'next-auth/jwt';
 import NextAuth from 'next-auth/next';
+import GoogleProvider from 'next-auth/providers/google';
+
+type googleCredentials = {
+	email: string;
+	name: string;
+	image: string;
+	sub: string;
+	locale: string;
+};
 
 export const authOptions: AuthOptions = {
 	providers: [
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID as string,
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+		}),
 		CredentialsProvider({
 			id: 'credentials',
 			name: 'credentials',
@@ -100,6 +114,35 @@ export const authOptions: AuthOptions = {
 			}
 
 			return params.token;
+		},
+		async signIn(
+			user?: User | undefined,
+			account?: Account | null | undefined,
+			profile?: googleCredentials | undefined
+		) {
+			if (profile) {
+				try {
+					const createUser = await prisma.user.create({
+						data: {
+							email: profile.email,
+							password_hash: bcrypt.hashSync(profile.email, 10),
+							username: profile.name,
+							nationality: profile.locale.split('-')[1],
+						},
+					});
+					const user = await prisma.user.findUnique({
+						where: {
+							email: profile.email,
+						},
+					});
+					console.log(user);
+
+					return createUser as unknown as User;
+				} catch (error) {
+					console.log(error);
+				}
+			}
+			return true;
 		},
 	},
 };
