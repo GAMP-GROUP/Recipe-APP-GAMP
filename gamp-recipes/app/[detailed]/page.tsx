@@ -105,9 +105,9 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 				}
 			</div>
 			<Link href={`${detailed}/inProgress`}>
-				{/* <StartRecipeButton type={api} id={id} /> */}
+				<StartRecipeButton id={id.toString()} />
 			</Link>
-			{/* <FavButton type={api} id={id} /> */}
+			<FavButton id={id.toString()} />
 		</main>
 	);
 }

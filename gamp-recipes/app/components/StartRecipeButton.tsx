@@ -1,20 +1,24 @@
-'use client'
+'use client';
+import React from 'react';
+import { ButtonProps } from '@/types';
 
-import { ButtonProps } from "@/types";
+export default function StartRecipeButton({ id }: ButtonProps) {
+	const started = JSON.parse(localStorage.getItem('recipes') as string) || [];
+	const isStarted = started.some((recipe: string) => recipe === id);
 
-export default function StartRecipeButton({ id, type }: ButtonProps) {
-  const { drink, meal } = JSON.parse(localStorage.getItem('recipes') as string) || { drink: [null], meal:[null] };
-  const started = type === 'drink' 
-    ? drink.some((each: string) => each === id)
-    : meal.some((each: string) => each === id)
+	function startHandle(e: React.MouseEvent<HTMLButtonElement>) {
+		const id = (e.target as Element).id;
+		isStarted ? null : localStorage.setItem('recipes', JSON.stringify([...started, id]));
+	}
 
-  return (
-    <>
-      <button
-        className='rounded-full bg-yellow bg-auto p-5 my-2 uppercase'
-        id={id}
-        >{started ? 'Continue Recipe' : 'Start Recipe' } 
-      </button>
-    </>
-  )
+	return (
+		<>
+			<button
+				onClick={(e) => { startHandle(e);}}
+				className='rounded-full bg-yellow bg-auto p-5 my-2 uppercase'
+				id={id}
+			>{isStarted ? 'Continue Recipe' : 'Start Recipe' }
+			</button>
+		</>
+	);
 }

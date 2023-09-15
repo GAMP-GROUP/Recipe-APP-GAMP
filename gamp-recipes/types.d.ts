@@ -37,7 +37,6 @@ type drinkAPI = {
 
 type ButtonProps = {
   id: string,
-  type: string,
 }
 
 type mealAPI = {
