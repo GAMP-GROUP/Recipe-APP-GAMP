@@ -16,7 +16,7 @@ type TRecipesProps = {
 
 type TRecipesFeed = {
     recipesQuantity: number,
-    type: 'drinks' | 'meals',
+    type: 'drink' | 'meal',
     recipes: TRecipesProps[],
 }
 
@@ -32,9 +32,10 @@ export default async function RecipesFeed({ recipesQuantity, type, recipes }: TR
                             type={ type }
                             id={ recipe.id }
                             title={ recipe.recipe_name }
+                            tags={ recipe.tags }
                             image={ recipe.image }
-                            area={ type === 'meals' ? recipe.area : null }
-                            alcoholic={ type === 'drinks' ? recipe.alcoholic : null }
+                            area={ type === 'meal' ? recipe.area : null }
+                            alcoholic={ type === 'drink' ? recipe.alcoholic : null }
                         />
                     </div>
                 )) }
