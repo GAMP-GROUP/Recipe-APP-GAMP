@@ -1,41 +1,27 @@
 import RecipesCard from "./RecipesCard"
 
-type TDrinkOrMeal = 'drink' | 'meal'
-
-type MealsRecipesProps = {
-    id: string,
-    recipeName: string,
-    thumb: string,
-    tags: string[],
-    area: string,
-    createdAt: Date,
-    updatedAt: Date,
-    author: string,
-    ingredients: string[],
-    favorites: string[],
+type TRecipesProps = {
+    id: number;
+    recipe_name: string;
+    instructions: string;
+    image: string;
+    tags: string;
+    video_source?: string | null;
+    area?: string | null;
+    alcoholic?: string | null;
+    recipe_type_id: number;
+    created_at: Date;
+    updated_at: Date;
 }
 
-type DrinksRecipesProps = {
-    id: string,
-    recipeName: string,
-    thumb: string,
-    tags: string[],
-    alcoholic: boolean,
-    createdAt: Date,
-    updatedAt: Date,
-    author: string,
-    ingredients: string[],
-    favorites: string[],
-}
-
-type RecipesFeedProps = {
+type TRecipesFeed = {
     recipesQuantity: number,
-    type: TDrinkOrMeal,
-    recipes: MealsRecipesProps[] | DrinksRecipesProps[]
+    type: 'drinks' | 'meals',
+    recipes: TRecipesProps[],
 }
 
-export default function RecipesFeed({ recipesQuantity, type, recipes }: RecipesFeedProps) {
-    const filteredRecipes = recipes.slice(0, recipesQuantity);
+export default async function RecipesFeed({ recipesQuantity, type, recipes }: TRecipesFeed) {
+    const filteredRecipes = recipes.slice(0, recipesQuantity);   
 
     return (
         <>
@@ -45,20 +31,10 @@ export default function RecipesFeed({ recipesQuantity, type, recipes }: RecipesF
                         <RecipesCard
                             type={ type }
                             id={ recipe.id }
-                            title={ recipe.recipeName }
-                            thumb={ recipe.thumb }
-                            area={ type === 'meal'
-                                ? (recipe as MealsRecipesProps).area
-                                : ''
-                            }
-                            category={ type === 'meal'
-                                ? (recipe as MealsRecipesProps).tags.join(', ')
-                                : ''
-                            }
-                            alcoholic={ type === 'drink'
-                                ? (recipe as DrinksRecipesProps).alcoholic
-                                : false
-                            }
+                            title={ recipe.recipe_name }
+                            image={ recipe.image }
+                            area={ type === 'meals' ? recipe.area : null }
+                            alcoholic={ type === 'drinks' ? recipe.alcoholic : null }
                         />
                     </div>
                 )) }

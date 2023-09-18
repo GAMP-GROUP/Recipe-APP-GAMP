@@ -1,24 +1,24 @@
 import Link from "next/link"
 
 type recipeProps = {
-    id: string,
-    thumb: string,
+    id: number,
+    image: string,
     title: string,
-    area?: string,
-    alcoholic?: boolean,
-    category: string,
-    type: 'meal' | 'drink'
+    area?: string | null,
+    alcoholic?: string | null,
+    category?: string,
+    type: 'meals' | 'drinks'
 }
 
-export default function RecipesCard({ id, thumb, title,area, category, type }: recipeProps): JSX.Element {
+export default function RecipesCard({ id, image, title,area, category, type }: recipeProps): JSX.Element {
     return (
         <Link href={`${type}-${id}`}>
-            <div className="p-6 text-center" id={id}>      
+            <div className="p-6 text-center">      
                 <picture>
                     <img
                         className="rounded-lg"
                         alt={title}
-                        src={thumb} />
+                        src={image} />
                 </picture>
                 <section className="flex">
                 <h2 className="inline-flex mt-2 mx-4 my-1">{title}</h2>
