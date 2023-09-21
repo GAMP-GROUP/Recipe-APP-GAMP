@@ -16,11 +16,11 @@ type TRecipesProps = {
 
 type TRecipesFeed = {
     recipesQuantity: number,
-    type: 'drink' | 'meal',
+    feedType: 'drink' | 'meal' | 'all',
     recipes: TRecipesProps[],
 }
 
-export default async function RecipesFeed({ recipesQuantity, type, recipes }: TRecipesFeed) {
+export default async function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) {
     const filteredRecipes = recipes.slice(0, recipesQuantity);   
 
     return (
@@ -29,13 +29,13 @@ export default async function RecipesFeed({ recipesQuantity, type, recipes }: TR
                 { filteredRecipes.map((recipe, index) => (
                     <div key={ index }>
                         <RecipesCard
-                            type={ type }
+                            type={ recipe.recipe_type_id }
                             id={ recipe.id }
                             title={ recipe.recipe_name }
                             tags={ recipe.tags }
                             image={ recipe.image }
-                            area={ type === 'meal' ? recipe.area : null }
-                            alcoholic={ type === 'drink' ? recipe.alcoholic : null }
+                            area={ recipe.recipe_type_id === 2 ? recipe.area : null }
+                            alcoholic={ recipe.recipe_type_id === 1 ? recipe.alcoholic : null }
                         />
                     </div>
                 )) }

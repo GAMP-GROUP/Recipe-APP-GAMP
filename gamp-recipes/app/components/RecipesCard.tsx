@@ -8,7 +8,7 @@ type recipeProps = {
     area?: string | null,
     alcoholic?: string | null,
     category?: string,
-    type: 'meal' | 'drink'
+    type: number
 }
 
 export default function RecipesCard({ id, image, title, tags, area, category, type }: recipeProps): JSX.Element {
@@ -32,8 +32,8 @@ export default function RecipesCard({ id, image, title, tags, area, category, ty
                     />
                 </picture>
                 <section className="mt-2 px-4 flex items-center">
-                    <h2 className="text-[1.75rem] font-black mr-4 font-croissant">{title}</h2>
-                    <p className="text-sm uppercase font-[600] text-gray-500 tracking-[0.075rem]">{ type }</p>
+                    <h2 className="text-[1.75rem] font-black mr-4 font-croissant">{ title }</h2>
+                    <p className="text-sm uppercase font-[600] text-gray-500 tracking-[0.075rem]">{ type === 2 ? 'meal' : 'drink' }</p>
                 </section>
             </div>
         </Link>
