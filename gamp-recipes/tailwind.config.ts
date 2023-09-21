@@ -17,6 +17,9 @@ const config: Config = {
         'gold': '#F2BA52',
         'red': '#F21D55',
       },
+      fontFamily: {
+        'croissant': ['Croissant One', 'cursive']
+      }
     },
   },
   plugins: [],

@@ -1,5 +1,5 @@
-import RecipesFeed from "./components/RecipesFeed";
 import prisma from "@/prisma/client"
+import RecipesFeed from "./components/RecipesFeed";
 
 export default async function Home() {
   const meals = await prisma.recipes.findMany({
@@ -11,11 +11,11 @@ export default async function Home() {
 
   return (
     <div>
-      <main className='h-full'>
-        <section>
+      <main className='h-full w-full'>
+        <section className="flex-row">
           <RecipesFeed
-            recipesQuantity={6}
-            type="meal"
+            recipesQuantity={12}
+            type="drink"
             recipes={meals}
           />
         </section>

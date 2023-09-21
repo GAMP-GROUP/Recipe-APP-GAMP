@@ -16,11 +16,11 @@ export default function RecipesCard({ id, image, title, tags, area, category, ty
 
     return (
         <Link href={`${type}-${id}`}>
-            <div className="p-6 text-center mb-6 relative">      
+            <div className="p-6 text-center mb-4 relative">      
                 <picture className='absolute top-8 right-8 cursor-pointer bg-white rounded-full p-2'>
                     <img
                         alt='Favorite button'
-                        src='icons/favorites.png'
+                        src='icons/favorites-notactive.png'
                         className='w-5'
                     />
                 </picture>
@@ -28,11 +28,12 @@ export default function RecipesCard({ id, image, title, tags, area, category, ty
                     <img
                         alt={title}
                         src={image}
+                        className="rounded-3xl"
                     />
                 </picture>
                 <section className="mt-2 px-4 flex items-center">
-                    <h2 className="text-[1.5rem] font-black mr-4">{title}</h2>
-                    <p className="uppercase font-[600] text-gray-500">{ type }</p>
+                    <h2 className="text-[1.75rem] font-black mr-4 font-croissant">{title}</h2>
+                    <p className="text-sm uppercase font-[600] text-gray-500 tracking-[0.075rem]">{ type }</p>
                 </section>
             </div>
         </Link>

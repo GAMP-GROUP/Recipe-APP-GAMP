@@ -17,15 +17,15 @@ export default function SearchBar() {
             > {/* O container branco */}
                 <fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center'>
                     <input type="text" placeholder="Recipe or ingredient"
-                        className='bg-gray-200 ml-3'
+                        className="bg-gray-200 ml-3"
                     /> {/* O campo para inserir o termo de pesquisa */}
-                    <button className='ml-3'>
+                    <button className="">
                         <Image
                             src='/icons/search.png'
                             width={15}
                             height={15}
                             alt='Search icon'
-                        /> 
+                        /> {/* Icone de pesquisa */}
                     </button> {/* Botão para fazer a pesquisa */}
                 </fieldset> {/* Todo container que abrange o campo input mais o botão */}
                     <button onClick={ () => setSearchBar(false) }>
