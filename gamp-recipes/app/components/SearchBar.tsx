@@ -15,11 +15,11 @@ export default function SearchBar() {
             <section
                 className={`w-screen h-16 fixed top-0 bg-white py-3 px-6 flex justify-between items-center`}
             > {/* O container branco */}
-                <fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center'>
+                <fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center'>
                     <input type="text" placeholder="Recipe or ingredient"
                         className="bg-gray-200 ml-3"
                     /> {/* O campo para inserir o termo de pesquisa */}
-                    <button className="">
+                    <button className="mr-3">
                         <Image
                             src='/icons/search.png'
                             width={15}
@@ -38,8 +38,11 @@ export default function SearchBar() {
                         </picture>
                     </button>
             </section>
-            { searchBar && <div className="overlay overlay-active" onClick={() => setSearchBar(false)}></div> }
-            {/* Resto da tela além da barra de pesquisa */}
+            { searchBar &&
+            <div
+                className="overlay"
+                onClick={() => setSearchBar(false)}
+            /> } {/* Resto da tela além da barra de pesquisa */}
         </section>
     )
 }
