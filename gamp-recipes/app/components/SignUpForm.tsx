@@ -3,6 +3,7 @@
 import { UserContext } from '@/contextAPI/context';
 import { useContext } from 'react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
 	validateEmail,
 	validateLogin,
@@ -15,10 +16,12 @@ import React from 'react';
 import { signUp } from '../actions/users/signUp';
 import { signIn } from 'next-auth/react';
 import { useSession } from 'next-auth/react';
+import { useEffect } from 'react';
 
 export default function SignUpForm() {
 	const [buttonClicked, setButtonClicked] = useState(false);
-	const session = useSession();
+	const {status} = useSession();
+	const router = useRouter();
 
 	const {
 		handleInputChange,
@@ -61,6 +64,13 @@ export default function SignUpForm() {
 		}
 		return window.alert('Successfully created new user!');
 	};
+
+	useEffect(() => {
+		if (status === 'authenticated') {
+			router.refresh();
+			router.push('/');
+		}
+	}, [status]);
 
 	const content = (
 		<div className='z-[99] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex flex-col bg-white shadow-2xl py-4 px-4 rounded-lg w-11/12 max-w-md'>
@@ -163,11 +173,7 @@ export default function SignUpForm() {
 								GOOGLE
 							</button>
 						</div>
-						<div className='flex flex-row items-center justify-between py-3 '>
-							<button type='button' onClick={() => console.log(session)}>
-								GOOGLE
-							</button>
-						</div>
+					
 						
 					</div>
 				</div>

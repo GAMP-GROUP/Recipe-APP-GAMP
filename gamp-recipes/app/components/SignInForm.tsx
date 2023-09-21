@@ -32,12 +32,12 @@ export default function SignInForm() {
 
 			if (!signInResponse || signInResponse.ok !== true) {
 				return window.alert('Invalid credentials');
-			} else {
-				router.refresh();
-				router.push('/');
-				const { status } = useSession();
-				console.log(status);
-			}
+			} 
+			router.refresh();
+			router.push('/');
+			const { status } = useSession();
+			console.log(status);
+			
 		} catch (err) {
 			console.log(err);
 		}
@@ -45,6 +45,7 @@ export default function SignInForm() {
 
 	useEffect(() => {
 		if (status === 'authenticated') {
+			router.refresh();
 			router.push('/');
 		}
 	}, [status]);
@@ -92,6 +93,15 @@ export default function SignInForm() {
 						className='w-80 bg-yellow hover:bg-gray-100 text-black text-md font-bold py-2 rounded-xl mx-auto shadow'
 					>
 						SIGN IN
+					</button>
+				</div>
+				<div className='flex flex-row items-center justify-between py-3 '>
+					<button
+						type='button'
+						onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000/' })}
+						className='w-80 bg-yellow hover:bg-gray-100 text-black text-md font-bold py-2 rounded-xl mx-auto shadow'
+					>
+						GOOGLE
 					</button>
 				</div>
 			</form>
