@@ -62,7 +62,10 @@ export default function SignUpForm() {
 		if (!req) {
 			return window.alert('User with that email already exists.');
 		}
-		return window.alert('Successfully created new user!');
+		router.push('/auth/signin');
+		console.log(status);
+		
+		
 	};
 
 	useEffect(() => {

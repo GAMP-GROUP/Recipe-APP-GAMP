@@ -4,6 +4,7 @@ import { UserContext } from '@/contextAPI/context';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect } from 'react';
+import Link from 'next/link';
 
 import React from 'react';
 
@@ -24,6 +25,7 @@ export default function SignInForm() {
 				redirect: false,
 				email,
 				password,
+				callbackUrl: 'http://localhost:3000/',
 			});
 			console.log(
 				'🚀 ~ file: SignInForm.tsx:27 ~ handleSignUpBtn ~ signInResponse:',
@@ -33,10 +35,9 @@ export default function SignInForm() {
 			if (!signInResponse || signInResponse.ok !== true) {
 				return window.alert('Invalid credentials');
 			} 
+			console.log('39', status);
 			router.refresh();
-			router.push('/');
-			const { status } = useSession();
-			console.log(status);
+			
 			
 		} catch (err) {
 			console.log(err);
@@ -85,6 +86,7 @@ export default function SignInForm() {
 						className='mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-stone-800  leading-tight focus:outline-none focus:shadow-outline'
 					/>
 				</div>
+				
 
 				<div className='flex flex-row items-center justify-between py-3 '>
 					<button
@@ -104,8 +106,15 @@ export default function SignInForm() {
 						GOOGLE
 					</button>
 				</div>
+				
+				<div className='flex flex-row items-center justify-between py-3'>
+					<Link href='/auth/signup'>
+						<p className='text-blue-600'>or create your account</p>
+					</Link>
+				</div>
 			</form>
 		</div>
+		
 	);
 
 	return content;

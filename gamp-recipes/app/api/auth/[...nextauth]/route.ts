@@ -8,6 +8,7 @@ import { JWT } from 'next-auth/jwt';
 import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 
+
 export const authOptions: AuthOptions = {
 	providers: [
 		GoogleProvider({
@@ -110,30 +111,42 @@ export const authOptions: AuthOptions = {
 
 			return params.token;
 		},
-		async signIn({  profile }) {
-			if (!profile?.email || !profile?.name) {
+		async signIn({ profile, credentials }) {
+			if (!profile?.email && !credentials?.email) {
 				throw new Error('No profile');
 			}
 			console.log(profile);
-			
 
-			await prisma.user.upsert({
+			const isUserRegistered = await prisma.user.findUnique({
 				where: {
-					email: profile.email,
-				},
-				create: {
-					email: profile.email,
-					username: profile.name,
-					nationality: profile.locale.split('-')[1],
-					password_hash: await bcrypt.hash(profile.email, 10),
-				},
-				update: {
-					username: profile.name,
+					email: profile?.email 
 				},
 			});
-			return true;
-		},
+
+			if (!isUserRegistered) {
+				if (profile?.email) {
+					await prisma.user.upsert({
+						where: {
+							email: profile.email,
+						},
+						create: {
+							email: profile.email,
+							username: profile.name,
+							nationality: profile.locale.split('-')[1],
+							password_hash: await bcrypt.hash(profile.email, 10),
+						},
+						update: {
+							username: profile.name,
+						},
+					});
+
+				}
+				
+			}
 			
+			return true;
+		}
+
 	},
 };
 
