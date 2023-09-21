@@ -8,14 +8,6 @@ import { JWT } from 'next-auth/jwt';
 import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 
-type googleCredentials = {
-	email: string;
-	name: string;
-	image: string;
-	sub: string;
-	locale: string;
-};
-
 export const authOptions: AuthOptions = {
 	providers: [
 		GoogleProvider({
@@ -98,6 +90,8 @@ export const authOptions: AuthOptions = {
 		async session(params: { session: Session; token: JWT; user: User }) {
 			if (params.session.user) {
 				params.session.user.email = params.token.email;
+			
+				
 			}
 
 			return params.session;
@@ -111,41 +105,38 @@ export const authOptions: AuthOptions = {
 		}) {
 			if (params.user) {
 				params.token.email = params.user.email;
+				params.token.id = params.user.id;
 			}
 
 			return params.token;
 		},
-		async signIn(
-			user?: User | undefined,
-			account?: Account | null | undefined,
-			profile?: googleCredentials | undefined
-		) {
-			if (profile) {
-				try {
-					const createUser = await prisma.user.create({
-						data: {
-							email: profile.email,
-							password_hash: bcrypt.hashSync(profile.email, 10),
-							username: profile.name,
-							nationality: profile.locale.split('-')[1],
-						},
-					});
-					const user = await prisma.user.findUnique({
-						where: {
-							email: profile.email,
-						},
-					});
-					console.log(user);
-
-					return createUser as unknown as User;
-				} catch (error) {
-					console.log(error);
-				}
+		async signIn({  profile }) {
+			if (!profile?.email || !profile?.name) {
+				throw new Error('No profile');
 			}
+			console.log(profile);
+			
+
+			await prisma.user.upsert({
+				where: {
+					email: profile.email,
+				},
+				create: {
+					email: profile.email,
+					username: profile.name,
+					nationality: profile.locale.split('-')[1],
+					password_hash: await bcrypt.hash(profile.email, 10),
+				},
+				update: {
+					username: profile.name,
+				},
+			});
 			return true;
 		},
+			
 	},
 };
+
 
 const handler = NextAuth(authOptions);
 

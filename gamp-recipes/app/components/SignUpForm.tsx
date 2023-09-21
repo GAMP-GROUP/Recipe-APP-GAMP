@@ -14,9 +14,11 @@ import Image from 'next/image';
 import React from 'react';
 import { signUp } from '../actions/users/signUp';
 import { signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 export default function SignUpForm() {
 	const [buttonClicked, setButtonClicked] = useState(false);
+	const session = useSession();
 
 	const {
 		handleInputChange,
@@ -161,6 +163,12 @@ export default function SignUpForm() {
 								GOOGLE
 							</button>
 						</div>
+						<div className='flex flex-row items-center justify-between py-3 '>
+							<button type='button' onClick={() => console.log(session)}>
+								GOOGLE
+							</button>
+						</div>
+						
 					</div>
 				</div>
 			</form>
