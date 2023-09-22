@@ -2,17 +2,27 @@
 
 import React from 'react';
 import { ButtonProps } from '@/types';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
 export default function FavButton({id}: ButtonProps) {
+	const session = useSession();
+	const router = useRouter();
 
-	function favHandle(e: React.MouseEvent<HTMLButtonElement>) {
-		const favRecipes = JSON.parse(localStorage.getItem('favorite') as string) || [];
+	async function favHandle(e: React.MouseEvent<HTMLButtonElement>) {
+		if (session.status === 'unauthenticated') router.replace('/auth/signin');
+
 		const id = (e.target as Element).id;
-		const alreadyFav = favRecipes.some((recipe: string) => recipe === id);
-		const temp = alreadyFav ? favRecipes.filter((each: string) => each !== id) 
-			: [...favRecipes, id];
-      
-		localStorage.setItem('favorite', JSON.stringify(temp));
+
+		//Explorar possíveis soluções para incluir a PK do usuário autenticado pela session
+		const req = await fetch(`http://localhost:3000/${id}/favorite`, {
+			method: 'POST',
+			body: JSON.stringify({id}),
+		});
+
+		const data = await req.json();
+		const favState = (data.message.fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
+		window.alert(favState);
 	}
 
 	return (

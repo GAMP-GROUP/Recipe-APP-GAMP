@@ -11,8 +11,6 @@ export default function StartRecipeButton({ id }: ButtonProps) {
 	const router = useRouter();
 	const { status } = useSession();
 
-	console.log(status);
-
 	function startHandle(e: React.MouseEvent<HTMLButtonElement>) {
 		if (status === 'unauthenticated') router.replace('/auth/signin');
 		const id = (e.target as Element).id;
