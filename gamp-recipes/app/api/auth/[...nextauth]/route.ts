@@ -23,7 +23,7 @@ export const authOptions: AuthOptions = {
 				email: {
 					label: 'Email',
 					type: 'text',
-					placeholder: 'your@email.com',
+					placeholder: 'yosaur@email.com',
 				},
 				password: {
 					label: 'Password',
@@ -84,8 +84,8 @@ export const authOptions: AuthOptions = {
 	},
 	session: {
 		strategy: 'jwt',
-		maxAge: 30 * 24 * 60 * 60,
-		updateAge: 24 * 60 * 60,
+		maxAge: 30 * 24 * 60 * 60, // 30 days
+		updateAge: 24 * 60 * 60, // 24 hours
 	},
 	callbacks: {
 		async session(params: { session: Session; token: JWT; user: User }) {
@@ -115,7 +115,6 @@ export const authOptions: AuthOptions = {
 			if (!profile?.email && !credentials?.email) {
 				throw new Error('No profile');
 			}
-			console.log(profile);
 
 			const isUserRegistered = await prisma.user.findUnique({
 				where: {
@@ -131,7 +130,7 @@ export const authOptions: AuthOptions = {
 						},
 						create: {
 							email: profile.email,
-							username: profile.name,
+							username: profile.name as string,
 							nationality: profile.locale.split('-')[1],
 							password_hash: await bcrypt.hash(profile.email, 10),
 						},
@@ -141,7 +140,7 @@ export const authOptions: AuthOptions = {
 					});
 
 				}
-				
+
 			}
 			
 			return true;

@@ -60,9 +60,9 @@ export default function Header() {
 					/>
 				</picture>
 			</Link>
-			<Link href='/auth/signup'>
+			<Link href='/auth/signin'>
 				<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
-					Sign Up
+					Sign In
 				</button>
 			</Link>
 		</header>

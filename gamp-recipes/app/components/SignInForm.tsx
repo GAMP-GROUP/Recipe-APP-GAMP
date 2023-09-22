@@ -4,7 +4,6 @@ import { UserContext } from '@/contextAPI/context';
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect } from 'react';
-import Link from 'next/link';
 
 import React from 'react';
 
@@ -12,7 +11,6 @@ export default function SignInForm() {
 	const router = useRouter();
 
 	const { status } = useSession();
-	console.log('🚀 ~ file: SignInForm.tsx:14 ~ SignInForm ~ status:', status);
 
 	const {
 		handleInputChange,
@@ -104,8 +102,6 @@ export default function SignInForm() {
 						SIGN IN
 					</button>
 				</div>
-
-				
 				
 				<div className="my-2 border-b text-center flex  items-cente0 justify-center ">
 					<span className="w-2/6 border-b border-gray-300 border-solid"></span>
@@ -127,6 +123,11 @@ export default function SignInForm() {
 					</button>
 
 				</div>
+
+			
+				<button onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000/' })}>
+					<span>Continue with Google</span>
+				</button>
 			
 				
 				
