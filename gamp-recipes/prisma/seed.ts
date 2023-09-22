@@ -6,6 +6,7 @@ import {
 } from './data';
 import { scrapv2 } from './scrap/v2';
 
+
 const load = async () => {
 	try {
 		await prisma.user.createMany({
@@ -45,6 +46,7 @@ const load = async () => {
 
 		const ings: string[] = [];
 		recipes.forEach(({ ingredients }) =>  ingredients.forEach((ingredient) => ings.push(ingredient.toLowerCase())));
+
 		const uniqueIngs = Array.from(new Set(ings)).map((ing) => ({ ingredients_name: ing }));
     
 		await prisma.ingredients.createMany({

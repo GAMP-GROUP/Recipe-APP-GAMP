@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import { ButtonProps } from '@/types';
 
@@ -10,6 +11,7 @@ export default function StartRecipeButton({ id }: ButtonProps) {
 		const id = (e.target as Element).id;
 		isStarted ? null : localStorage.setItem('recipes', JSON.stringify([...started, id]));
 	}
+
 
 	return (
 		<>

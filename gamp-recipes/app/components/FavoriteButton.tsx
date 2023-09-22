@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import { ButtonProps } from '@/types';
 
@@ -25,3 +26,4 @@ export default function FavButton({id}: ButtonProps) {
 	);
   
 }
+

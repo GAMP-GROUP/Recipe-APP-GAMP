@@ -1,47 +1,48 @@
 import { ChangeEvent } from 'react';
 
 type UserProps = {
-  username:string
-  email: string
-  password:string 
-}
+	nationality: string;
+	username: string;
+	email: string;
+	password: string;
+};
 
 type ContextUser = {
-  logging: boolean
-  user:UserProps 
-  handleLoginCardDisplay:() => void
-  handleInputChange: (event:ChangeEvent<HTMLInputElement>) => void
-}
+
+	user: UserProps;
+	handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+};
 
 type detailedParams = {
-  params: { detailed: string }
-}
+	params: { detailed: string };
+};
 
 type mealProps = {
-  idMeal: string,
-  strMealThumb: string,
-  strMeal: string,
-}
+	idMeal: string;
+	strMealThumb: string;
+	strMeal: string;
+};
 
 type ContextMeals = {
-  allRecipes: MealRes[],
-}
+	allRecipes: MealRes[];
+};
 
-type externalAPI = drinkAPI | mealAPI
+type externalAPI = drinkAPI | mealAPI;
 
-type externalRes = MealRes[] | DrinkRes[]
+type externalRes = MealRes[] | DrinkRes[];
 
 type drinkAPI = {
-  [drinks: string]: externalRes,
-}
+	[drinks: string]: externalRes;
+};
 
 type ButtonProps = {
   id: string,
 }
 
+
 type mealAPI = {
-  [meals: string]: externalRes,
-}
+	[meals: string]: externalRes;
+};
 type MealRes = {
   'idMeal': string,
   'strMeal': string,
@@ -83,3 +84,4 @@ type DrinkRes = {
   'dateModified': null | string,
   [index: string]: string,
 }
+
