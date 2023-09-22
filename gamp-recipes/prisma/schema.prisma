@@ -22,6 +22,12 @@ model User {
   Favorite_Recipes Favorite_Recipes[]
 }
 
+model Category {
+  id        Int         @id @default(autoincrement())
+  name      String
+  Recipes   Recipes[]
+}
+
 model Recipe_types {
   id      Int       @id @default(autoincrement())
   name    String
@@ -48,13 +54,16 @@ model Recipes {
   instructions        String @db.VarChar(3000)
   image               String
   tags                String
+  category            Int
   video_source        String?
   area                String?
   alcoholic           String?
   recipe_type_id      Int
+  category_name       Category              @relation(fields: [category], references: [id])
   created_at          DateTime              @default(now())
   updated_at          DateTime              @updatedAt
   recipe_type         Recipe_types          @relation(fields: [recipe_type_id], references: [id])
+
   Author_Recipe       Author_Recipe[]
   Ingredients_Recipes Ingredients_Recipes[]
   Favorite_Recipes    Favorite_Recipes[]
