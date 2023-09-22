@@ -7,7 +7,6 @@ import React from 'react';
 export const UserContext = createContext<ContextUser>({} as ContextUser);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
-	const [registering, setRegistering] = useState(false);
 
 	const [user, setUser] = useState<UserProps>({
 		email: '',
@@ -24,22 +23,12 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 		}));
 	};
 
-	const handleLoginCardDisplay = () => {
-		const body = document.querySelector('body');
-		if (body?.classList.contains('overflow-hidden')) {
-			body.classList.remove('overflow-hidden');
-		} else {
-			body?.classList.add('overflow-hidden');
-		}
-		setRegistering((previousRegisteringState) => !previousRegisteringState);
-	};
 	return (
 		<UserContext.Provider
 			value={{
 				user,
-				registering,
 				handleInputChange,
-				handleLoginCardDisplay,
+
 			}}
 		>
 			<>{children}</>

@@ -8,9 +8,8 @@ type UserProps = {
 };
 
 type ContextUser = {
-	registering: boolean;
+
 	user: UserProps;
-	handleLoginCardDisplay: () => void;
 	handleInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
 };
 
