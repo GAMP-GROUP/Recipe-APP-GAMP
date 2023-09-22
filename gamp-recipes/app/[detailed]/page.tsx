@@ -1,7 +1,6 @@
 import { detailedParams } from '@/types';
 import prisma from '@/prisma/client';
 import React from 'react';
-import Link from 'next/link';
 import StartRecipeButton from '../components/StartRecipeButton'; 
 import FavButton from '../components/FavoriteButton';
 
@@ -104,9 +103,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 						/>
 				}
 			</div>
-			<Link href={`${detailed}/inProgress`}>
-				<StartRecipeButton id={id.toString()} />
-			</Link>
+			<StartRecipeButton id={id.toString()} />
 			<FavButton id={id.toString()} />
 		</main>
 	);
