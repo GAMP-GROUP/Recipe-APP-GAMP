@@ -1,4 +1,4 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
+
 import prisma from '@/prisma/client';
 import { Account, AuthOptions, Profile, Session, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -52,7 +52,6 @@ export const authOptions: AuthOptions = {
 				const userPassword = user.password_hash;
 
 				const isValidPassword = bcrypt.compareSync(password, userPassword);
-				console.log('🚀 ~ file: route.ts:57 ~ authorize: ~ isValidPassword', isValidPassword);
 
 
 				if (!isValidPassword) {
