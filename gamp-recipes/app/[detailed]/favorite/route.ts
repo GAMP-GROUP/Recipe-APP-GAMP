@@ -12,14 +12,20 @@ export async function POST(request: NextRequest) {
 	const favoriteRecipe = await prisma.favorite_Recipes.findFirst({
 		where: { user_id,	recipe_id: Number(id), }});
 
-	if (favoriteRecipe === null) await prisma.favorite_Recipes.create({
-		data: { user_id,	recipe_id: Number(id), fav: true }
-	});
+	if (favoriteRecipe === null) {
+		const created = await prisma.favorite_Recipes.create({
+			data: { user_id,	recipe_id: Number(id), fav: true }
+		});
 
-	if (favoriteRecipe !== null) await prisma.favorite_Recipes.update({
-		where: { id: favoriteRecipe?.id },
-		data: { fav: !favoriteRecipe.fav }
-	});
+		return NextResponse.json({message: created});
+	}
 
-	return NextResponse.json({message: favoriteRecipe });
+	if (favoriteRecipe !== null) {
+		const updated = await prisma.favorite_Recipes.update({
+			where: { id: favoriteRecipe?.id },
+			data: { fav: !favoriteRecipe.fav }
+		});
+
+		return NextResponse.json({message: updated });
+	}
 }
