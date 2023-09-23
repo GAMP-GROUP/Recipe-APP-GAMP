@@ -113,12 +113,14 @@ export const authOptions: AuthOptions = {
 
 			return params.token;
 		},
-		async signIn({ profile, credentials }) {
-			if (!profile?.email && !credentials?.email) {
+		async signIn({ profile }) {
+			if (!profile?.email) {
 				throw new Error('No profile');
 			}
 
 			const profileWithLocale = profile as ProfileWithLocale;
+			console.log(profileWithLocale);
+			
 
 			if (profile?.email) {
 				await prisma.user.upsert({
