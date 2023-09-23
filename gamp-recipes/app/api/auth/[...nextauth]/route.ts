@@ -24,7 +24,7 @@ export const authOptions: AuthOptions = {
 			credentials: {
 				email: {
 					label: 'Email',
-					type: 'text',
+					type: 'email',
 					placeholder: 'yosaur@email.com',
 				},
 				password: {
@@ -44,6 +44,7 @@ export const authOptions: AuthOptions = {
 						email,
 					},
 				});
+				console.log('🚀 ~ file: route.ts:47 ~ authorize: ~ user:', user);
 				if (!user) {
 					return null;
 				}
@@ -51,6 +52,8 @@ export const authOptions: AuthOptions = {
 				const userPassword = user.password_hash;
 
 				const isValidPassword = bcrypt.compareSync(password, userPassword);
+				console.log('🚀 ~ file: route.ts:57 ~ authorize: ~ isValidPassword', isValidPassword);
+
 
 				if (!isValidPassword) {
 					return null;
@@ -113,9 +116,11 @@ export const authOptions: AuthOptions = {
 
 			return params.token;
 		},
-		async signIn({ profile }) {
-			if (!profile?.email) {
-				throw new Error('No profile');
+		async signIn({ profile, credentials}) {
+			if (!profile?.email && !credentials) {
+				console.log('cre',credentials, 'pro' ,profile);
+				
+				throw new Error('No pro121212file');
 			}
 
 			const profileWithLocale = profile as ProfileWithLocale;
@@ -138,7 +143,6 @@ export const authOptions: AuthOptions = {
 					},
 				});
 
-				
 
 			}
 			

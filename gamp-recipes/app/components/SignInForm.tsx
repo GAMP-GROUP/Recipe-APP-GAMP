@@ -40,9 +40,6 @@ export default function SignInForm() {
 			if (!signInResponse || signInResponse.ok !== true) {
 				return window.alert('Invalid credentials');
 			} 
-			console.log('39', status);
-			router.refresh();
-			
 			
 		} catch (err) {
 			console.log(err);
@@ -54,6 +51,7 @@ export default function SignInForm() {
 			router.refresh();
 			router.push('/');
 		}
+		
 	}, [status]);
 
 	const content = (
