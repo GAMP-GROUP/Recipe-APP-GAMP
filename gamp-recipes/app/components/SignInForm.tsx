@@ -125,9 +125,6 @@ export default function SignInForm() {
 				</div>
 
 			
-				<button onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000/' })}>
-					<span>Continue with Google</span>
-				</button>
 			
 				
 				

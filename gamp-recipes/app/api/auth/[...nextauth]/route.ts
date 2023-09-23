@@ -9,6 +9,8 @@ import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 
 
+type  ProfileWithLocale = Profile & { locale: string };
+
 export const authOptions: AuthOptions = {
 	providers: [
 		GoogleProvider({
@@ -116,30 +118,25 @@ export const authOptions: AuthOptions = {
 				throw new Error('No profile');
 			}
 
-			const isUserRegistered = await prisma.user.findUnique({
-				where: {
-					email: profile?.email 
-				},
-			});
+			const profileWithLocale = profile as ProfileWithLocale;
 
-			if (!isUserRegistered) {
-				if (profile?.email) {
-					await prisma.user.upsert({
-						where: {
-							email: profile.email,
-						},
-						create: {
-							email: profile.email,
-							username: profile.name as string,
-							nationality: profile.locale.split('-')[1],
-							password_hash: await bcrypt.hash(profile.email, 10),
-						},
-						update: {
-							username: profile.name,
-						},
-					});
+			if (profile?.email) {
+				await prisma.user.upsert({
+					where: {
+						email: profileWithLocale.email,
+					},
+					create: {
+						email: profileWithLocale.email as string,
+						username: profileWithLocale.name as string,
+						nationality: profileWithLocale.locale.split('-')[1],
+						password_hash: await bcrypt.hash(profile.email, 10),
+					},
+					update: {
+						username: profile.name,
+					},
+				});
 
-				}
+				
 
 			}
 			
