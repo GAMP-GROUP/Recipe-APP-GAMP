@@ -26,12 +26,13 @@ export default function RootLayout({
 		<html lang='en'>
 			<body className={`${inter.className} flex-col`}>
 				<Providers>
-					<SearchBar />
-
-					<UserMenu />
-					<Header />
-					<AuthProvider>{children}</AuthProvider>
-					<Footer />
+					<AuthProvider>
+						<SearchBar />
+						<UserMenu />
+						<Header />
+						{children}
+						<Footer />
+					</AuthProvider>
 				</Providers>
 			</body>
 		</html>
