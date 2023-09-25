@@ -1,10 +1,15 @@
 'use client'
 import '../custom-styles.css'
 import { useBehaviorContext } from "@/contextAPI/context/behavior.context";
+import { useState } from 'react';
 import Image from "@/node_modules/next/image";
 
 export default function SearchBar() {
-    const { searchBar, setSearchBar } = useBehaviorContext();
+    const {
+        searchBar, setSearchBar,
+        setRecipeSearch
+    } = useBehaviorContext();
+    const [currentSearch, setCurrentSearch] = useState("")
 
     return (
         <section
@@ -16,10 +21,16 @@ export default function SearchBar() {
                 className={`w-screen h-16 fixed top-0 bg-white py-3 px-6 flex justify-between items-center`}
             > {/* O container branco */}
                 <fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center'>
-                    <input type="text" placeholder="Recipe or ingredient"
+                    <input
+                        type="text"
+                        placeholder="Recipe or ingredient"
                         className="bg-gray-200 ml-3"
+                        onChange={ (element) => setCurrentSearch(element.target.value) }
                     /> {/* O campo para inserir o termo de pesquisa */}
-                    <button className="mr-3">
+                    <button
+                        className="mr-3"
+                        onClick={ () => setRecipeSearch(currentSearch) }
+                    >
                         <Image
                             src='/icons/search.png'
                             width={15}

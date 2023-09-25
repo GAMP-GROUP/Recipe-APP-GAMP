@@ -17,6 +17,8 @@ type BehaviorProps = {
   setMenu: Dispatch<SetStateAction<boolean>>;
   searchBar: boolean;
   setSearchBar: Dispatch<SetStateAction<boolean>>;
+  recipeSearch: string;
+  setRecipeSearch: Dispatch<SetStateAction<string>>;
 };
 
 export const BehaviorContext = createContext({
@@ -24,17 +26,22 @@ export const BehaviorContext = createContext({
   setMenu: () => {},
   searchBar: false,
   setSearchBar: () => {},
+  recipeSearch: "",
+  setRecipeSearch: () => {},
 } as BehaviorProps);
 
 export function BehaviorProvider({ children }: Props) {
   const [menu, setMenu] = useState(false);
   const [searchBar, setSearchBar] = useState(false);
+  const [recipeSearch, setRecipeSearch] = useState("")
 
   const behaviorSettings = {
     menu,
     setMenu,
     searchBar,
     setSearchBar,
+    recipeSearch,
+    setRecipeSearch
   };
 
   return (

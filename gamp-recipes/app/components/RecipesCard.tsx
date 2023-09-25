@@ -13,6 +13,24 @@ type recipeProps = {
 
 export default function RecipesCard({ id, image, title, tags, area, category, type }: recipeProps): JSX.Element {
     // const tagItems = tags.split(',').map((tag) => tag.trim());
+    
+    // function createTags(tags: string[]) {
+    //     const nonEmptyTags = tags.filter((tag) => tag.trim() !== '');
+    
+    //     if (nonEmptyTags.length > 0) {
+    //         return (
+    //             <div className="mt-2">
+    //                 {nonEmptyTags.map((tag, index) => (
+    //                     <p key={index} className="">
+    //                         {tag}
+    //                     </p>
+    //                 ))}
+    //             </div>
+    //         )
+    //     } else {
+    //         return null; // Retorna null se não houver tags válidas
+    //     }
+    // }
 
     return (
         <Link href={`${type}-${id}`}>
@@ -34,6 +52,7 @@ export default function RecipesCard({ id, image, title, tags, area, category, ty
                 <section className="mt-2 px-4 flex items-center">
                     <h2 className="text-[1.75rem] font-black mr-4 font-croissant">{ title }</h2>
                     <p className="text-sm uppercase font-[600] text-gray-500 tracking-[0.075rem]">{ type === 2 ? 'meal' : 'drink' }</p>
+                    {/* { createTags(tagItems) } */}
                 </section>
             </div>
         </Link>
