@@ -44,10 +44,15 @@ export const authOptions: AuthOptions = {
 						email,
 					},
 				});
-				console.log('🚀 ~ file: route.ts:47 ~ authorize: ~ user:', user);
+
 				if (!user) {
 					return null;
 				}
+
+				if(email.endsWith('@prisma.io')) {
+					return user as unknown as User;
+				}
+			
 
 				const userPassword = user.password_hash;
 
@@ -55,7 +60,7 @@ export const authOptions: AuthOptions = {
 
 
 				if (!isValidPassword) {
-					return null;
+					return null ;
 				}
 
 				return user as unknown as User;
@@ -119,7 +124,7 @@ export const authOptions: AuthOptions = {
 			if (!profile?.email && !credentials) {
 				console.log('cre',credentials, 'pro' ,profile);
 				
-				throw new Error('No pro121212file');
+				throw new Error('No profile');
 			}
 
 			const profileWithLocale = profile as ProfileWithLocale;

@@ -24,7 +24,13 @@ export default function SignInForm() {
 	};
 
 
-	const handleSignUpBtn = async () => {
+	const handleSignInBtn = async () => {
+		if(email === '' || password === '') {
+			return window.alert('Please fill in all fields');
+		}
+
+	
+
 		try {
 			const signInResponse = await signIn('credentials', {
 				redirect: false,
@@ -37,7 +43,7 @@ export default function SignInForm() {
 				signInResponse
 			);
 
-			if (!signInResponse || signInResponse.ok !== true) {
+			if (!signInResponse?.url || signInResponse.ok !== true) {
 				return window.alert('Invalid credentials');
 			} 
 			
@@ -101,7 +107,7 @@ export default function SignInForm() {
 				<div className='flex flex-col items-center justify-between py-3 '>
 					<button
 						type='button'
-						onClick={() => handleSignUpBtn()}
+						onClick={() => handleSignInBtn()}
 						className="w-80 mt-4 content-center flex items-center justify-center bg-yellow border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
 					
 						SIGN IN
