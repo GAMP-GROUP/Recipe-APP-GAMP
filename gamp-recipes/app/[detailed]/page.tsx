@@ -24,7 +24,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 	});
 
 	return (
-		<main
+		<div
 			className='flex flex-col items-center gap-4 w-full'
 		>
 			<h1
@@ -40,14 +40,6 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 			<div
 				className='flex flex-row gap-8'
 			>
-				<p
-					className='text-xs'
-				></p>
-				<p
-					className='text-xs'
-				>
-
-				</p>
 			</div>
 			<section
 				className='w-3/4'
@@ -105,6 +97,6 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 			</div>
 			<StartRecipeButton id={id.toString()} />
 			<FavButton id={id.toString()} />
-		</main>
+		</div>
 	);
 }

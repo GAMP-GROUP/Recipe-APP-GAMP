@@ -1,34 +1,60 @@
-import { formatResponse } from '@/app/lib/formatResponse';
-import { getMealById, getDrinkById } from '@/app/lib/externalAPI';
+
 import React from 'react';
 import { detailedParams } from '@/types';
 import IngredientList from '@/app/components/IngredientLIst';
+import prisma from '@/prisma/client';
 
 export default async function InProgress({
 	params: { detailed },
 }: detailedParams) {
-	const [api, id] = detailed.split('-');
 
-	if (api !== 'meal' && api !== 'drink') return <h1>Invalid route {api}</h1>;
+	const recipe = await prisma.recipes.findUnique({
+		where: {
+			id: Number(detailed),
+		},
+		include: {
+			Ingredients_Recipes: {
+				include: {
+					ingredient: {
+						select: {
+							ingredients_name: true,
+						}
+					},
+				}
+			}
+		}
+	});
 
-	const fetchRecipe =
-    api === 'meal' ? await getMealById(id) : await getDrinkById(id);
-	const recipe = formatResponse(fetchRecipe, api);
+	const ingredients = recipe?.Ingredients_Recipes.map(({ingredient: { ingredients_name }}) => {
+		const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
+		return ingName;
+	});
 
 	return (
-		<div>
-			<section className="text-center">
+		<div
+			className="text-center flex flex-col items-center gap-4 w-full"
+		>
+			<section>				
+				<h2
+					className='text-4xl font-semibold antialiased'
+				>{recipe?.recipe_name}</h2>
 				<picture>
-					<img className="w-full" src={recipe.thumb} alt="recipe image"></img>
+					<img className="rounded-md w-10/12 mx-auto" src={recipe?.image} alt={recipe?.recipe_name}></img>
 				</picture>
-				<h2>{recipe.title}</h2>
-				<br />
 
-				<p>{recipe.instructions}</p>
+				<br />
+				<h2
+					className='text-3xl text-center uppercase'
+				>
+          Instructions
+				</h2>
+				<p className='text-center'>{recipe?.instructions}</p>
 			</section>
 
-			<section>
-				<IngredientList ingredients={recipe.ingredients} />
+			<section
+				className='w-3/4'
+			>
+				<IngredientList ingredients={ingredients as string[]} />
 			</section>
 		</div>
 	);
