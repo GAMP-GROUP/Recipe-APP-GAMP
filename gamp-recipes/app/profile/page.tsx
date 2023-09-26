@@ -9,7 +9,7 @@ export default async function ProfilePage() {
 		}
 	});
 
-	console.log(user);
+	// console.log(user);
 
 	function created_since(_date: Date): string {
 		const today = new Date().getDate();
