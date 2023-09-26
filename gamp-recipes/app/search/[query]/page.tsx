@@ -27,9 +27,8 @@ export default async function SearchFeed({ params: { query } }: searchProps) {
         const ingredientsRecipes = await prisma.recipes.findMany({
             where: { Ingredients_Recipes: { some: { ingredient_id: ingredient?.id } }}
         })
-        console.log(ingredientsRecipes);
         
-
+        // Verifica os resultados para cada consulta ao DB e envia resultados para a lista de receitas encontradas
         if (mealsRecipes.length > 0 && drinksRecipes.length > 0) {
             recipesFeed.recipes = [...mealsRecipes, ...drinksRecipes]
             recipesFeed.feedType = 'all'
