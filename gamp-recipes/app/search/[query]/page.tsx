@@ -21,6 +21,14 @@ export default async function SearchFeed({ params: { query } }: searchProps) {
         const drinksRecipes = await prisma.recipes.findMany({
             where: { recipe_type_id: 1, recipe_name: modifiedQuery }
         })
+        const ingredient = await prisma.ingredients.findFirst({
+            where: { ingredients_name: modifiedQuery }
+        })
+        const ingredientsRecipes = await prisma.recipes.findMany({
+            where: { Ingredients_Recipes: { some: { ingredient_id: ingredient?.id } }}
+        })
+        console.log(ingredientsRecipes);
+        
 
         if (mealsRecipes.length > 0 && drinksRecipes.length > 0) {
             recipesFeed.recipes = [...mealsRecipes, ...drinksRecipes]
@@ -31,6 +39,9 @@ export default async function SearchFeed({ params: { query } }: searchProps) {
         } else if (drinksRecipes.length > 0) {
             recipesFeed.recipes = drinksRecipes
             recipesFeed.feedType = 'drink'
+        } else if (ingredientsRecipes.length > 0) {
+            recipesFeed.recipes = ingredientsRecipes
+            recipesFeed.feedType = 'all'
         }
     } catch(error) {
 
