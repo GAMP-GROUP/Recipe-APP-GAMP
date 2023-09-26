@@ -30,15 +30,15 @@ export default function ProfilePage() {
             <p className='text-sm'>Porto Alegre, BRA</p>
             <section className='flex justify-evenly pt-8 items-center'>
               <div className='active-container'>
-                <img src='/icons/favorites-active.png' alt='Fav icon' className='active-profile-icon ' />
+                <img src='/icons/favorites-active.png' alt='Fav icon' className='active-profile-icon w-12' />
                 <span className='font-bold text-lg ml-2 text-pink-500'>16</span>
               </div>
               <div className='inactive-container'>
-                <img src='/icons/save.png' alt='Done recipes icon' className='inactive-profile-icon' />
+                <img src='/icons/save.png' alt='Done recipes icon' className='inactive-profile-icon w-12' />
                 <span className='text-lg ml-2 opacity-40'>32</span>
               </div>
               <div className='inactive-container'>
-                <img src='/icons/cooking.png' alt='In progress recipes icon' className='inactive-profile-icon' />
+                <img src='/icons/cooking.png' alt='In progress recipes icon' className='inactive-profile-icon w-12' />
                 <span className='text-lg ml-2 opacity-40'>1</span>
               </div>
             </section>
