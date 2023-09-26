@@ -38,7 +38,7 @@ export default function RecipesCard({ id, image, title, tags, area, category, ty
                 <picture className='absolute top-8 right-8 cursor-pointer bg-white rounded-full p-2'>
                     <img
                         alt='Favorite button'
-                        src='icons/favorites-notactive.png'
+                        src='/icons/favorites-notactive.png'
                         className='w-5'
                     />
                 </picture>

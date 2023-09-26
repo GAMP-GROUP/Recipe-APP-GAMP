@@ -10,7 +10,7 @@ export default function SearchBar() {
         searchBar, setSearchBar,
         setRecipeSearch
     } = useBehaviorContext();
-    const [currentSearch, setCurrentSearch] = useState("")
+    const [currentSearch, setCurrentSearch] = useState('')
     const router = useRouter();
 
     // Limpa o estado local da pesquisa e fecha a barra de pesquisa
@@ -33,7 +33,11 @@ export default function SearchBar() {
         event: React.KeyboardEvent<HTMLInputElement> | React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
         if (('key' in event && event.key === 'Enter') || ('type' in event && event.type === 'click')) {
-            handleSearch();
+            handleSearch()
+        }
+        // ESC fecha a barra de pesquisa
+        if (('key' in event && event.key === 'Escape')) {
+            closeSearchBar()
         }
     };
 
@@ -48,15 +52,15 @@ export default function SearchBar() {
             > {/* O container branco */}
                 <fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center'>
                     <input
-                        type="text"
-                        placeholder="Recipe or ingredient"
-                        className="bg-gray-200 ml-3"
+                        type='text'
+                        placeholder='Recipe or ingredient'
+                        className='bg-gray-200 ml-3'
                         value={ currentSearch }
                         onChange={ (element) => setCurrentSearch(element.target.value) }
                         onKeyDown={ (event) => handleSearchClick(event) }
                     /> {/* O campo para inserir o termo de pesquisa */}
                     <button
-                        className="mr-3"
+                        className='mr-3'
                         onClick={ (event) => handleSearchClick(event) }
                     >
                         <Image
@@ -80,7 +84,7 @@ export default function SearchBar() {
             </section>
             { searchBar &&
             <div
-                className="overlay"
+                className='overlay'
                 onClick={() => setSearchBar(false)}
             /> } {/* Resto da tela além da barra de pesquisa */}
         </section>

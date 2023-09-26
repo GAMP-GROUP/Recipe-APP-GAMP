@@ -1,4 +1,4 @@
-import RecipesCard from "./RecipesCard"
+import RecipesCard from './RecipesCard'
 
 type TRecipesProps = {
     id: number;
@@ -25,7 +25,7 @@ export default async function RecipesFeed({ recipesQuantity, recipes }: TRecipes
 
     return (
         <>
-            <main>
+            <main className='mt-6'>
                 { filteredRecipes.map((recipe, index) => (
                     <div key={ index }>
                         <RecipesCard
