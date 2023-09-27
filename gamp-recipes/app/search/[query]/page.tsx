@@ -1,5 +1,6 @@
 import prisma from "@/prisma/client"
 import RecipesFeed from "@/app/components/RecipesFeed"
+import Image from "next/image"
 
 type searchProps = {
     params: { query: string }
@@ -19,7 +20,8 @@ type TRecipesFeed = {
         created_at: Date;
         updated_at: Date;
     }[],
-    feedType: 'all' | 'meal' | 'drink'
+    feedType: 'all' | 'meal' | 'drink',
+    totalRecipes: number,
 }
 
 export default async function SearchFeed({ params: { query } }: searchProps) {    
@@ -27,7 +29,8 @@ export default async function SearchFeed({ params: { query } }: searchProps) {
     const modifiedQuery = query.replace('%20', ' ')
     const recipesFeed: TRecipesFeed = {
         recipes: [],
-        feedType: 'all'
+        feedType: 'all',
+        totalRecipes: 0
     }
     
     // Pesquisa o termo refinado
@@ -49,6 +52,7 @@ export default async function SearchFeed({ params: { query } }: searchProps) {
         if (ingredientsRecipes.length > 0) {
             recipesFeed.recipes = ingredientsRecipes
             recipesFeed.feedType = 'all'
+            recipesFeed.totalRecipes = recipesFeed.recipes.length
         }
     }        
     
@@ -56,24 +60,46 @@ export default async function SearchFeed({ params: { query } }: searchProps) {
     if (mealsRecipes.length > 0 && drinksRecipes.length > 0) {
         recipesFeed.recipes = [...mealsRecipes, ...drinksRecipes]
         recipesFeed.feedType = 'all'
+        recipesFeed.totalRecipes = recipesFeed.recipes.length
     } else if (mealsRecipes.length > 0) {
         recipesFeed.recipes = mealsRecipes
         recipesFeed.feedType = 'meal'
+        recipesFeed.totalRecipes = recipesFeed.recipes.length
     } else if (drinksRecipes.length > 0) {
         recipesFeed.recipes = drinksRecipes
         recipesFeed.feedType = 'drink'
+        recipesFeed.totalRecipes = recipesFeed.recipes.length
     }
+    const { totalRecipes } = recipesFeed;
 
     return(
         <main>
-            { recipesFeed.recipes.length > 0
+            { totalRecipes > 0
             ?
-            <RecipesFeed
-                recipesQuantity={25}
-                feedType={ recipesFeed.feedType }
-                recipes={recipesFeed.recipes}
-            />
-            : <h1>Nenhum resultado encontrado</h1> }
+            <>
+                <h1 className="text-center mx-auto mt-8 font-extrabold text-lg">
+                    { `Showing ${totalRecipes} ${totalRecipes > 1 ? 'results' : 'result' }` }
+                </h1>
+                <RecipesFeed
+                    recipesQuantity={25}
+                    feedType={ recipesFeed.feedType }
+                    recipes={recipesFeed.recipes}
+                />
+            </>
+            : 
+            <section className="h-[600px] w-screen flex flex-col justify-center items-center">
+                <h1 className="text-center font-extrabold text-lg">
+                    No results have been found
+                </h1>
+                <Image
+                    alt='Sad emoji'
+                    src='/icons/sad.png'
+                    width={35}
+                    height={35}
+                    className="mt-2"
+                />
+            </section>
+             }
         </main>
     )
 }
