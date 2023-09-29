@@ -9,13 +9,13 @@ export default async function ProfilePage() {
 		}
 	});
 
-	// console.log(user);
+	console.log(user);
 
-	function created_since(_date: Date): string {
-		const today = new Date().getDate();
-		const created = user.created_at.getDate();
-		const diff =  created - today;
-		if (diff === 0) return 'Today';
+	function created_since(): string {
+		const today = Date.now();
+		const created = user?.created_at as Date;
+		const diff = ((today - created) / 86400000).toFixed(0);
+		if (diff === '0') return 'Today';
 		return `Since ${diff} days ago`;
 	}
 
@@ -30,7 +30,7 @@ export default async function ProfilePage() {
 
 	return (
 		<main className="w-full h-full pt-8 flex-row bg-gradient-to-br from-cyan-400 via-violet-400 to-pink-500">
-			<h3 className='text-center mx-auto font-semibold text-xl text-white'>@mariosanseverino</h3>
+			<h3 className='text-center mx-auto font-semibold text-xl text-white'>{user?.username}</h3>
 			<section
 				className='w-11/12 h-[50vh] mt-32 bg-white mx-auto rounded-t-[56px]'>
 				<picture>
@@ -39,8 +39,8 @@ export default async function ProfilePage() {
 					/>
 				</picture>
 				<section className='flex-row justify-evenly pt-24 pb-4 text-center'>
-					<h1 className='text-center mx-auto font-bold text-2xl'>Mario Sanseverino</h1>
-					<p className='text-sm'>Porto Alegre, BRA</p>
+					<h1 className='text-center mx-auto font-bold text-2xl'>{user?.email}</h1>
+					<p className='text-sm'>{user?.nationality}</p>
 					<p className='text-sm'>{created_since(user?.created_at)}</p>
 					<section className='flex justify-evenly pt-8 items-center'>
 						<div className='active-container'>
