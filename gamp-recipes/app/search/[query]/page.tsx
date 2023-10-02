@@ -106,7 +106,7 @@ export default async function SearchFeed({ params: { query } }: searchProps) {
             { totalRecipes > 0
             ?
             <>
-                <h1 className="text-center mx-auto mt-8 font-extrabold text-lg">
+                <h1 className="text-center mx-auto mt-5 font-extrabold text-lg">
                     { `Showing ${totalRecipes} ${totalRecipes > 1 ? 'results' : 'result' }` }
                 </h1>
                 <RecipesFeed

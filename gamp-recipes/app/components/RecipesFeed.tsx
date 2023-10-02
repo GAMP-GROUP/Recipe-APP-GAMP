@@ -25,7 +25,7 @@ export default async function RecipesFeed({ recipesQuantity, recipes }: TRecipes
 
     return (
         <>
-            <main className='mt-6'>
+            <main>
                 { filteredRecipes.map((recipe, index) => (
                     <div key={ index }>
                         <RecipesCard
