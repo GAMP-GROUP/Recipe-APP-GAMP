@@ -1,7 +1,6 @@
 import './reset.css';
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import Providers from '@/contextAPI/provider/providers';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -9,8 +8,6 @@ import UserMenu from './components/UserMenu';
 import SearchBar from './components/SearchBar';
 import React from 'react';
 import AuthProvider from './api/auth/[...nextauth]/authProvider';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -22,9 +19,10 @@ export default function RootLayout({
 }: {
 	children: React.ReactNode;
 }) {
+
 	return (
 		<html lang='en'>
-			<body className={`${inter.className} flex-col`}>
+			<body className='flex-col'>
 				<Providers>
 					<AuthProvider>
 						<SearchBar />
