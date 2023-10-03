@@ -1,15 +1,17 @@
-"use client";
+'use client';
+import React from 'react';
+
 import {
-  useState,
-  useContext,
-  createContext,
-  Dispatch,
-  SetStateAction,
-  ReactNode,
-} from "react";
+	useState,
+	useContext,
+	createContext,
+	Dispatch,
+	SetStateAction,
+	ReactNode,
+} from 'react';
 
 type Props = {
-  children: ReactNode;
+	children: ReactNode;
 };
 
 type BehaviorProps = {
@@ -52,5 +54,5 @@ export function BehaviorProvider({ children }: Props) {
 }
 
 export function useBehaviorContext() {
-  return useContext(BehaviorContext);
+	return useContext(BehaviorContext);
 }
