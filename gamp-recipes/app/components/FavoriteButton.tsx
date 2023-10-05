@@ -30,13 +30,15 @@ export default function FavButton({id}: ButtonProps) {
 
 	return (
 		<button
-			id={`${id}`}
+			id={id}
 			onClick={(e) => favHandle(e)}
 			className='bg-yellow rounded-full w-14 h-14 z-3'
 		>
-			<picture className='m-auto'>
+			<picture 
+				id={id}
+				className='m-auto'>
 				<img
-					id={`${id}`}
+					id={id}
 					alt='Favorite button'
 					src='/icons/favorites-notactive.png'
 					className='w-7 mx-auto'
