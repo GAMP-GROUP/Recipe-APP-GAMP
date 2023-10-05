@@ -10,8 +10,11 @@ export default function FavButton({id}: ButtonProps) {
 	const router = useRouter();
 
 	async function favHandle(e: React.MouseEvent<HTMLButtonElement>) {
-		if (session.status === 'unauthenticated') router.replace('/auth/signin');
-
+		if (session.status === 'unauthenticated') {
+			window.alert('You need to sign in or register in GAMP in order to favorite recipes');
+			router.replace('/auth/signin');
+		}
+		console.log(e);
 		const id = (e.target as Element).id;
 
 		//Explorar possíveis soluções para incluir a PK do usuário autenticado pela session
@@ -29,9 +32,16 @@ export default function FavButton({id}: ButtonProps) {
 		<button
 			id={`${id}`}
 			onClick={(e) => favHandle(e)}
-			className='rounded-full bg-yellow bg-auto p-5 mb-4 uppercase'
+			className='bg-yellow rounded-full w-14 h-14 z-3'
 		>
-      ADD TO FAVORITES
+			<picture className='m-auto'>
+				<img
+					id={`${id}`}
+					alt='Favorite button'
+					src='/icons/favorites-notactive.png'
+					className='w-7 mx-auto'
+				/>
+			</picture>
 		</button>
 	);
   

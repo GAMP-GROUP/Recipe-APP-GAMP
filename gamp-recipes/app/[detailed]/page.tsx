@@ -95,8 +95,12 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 						/>
 				}
 			</div>
-			<StartRecipeButton id={id.toString()} />
-			<FavButton id={id.toString()} />
+			<div
+				className='mb-8 flex flex-col items-center'	
+			>
+				<StartRecipeButton id={id.toString()} />
+				<FavButton id={id.toString()} />
+			</div>
 		</div>
 	);
 }
