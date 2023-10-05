@@ -1,59 +1,32 @@
-import { getAllDrinks, getAllMeals } from './lib/externalAPI';
-import RecipesCard from './components/RecipesCard';
-import React from 'react';
+import prisma from "@/prisma/client"
+import RecipesFeed from "./components/RecipesFeed";
 
 export default async function Home() {
-	const dataAllMeals = await getAllMeals();
-	const dataAllDrinks = await getAllDrinks();
-	return (
-		<div>
-			<main className='h-full'>
-				<section className='p'>
-					{dataAllMeals.map(
-						(
-							{ strMeal, idMeal, strMealThumb, strArea, strCategory },
-							index
-						) => {
-							return (
-								index < 6 && (
-									<div key={index}>
-										<RecipesCard
-											type='meal'
-											id={idMeal}
-											title={strMeal}
-											thumb={strMealThumb}
-											area={strArea}
-											category={strCategory}
-										/>
-									</div>
-								)
-							);
-						}
-					)}
+  const mealsRecipes = await prisma.recipes.findMany({
+    where: { recipe_type_id: 2 }
+  })
+  const drinksRecipes = await prisma.recipes.findMany({
+    where: { recipe_type_id: 1 }
+  })
+  const allRecipes = [...mealsRecipes, ...drinksRecipes]
+  
+  function getRandomNumber() {
+    return Math.random() - 0.5;
+  }
+  
+  allRecipes.sort(getRandomNumber)
 
-					{dataAllDrinks.map(
-						(
-							{ strDrink, idDrink, strDrinkThumb, strAlcoholic, strCategory },
-							index
-						) => {
-							return (
-								index < 6 && (
-									<div key={index}>
-										<RecipesCard
-											type='drink'
-											id={idDrink}
-											title={strDrink}
-											thumb={strDrinkThumb}
-											area={strAlcoholic}
-											category={strCategory}
-										/>
-									</div>
-								)
-							);
-						}
-					)}
-				</section>
-			</main>
-		</div>
-	);
+  return (
+    <div>
+      <main className='h-full w-full'>
+        <section className="flex-row">
+          <RecipesFeed
+            recipesQuantity={25}
+            feedType={ 'all' }
+            recipes={ allRecipes }
+          />
+        </section>
+      </main>
+    </div>
+  )
 }
