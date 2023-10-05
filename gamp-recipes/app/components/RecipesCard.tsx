@@ -12,9 +12,9 @@ type recipeProps = {
     type: number
 }
 
-export default function RecipesCard({ id, image, title, tags, area, category, type }: recipeProps): JSX.Element {
+export default function RecipesCard({ id, image, title, type }: recipeProps): JSX.Element {
     return (
-        <Link href={`${type}-${id}`}>
+        <Link href={`/${id}`} replace>
             <div className="p-6 text-center mb-4 relative">      
                 <picture className='absolute top-8 right-8 cursor-pointer bg-white rounded-full p-2'>
                     <img
