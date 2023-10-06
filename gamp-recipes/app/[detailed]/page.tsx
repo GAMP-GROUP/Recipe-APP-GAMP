@@ -78,8 +78,8 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 			</ul>
 
 			<div
-				className='aspect-video w-3/4 mb-18'
-			>
+				className={ recipe?.recipe_type_id === 1 ? '' : 'aspect-video w-3/4'
+				}>
 				{
 					recipe?.video_source === null 
 						? <p
@@ -98,8 +98,8 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 			<div
 				className='mb-8 flex flex-col items-center'	
 			>
-				<StartRecipeButton id={id.toString()} />
 				<FavButton id={id.toString()} />
+				<StartRecipeButton id={id.toString()} />
 			</div>
 		</div>
 	);
