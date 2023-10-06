@@ -59,7 +59,7 @@ model Recipes {
   area                String?
   alcoholic           String?
   recipe_type_id      Int
-  category_name       Category              @relation(fields: [category], references: [id])
+  category_name       Category               @relation(fields: [category], references: [id])
   created_at          DateTime              @default(now())
   updated_at          DateTime              @updatedAt
   recipe_type         Recipe_types          @relation(fields: [recipe_type_id], references: [id])

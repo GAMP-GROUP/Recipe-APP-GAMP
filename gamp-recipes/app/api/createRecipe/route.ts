@@ -3,71 +3,80 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
 	const json = await request.json();
-	const { recipe_name, instructions, ingredients, ing_amount, type, category, image, tags } = json;
+	const { recipe_name, instructions, ingredients, recipe_type, category, amount, image, tags } = json;
+	// recipe_name: string, instructions: string (3000), rti = 1 | 2, category: int (pk da category table)
+	// ingredients [pk, { name: string }] upsert
+	// amount { ig:pk, recipe: pk, ing_amount: string} 
 
-	// Crie um array para armazenar os IDs dos ingredientes
+
+	// Create an array to store the IDs of ingredients
 	const ingredientIds = [];
-	const categoriesIds = [];
 
-	// Verifique cada ingrediente no pedido POST
+	// Verify each ingredient in the POST request
 	for (const { ingredient_name } of ingredients) {
-		// Verifique se o ingrediente já existe no banco de dados
+		// Check if the ingredient already exists in the database
 		const existingIngredient = await prisma.ingredients.findFirst({
 			where: {
-				ingredients_name: ingredient_name // Use ingredients_name em vez de ingredient_name
+				ingredients_name: ingredient_name
 			}
 		});
 
 		if (existingIngredient) {
-			// Se o ingrediente existe, use o ID existente
+			// If the ingredient exists, use the existing ID
 			ingredientIds.push(existingIngredient.id);
 		} else {
-			// Se o ingrediente não existe, crie um novo e obtenha o ID
+			// If the ingredient doesn't exist, create a new one and get the ID
 			const newIngredient = await prisma.ingredients.create({
 				data: {
-					ingredients_name: ingredient_name // Use ingredients_name em vez de ingredient_name
+					ingredients_name: ingredient_name
 				}
 			});
 			ingredientIds.push(newIngredient.id);
 		}
 	}
 
-	const existingCategory = await prisma.category.findFirst({
+	const recipe = {
+	
+	};
+
+
+	const categoriesCheck = await prisma.category.findFirst({
 		where: {
-			Recipes: {
-				some: {
-					category_name: category
-				}
-			}
-			
+			id: category
 		}
 	});
 
-	if (existingCategory) {
-		// If the category exists, connect it to the recipe
-		categoriesIds.push(existingCategory.id);
+	if (!categoriesCheck) {
+		// Handle the case where the category doesn't exist
+		return new NextResponse('Category not found', { status: 404 });
 	}
 
-	// Crie a nova receita associando os ingredientes pelos IDs
-	const recipe = await prisma.recipes.create({
-		data: {
+	const recipeData = {
+		recipe_name,
+		instructions,
+		recipe_type,
+		image,
+		tags,
+
+		category: category,
+		// ingredients: { connect: ingredientIds.map((id) => ({ id })) },
+		// amount,
+	};
+
+	const createRecipe = await prisma.recipes.create({
+		data:
+		{
+			recipe_type_id: recipe_type,
 			recipe_name,
 			instructions,
-			recipe_type: { connect: { id: type } },
-			category: { connect: { id: categoriesIds[0] } },
 			image,
 			tags,
-			Ingredients_Recipes: {
-				create: ingredientIds.map((ingredientId) => ({
-					ingredients_id: ingredientId,
-					ing_amount,
-					ingredient: { connect: { id: ingredientId } },
-
-				})),
-			},
+			category,
 		},
+		
 	});
 
-	return new NextResponse(JSON.stringify(recipe), { status: 201 });
+	
 
+	return new NextResponse(JSON.stringify(createRecipe), { status: 201 });
 }
