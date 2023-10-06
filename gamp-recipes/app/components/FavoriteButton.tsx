@@ -13,18 +13,17 @@ export default function FavButton({id}: ButtonProps) {
 		if (session.status === 'unauthenticated') {
 			window.alert('You need to sign in or register in GAMP in order to favorite recipes');
 			router.replace('/auth/signin');
+			return;
 		}
-		console.log(e);
 		const id = (e.target as Element).id;
 
-		//Explorar possíveis soluções para incluir a PK do usuário autenticado pela session
-		const req = await fetch(`http://localhost:3000/${id}/favorite`, {
+		const res = await fetch(`http://localhost:3000/${id}/favorite`, {
 			method: 'POST',
 			body: JSON.stringify({id}),
 		});
 
-		const data = await req.json();
-		const favState = (data.message.fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
+		const { message: { fav }} = await res.json();
+		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
 		window.alert(favState);
 	}
 
