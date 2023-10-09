@@ -1,24 +1,23 @@
 'use client';
-import React, { useState } from 'react';
-// import prisma from '@/prisma/client';
-import IngredientSelect from '../components/IngredientSelect';
+import React, { useState, useEffect } from 'react';
+import prisma from '@/prisma/client';
 
 export default async function Create() {
-	const [ingredientSelection, setIngredientSelection] = useState(false);
-	// const [ingredientsList, setIngredientsList] = useState([]);
+	const [ingredientsList, setIngredientsList] = useState<string[]>([]);
 
-	// function selectNewIngredient() {
-	// 	return (
-	// 		<fieldset className='py-2'>
-	// 			<label htmlFor='ingredient-1' className='mr-2'>Ingredient 1:</label>
-	// 			<IngredientSelect />
-	// 		</fieldset>
-	// 	);
-	// }
+	useEffect(() => {
+		async function fetchIngredients() {
+			try {
+				const response = await prisma.ingredients.findMany();
+				const ingredientNames = response.map((ingredient) => ingredient.ingredients_name);
+				setIngredientsList(ingredientNames);
+			} catch(error) {
+				window.alert(`ERROR: ${error}`);
+			}
+		}
 
-	function handleIngredientSelectButton() {
-		setIngredientSelection(true);
-	}
+		fetchIngredients();
+	}, []);
 
 	return (
 		<section className='flex-row justify-center items-center h-[600px]'>
@@ -56,15 +55,17 @@ export default async function Create() {
 					/>
 				</fieldset>
 				<fieldset className='py-2'>
-					<legend>Ingredient 1</legend>
-					<button
-						onClick={ () => handleIngredientSelectButton() }
-						className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
-					>Select ingredient</button>
-					{ ingredientSelection
-						? <IngredientSelect />
-						: ''
-					}
+					<label htmlFor='ingredient-1'>Ingredient 1:</label>
+					<select name='ingredient-1' id='ingredient-1'>
+						{ ingredientsList.map((ingredient, index) => (
+							<option
+								key={ index }
+								value={ ingredient }
+							>
+								{ ingredient }
+							</option>
+						))}
+					</select>
 				</fieldset>
 			</form>
 		</section>
