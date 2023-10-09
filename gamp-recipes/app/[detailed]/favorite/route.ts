@@ -5,42 +5,26 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
 	try {
 		const cookie = request.cookies.get('next-auth.session-token');
+		const { id } = await request.json();
 		
-		if (!cookie) return NextResponse.json(
-			{	
-				message: 'Unauthorized, access denied',
-				error: 'UNAUTHORIZED'
-			},
-			{ status: 401 },
-		);
-		
+		if (cookie === undefined) return NextResponse.json({ 
+			message: 'Unauthorized, access denied', error: 'UNAUTHORIZED'
+		}, { status: 401 });
+
 		const payload = {
 			token: cookie.value,
 			secret: process.env.NEXTAUTH_SECRET as string,
 		};
 		
-		const auth = await decode(payload);
-		
-		const { id } = await request.json();
-		
+		const auth = await decodeHelper(payload);
 		const user = await prisma.user.findUnique({
 			where: { email: auth.email }
 		});
 
 		if(user === null) return NextResponse.json(
-			{
-				message: 'User not Found!', 
-				error: 'NOT_FOUND'
-			},
+			{	message: 'User not Found!', 
+				error: 'NOT_FOUND' },
 			{ status: 404 }
-		);
-
-		if(!id) return NextResponse.json(
-			{
-				message: 'Id is missing in Request',
-				error: 'INVALID_INPUT'
-			},
-			{ status: 400}
 		);
 		
 		const favoriteRecipe = await prisma.favorite_Recipes.findFirst({
@@ -59,10 +43,18 @@ export async function POST(request: NextRequest) {
 				where: { id: favoriteRecipe?.id },
 				data: { fav: !favoriteRecipe.fav }
 			});
-			
 			return NextResponse.json({message: updated });
 		}
 	} catch (e) {
-		return NextResponse.json({ status: 500, message: 'Something Went Wrong!' });
+		return NextResponse.json({ status: 500, message: 'Something went wrong!' });
+	}
+}
+
+async function decodeHelper(payload: { token: string, secret: string }) {
+	try {
+		const auth = await decode(payload);
+		return auth;
+	} catch (error) {
+		return NextResponse.json({ message: 'Unauthorized, access denied', error: 'UNAUTHORIZED' }, { status: 401 });
 	}
 }
