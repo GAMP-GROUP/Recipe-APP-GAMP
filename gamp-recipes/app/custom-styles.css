@@ -8,3 +8,7 @@
     opacity: 100;
     background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
 }
+
+.create-form {
+    width: calc(100vw - 10%);
+}
