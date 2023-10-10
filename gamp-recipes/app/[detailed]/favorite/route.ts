@@ -1,31 +1,14 @@
-import { decode } from '@/app/lib/jwtUtils';
+
+import { userAuth } from '@/app/middlewares/authToken';
 import prisma from '@/prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
  
 export async function POST(request: NextRequest) {
 	try {
-		const cookie = request.cookies.get('next-auth.session-token');
 		const { id } = await request.json();
-		
-		if (cookie === undefined) return NextResponse.json({ 
-			message: 'Unauthorized, access denied', error: 'UNAUTHORIZED'
-		}, { status: 401 });
+		const { message, user, error, code } = await userAuth(request);
 
-		const payload = {
-			token: cookie.value,
-			secret: process.env.NEXTAUTH_SECRET as string,
-		};
-		
-		const auth = await decodeHelper(payload);
-		const user = await prisma.user.findUnique({
-			where: { email: auth.email }
-		});
-
-		if(user === null) return NextResponse.json(
-			{	message: 'User not Found!', 
-				error: 'NOT_FOUND' },
-			{ status: 404 }
-		);
+		if (message !== 'success' || user == undefined) return NextResponse.json({ message, error }, { status: code });
 		
 		const favoriteRecipe = await prisma.favorite_Recipes.findFirst({
 			where: { user_id: user.id,	recipe_id: Number(id), }});
@@ -47,14 +30,5 @@ export async function POST(request: NextRequest) {
 		}
 	} catch (e) {
 		return NextResponse.json({ status: 500, message: 'Something went wrong!' });
-	}
-}
-
-async function decodeHelper(payload: { token: string, secret: string }) {
-	try {
-		const auth = await decode(payload);
-		return auth;
-	} catch (error) {
-		return NextResponse.json({ message: 'Unauthorized, access denied', error: 'UNAUTHORIZED' }, { status: 401 });
 	}
 }
