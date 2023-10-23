@@ -65,7 +65,12 @@ export default function IngredientList({ ingredients }: IngredientList) {
 
 	return (
 		<div>
-			<ul>
+			<h2
+				className='text-2xl text-center uppercase'
+			>ingredients</h2>
+			<ul
+				className=''
+			>
 				{ingredients.map((property) => (
 					<li key={property}>
 						<label>
@@ -76,7 +81,7 @@ export default function IngredientList({ ingredients }: IngredientList) {
 								onChange={handleCheckboxClick}
 								className='hidden'
 							/>
-							<div className='flex'>
+							<div className='flex justify-between w-full gap-8 h-12'>
 								{svgOptions[itemsChecked[property] ? 'option1' : 'option2']}
 								<span>{property}</span>
 							</div>
