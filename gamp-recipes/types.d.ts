@@ -36,29 +36,29 @@ type drinkAPI = {
 };
 
 type ButtonProps = {
-	id: string;
-	type: string;
-};
+  id: string,
+}
+
 
 type mealAPI = {
 	[meals: string]: externalRes;
 };
 type MealRes = {
-	idMeal: string;
-	strMeal: string;
-	strDrinkAlternate: string | null;
-	strCategory: string;
-	strArea: string;
-	strInstructions: string;
-	strMealThumb: string;
-	strTags: string;
-	strYoutube: string;
-	strSource: string | null;
-	strImageSource: string | null;
-	strCreativeCommonsConfirmed: string | null;
-	dateModified: string | null;
-	[index: string]: string;
-};
+  'idMeal': string,
+  'strMeal': string,
+  'strDrinkAlternate': string | null,
+  'strCategory': string,
+  'strArea': string,
+  'strInstructions': string,
+  'strMealThumb': string,
+  'strTags': string,
+  'strYoutube': string,
+  'strSource': string | null,
+  'strImageSource': string | null,
+  'strCreativeCommonsConfirmed': string | null,
+  'dateModified': string | null,
+  [index: string]: string,
+}
 
 type DrinkRes = {
 	idDrink: string;
@@ -114,6 +114,21 @@ type NewRecipeRequest = {
 	updated_at: Date;
 	ingredients: ingredientsAPI[];
  }
+
+type UpdateRecipeRequest =  {
+	id: number; // O ID da receita a ser atualizada
+	recipe_name: tring; // Campos atualizáveis (adicione todos os campos que podem ser atualizados)
+	instructions?: string;
+	image?: string;
+	tags?: string;
+	category?: number;
+	ingredients?: {
+		ingredient_name: string;
+		ing_amount?: string;
+	}[];
+	amount?: string[];
+	recipe_type_id?: number;
+}
 
 type NewRecipeResponse = { message: string | RecipeData, TYPE: number };
 
