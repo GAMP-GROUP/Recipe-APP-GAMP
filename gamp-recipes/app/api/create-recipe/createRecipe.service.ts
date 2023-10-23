@@ -34,8 +34,6 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 	}
 
 
-
-
 	const categoriesCheck = await prisma.category.findFirst({
 		where: {
 			id: category
@@ -43,7 +41,7 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 	});
 
 	if (!categoriesCheck) {
-		// Handle the case where the category doesn't exist
+	
 		return {message: 'Category not found',  TYPE: HttpStatusCode.NotFound};
 	}
 
@@ -95,7 +93,6 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 		})),
 	};
 	
-		
     
 
 	return { message: response,  TYPE: HttpStatusCode.Created };
