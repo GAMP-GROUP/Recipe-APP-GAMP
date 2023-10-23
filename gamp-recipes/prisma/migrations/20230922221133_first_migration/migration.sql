@@ -78,6 +78,7 @@ CREATE TABLE `Favorite_Recipes` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_id` INTEGER NOT NULL,
     `recipe_id` INTEGER NOT NULL,
+    `fav` BOOLEAN NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)

@@ -7,6 +7,10 @@ services:
       - 3000:3000
     environment:
       - DATABASE_URL=$DATABASE_URL
+      - NEXTAUTH_SECRET=$NEXTAUTH_SECRET
+      - GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID
+      - GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET
+      - NEXTAUTH_URL=$NEXTAUTH_URL
     working_dir: /app-backend
     # Caso queira que o container esteja atualizado durante o desenvolvimento, sem que você precise ficar fazendo down e up dos containers, descomente as 3 linhas abaixo
     volumes: 

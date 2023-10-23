@@ -4,6 +4,7 @@ import Link from '@/node_modules/next/link';
 import { useState, useEffect } from 'react';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { toggleMenu } from './UserMenu';
+import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
 
 export default function Header() {
@@ -12,6 +13,9 @@ export default function Header() {
 
 	const { menu, setMenu } = useBehaviorContext();
 	const { setSearchBar } = useBehaviorContext();
+	const {status}  = useSession();
+
+	const sessionStatus = status === 'authenticated' ? true : false;
 
 	function scrollPage(): void {
 		const currentScrollY = window.scrollY;
@@ -60,11 +64,24 @@ export default function Header() {
 					/>
 				</picture>
 			</Link>
-			<Link href='/auth/signin'>
-				<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
+			{
+				sessionStatus ? (
+					<button
+						onClick={() => signOut()}
+						className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
+					>
+				Sign Out
+					</button>
+					
+				) : (
+					<Link href='/auth/signin'>
+						<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
 					Sign In
-				</button>
-			</Link>
+						</button>
+					</Link>
+				
+				)
+			}
 		</header>
 	);
 }

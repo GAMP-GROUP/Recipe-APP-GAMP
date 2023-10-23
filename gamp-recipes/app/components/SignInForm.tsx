@@ -16,8 +16,21 @@ export default function SignInForm() {
 		handleInputChange,
 		user: { email, password },
 	} = useContext(UserContext);
+	
+	const handleSubmit = (event: React.FormEvent) => {
+		event.preventDefault();
 
-	const handleSignUpBtn = async () => {
+		console.log('login!');
+	};
+
+
+	const handleSignInBtn = async () => {
+		if(email === '' || password === '') {
+			return window.alert('Please fill in all fields');
+		}
+
+	
+
 		try {
 			const signInResponse = await signIn('credentials', {
 				redirect: false,
@@ -30,12 +43,9 @@ export default function SignInForm() {
 				signInResponse
 			);
 
-			if (!signInResponse || signInResponse.ok !== true) {
+			if (!signInResponse?.url || signInResponse.ok !== true) {
 				return window.alert('Invalid credentials');
 			} 
-			console.log('39', status);
-			router.refresh();
-			
 			
 		} catch (err) {
 			console.log(err);
@@ -47,6 +57,7 @@ export default function SignInForm() {
 			router.refresh();
 			router.push('/');
 		}
+		
 	}, [status]);
 
 	const content = (
@@ -63,7 +74,7 @@ export default function SignInForm() {
 					</a>.
 				</p>
 			</div>
-			<form>
+			<form  onSubmit={handleSubmit}>
 				<div className='bg-white text-slate-950  flex-row items-center justify-between p-5'>
 					<label className='block text-gray-700 text-sm font-bold mb-2 mt-1'>
 						Email:
@@ -96,7 +107,7 @@ export default function SignInForm() {
 				<div className='flex flex-col items-center justify-between py-3 '>
 					<button
 						type='button'
-						onClick={() => handleSignUpBtn()}
+						onClick={() => handleSignInBtn()}
 						className="w-80 mt-4 content-center flex items-center justify-center bg-yellow border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
 					
 						SIGN IN
@@ -115,6 +126,7 @@ export default function SignInForm() {
 					
 				<div className='flex flex-col items-center justify-between py-3 '>
 					<button
+						type='button'
 						onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000/' })}
 						className="w-80 mt-4 content-center flex items-center justify-center bg-white border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
 
@@ -125,9 +137,6 @@ export default function SignInForm() {
 				</div>
 
 			
-				<button onClick={() => signIn('google', { callbackUrl: 'http://localhost:3000/' })}>
-					<span>Continue with Google</span>
-				</button>
 			
 				
 				

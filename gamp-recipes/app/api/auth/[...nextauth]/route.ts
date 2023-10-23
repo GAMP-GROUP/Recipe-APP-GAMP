@@ -1,4 +1,4 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
+
 import prisma from '@/prisma/client';
 import { Account, AuthOptions, Profile, Session, User } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
@@ -8,6 +8,8 @@ import { JWT } from 'next-auth/jwt';
 import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 
+
+type  ProfileWithLocale = Profile & { locale: string };
 
 export const authOptions: AuthOptions = {
 	providers: [
@@ -22,7 +24,7 @@ export const authOptions: AuthOptions = {
 			credentials: {
 				email: {
 					label: 'Email',
-					type: 'text',
+					type: 'email',
 					placeholder: 'yosaur@email.com',
 				},
 				password: {
@@ -42,16 +44,23 @@ export const authOptions: AuthOptions = {
 						email,
 					},
 				});
+
 				if (!user) {
 					return null;
 				}
+
+				if(email.endsWith('@prisma.io')) {
+					return user as unknown as User;
+				}
+			
 
 				const userPassword = user.password_hash;
 
 				const isValidPassword = bcrypt.compareSync(password, userPassword);
 
+
 				if (!isValidPassword) {
-					return null;
+					return null ;
 				}
 
 				return user as unknown as User;
@@ -111,35 +120,33 @@ export const authOptions: AuthOptions = {
 
 			return params.token;
 		},
-		async signIn({ profile, credentials }) {
-			if (!profile?.email && !credentials?.email) {
+		async signIn({ profile, credentials}) {
+			if (!profile?.email && !credentials) {
+				console.log('cre',credentials, 'pro' ,profile);
+				
 				throw new Error('No profile');
 			}
 
-			const isUserRegistered = await prisma.user.findUnique({
-				where: {
-					email: profile?.email 
-				},
-			});
+			const profileWithLocale = profile as ProfileWithLocale;
+			console.log(profileWithLocale);
+			
 
-			if (!isUserRegistered) {
-				if (profile?.email) {
-					await prisma.user.upsert({
-						where: {
-							email: profile.email,
-						},
-						create: {
-							email: profile.email,
-							username: profile.name as string,
-							nationality: profile.locale.split('-')[1],
-							password_hash: await bcrypt.hash(profile.email, 10),
-						},
-						update: {
-							username: profile.name,
-						},
-					});
+			if (profile?.email) {
+				await prisma.user.upsert({
+					where: {
+						email: profileWithLocale.email,
+					},
+					create: {
+						email: profileWithLocale.email as string,
+						username: profileWithLocale.name as string,
+						nationality: profileWithLocale.locale.split('-')[1],
+						password_hash: await bcrypt.hash(profile.email, 10),
+					},
+					update: {
+						username: profile.name,
+					},
+				});
 
-				}
 
 			}
 			

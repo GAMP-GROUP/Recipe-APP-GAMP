@@ -1,7 +1,7 @@
-import React from 'react';
 import prisma from '@/prisma/client';
 import RecipesFeed from '@/app/components/RecipesFeed';
 import Image from 'next/image';
+import React from 'react';
 
 type searchProps = {
     params: { query: string }
@@ -72,12 +72,12 @@ export default async function SearchFeed({ params: { query } }: searchProps) {
 		recipesFeed.feedType = 'drink';
 		recipesFeed.totalRecipes = recipesFeed.recipes.length;
 	} else if (ingredient !== null) {
-		// Caso nenhum resultado seja encontrado para meals ou drinks,
+		// Caso nenhum resultado seja encontrado para meals ou drinks,,,
 		// procede a fazer a pesquisa por ingredientes
 		const recipePromises = ingredient!.Ingredients_Recipes.map(async (item) => {
 			const recipe = await prisma.recipes.findFirst({ where: { id: item.recipe_id } });
 			return {
-				id: item.id,
+				id: item.recipe_id,
 				recipe_name: recipe!.recipe_name,
 				instructions: recipe!.instructions,
 				image: recipe!.image,
