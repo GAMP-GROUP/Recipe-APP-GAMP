@@ -84,3 +84,36 @@ type DrinkRes = {
 	dateModified: null | string;
 	[index: string]: string;
 };
+
+type NewRecipeRequest = {
+	recipe_type_id: number;
+	recipe_name: string;
+	instructions: string;
+	image: string;
+	tags: string;
+	category: number;
+	ingredients: {
+		ingredient_name: string;
+	}[];
+	amount: string[];
+};
+
+
+ type RecipeData =  {
+	id: number;
+	recipe_name: string;
+	instructions: string;
+	image: string;
+	tags: string;
+	category: number;
+	video_source?: string | null;
+	area?: string | null;
+	alcoholic?: string | null;
+	recipe_type_id: number;
+	created_at: Date;
+	updated_at: Date;
+	ingredients: ingredientsAPI[];
+ }
+
+type NewRecipeResponse = { message: string | RecipeData, TYPE: number };
+
