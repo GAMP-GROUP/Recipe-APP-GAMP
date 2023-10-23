@@ -203,3 +203,22 @@ export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRec
 
 	return { message: response, TYPE: HttpStatusCode.OK };
 }
+
+
+export async function  deleteRecipe (request: number) {
+	try {
+		// Use Prisma to find the recipe by its ID and delete it
+		const deletedRecipe = await prisma.recipes.delete({
+			where: { id: request },
+		});
+
+		// Delete related ingredients records
+		await prisma.ingredients_Recipes.deleteMany({
+			where: { recipe_id: request },
+		});
+
+		console.log('Recipe and related ingredients deleted:', deletedRecipe);
+	} catch (error) {
+		console.error('Error deleting recipe:', error);
+	} 
+}
