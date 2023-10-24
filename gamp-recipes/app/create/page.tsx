@@ -9,13 +9,14 @@ export default async function Create() {
 		return response;
 	}
 
-	const ingredientsList: Ingredients[] = await fetchIngredients();
+	const data: Ingredients[] = await fetchIngredients();
+	const ingredientList = data.map(({ ingredients_name }) => ingredients_name);
 
 	return (
 		<section className='flex-row justify-center items-center h-[600px]'>
 			<h1 className='text-center font-extrabold text-xl mt-4'>New Recipe</h1>
 			<CreateRecipeForm
-				ingredientsList={ ingredientsList }
+				ingredientList={ ingredientList }
 			/>
 		</section>
 	);
