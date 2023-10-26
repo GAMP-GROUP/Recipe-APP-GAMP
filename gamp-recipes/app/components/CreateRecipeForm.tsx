@@ -1,13 +1,22 @@
 'use client';
+import { recipePost } from '@/types';
 import React, { useState } from 'react';
 
 type TCreateRecipeFormProps = {
-	ingredientList: string[]
+	ingredientList: string[],
+	categoryList: { id: number, name: string }[]
 }
 
 
-export default function CreateRecipeForm({ ingredientList }: TCreateRecipeFormProps) {
-	const [payload, setPayload] = useState({});
+export default function CreateRecipeForm({ ingredientList, categoryList}: TCreateRecipeFormProps) {
+	const [payload, setPayload] = useState({
+		tags: '',
+		image: '',
+		instructions: '',
+		category: '1',
+		recipe_name: '',
+		recipe_type_id: '1', 
+	});
 	const [ingredients, setIngredients] = useState([{ name: '', amount: '', pk: ''}]);
 
 	function handleIngredient(e: React.ChangeEvent<HTMLInputElement>) {
@@ -27,7 +36,7 @@ export default function CreateRecipeForm({ ingredientList }: TCreateRecipeFormPr
 		const newIngredients = [...ingredients];
 		const num = Number(index);
 		newIngredients[num] = field === 'name' 
-			? { name: value, amount: newIngredients[num].amount, pk: isNaN(Number(pkOrString)) ? '' : pkOrString }
+			? { name: value.toLowerCase(), amount: newIngredients[num].amount, pk: isNaN(Number(pkOrString)) ? '' : pkOrString }
 			: { pk: newIngredients[num].pk, name: newIngredients[num].name, amount: value };
 		setIngredients(newIngredients);
 	}
@@ -47,7 +56,6 @@ export default function CreateRecipeForm({ ingredientList }: TCreateRecipeFormPr
 		| React.ChangeEvent<HTMLInputElement>
 	) {
 		// função handleChange genérica para registro dos inputs do form
-		e.preventDefault();
 
 		const userInput = e.currentTarget.value;
 		const field = e.target.id;
@@ -56,12 +64,37 @@ export default function CreateRecipeForm({ ingredientList }: TCreateRecipeFormPr
 		setPayload({...payload, ...newPayload});
 	}
 
+	async function postRecipe(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+
+		const { tags, image, instructions, category, recipe_name, recipe_type_id } = payload;
+
+		const body: recipePost = {
+			recipe_type_id: Number(recipe_type_id),
+			category: Number(category),
+			recipe_name,
+			instructions,
+			image,
+			tags,
+			ingredients: [],
+			amount: [],
+		};
+
+		ingredients.forEach(({name, amount, pk}) => {
+			body.ingredients.push({ ingredient_name: name, pk: Number(pk)});
+			body.amount.push(amount || null);
+		});
+
+		console.log(body);
+	}
+
 	return (
-		<form id='create-recipe' className='create-form mx-auto'>
+		<form id='create-recipe' className='create-form mx-auto' 
+			onSubmit={postRecipe}>
 			<fieldset className='py-2'>
-				<label htmlFor='recipeName' className='mr-2'>Recipe Name:</label>
+				<label htmlFor='recipe_name' className='mr-2'>Recipe Name:</label>
 				<input 
-					id='recipeName'
+					id='recipe_name'
 					type='text'
 					placeholder='Lasagna al ragú'
 					className='border border-b-2 p-1'
@@ -70,15 +103,19 @@ export default function CreateRecipeForm({ ingredientList }: TCreateRecipeFormPr
 				/>
 			</fieldset>
 			<fieldset className='py-2'>
-				<label htmlFor='recipeType' className='mr-2'>Recipe Type:</label>
-				<select name='recipeType' id='recipeType' onChange={(e) => handleChange(e)}>
+				<label htmlFor='recipe_type_id' className='mr-2'>Recipe Type:</label>
+				<select name='recipe_type_id' id='recipe_type_id' onChange={(e) => handleChange(e)}>
 					<option value='1'>Meal</option>
 					<option value='2'>Drink</option>
 				</select>
 			</fieldset>
 			<fieldset className='py-2'>
-				<label htmlFor='recipeImage' className='mr-2'>Image:</label>
-				<input type='text' name='recipeImage' id='recipeImage' className='border border-b-2 p-1' onChange={(e) => handleChange(e)}/>
+				<label htmlFor='image' className='mr-2'>Image:</label>
+				<input type='text' name='image' id='image' className='border border-b-2 p-1' onChange={(e) => handleChange(e)}/>
+			</fieldset>
+			<fieldset className='py-2'>
+				<label htmlFor='tags' className='mr-2'>Tags:</label>
+				<input type='text' name='tags' id='tags' className='border border-b-2 p-1' onChange={(e) => handleChange(e)}/>
 			</fieldset>
 			<fieldset className='py-2'>
 				<label htmlFor='instructions' className='mr-2'>Instructions:</label>
@@ -91,6 +128,23 @@ export default function CreateRecipeForm({ ingredientList }: TCreateRecipeFormPr
 					rows={4}
 					onChange={(e) => handleChange(e)}
 				/>
+			</fieldset>
+			<fieldset>
+				<label htmlFor='category'>
+				Pick A Cateogry
+					<select name="category" id="category" onChange={ (e) => handleChange(e) }>
+						{	categoryList.map(({ id, name })=> {
+							return (
+								<option
+									key={ id }
+									value={ id }
+								>
+									{ name }
+								</option>
+							);
+						})}
+					</select>
+				</label>
 			</fieldset>
 			{
 				ingredients.map((e, index) => {
@@ -143,13 +197,14 @@ export default function CreateRecipeForm({ ingredientList }: TCreateRecipeFormPr
 					);
 				})
 			}
-			
+		
 			<button
 				onClick={ (e) => addIngredient(e) }
 				className='text-md font-bold px-5 py-1 mr-2 bg-yellow text-black rounded-2xl w-1/2'
 			>
 				Add Ingredient
 			</button>
+
 			<button
 				type='submit'
 				className='text-lg font-bold px-5 py-1 mr-2 bg-black text-white rounded-2xl create-button'>
