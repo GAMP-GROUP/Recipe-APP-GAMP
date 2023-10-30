@@ -56,7 +56,7 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 			Ingredients_Recipes: {
 				create: ingredientIds.map((ingredientId) => ({
 					ingredient: { connect: { id: ingredientId } },
-					ing_amount: amount[0],
+					ing_amount: amount[ingredientIds.indexOf(ingredientId)],
 				})),
 			},
 		},
@@ -143,6 +143,8 @@ export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRec
 		return { message: 'Receita não encontrada', TYPE: HttpStatusCode.NotFound };
 	}
 
+
+
 	const updateRecipe = await prisma.recipes.update({
 		where: { id },
 		data: {
@@ -157,7 +159,7 @@ export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRec
 					where: { id:ingredientRecipe.id },
 					data: {
 						ingredient: { connect: { id: ingredientId } }, 
-						ing_amount: amount && amount[0],
+						ing_amount: amount && amount[ingredientIds.indexOf(ingredientId)]
 					},
 				})),
 			},

@@ -1,5 +1,5 @@
 import { HttpStatusCode } from '@/app/lib/HTTPHandler';
-import { createRecipe, deleteRecipe, updateRecipe } from './createRecipe.service';
+import { createRecipe, deleteRecipe, updateRecipe } from './recipe.service';
 import { NextRequest, NextResponse } from 'next/server';
 
 
@@ -42,8 +42,7 @@ export async function DELETE(request: NextRequest) {
 
 	try {
 
-		const id = request.nextUrl.searchParams.get('id');
-		console.log(id);
+		const { id } =  await request.json();
 		
 		if (!id) {
 			return new NextResponse(JSON.stringify('Id is missing in Request'), { status: HttpStatusCode.BadRequest });
