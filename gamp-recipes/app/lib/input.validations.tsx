@@ -27,7 +27,7 @@ export const validateUsername = (username: string) => {
 	if (username.length > characters && username.length < 10) return true;
 
 	return false;
-};
+}; 
 
 export const validateLogin = (
 	email: string,
