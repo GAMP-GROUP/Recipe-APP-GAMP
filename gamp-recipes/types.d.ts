@@ -79,27 +79,74 @@ type MealRes = {
 }
 
 type DrinkRes = {
-  'idDrink': string,
-  'strDrink': string,
-  'strDrinkAlternate': null | string,
-  'strTags': string,
-  'strVideo': null | string,
-  'strCategory': string,
-  'strIBA': string,
-  'strAlcoholic': string,
-  'strGlass': string,
-  'strInstructions': string
-  'strInstructionsES': null | string,
-  'strInstructionsDE': null | string,
-  'strInstructionsFR': null | string,
-  'strInstructionsIT': null | string,
-  'strInstructionsZH-HANS': null | string,
-  'strInstructionsZH-HANT': null | string,
-  'strDrinkThumb': string,
-  'strImageSource': string,
-  'strImageAttribution': string,
-  'strCreativeCommonsConfirmed': null | string,
-  'dateModified': null | string,
-  [index: string]: string,
+	idDrink: string;
+	strDrink: string;
+	strDrinkAlternate: null | string;
+	strTags: string;
+	strVideo: null | string;
+	strCategory: string;
+	strIBA: string;
+	strAlcoholic: string;
+	strGlass: string;
+	strInstructions: string;
+	strInstructionsES: null | string;
+	strInstructionsDE: null | string;
+	strInstructionsFR: null | string;
+	strInstructionsIT: null | string;
+	'strInstructionsZH-HANS': null | string;
+	'strInstructionsZH-HANT': null | string;
+	strDrinkThumb: string;
+	strImageSource: string;
+	strImageAttribution: string;
+	strCreativeCommonsConfirmed: null | string;
+	dateModified: null | string;
+	[index: string]: string;
+};
+
+type NewRecipeRequest = {
+	recipe_type_id: number;
+	recipe_name: string;
+	instructions: string;
+	image: string;
+	tags: string;
+	category: number;
+	ingredients: {
+		ingredient_name: string;
+	}[];
+	amount: string[];
+};
+
+
+ type RecipeData =  {
+	id: number;
+	recipe_name: string;
+	instructions: string;
+	image: string;
+	tags: string;
+	category: number;
+	video_source?: string | null;
+	area?: string | null;
+	alcoholic?: string | null;
+	recipe_type_id: number;
+	created_at: Date;
+	updated_at: Date;
+	ingredients: ingredientsAPI[];
+ }
+
+type UpdateRecipeRequest =  {
+	id: number; // O ID da receita a ser atualizada
+	recipe_name: tring; // Campos atualizáveis (adicione todos os campos que podem ser atualizados)
+	instructions?: string;
+	image?: string;
+	tags?: string;
+	category?: number;
+	ingredients?: {
+		ingredient_name: string;
+		ing_amount?: string;
+	}[];
+	amount?: string[];
+	recipe_type_id?: number;
 }
+
+type NewRecipeResponse = { message: string | RecipeData, TYPE: number };
 
