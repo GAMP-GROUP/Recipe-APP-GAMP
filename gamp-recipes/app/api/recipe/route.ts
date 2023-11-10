@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(request: NextRequest) {
 
-	try{
+	try {
 
 		const json = await request.json();
 		const data = await createRecipe(json);

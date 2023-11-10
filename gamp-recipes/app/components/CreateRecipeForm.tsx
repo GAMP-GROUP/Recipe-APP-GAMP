@@ -1,14 +1,15 @@
 'use client';
 import { recipePost } from '@/types';
 import React, { useState } from 'react';
+import IngredientsForm from './IngredientForm';
+import { Ingredients } from '@prisma/client';
 
 type TCreateRecipeFormProps = {
-	ingredientList: string[],
+	ingredientsList: Ingredients[],
 	categoryList: { id: number, name: string }[]
 }
 
-
-export default function CreateRecipeForm({ ingredientList, categoryList}: TCreateRecipeFormProps) {
+export default function CreateRecipeForm({ ingredientsList, categoryList}: TCreateRecipeFormProps) {
 	const [payload, setPayload] = useState({
 		tags: '',
 		image: '',
@@ -17,35 +18,37 @@ export default function CreateRecipeForm({ ingredientList, categoryList}: TCreat
 		recipe_name: '',
 		recipe_type_id: '1', 
 	});
-	const [ingredients, setIngredients] = useState([{ name: '', amount: '', pk: ''}]);
+	const [ingredients, setIngredients] = useState([{ name: '', amount: '', id: ''}]);
 
-	function handleIngredient(e: React.ChangeEvent<HTMLInputElement>) {
+	function handleIngredient(event: React.ChangeEvent<HTMLInputElement>) {
+		// console.log(event.target.id);
+
 		// função responsável por capturar os inputs do nome e quant de ingredientes
 		// cada dupla de input está indexada pelo nome e mantém essa relação no array ingredients na linha 11
-		const [field, index] = e.target.id.split('-');
-		const value = e.target.value;
-		let pkOrString = '';
+		const eventId: string = event.target.id;
+		const eventValue: string = event.target.value.toLowerCase();
 
-		if (field === 'name') {
-			const normalized = value.toLowerCase();
-			pkOrString = ingredientList.includes(normalized) 
-				? ingredientList.indexOf(normalized).toString() 
-				: normalized;
-		} 
+		const recipeIngredients = [...ingredients];
 
-		const newIngredients = [...ingredients];
-		const num = Number(index);
-		newIngredients[num] = field === 'name' 
-			? { name: value.toLowerCase(), amount: newIngredients[num].amount, pk: isNaN(Number(pkOrString)) ? '' : pkOrString }
-			: { pk: newIngredients[num].pk, name: newIngredients[num].name, amount: value };
-		setIngredients(newIngredients);
+		if (eventId === 'add-ingredient') {
+			const findIngredient = ingredientsList.find((ingredient) => ingredient.ingredients_name === eventValue);
+			if (findIngredient) {
+				console.log(findIngredient.ingredients_name, findIngredient.id);
+			}
+		}
+
+		// const num = Number(index);
+		// newIngredients[num] = field === 'add-ingredient' 
+		// 	? { name: value.toLowerCase(), amount: newIngredients[num].amount, pk: isNaN(Number(pkOrString)) ? '' : pkOrString }
+		// 	: { pk: newIngredients[num].pk, name: newIngredients[num].name, amount: value };
+		// setIngredients(newIngredients);
 	}
 
-	function addIngredient(e: React.MouseEvent<HTMLButtonElement>) {
+	function addIngredient(event: React.MouseEvent<HTMLButtonElement>) {
 		// responsável por adicionar no array ingredients do estado uma chava vazia para capturar inputs do usuário
 		// referente ao nome e quantidade do ingrediente
-		e.preventDefault();
-		const adding = [...ingredients, { name: '', amount: '', pk: '' }];
+		event.preventDefault();
+		const adding = [...ingredients, { name: '', amount: '', id: '' }];
 		setIngredients(adding);
 	}
 
@@ -64,8 +67,8 @@ export default function CreateRecipeForm({ ingredientList, categoryList}: TCreat
 		setPayload({...payload, ...newPayload});
 	}
 
-	async function postRecipe(e: React.FormEvent<HTMLFormElement>) {
-		e.preventDefault();
+	async function postRecipe(event: React.FormEvent<HTMLFormElement>) {
+		event.preventDefault();
 
 		const { tags, image, instructions, category, recipe_name, recipe_type_id } = payload;
 
@@ -80,19 +83,20 @@ export default function CreateRecipeForm({ ingredientList, categoryList}: TCreat
 			amount: [],
 		};
 
-		ingredients.forEach(({name, amount, pk}) => {
+		ingredients.forEach(({name, amount, id: pk}) => {
 			body.ingredients.push({ ingredient_name: name, pk: Number(pk)});
 			body.amount.push(amount || null);
 		});
 
-		console.log(body);
+		const postBody = fetch('/localhost:3000/api/recipe/', { method: 'POST', body: JSON.stringify(body) });
 	}
 
 	return (
 		<form id='create-recipe' className='create-form mx-auto' 
 			onSubmit={postRecipe}>
+			{/* Recipe Name */}
 			<fieldset className='py-2'>
-				<label htmlFor='recipe_name' className='mr-2'>Recipe Name:</label>
+				<label htmlFor='recipe_name' className='mr-2'>Recipe name:</label>
 				<input 
 					id='recipe_name'
 					type='text'
@@ -102,23 +106,50 @@ export default function CreateRecipeForm({ ingredientList, categoryList}: TCreat
 					required
 				/>
 			</fieldset>
+
+			{/* Meal or drink */}
 			<fieldset className='py-2'>
-				<label htmlFor='recipe_type_id' className='mr-2'>Recipe Type:</label>
+				<label htmlFor='recipe_type_id' className='mr-2'>Meal or drink:</label>
 				<select name='recipe_type_id' id='recipe_type_id' onChange={(e) => handleChange(e)}>
-					<option value='1'>Meal</option>
-					<option value='2'>Drink</option>
+					<option value='1'>meal</option>
+					<option value='2'>drink</option>
 				</select>
 			</fieldset>
+
+			{/* Recipe Category */}
+			<fieldset className='py-2'>
+				<label htmlFor='category' className='mr-2'>
+					Category:
+				</label>
+				<select name="category" id="category" onChange={ (e) => handleChange(e) }>
+					{	categoryList.map(({ id, name })=> {
+						return (
+							<option
+								key={ id }
+								value={ id }
+							>
+								{ name }
+							</option>
+						);
+					})}
+				</select>
+			</fieldset>
+
+			{/* Image */}
 			<fieldset className='py-2'>
 				<label htmlFor='image' className='mr-2'>Image:</label>
 				<input type='text' name='image' id='image' className='border border-b-2 p-1' onChange={(e) => handleChange(e)}/>
 			</fieldset>
+
+			{/* Tags */}
 			<fieldset className='py-2'>
 				<label htmlFor='tags' className='mr-2'>Tags:</label>
 				<input type='text' name='tags' id='tags' className='border border-b-2 p-1' onChange={(e) => handleChange(e)}/>
 			</fieldset>
-			<fieldset className='py-2'>
-				<label htmlFor='instructions' className='mr-2'>Instructions:</label>
+
+			{/* Instructions */}
+			<fieldset className='py-1 flex flex-col'>
+				<label htmlFor='instructions' className='py-2 mr-2'>Instructions:</label>
 				<textarea 
 					id='instructions'
 					placeholder='Start by chopping 1 onion...'
@@ -129,82 +160,24 @@ export default function CreateRecipeForm({ ingredientList, categoryList}: TCreat
 					onChange={(e) => handleChange(e)}
 				/>
 			</fieldset>
-			<fieldset>
-				<label htmlFor='category'>
-				Pick A Cateogry
-					<select name="category" id="category" onChange={ (e) => handleChange(e) }>
-						{	categoryList.map(({ id, name })=> {
-							return (
-								<option
-									key={ id }
-									value={ id }
-								>
-									{ name }
-								</option>
-							);
-						})}
-					</select>
-				</label>
-			</fieldset>
-			{
-				ingredients.map((e, index) => {
-					return (
-						<fieldset
-							key={`registerIng${index}`}
-						>
-							<label
-								htmlFor={`name-${index.toString()}`}
-							>
-								Ingredient
-								<input
-									key={`name-${index.toString()}`}
-									id={`name-${index.toString()}`}
-									type='text'
-									list='ingredients'
-									placeholder='Butter'
-									onBlur={ (e) => handleIngredient(e) }
-									required
-								/>
-								<datalist
-									id='ingredients'
-								>
-									{ 
-										ingredientList.map((e, index) => {
-											return (
-												<option
-													key={e + index}
-													value={e}
-												>
-												</option>
-											);
-										})
-									}
-								</datalist>
-							</label>
-							<label
-								htmlFor={`amount-${index.toString()}`}
-							>
-								Amount
-								<input
-									key={`amount-${index.toString()}`}
-									id={`amount-${index.toString()}`}
-									type='text'
-									placeholder='1/2 cup'
-									onBlur={ (e) => handleIngredient(e) }
-								/>
-							</label>
-						</fieldset>
-					);
-				})
-			}
-		
-			<button
-				onClick={ (e) => addIngredient(e) }
-				className='text-md font-bold px-5 py-1 mr-2 bg-yellow text-black rounded-2xl w-1/2'
-			>
-				Add Ingredient
-			</button>
 
+			{ /* Escolha dos ingredients */ }
+			<fieldset>
+				<IngredientsForm
+					ingredientsList={ ingredientsList }
+					handleIngredient={ handleIngredient }
+				/>
+			</fieldset>
+		
+			{ /* Botão para adicionar mais ingredientes */ }
+			<button
+				onClick={ (event) => addIngredient(event) }
+				className='text-md font-bold my-2 px-5 py-1 mr-2 bg-yellow text-black rounded-2xl w-1/2'
+			>
+				New Ingredient
+			</button>
+			
+			{ /* Botão para finalizar a receita */ }
 			<button
 				type='submit'
 				className='text-lg font-bold px-5 py-1 mr-2 bg-black text-white rounded-2xl create-button'>
