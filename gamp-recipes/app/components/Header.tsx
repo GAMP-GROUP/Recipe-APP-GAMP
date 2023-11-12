@@ -64,24 +64,21 @@ export default function Header() {
 					/>
 				</picture>
 			</Link>
-			{
-				sessionStatus ? (
-					<button
-						onClick={() => signOut()}
-						className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
-					>
-				Sign Out
-					</button>
+			{ sessionStatus ? (
+				<button
+					onClick={() => signOut()}
+					className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
+				>
+					Sign Out
+				</button>
 					
-				) : (
-					<Link href='/auth/signin'>
-						<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
-					Sign In
-						</button>
-					</Link>
-				
-				)
-			}
+			) : (
+				<Link href='/auth/signin'>
+					<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
+						Sign In
+					</button>
+				</Link>
+			) }
 		</header>
 	);
 }

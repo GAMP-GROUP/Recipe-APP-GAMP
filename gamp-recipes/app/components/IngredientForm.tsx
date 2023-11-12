@@ -2,11 +2,11 @@ import React from 'react';
 import { Ingredients } from '@prisma/client';
 
 type TIngredientsFormProps = {
-   ingredientsList: Ingredients[],
-   handleIngredient: (event: React.ChangeEvent<HTMLInputElement>) => void,
+	allIngredientsList: Ingredients[],
+	handleIngredient: (event: React.ChangeEvent<HTMLInputElement>) => void,
 }
 
-export default function IngredientsForm({ ingredientsList, handleIngredient }: TIngredientsFormProps) {
+export default function IngredientsForm({ allIngredientsList, handleIngredient }: TIngredientsFormProps) {
 	return (
 		<section
 			className='py-2'
@@ -25,7 +25,7 @@ export default function IngredientsForm({ ingredientsList, handleIngredient }: T
 					type='text'
 					list='ingredients'
 					placeholder='butter'
-					onBlur={ (event) => handleIngredient(event) }
+					onBlur={(event) => handleIngredient(event)}
 					className='my-2'
 					required
 				>
@@ -33,16 +33,16 @@ export default function IngredientsForm({ ingredientsList, handleIngredient }: T
 				<datalist
 					id='ingredients'
 				>
-					{ ingredientsList.map((ingredient) => (
+					{ allIngredientsList.map((ingredient) => (
 						<option
-							key={ ingredient.id }
-							value={ ingredient.ingredients_name }
+							key={ingredient.id}
+							value={ingredient.ingredients_name}
 						/>
 					)) }
 				</datalist>
 			</fieldset>
 
-			{ /* Choose amount */ }
+			{ /* Choose amount */}
 			<fieldset>
 				<label
 					htmlFor='ingredient-amount'
@@ -55,9 +55,12 @@ export default function IngredientsForm({ ingredientsList, handleIngredient }: T
 					name='ingredient-amount'
 					id='ingredient-amount'
 					placeholder='1/2 cup'
-					onBlur={ (event) => handleIngredient(event) }
+					onBlur={(event) => handleIngredient(event)}
 				/>
 			</fieldset>
+
+			{/* <button>Save</button>
+			<button>Delete</button> */}
 		</section>
 	);
 }
