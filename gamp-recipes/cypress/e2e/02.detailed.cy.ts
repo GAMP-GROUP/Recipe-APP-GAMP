@@ -46,7 +46,7 @@ const pancakes = {
 };
 
 describe('01 - Detailed Route', () => {
-	it('01 - 01 - Drink Recipe', () => {
+	it('01 - 01 - Drink Recipe - verify if it renders properly', () => {
 		cy.visit('/search/Ace');
 
 		cy.get('a:last').click();
@@ -67,7 +67,7 @@ describe('01 - Detailed Route', () => {
 		cy.get('button').last().prev();
 	});
 
-	it('01 - 02 - Meal Recipe', () => {
+	it('01 - 02 - Meal Recipe - verify if it renders properly', () => {
 		cy.visit('/search/pancakes');
 
 		cy.get('a:last').click();
