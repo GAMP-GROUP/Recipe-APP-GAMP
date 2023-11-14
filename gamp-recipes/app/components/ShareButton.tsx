@@ -5,7 +5,7 @@ import { ButtonProps } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-export default function FavButton({ id }: ButtonProps) {
+export default function ShareButton({ id }: ButtonProps) {
 	const session = useSession();
 	const router = useRouter();
 
@@ -26,7 +26,7 @@ export default function FavButton({ id }: ButtonProps) {
 		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
 		window.alert(favState);
 	}
-	const BtnClass = 'rounded-full w - 14 h - 14 z - 3';
+	const BtnClass = 'rounded-full w-14 h-14 z-3';
 
 
 
@@ -42,7 +42,7 @@ export default function FavButton({ id }: ButtonProps) {
 				<img
 					id={id}
 					alt='Favorite button'
-					src='/icons/favorites-notactive.png'
+					src='/icons/share.png'
 					className='w-8 h-8 m-auto'
 				/>
 			</picture>

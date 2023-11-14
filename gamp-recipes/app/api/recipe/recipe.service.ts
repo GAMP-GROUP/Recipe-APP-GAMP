@@ -39,7 +39,6 @@ export async function createRecipe(request: Request): Promise<NewRecipeResponse>
 
 	}
 
-
 	const categoriesCheck = await prisma.category.findFirst({
 		where: {
 			id: category
