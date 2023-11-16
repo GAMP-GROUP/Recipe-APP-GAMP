@@ -57,7 +57,7 @@ export default function IngredientsForm({ allIngredientsList, recipeIngredients 
 					value={ ingredientName }
 					onBlur={ (event) => handleIngredientStatus(event, 'name') }
 					onChange={ (event) => handleIngredientChange(event, 'name') }
-					className='my-2'
+					className={ ingredientStatus === true ? 'my-2 bg-lime-400' : 'my-2' }
 					required
 				>
 				</input>
@@ -90,7 +90,7 @@ export default function IngredientsForm({ allIngredientsList, recipeIngredients 
 					placeholder='1/2 cup'
 					onBlur={ (event) => handleIngredientStatus(event, 'amount') }
 					onChange={ (event) => handleIngredientChange(event, 'amount') }
-					className='my-2'
+					className={ ingredientStatus === true ? 'my-2 bg-lime-400' : 'my-2' }
 					required
 				/>
 			</fieldset>

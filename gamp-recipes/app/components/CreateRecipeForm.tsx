@@ -53,7 +53,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		setRecipeIngredients(adding);
 	}
 
-	function removeIngredient(event: React.MouseEvent<HTMLButtonElement>) {}
+	// function removeIngredient(event: React.MouseEvent<HTMLButtonElement>) {}
 
 	function handleChange(
 		e:
@@ -91,7 +91,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 			body.amount.push(amount || null);
 		});
 
-		const postBody = fetch('/localhost:3000/api/recipe/', { method: 'POST', body: JSON.stringify(body) });
+		// const postBody = fetch('/localhost:3000/api/recipe/', { method: 'POST', body: JSON.stringify(body) });
 	}
 
 	return (
@@ -179,7 +179,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 				</fieldset>
 
 				{/* Instruções */}
-				<fieldset className='py-2 flex flex-col'>
+				<fieldset className='py-2 flex flex-col items-start'>
 					<label htmlFor='instructions' className='py-2 mr-2 font-bold'>Instructions:</label>
 					<textarea
 						id='instructions'
@@ -208,17 +208,17 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 			{ /* Botão para adicionar mais ingredientes */}
 			<button
 				onClick={(event) => addIngredient(event)}
-				className='text-sm font-semibold py-1 mr-2 bg-yellow text-black rounded-2xl w-1/2'
+				className='text-sm font-semibold py-1 mr-2 bg-yellow text-black rounded-2xl w-full'
 			>
 				New Ingredient
 			</button>
 
 			{ /* Botão para finalizar a receita */}
-			{/* <button
-				type='submit'
-				className='text-lg font-bold px-5 py-1 mr-2 bg-black text-white rounded-2xl create-button'>
-					Finish
-			</button> */}
+			<button
+				className='text-lg font-bold px-5 py-1 mr-2 mt-4 bg-black text-white rounded-2xl create-button'
+			>
+				Finish
+			</button>
 		</form>
 	);
 }
