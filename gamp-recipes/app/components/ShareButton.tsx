@@ -4,28 +4,33 @@ import React from 'react';
 import { ButtonProps } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+
 
 export default function ShareButton({ id }: ButtonProps) {
 	const session = useSession();
 	const router = useRouter();
 
-	async function favHandle(e: React.MouseEvent<HTMLButtonElement>) {
+	const { setShare, share } = useBehaviorContext();
+
+
+
+	async function ShareHandle() {
 		if (session.status === 'unauthenticated') {
 			window.alert('You need to sign in or register in GAMP in order to favorite recipes');
 			router.replace('/auth/signin');
 			return;
 		}
-		const id = (e.target as Element).id;
 
-		const res = await fetch(`http://localhost:3000/${id}/favorite`, {
-			method: 'POST',
-			body: JSON.stringify({ id }),
-		});
+		if (session.status === 'loading') {
+			return;
+		}
 
-		const { message: { fav } } = await res.json();
-		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
-		window.alert(favState);
+		if (share === true) return setShare(false);
+
+		return setShare(true);
 	}
+
 	const BtnClass = 'rounded-full w-14 h-14 z-3';
 
 
@@ -33,7 +38,7 @@ export default function ShareButton({ id }: ButtonProps) {
 	return (
 		<button
 			id={id}
-			onClick={(e) => favHandle(e)}
+			onClick={() => ShareHandle()}
 			className={BtnClass}
 		>
 			<picture

@@ -1,14 +1,16 @@
-
 import React from 'react';
 import { detailedParams } from '@/types';
 import IngredientList from '@/app/components/IngredientLIst';
 import prisma from '@/prisma/client';
 import FavButton from '@/app/components/FavoriteButton';
-import ShareButton from '@/app/components/ShareButton';
+
+import ShareToSocialCard from '@/app/components/ShareToSocialCard';
+
 
 export default async function InProgress({
 	params: { detailed },
 }: detailedParams) {
+
 
 	const recipe = await prisma.recipes.findUnique({
 		where: {
@@ -48,14 +50,17 @@ export default async function InProgress({
 
 				<section className='flex flex-row justify-center gap-4'>
 
-					<ShareButton
-						id={detailed.toString()}
-					/>
-
 					<FavButton
 						id={detailed.toString()}
 
 					/>
+
+					<ShareToSocialCard
+						id={detailed.toString()}
+						url={`https://gamp.vercel.app/${detailed}`}
+						img={recipe?.image as string}
+					/>
+
 				</section>
 
 				<h2
