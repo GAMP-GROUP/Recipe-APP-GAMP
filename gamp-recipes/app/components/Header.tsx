@@ -61,6 +61,7 @@ export default function Header() {
 						className='transition-all duration-300 w-[62px]'
 						src='/images/logo-simple.png'
 						alt='Our logo'
+						onClick={ () => toggleMenu(true, setMenu)}
 					/>
 				</picture>
 			</Link>
@@ -75,7 +76,9 @@ export default function Header() {
 					
 				) : (
 					<Link href='/auth/signin'>
-						<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
+						<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
+							onClick={() => toggleMenu(true, setMenu)}
+						>
 					Sign In
 						</button>
 					</Link>

@@ -24,33 +24,33 @@ type BehaviorProps = {
 };
 
 export const BehaviorContext = createContext({
-  menu: false,
-  setMenu: () => {},
-  searchBar: false,
-  setSearchBar: () => {},
-  recipeSearch: "",
-  setRecipeSearch: () => {},
+	menu: false,
+	setMenu: () => {},
+	searchBar: false,
+	setSearchBar: () => {},
+	recipeSearch: '',
+	setRecipeSearch: () => {},
 } as BehaviorProps);
 
 export function BehaviorProvider({ children }: Props) {
-  const [menu, setMenu] = useState(false);
-  const [searchBar, setSearchBar] = useState(false);
-  const [recipeSearch, setRecipeSearch] = useState("")
+	const [menu, setMenu] = useState(false);
+	const [searchBar, setSearchBar] = useState(false);
+	const [recipeSearch, setRecipeSearch] = useState('');
 
-  const behaviorSettings = {
-    menu,
-    setMenu,
-    searchBar,
-    setSearchBar,
-    recipeSearch,
-    setRecipeSearch
-  };
+	const behaviorSettings = {
+		menu,
+		setMenu,
+		searchBar,
+		setSearchBar,
+		recipeSearch,
+		setRecipeSearch,
+	};
 
-  return (
-    <BehaviorContext.Provider value={behaviorSettings}>
-      {children}
-    </BehaviorContext.Provider>
-  );
+	return (
+		<BehaviorContext.Provider value={behaviorSettings}>
+			{children}
+		</BehaviorContext.Provider>
+	);
 }
 
 export function useBehaviorContext() {
