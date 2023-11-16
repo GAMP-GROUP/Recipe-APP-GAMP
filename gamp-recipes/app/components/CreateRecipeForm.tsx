@@ -20,30 +20,30 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 	});
 	const [recipeIngredients, setRecipeIngredients] = useState([{ name: '', amount: '', id: '' }]);
 
-	function handleIngredient(event: React.ChangeEvent<HTMLInputElement>) {
-		// console.log(event.target.id);
+	// function handleIngredient(event: React.ChangeEvent<HTMLInputElement>) {
+	// 	// console.log(event.target.id);
 
-		// função responsável por capturar os inputs do nome e quant de ingredientes
-		// cada dupla de input está indexada pelo nome e mantém essa relação no array ingredients na linha 11
-		const eventId: string = event.target.id;
-		const eventValue: string = event.target.value.toLowerCase();
+	// 	// função responsável por capturar os inputs do nome e quant de ingredientes
+	// 	// cada dupla de input está indexada pelo nome e mantém essa relação no array ingredients na linha 11
+	// 	const eventId: string = event.target.id;
+	// 	const eventValue: string = event.target.value.toLowerCase();
 
-		const currentRecipeIngredients = [...recipeIngredients];
+	// 	const currentRecipeIngredients = [...recipeIngredients];
 
-		if (eventId === 'add-ingredient') {
-			const findIngredient = allIngredientsList.find((ingredient) => ingredient.ingredients_name === eventValue);
-			if (findIngredient) {
-				// const updateRecipeIngredients = [...currentRecipeIngredients, { name: findIngredient.ingredients_name, amount: '', id: findIngredient.id.toString() }];
-				// setRecipeIngredients(updateRecipeIngredients);
-			}
-		}
-
-		// const num = Number(index);
-		// newIngredients[num] = field === 'add-ingredient' 
-		// 	? { name: value.toLowerCase(), amount: newIngredients[num].amount, pk: isNaN(Number(pkOrString)) ? '' : pkOrString }
-		// 	: { pk: newIngredients[num].pk, name: newIngredients[num].name, amount: value };
-		// setIngredients(newIngredients);
-	}
+	// 	if (eventId === 'add-ingredient') {
+	// 		const findIngredient = allIngredientsList.find((ingredient) => ingredient.ingredients_name === eventValue);
+	// 		if (findIngredient) {
+	// 			// const updateRecipeIngredients = [...currentRecipeIngredients, { name: findIngredient.ingredients_name, amount: '', id: findIngredient.id.toString() }];
+	// 			// setRecipeIngredients(updateRecipeIngredients);
+	// 		}
+	// 	}
+	// 	// const num = Number(index);
+	// 	// newIngredients[num] = field === 'add-ingredient' 
+	// 	// 	? { name: value.toLowerCase(), amount: newIngredients[num].amount, pk: isNaN(Number(pkOrString)) ? '' : pkOrString }
+	// 	// 	: { pk: newIngredients[num].pk, name: newIngredients[num].name, amount: value };
+	// 	// setIngredients(newIngredients);
+		
+	// }
 
 	function addIngredient(event: React.MouseEvent<HTMLButtonElement>) {
 		// responsável por adicionar no array ingredients do estado uma chava vazia para capturar inputs do usuário
@@ -52,6 +52,8 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		const adding = [...recipeIngredients, { name: '', amount: '', id: '' }];
 		setRecipeIngredients(adding);
 	}
+
+	function removeIngredient(event: React.MouseEvent<HTMLButtonElement>) {}
 
 	function handleChange(
 		e:
@@ -95,83 +97,110 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 	return (
 		<form
 			id='create-recipe'
-			className='create-form mx-auto'
+			className='create-form mx-auto items-center'
 			onSubmit={postRecipe}
 		>
-			{/* Recipe Name */}
-			<fieldset className='py-2'>
-				<label htmlFor='recipe_name' className='mr-2'>Recipe name:</label>
-				<input
-					id='recipe_name'
-					type='text'
-					placeholder='Lasagna al ragú'
-					className='border border-b-2 p-1'
-					onChange={(e) => handleChange(e)}
-					required
-				/>
-			</fieldset>
+			<section
+				className='py-2 px-4 rounded-3xl border-solid border-[6px] border-white shadow-md'
+			>
+				{/* Nome da receita */}
+				<fieldset className='py-2 flex flex-row items-center'>
+					<label htmlFor='recipe_name' className='mr-2 font-bold'>Name:</label>
+					<input
+						id='recipe_name'
+						type='text'
+						// placeholder='Lasagna al ragú'
+						className='border border-1 rounded-xl p-1 grow'
+						onChange={(e) => handleChange(e)}
+						required
+					/>
+				</fieldset>
 
-			{/* Meal or drink */}
-			<fieldset className='py-2'>
-				<label htmlFor='recipe_type_id' className='mr-2'>Meal or drink:</label>
-				<select name='recipe_type_id' id='recipe_type_id' onChange={(e) => handleChange(e)}>
-					<option value='1'>meal</option>
-					<option value='2'>drink</option>
-				</select>
-			</fieldset>
+				{/* Escolha entre "meal" ou "drink" */}
+				<fieldset className='py-2 flex flex-row items-center'>
+					<label htmlFor='recipe_type_id' className='mr-2 font-bold'>Meal or drink:</label>
+					<select
+						name='recipe_type_id'
+						id='recipe_type_id'
+						className='bg-white grow'
+						onChange={ (event) => handleChange(event) }
+					>
+						<option value='1'>meal</option>
+						<option value='2'>drink</option>
+					</select>
+				</fieldset>
 
-			{/* Recipe Category */}
-			<fieldset className='py-2'>
-				<label htmlFor='category' className='mr-2'>
+				{/* Categoria da receita */}
+				<fieldset className='py-2 flex flex-row items-center'>
+					<label htmlFor='category' className='mr-2 font-bold'>
 					Category:
-				</label>
-				<select name="category" id="category" onChange={(e) => handleChange(e)}>
-					{categoryList.map(({ id, name }) => {
-						return (
-							<option
-								key={id}
-								value={id}
-							>
-								{name}
-							</option>
-						);
-					})}
-				</select>
-			</fieldset>
+					</label>
+					<select
+						name="category"
+						id="category"
+						className='bg-white grow'
+						onChange={ (event) => handleChange(event) }
+					>
+						{categoryList.map(({ id, name }) => {
+							return (
+								<option
+									key={id}
+									value={id}
+								>
+									{name}
+								</option>
+							);
+						})}
+					</select>
+				</fieldset>
 
-			{/* Image */}
-			<fieldset className='py-2'>
-				<label htmlFor='image' className='mr-2'>Image:</label>
-				<input type='text' name='image' id='image' className='border border-b-2 p-1' onChange={(e) => handleChange(e)} />
-			</fieldset>
+				{/* URL da imagem da receita */}
+				<fieldset className='py-2 flex flex-row items-center'>
+					<label htmlFor='image' className='mr-2 font-bold'>Image:</label>
+					<input
+						type='url'
+						name='image'
+						id='image'
+						className='border border-1 rounded-xl p-1 grow'
+						onChange={(event) => handleChange(event) }
+					/>
+				</fieldset>
 
-			{/* Tags */}
-			<fieldset className='py-2'>
-				<label htmlFor='tags' className='mr-2'>Tags:</label>
-				<input type='text' name='tags' id='tags' className='border border-b-2 p-1' onChange={(e) => handleChange(e)} />
-			</fieldset>
+				{/* Tags */}
+				<fieldset className='py-2 flex flex-row items-center'>
+					<label htmlFor='tags' className='mr-2 font-bold'>Tags:</label>
+					<input
+						type='text'
+						name='tags'
+						id='tags'
+						className='border border-1 rounded-xl p-1 grow'
+						onChange={ (event) => handleChange(event) }
+					/>
+				</fieldset>
 
-			{/* Instructions */}
-			<fieldset className='py-1 flex flex-col'>
-				<label htmlFor='instructions' className='py-2 mr-2'>Instructions:</label>
-				<textarea
-					id='instructions'
-					placeholder='Start by chopping 1 onion...'
-					className='border border-b-2 p-2'
-					required
-					cols={30}
-					rows={4}
-					onChange={(e) => handleChange(e)}
-				/>
-			</fieldset>
+				{/* Instruções */}
+				<fieldset className='py-2 flex flex-col'>
+					<label htmlFor='instructions' className='py-2 mr-2 font-bold'>Instructions:</label>
+					<textarea
+						id='instructions'
+						placeholder='Start by chopping 1 onion...'
+						className='border border-1 rounded-xl p-2 grow'
+						required
+						cols={30}
+						rows={4}
+						onChange={(e) => handleChange(e)}
+					/>
+				</fieldset>
+			</section>
 
 			{ /* Escolha dos ingredientes */}
+			<h1 className='text-center font-extrabold text-xl mt-4 mb-2'>Select Ingredients</h1>
 			<fieldset>
 				{ recipeIngredients.map((_ingredientAdded, index) => (
 					<IngredientsForm
 						key={ index }
 						allIngredientsList={ allIngredientsList }
-						handleIngredient={ handleIngredient }
+						recipeIngredients={ recipeIngredients }
 					/>
 				)) }
 			</fieldset>
