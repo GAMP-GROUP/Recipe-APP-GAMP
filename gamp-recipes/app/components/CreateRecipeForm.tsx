@@ -20,51 +20,50 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 	});
 	const [recipeIngredients, setRecipeIngredients] = useState([{ name: '', amount: '', id: '' }]);
 
-	// function handleIngredient(event: React.ChangeEvent<HTMLInputElement>) {
-	// 	// console.log(event.target.id);
-
-	// 	// função responsável por capturar os inputs do nome e quant de ingredientes
-	// 	// cada dupla de input está indexada pelo nome e mantém essa relação no array ingredients na linha 11
-	// 	const eventId: string = event.target.id;
-	// 	const eventValue: string = event.target.value.toLowerCase();
-
-	// 	const currentRecipeIngredients = [...recipeIngredients];
-
-	// 	if (eventId === 'add-ingredient') {
-	// 		const findIngredient = allIngredientsList.find((ingredient) => ingredient.ingredients_name === eventValue);
-	// 		if (findIngredient) {
-	// 			// const updateRecipeIngredients = [...currentRecipeIngredients, { name: findIngredient.ingredients_name, amount: '', id: findIngredient.id.toString() }];
-	// 			// setRecipeIngredients(updateRecipeIngredients);
-	// 		}
-	// 	}
-	// 	// const num = Number(index);
-	// 	// newIngredients[num] = field === 'add-ingredient' 
-	// 	// 	? { name: value.toLowerCase(), amount: newIngredients[num].amount, pk: isNaN(Number(pkOrString)) ? '' : pkOrString }
-	// 	// 	: { pk: newIngredients[num].pk, name: newIngredients[num].name, amount: value };
-	// 	// setIngredients(newIngredients);
-		
-	// }
-
-	function addIngredient(event: React.MouseEvent<HTMLButtonElement>) {
+	function addIngredient(event: React.MouseEvent<HTMLButtonElement>): void {
 		// responsável por adicionar no array ingredients do estado uma chava vazia para capturar inputs do usuário
 		// referente ao nome e quantidade do ingrediente
 		event.preventDefault();
-		const adding = [...recipeIngredients, { name: '', amount: '', id: '' }];
-		setRecipeIngredients(adding);
+		const updateIngredients = [...recipeIngredients, { name: '', amount: '', id: '' }];
+		setRecipeIngredients(updateIngredients);
 	}
 
-	// function removeIngredient(event: React.MouseEvent<HTMLButtonElement>) {}
+	function updateIngredient(ingredientName: string, ingredientAmount: string, ingredientIndex: number): boolean | null {
+		const findIngredient = allIngredientsList.find((ingredient) => (
+			ingredient.ingredients_name === ingredientName
+		));
+
+		if (!findIngredient) {
+			console.log('deu ruim');
+			return null;
+		}
+
+		recipeIngredients[ingredientIndex] = {
+			name: findIngredient.ingredients_name,
+			amount: ingredientAmount,
+			id: findIngredient.id.toString()
+		};
+
+		return true;
+	}
+
+	function removeIngredient(event: React.MouseEvent<HTMLButtonElement>, index: number): void {
+		event.preventDefault();
+		const updateIngredients = [...recipeIngredients];
+		updateIngredients.splice(index, 1);
+		setRecipeIngredients(updateIngredients);
+	}
 
 	function handleChange(
-		e:
+		event:
 			React.ChangeEvent<HTMLTextAreaElement>
 			| React.ChangeEvent<HTMLSelectElement>
 			| React.ChangeEvent<HTMLInputElement>
-	) {
+	): void {
 		// função handleChange genérica para registro dos inputs do form
 
-		const userInput = e.currentTarget.value;
-		const field = e.target.id;
+		const userInput = event.currentTarget.value;
+		const field = event.target.id;
 		const newPayload = { [field]: userInput };
 
 		setPayload({ ...payload, ...newPayload });
@@ -201,6 +200,9 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 						key={ index }
 						allIngredientsList={ allIngredientsList }
 						recipeIngredients={ recipeIngredients }
+						recipeIngredientsIndex={ index }
+						removeIngredient={ removeIngredient }
+						updateIngredient={ updateIngredient }
 					/>
 				)) }
 			</fieldset>

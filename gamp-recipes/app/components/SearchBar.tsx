@@ -84,7 +84,7 @@ export default function SearchBar() {
 				</button>
 			</section>
 			{ searchBar &&
-            <div className='overlay' onClick={() => setSearchBar(false)} />
+            <div className='overlay' onClick={ () => setSearchBar(false) } />
 			} {/* Resto da tela além da barra de pesquisa */}
 		</section>
 	);
