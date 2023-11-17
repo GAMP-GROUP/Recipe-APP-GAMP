@@ -36,7 +36,7 @@ export default async function InProgress({
 
 	return (
 		<div
-			className="text-center flex flex-col items-center gap-4 w-full"
+			className="text-center flex flex-col items-center"
 		>
 			<section>
 
@@ -48,7 +48,7 @@ export default async function InProgress({
 					className='text-4xl font-semibold antialiased'
 				>{recipe?.recipe_name}</h2>
 
-				<section className='flex flex-row justify-center gap-4'>
+				<section className='flex flex-row justify-center'>
 
 					<FavButton
 						id={detailed.toString()}

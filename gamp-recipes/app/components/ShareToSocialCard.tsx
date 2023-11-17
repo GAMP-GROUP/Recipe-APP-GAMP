@@ -10,7 +10,6 @@ import { ShareModal } from './ShareModal';
 export default function ShareToSocialCard({ url, img, id }: { url: string, img: string, id: string }) {
 	const { share } = useBehaviorContext();
 
-
 	return (
 		<div>
 			{share === false ? (

@@ -36,12 +36,15 @@ export const BehaviorContext = createContext({
 
 export function BehaviorProvider({ children }: Props) {
 	const [menu, setMenu] = useState(false);
+	const [open, setOpen] = useState(false);
 	const [share, setShare] = useState(false);
 	const [searchBar, setSearchBar] = useState(false);
 	const [recipeSearch, setRecipeSearch] = useState('');
 
 	const behaviorSettings = {
 		menu,
+		open,
+		setOpen,
 		share,
 		setShare,
 		setMenu,
