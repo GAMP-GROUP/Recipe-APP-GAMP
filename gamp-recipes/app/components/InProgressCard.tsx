@@ -1,38 +1,25 @@
-
+'use client';
+'use client';
 
 import React from 'react';
-import { detailedParams } from '@/types';
+import { RecipeData } from '@/types';
 import IngredientList from '@/app/components/IngredientLIst';
-import prisma from '@/prisma/client';
+
 import FavButton from '@/app/components/FavoriteButton';
 
 
 import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 
+type inProgressData =
+	{
+		recipe: RecipeData,
+		detailed: string
+	};
+export default async function InProgressCard(inProgressData: inProgressData) {
 
-export default async function InProgressCard({
-	params: { detailed },
-}: detailedParams) {
 
 
-	const recipe = await prisma.recipes.findUnique({
-		where: {
-			id: Number(detailed),
-		},
-		include: {
-			Ingredients_Recipes: {
-				include: {
-					ingredient: {
-						select: {
-							ingredients_name: true,
-						}
-					},
-				}
-			}
-		}
-	});
-
-	const ingredients = recipe?.Ingredients_Recipes.map(({ ingredient: { ingredients_name } }) => {
+	const ingredients = inProgressData.recipe?.ingredients.map(({ ingredient: { ingredients_name } }) => {
 		const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
 		return ingName;
 	});
@@ -44,24 +31,24 @@ export default async function InProgressCard({
 			<section>
 
 				<picture>
-					<img className="w-full mx-auto  h-fit" src={recipe?.image} alt={recipe?.recipe_name}></img>
+					<img className="w-full mx-auto  h-fit" src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 				</picture>
 
 				<h2
 					className='text-4xl font-semibold antialiased'
-				>{recipe?.recipe_name}</h2>
+				>{inProgressData.recipe?.recipe_name}</h2>
 
 				<section className='flex flex-row justify-center'>
 
 					<FavButton
-						id={detailed.toString()}
+						id={inProgressData.detailed.toString()}
 
 					/>
 
 					<ShareToSocialCard
-						id={detailed.toString()}
-						url={`https://gamp.vercel.app/${detailed}`}
-						img={recipe?.image as string}
+						id={inProgressData.detailed.toString()}
+						url={`https://gamp.vercel.app/${inProgressData.detailed}`}
+						img={inProgressData?.recipe.image as string}
 					/>
 
 				</section>
@@ -71,7 +58,7 @@ export default async function InProgressCard({
 				>
 					Instructions
 				</h2>
-				<p className='text-center'>{recipe?.instructions}</p>
+				<p className='text-center'>{inProgressData?.recipe.instructions}</p>
 			</section>
 
 			<section
