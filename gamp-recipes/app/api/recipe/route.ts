@@ -1,6 +1,7 @@
 import { HttpStatusCode } from '@/app/lib/HTTPHandler';
-import { createRecipe, deleteRecipe, updateRecipe } from './recipe.service';
+import { createRecipe, deleteRecipe, getRecipes, updateRecipe } from './recipe.service';
 import { NextRequest, NextResponse } from 'next/server';
+
 
 
 export async function POST(request: NextRequest) {
@@ -54,6 +55,18 @@ export async function DELETE(request: NextRequest) {
 	} catch (error) {
 
 		console.error('Error caught in DELETE request:', error);
+		return new NextResponse(JSON.stringify(error), { status: HttpStatusCode.InternalServerError });
+	}
+}
+
+
+
+export async function GET() {
+
+	try {
+		const data = await getRecipes();
+		return new NextResponse(JSON.stringify(data), { status: HttpStatusCode.OK });
+	} catch (error) {
 		return new NextResponse(JSON.stringify(error), { status: HttpStatusCode.InternalServerError });
 	}
 }

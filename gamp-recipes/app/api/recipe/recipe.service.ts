@@ -239,3 +239,60 @@ export async function deleteRecipe(request: number) {
 		console.error('Error deleting recipe:', error);
 	}
 }
+
+
+export async function getRecipes() {
+	try {
+		const recipes = await prisma.recipes.findMany({
+			include: {
+				category_name: true,
+				recipe_type: true,
+				Ingredients_Recipes: {
+					select: {
+						ing_amount: true,
+						ingredient: {
+							select: {
+								ingredients_name: true,
+							},
+						},
+					},
+
+				},
+			},
+		});
+
+		return recipes;
+	} catch (error) {
+		console.error('Error getting recipes:', error);
+	}
+}
+
+
+export async function getRecipeById(request: number) {
+	try {
+		const recipe = await prisma.recipes.findFirst({
+			where: {
+				id: request,
+			},
+			include: {
+				category_name: true,
+				recipe_type: true,
+				Ingredients_Recipes: {
+					select: {
+						ing_amount: true,
+						ingredient: {
+							select: {
+								ingredients_name: true,
+							},
+						},
+					},
+
+				},
+			},
+		});
+
+		return recipe;
+	} catch (error) {
+		console.error('Error getting recipe:', error);
+	}
+}

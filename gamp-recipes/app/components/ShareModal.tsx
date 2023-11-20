@@ -6,6 +6,7 @@ import { TwitterShareButton, TwitterIcon, PinterestShareButton, PinterestIcon, W
 import { enqueueSnackbar, SnackbarProvider } from 'notistack';
 
 
+
 export function ShareModal({ url, img }: { url: string, img: string, id: string }) {
 	const { setShare } = useBehaviorContext();
 	const [inputText, setInputText] = React.useState(url);
@@ -38,13 +39,13 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 
 
 	return (
-		<div className='flex items-center justify-center text-left z-0 h-0  relative'>
+		<div className='flex items-center justify-center text-left z-0 h-0  relative font-croissant'>
 			<div className=' shadow-md bg-white	 w-full mx-4 p-3 rounded-xl md:w-1/2 lg:w-1/3'>
 				<div
 					className="flex justify-between items center border-b border-gray-200 py-3 "
 				>
-					<div className="flex items-center justify-center">
-						<p className="text-xl font-bold text-gray-800">GAMP</p>
+					<div className="flex items-center justify-center mb-0">
+						<img src='/images/logo-black.png' alt='logo icon' className='w-20' />
 					</div>
 
 					<div
@@ -56,7 +57,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 							onClick={() => setShare(false)}
 
 						>
-							<img src='/icons/close.png' alt='close icon' className='h-3' />
+							<img src='/icons/close.png' alt='close icon' className='w-4' />
 
 						</button>
 
