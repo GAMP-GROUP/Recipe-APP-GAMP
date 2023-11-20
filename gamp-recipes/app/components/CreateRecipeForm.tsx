@@ -40,7 +40,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		const value = event.target.value;
 		const id = event.target.id;
 		const updateIngredients = [...recipeIngredients];
-
+		
 		if (id === 'name') {
 			// handleIngredientInput(value, recipeIngredients[recipeIngredientsIndex].amount, Number(recipeIngredients[recipeIngredientsIndex].id));
 			updateIngredients[recipeIngredientsIndex] = { name: value, amount: updateIngredients[recipeIngredientsIndex].amount };
@@ -230,6 +230,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 					<IngredientsForm
 						key={ index }
 						allIngredientsList={ allIngredientsList }
+						recipeIngredients={ recipeIngredients }
 						recipeIngredientsIndex={ index }
 						removeIngredient={ removeIngredient }
 						updateIngredientId={ updateIngredientId }

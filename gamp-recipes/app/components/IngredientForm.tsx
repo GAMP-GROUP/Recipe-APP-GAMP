@@ -3,6 +3,7 @@ import { Ingredients } from '@prisma/client';
 
 type TIngredientsFormProps = {
 	allIngredientsList: Ingredients[],
+	recipeIngredients: { name: string, amount: string, id?: string }[],
 	recipeIngredientsIndex: number,
 	removeIngredient: (event: React.MouseEvent<HTMLButtonElement>, index: number) => void,
 	updateIngredientId: (ingredientName: string, ingredientIndex: number) => void,
@@ -19,6 +20,7 @@ enum IngredientStatusOptions {
 
 export default function IngredientsForm({
 	allIngredientsList,
+	recipeIngredients,
 	recipeIngredientsIndex,
 	updateIngredientId,
 	removeIngredient,
@@ -54,7 +56,9 @@ export default function IngredientsForm({
 	}
 
 	function deleteButtonClick(event: React.MouseEvent<HTMLButtonElement>) {
-		if (recipeIngredientsIndex === 0) {
+		if (recipeIngredientsIndex === 0
+			&& (recipeIngredients[recipeIngredientsIndex].name === ''
+			&& recipeIngredients[recipeIngredientsIndex].amount) === '') {
 			setIngredientStatus(IngredientStatusOptions.Empty);
 		}
 
