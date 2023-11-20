@@ -1,13 +1,10 @@
 'use client';
-'use client';
 
 import React from 'react';
 import { RecipeData } from '@/types';
 import IngredientList from '@/app/components/IngredientLIst';
-
+import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import FavButton from '@/app/components/FavoriteButton';
-
-
 import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 
 type inProgressData =
@@ -15,8 +12,9 @@ type inProgressData =
 		recipe: RecipeData,
 		detailed: string
 	};
-export default async function InProgressCard(inProgressData: inProgressData) {
+export default function InProgressCard(inProgressData: inProgressData) {
 
+	const { share } = useBehaviorContext();
 
 
 	const ingredients = inProgressData.recipe?.ingredients.map(({ ingredient: { ingredients_name } }) => {
@@ -24,21 +22,24 @@ export default async function InProgressCard(inProgressData: inProgressData) {
 		return ingName;
 	});
 
+	// const mainModalClass = !share ? 'text-center flex flex-col items-center' : 'text-center flex flex-col items-center opacity-2';
+
 	return (
 		<div
-			className="text-center flex flex-col items-center"
+
+			className={'text-center flex flex-col items-center'}
 		>
-			<section>
+			<div>
 
 				<picture>
-					<img className="w-full mx-auto  h-fit" src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
+					<img className={!share ? 'w-full mx-auto  h-fit' : 'w-full mx-auto  h-fit opacity-25'} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 				</picture>
 
 				<h2
-					className='text-4xl font-semibold antialiased'
+					className={!share ? 'text-4xl font-semibold antialiased list' : 'text-4xl font-semibold antialiased list opacity-25'}
 				>{inProgressData.recipe?.recipe_name}</h2>
 
-				<section className='flex flex-row justify-center'>
+				<div className='flex flex-row justify-center'>
 
 					<FavButton
 						id={inProgressData.detailed.toString()}
@@ -51,18 +52,18 @@ export default async function InProgressCard(inProgressData: inProgressData) {
 						img={inProgressData?.recipe.image as string}
 					/>
 
-				</section>
+				</div>
 
 				<h2
-					className='text-3xl text-center uppercase'
+					className={!share ? 'text-3xl text-center uppercase' : 'text-3xl text-center uppercase'}
 				>
 					Instructions
 				</h2>
 				<p className='text-center'>{inProgressData?.recipe.instructions}</p>
-			</section>
+			</div>
 
 			<section
-				className='w-3/4'
+				className={!share ? 'w-3/4' : 'w-3/4 '}
 			>
 				<IngredientList ingredients={ingredients as string[]} />
 			</section>

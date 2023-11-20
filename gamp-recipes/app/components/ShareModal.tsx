@@ -40,7 +40,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 
 	return (
 		<div className='flex items-center justify-center text-left z-0 h-0  relative font-croissant'>
-			<div className=' shadow-md bg-white	 w-full mx-4 p-3 rounded-xl md:w-1/2 lg:w-1/3'>
+			<div className=' shadow-md bg-white	 w-full mx-4 p-3 rounded-xl md:w-1/2 lg:w-1/3 '>
 				<div
 					className="flex justify-between items center border-b border-gray-200 py-3 "
 				>
