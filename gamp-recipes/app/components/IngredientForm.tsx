@@ -3,7 +3,6 @@ import { Ingredients } from '@prisma/client';
 
 type TIngredientsFormProps = {
 	allIngredientsList: Ingredients[],
-	recipeIngredients: { name: string, amount: string, id?: string }[],
 	recipeIngredientsIndex: number,
 	removeIngredient: (event: React.MouseEvent<HTMLButtonElement>, index: number) => void,
 	updateIngredientId: (ingredientName: string, ingredientIndex: number) => void,
@@ -20,7 +19,6 @@ enum IngredientStatusOptions {
 
 export default function IngredientsForm({
 	allIngredientsList,
-	recipeIngredients,
 	recipeIngredientsIndex,
 	updateIngredientId,
 	removeIngredient,
@@ -29,9 +27,6 @@ export default function IngredientsForm({
 	ingredientAmount
 }: TIngredientsFormProps) {
 	const [ingredientStatus, setIngredientStatus] = useState<IngredientStatusOptions>(IngredientStatusOptions.Empty);
-
-	console.log('Lista de ingredientes:', recipeIngredients);
-	console.log('Index desse ingrediente:', recipeIngredientsIndex);
 	
 	// Função responsável por controlar se ambos os campos do ingrediente foram preenchidos
 	// se sim, coloca o estado "ingredientStatus" como true
