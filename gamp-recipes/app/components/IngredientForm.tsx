@@ -57,6 +57,14 @@ export default function IngredientsForm({
 			return '';
 		}
 	}
+
+	function deleteButtonClick(event: React.MouseEvent<HTMLButtonElement>) {
+		if (recipeIngredientsIndex === 0) {
+			setIngredientStatus(IngredientStatusOptions.Empty);
+		}
+
+		removeIngredient(event, recipeIngredientsIndex);
+	}
 	
 	return (
 		<section
@@ -121,7 +129,7 @@ export default function IngredientsForm({
 			<button
 				// hidden={ recipeIngredientsIndex === 0 ? true : false }
 				className='p-2 bg-red text-white rounded-2xl'
-				onClick={ (event) => removeIngredient(event, recipeIngredientsIndex) }
+				onClick={ (event) => deleteButtonClick(event) }
 			>
 					Delete
 			</button>
