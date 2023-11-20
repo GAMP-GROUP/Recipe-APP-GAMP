@@ -1,61 +1,33 @@
-
 import React from 'react';
 import { detailedParams } from '@/types';
-import IngredientList from '@/app/components/IngredientLIst';
-import prisma from '@/prisma/client';
+
+
+import InProgressCard from '@/app/components/InProgressCard';
+import { getRecipeById } from '@/app/api/recipe/recipe.service';
+
 
 export default async function InProgress({
 	params: { detailed },
 }: detailedParams) {
 
-	const recipe = await prisma.recipes.findUnique({
-		where: {
-			id: Number(detailed),
-		},
-		include: {
-			Ingredients_Recipes: {
-				include: {
-					ingredient: {
-						select: {
-							ingredients_name: true,
-						}
-					},
-				}
-			}
-		}
-	});
-
-	const ingredients = recipe?.Ingredients_Recipes.map(({ingredient: { ingredients_name }}) => {
-		const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
-		return ingName;
-	});
+	const recipe = await getRecipeById(parseInt(detailed));
+	if (!recipe) return null;
 
 	return (
-		<div
-			className="text-center flex flex-col items-center gap-4 w-full"
-		>
-			<section>				
-				<h2
-					className='text-4xl font-semibold antialiased'
-				>{recipe?.recipe_name}</h2>
-				<picture>
-					<img className="rounded-md w-10/12 mx-auto" src={recipe?.image} alt={recipe?.recipe_name}></img>
-				</picture>
-
-				<br />
-				<h2
-					className='text-3xl text-center uppercase'
-				>
-          Instructions
-				</h2>
-				<p className='text-center'>{recipe?.instructions}</p>
-			</section>
-
-			<section
-				className='w-3/4'
-			>
-				<IngredientList ingredients={ingredients as string[]} />
-			</section>
-		</div>
+		<InProgressCard recipe={{
+			id: recipe.id,
+			recipe_name: recipe.recipe_name,
+			instructions: recipe.instructions,
+			image: recipe.image,
+			tags: recipe.tags,
+			category: recipe.category,
+			video_source: recipe.video_source,
+			area: recipe.area,
+			alcoholic: recipe.alcoholic,
+			recipe_type_id: recipe.recipe_type_id,
+			created_at: recipe.created_at,
+			updated_at: recipe.updated_at,
+			ingredients: recipe.Ingredients_Recipes
+		}} detailed={detailed} />
 	);
 }
