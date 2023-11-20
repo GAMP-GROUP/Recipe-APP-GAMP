@@ -1,50 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Ingredients } from '@prisma/client';
+import { IngredientStatusOptions } from './CreateRecipeForm';
 
 type TIngredientsFormProps = {
 	allIngredientsList: Ingredients[],
-	recipeIngredients: { name: string, amount: string, id?: string }[],
-	recipeIngredientsIndex: number,
 	removeIngredient: (event: React.MouseEvent<HTMLButtonElement>, index: number) => void,
 	updateIngredientId: (ingredientName: string, ingredientIndex: number) => void,
 	handleIngredientInput: (event: React.ChangeEvent<HTMLInputElement>, index: number) => void,
+	handleIngredientStatus: (ingredientName: string, ingredientAmount: string, ingredientIndex: number) => void,
+	ingredientIndex: number,
 	ingredientName: string,
 	ingredientAmount: string,
-}
-
-enum IngredientStatusOptions {
-	Empty = 'empty',
-	Failed = 'failed',
-	Completed = 'completed'
+	ingredientStatus: IngredientStatusOptions
 }
 
 export default function IngredientsForm({
 	allIngredientsList,
-	recipeIngredients,
-	recipeIngredientsIndex,
 	updateIngredientId,
 	removeIngredient,
 	handleIngredientInput,
+	handleIngredientStatus,
+	ingredientIndex,
 	ingredientName,
-	ingredientAmount
-}: TIngredientsFormProps) {
-	const [ingredientStatus, setIngredientStatus] = useState<IngredientStatusOptions>(IngredientStatusOptions.Empty);
-	
-	// Função responsável por controlar se ambos os campos do ingrediente foram preenchidos
-	// se sim, coloca o estado "ingredientStatus" como true
-	function handleIngredientStatus(): void {
-		if (ingredientName.trim() !== '' && ingredientAmount.trim() !== '') {
-			const status = updateIngredientId(ingredientName, recipeIngredientsIndex);
-			if (typeof status === 'number') {
-				setIngredientStatus(IngredientStatusOptions.Completed);
-			} else {
-				setIngredientStatus(IngredientStatusOptions.Failed);
-			}
-		} else {
-			setIngredientStatus(IngredientStatusOptions.Empty);
-		}
-	}
-
+	ingredientAmount,
+	ingredientStatus
+}: TIngredientsFormProps) {	
 	function checkIngredientStatus() {
 		if (ingredientStatus === IngredientStatusOptions.Completed) {
 			return 'bg-lime-400';
@@ -55,14 +35,14 @@ export default function IngredientsForm({
 		}
 	}
 
-	function deleteButtonClick(event: React.MouseEvent<HTMLButtonElement>) {
-		if (recipeIngredientsIndex === 0
-			&& (recipeIngredients[recipeIngredientsIndex].name === ''
-			&& recipeIngredients[recipeIngredientsIndex].amount) === '') {
-			setIngredientStatus(IngredientStatusOptions.Empty);
-		}
+	function ingredientOnBlur() {
+		updateIngredientId(ingredientName, ingredientIndex);
+		handleIngredientStatus(ingredientName, ingredientAmount, ingredientIndex);
+		checkIngredientStatus();
+	}
 
-		removeIngredient(event, recipeIngredientsIndex);
+	function deleteButtonClick(event: React.MouseEvent<HTMLButtonElement>) {
+		removeIngredient(event, ingredientIndex);
 	}
 	
 	return (
@@ -85,8 +65,8 @@ export default function IngredientsForm({
 					list='ingredients'
 					placeholder='butter'
 					value={ ingredientName }
-					onBlur={ () => handleIngredientStatus() }
-					onChange={ (event) => handleIngredientInput(event, recipeIngredientsIndex) }
+					onBlur={ () => ingredientOnBlur() }
+					onChange={ (event) => handleIngredientInput(event, ingredientIndex) }
 					className={ `my-2 ${checkIngredientStatus()}` }
 					required
 				>
@@ -119,8 +99,8 @@ export default function IngredientsForm({
 					id='amount'
 					placeholder='1/2 cup'
 					value={ ingredientAmount }
-					onBlur={ () => handleIngredientStatus() }
-					onChange={ (event) => handleIngredientInput(event, recipeIngredientsIndex) }
+					onBlur={ () => ingredientOnBlur() }
+					onChange={ (event) => handleIngredientInput(event, ingredientIndex) }
 					className={ `my-2 ${checkIngredientStatus()}` }
 					required
 				/>

@@ -9,10 +9,17 @@ type TCreateRecipeFormProps = {
 	categoryList: { id: number, name: string }[]
 }
 
+export enum IngredientStatusOptions {
+	Empty = 'empty',
+	Failed = 'failed',
+	Completed = 'completed'
+}
+
 type TRecipeIngredient = {
 	name: string,
 	amount: string,
-	id?: string
+	id?: string,
+	status: IngredientStatusOptions,
 }
 
 export default function CreateRecipeForm({ allIngredientsList, categoryList }: TCreateRecipeFormProps) {
@@ -24,33 +31,57 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		recipe_name: '',
 		recipe_type_id: '1',
 	});
-	const [recipeIngredients, setRecipeIngredients] = useState<TRecipeIngredient[]>([{ name: '', amount: '' }]);
+	const [recipeIngredients, setRecipeIngredients] = useState<TRecipeIngredient[]>([{ name: '', amount: '', status: IngredientStatusOptions.Empty }]);
 
 	function addIngredient(event: React.MouseEvent<HTMLButtonElement>): void {
 		// responsável por adicionar no array ingredients do estado uma chava vazia para capturar inputs do usuário
 		// referente ao nome e quantidade do ingrediente
 		event.preventDefault();
-		const updateIngredients = [...recipeIngredients, { name: '', amount: '', id: '' }];
+		const updateIngredients = [...recipeIngredients, { name: '', amount: '', id: '', status: IngredientStatusOptions.Empty }];
 		setRecipeIngredients(updateIngredients);
 	}
 
 	// Essa função muda o valor dos estados "ingredientName" e "ingredientAmount"
 	// de acordo com a digitação do usuário
-	function handleIngredientInput(event: React.ChangeEvent<HTMLInputElement>, recipeIngredientsIndex: number) {
+	function handleIngredientInput(event: React.ChangeEvent<HTMLInputElement>, ingredientIndex: number) {
 		const value = event.target.value;
 		const id = event.target.id;
 		const updateIngredients = [...recipeIngredients];
 		
 		if (id === 'name') {
 			// handleIngredientInput(value, recipeIngredients[recipeIngredientsIndex].amount, Number(recipeIngredients[recipeIngredientsIndex].id));
-			updateIngredients[recipeIngredientsIndex] = { name: value, amount: updateIngredients[recipeIngredientsIndex].amount };
+			updateIngredients[ingredientIndex] = { name: value, amount: updateIngredients[ingredientIndex].amount, status: updateIngredients[ingredientIndex].status };
 			setRecipeIngredients(updateIngredients);
 		} else if (id === 'amount') {
-			updateIngredients[recipeIngredientsIndex] = { name: updateIngredients[recipeIngredientsIndex].name, amount: value };
+			updateIngredients[ingredientIndex] = { name: updateIngredients[ingredientIndex].name, amount: value, status: updateIngredients[ingredientIndex].status };
 			setRecipeIngredients(updateIngredients);
 		}
 	}
+
+	// Função responsável por controlar se ambos os campos do ingrediente foram preenchidos
+	// se sim, coloca o estado "ingredientStatus" como true
+	function handleIngredientStatus(ingredientName: string, ingredientAmount: string, ingredientIndex: number): void {
+		setRecipeIngredients(prevIngredients => {
+			const updatedIngredients = [...prevIngredients];
 	
+			switch (true) {
+			case updatedIngredients[ingredientIndex].id && ingredientAmount.trim() !== '':
+				updatedIngredients[ingredientIndex].status = IngredientStatusOptions.Completed;
+				break;
+			case !updatedIngredients[ingredientIndex].id:
+				updatedIngredients[ingredientIndex].status = IngredientStatusOptions.Failed;
+				break;
+			case ingredientName === '' || ingredientAmount === '':
+				updatedIngredients[ingredientIndex].status = IngredientStatusOptions.Empty;
+				break;
+			default:
+				// Default case if none of the above conditions are met
+				break;
+			}
+	
+			return updatedIngredients;
+		});
+	}  
 
 	function updateIngredientId(ingredientName: string, ingredientIndex: number): null | number {
 		const findIngredient = allIngredientsList.find((ingredient) => (
@@ -76,7 +107,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		event.preventDefault();
 
 		if (index === 0 && recipeIngredients.length === 1) {
-			setRecipeIngredients([{ name: '', amount: '', id: '' }]);
+			setRecipeIngredients([{ name: '', amount: '', id: '', status: IngredientStatusOptions.Empty }]);
 		} else {
 			const updateIngredients = [...recipeIngredients];
 			updateIngredients.splice(index, 1);
@@ -230,13 +261,14 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 					<IngredientsForm
 						key={ index }
 						allIngredientsList={ allIngredientsList }
-						recipeIngredients={ recipeIngredients }
-						recipeIngredientsIndex={ index }
 						removeIngredient={ removeIngredient }
 						updateIngredientId={ updateIngredientId }
 						handleIngredientInput={ handleIngredientInput }
+						handleIngredientStatus={ handleIngredientStatus }
+						ingredientIndex={ index }
 						ingredientName={ recipeIngredients[index].name }
 						ingredientAmount={ recipeIngredients[index].amount }
+						ingredientStatus={ recipeIngredients[index].status }
 					/>
 				)) }
 			</fieldset>
