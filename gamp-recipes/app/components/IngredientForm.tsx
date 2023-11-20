@@ -3,10 +3,13 @@ import { Ingredients } from '@prisma/client';
 
 type TIngredientsFormProps = {
 	allIngredientsList: Ingredients[],
-	recipeIngredients: { name: string, amount: string, id: string }[],
+	recipeIngredients: { name: string, amount: string, id?: string }[],
 	recipeIngredientsIndex: number,
-	updateIngredient: (ingredientName: string, ingredientAmount: string, ingredientIndex: number) => void,
 	removeIngredient: (event: React.MouseEvent<HTMLButtonElement>, index: number) => void,
+	updateIngredientId: (ingredientName: string, ingredientIndex: number) => void,
+	handleIngredientInput: (event: React.ChangeEvent<HTMLInputElement>, index: number) => void,
+	ingredientName: string,
+	ingredientAmount: string,
 }
 
 enum IngredientStatusOptions {
@@ -15,17 +18,27 @@ enum IngredientStatusOptions {
 	Completed = 'completed'
 }
 
-export default function IngredientsForm({ allIngredientsList, recipeIngredients, recipeIngredientsIndex, updateIngredient, removeIngredient }: TIngredientsFormProps) {
-	const [ingredientStatus, setIngredientStatus] = useState(IngredientStatusOptions.Empty);
-	const [ingredientName, setIngredientName] = useState('');
-	const [ingredientAmount, setIngredientAmount] = useState('');
+export default function IngredientsForm({
+	allIngredientsList,
+	recipeIngredients,
+	recipeIngredientsIndex,
+	updateIngredientId,
+	removeIngredient,
+	handleIngredientInput,
+	ingredientName,
+	ingredientAmount
+}: TIngredientsFormProps) {
+	const [ingredientStatus, setIngredientStatus] = useState<IngredientStatusOptions>(IngredientStatusOptions.Empty);
 
+	console.log('Lista de ingredientes:', recipeIngredients);
+	console.log('Index desse ingrediente:', recipeIngredientsIndex);
+	
 	// Função responsável por controlar se ambos os campos do ingrediente foram preenchidos
 	// se sim, coloca o estado "ingredientStatus" como true
 	function handleIngredientStatus(): void {
 		if (ingredientName.trim() !== '' && ingredientAmount.trim() !== '') {
-			const status = updateIngredient(ingredientName, ingredientAmount, recipeIngredientsIndex);
-			if (status !== null) {
+			const status = updateIngredientId(ingredientName, recipeIngredientsIndex);
+			if (typeof status === 'number') {
 				setIngredientStatus(IngredientStatusOptions.Completed);
 			} else {
 				setIngredientStatus(IngredientStatusOptions.Failed);
@@ -35,19 +48,6 @@ export default function IngredientsForm({ allIngredientsList, recipeIngredients,
 		}
 	}
 
-	// Essa função muda o valor dos estados "ingredientName" e "ingredientAmount"
-	// de acordo com a digitação do usuário
-	function handleIngredientChange(event: React.ChangeEvent<HTMLInputElement>) {
-		const value = event.target.value;
-		const id = event.target.id;
-
-		if (id === 'name') {
-			setIngredientName(value);
-		} else if (id === 'amount') {
-			setIngredientAmount(value);
-		}
-	}
-	
 	function checkIngredientStatus() {
 		if (ingredientStatus === IngredientStatusOptions.Completed) {
 			return 'bg-lime-400';
@@ -59,7 +59,7 @@ export default function IngredientsForm({ allIngredientsList, recipeIngredients,
 	}
 	
 	return (
-		<form
+		<section
 			className={ `py-2 px-4 mb-6 rounded-3xl ${checkIngredientStatus()} shadow-md` }
 		>
 			{ /* Escolha do ingrediente */}
@@ -79,7 +79,7 @@ export default function IngredientsForm({ allIngredientsList, recipeIngredients,
 					placeholder='butter'
 					value={ ingredientName }
 					onBlur={ () => handleIngredientStatus() }
-					onChange={ (event) => handleIngredientChange(event) }
+					onChange={ (event) => handleIngredientInput(event, recipeIngredientsIndex) }
 					className={ `my-2 ${checkIngredientStatus()}` }
 					required
 				>
@@ -111,20 +111,21 @@ export default function IngredientsForm({ allIngredientsList, recipeIngredients,
 					name='amount'
 					id='amount'
 					placeholder='1/2 cup'
+					value={ ingredientAmount }
 					onBlur={ () => handleIngredientStatus() }
-					onChange={ (event) => handleIngredientChange(event) }
+					onChange={ (event) => handleIngredientInput(event, recipeIngredientsIndex) }
 					className={ `my-2 ${checkIngredientStatus()}` }
 					required
 				/>
 			</fieldset>
 			<button
-				hidden={ recipeIngredientsIndex === 0 ? true : false }
+				// hidden={ recipeIngredientsIndex === 0 ? true : false }
 				className='p-2 bg-red text-white rounded-2xl'
 				onClick={ (event) => removeIngredient(event, recipeIngredientsIndex) }
 			>
 					Delete
 			</button>
-		</form>
+		</section>
 	);
 }
  

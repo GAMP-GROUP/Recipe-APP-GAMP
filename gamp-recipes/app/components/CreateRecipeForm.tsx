@@ -9,6 +9,12 @@ type TCreateRecipeFormProps = {
 	categoryList: { id: number, name: string }[]
 }
 
+type TRecipeIngredient = {
+	name: string,
+	amount: string,
+	id?: string
+}
+
 export default function CreateRecipeForm({ allIngredientsList, categoryList }: TCreateRecipeFormProps) {
 	const [payload, setPayload] = useState({
 		tags: '',
@@ -18,7 +24,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		recipe_name: '',
 		recipe_type_id: '1',
 	});
-	const [recipeIngredients, setRecipeIngredients] = useState([{ name: '', amount: '', id: '' }]);
+	const [recipeIngredients, setRecipeIngredients] = useState<TRecipeIngredient[]>([{ name: '', amount: '' }]);
 
 	function addIngredient(event: React.MouseEvent<HTMLButtonElement>): void {
 		// responsável por adicionar no array ingredients do estado uma chava vazia para capturar inputs do usuário
@@ -28,30 +34,55 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		setRecipeIngredients(updateIngredients);
 	}
 
-	function updateIngredient(ingredientName: string, ingredientAmount: string, ingredientIndex: number): boolean | null {
+	// Essa função muda o valor dos estados "ingredientName" e "ingredientAmount"
+	// de acordo com a digitação do usuário
+	function handleIngredientInput(event: React.ChangeEvent<HTMLInputElement>, recipeIngredientsIndex: number) {
+		const value = event.target.value;
+		const id = event.target.id;
+		const updateIngredients = [...recipeIngredients];
+		
+		if (id === 'name') {
+			// handleIngredientInput(value, recipeIngredients[recipeIngredientsIndex].amount, Number(recipeIngredients[recipeIngredientsIndex].id));
+			updateIngredients[recipeIngredientsIndex] = { name: value, amount: updateIngredients[recipeIngredientsIndex].amount };
+			setRecipeIngredients(updateIngredients);
+		} else if (id === 'amount') {
+			updateIngredients[recipeIngredientsIndex] = { name: updateIngredients[recipeIngredientsIndex].name, amount: value };
+			setRecipeIngredients(updateIngredients);
+		}
+	}
+	
+
+	function updateIngredientId(ingredientName: string, ingredientIndex: number): null | number {
 		const findIngredient = allIngredientsList.find((ingredient) => (
 			ingredient.ingredients_name === ingredientName
 		));
 
 		if (!findIngredient) {
-			console.log('deu ruim');
+			console.log('Ingrediente não encontrado');
 			return null;
 		}
 
-		recipeIngredients[ingredientIndex] = {
-			name: findIngredient.ingredients_name,
-			amount: ingredientAmount,
+		const updateIngredients = [...recipeIngredients];
+		updateIngredients[ingredientIndex] = {
+			...updateIngredients[ingredientIndex],
 			id: findIngredient.id.toString()
 		};
+		setRecipeIngredients(updateIngredients);
 
-		return true;
+		return findIngredient.id;
 	}
 
 	function removeIngredient(event: React.MouseEvent<HTMLButtonElement>, index: number): void {
 		event.preventDefault();
-		const updateIngredients = [...recipeIngredients];
-		updateIngredients.splice(index, 1);
-		setRecipeIngredients(updateIngredients);
+
+		if (index === 0 && recipeIngredients.length === 1) {
+			setRecipeIngredients([{ name: '', amount: '', id: '' }]);
+		} else {
+			const updateIngredients = [...recipeIngredients];
+			updateIngredients.splice(index, 1);
+			setRecipeIngredients(updateIngredients);
+		}
+
 	}
 
 	function handleChange(
@@ -202,7 +233,10 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 						recipeIngredients={ recipeIngredients }
 						recipeIngredientsIndex={ index }
 						removeIngredient={ removeIngredient }
-						updateIngredient={ updateIngredient }
+						updateIngredientId={ updateIngredientId }
+						handleIngredientInput={ handleIngredientInput }
+						ingredientName={ recipeIngredients[index].name }
+						ingredientAmount={ recipeIngredients[index].amount }
 					/>
 				)) }
 			</fieldset>
