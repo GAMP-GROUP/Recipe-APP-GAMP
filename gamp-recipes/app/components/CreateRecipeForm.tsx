@@ -171,8 +171,8 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 					<input
 						id='recipe_name'
 						type='text'
-						placeholder='Traditional Cheesburguer'
-						className='border border-1 rounded-xl p-1 grow'
+						placeholder='Australian Avocado Toast'
+						className='border border-1 rounded-xl py-1 px-2 grow'
 						onChange={(e) => handleChange(e)}
 						required
 					/>
@@ -223,7 +223,8 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 						type='url'
 						name='image'
 						id='image'
-						className='border border-1 rounded-xl p-1 grow'
+						placeholder='example.com/image.jpg'
+						className='border border-1 rounded-xl py-1 px-2 grow'
 						onChange={(event) => handleChange(event) }
 					/>
 				</fieldset>
@@ -235,7 +236,8 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 						type='text'
 						name='tags'
 						id='tags'
-						className='border border-1 rounded-xl p-1 grow'
+						className='border border-1 rounded-xl py-1 px-2 grow'
+						placeholder='breakfast, easy, vegetarian'
 						onChange={ (event) => handleChange(event) }
 					/>
 				</fieldset>
@@ -245,7 +247,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 					<label htmlFor='instructions' className='py-2 mr-2 font-bold'>Instructions:</label>
 					<textarea
 						id='instructions'
-						placeholder='Start by chopping 1 onion...'
+						placeholder='Start by melting the butter in a frying pan...'
 						className='border border-1 rounded-xl p-2 grow'
 						required
 						cols={30}
