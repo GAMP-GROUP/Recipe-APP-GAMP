@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { Ingredients } from '@prisma/client';
 import { IngredientStatusOptions } from './CreateRecipeForm';
 
@@ -47,7 +48,7 @@ export default function IngredientsForm({
 	
 	return (
 		<section
-			className={ `py-2 px-4 mb-6 rounded-3xl ${checkIngredientStatus()} shadow-md` }
+			className={ `relative py-2 px-4 mb-6 rounded-3xl ${checkIngredientStatus()} shadow-md` }
 		>
 			{ /* Escolha do ingrediente */}
 			<fieldset
@@ -55,7 +56,7 @@ export default function IngredientsForm({
 			>
 				<label
 					htmlFor='name'
-					className='mr-2 font-bold'
+					className='py-2 mr-2 font-bold'
 				>
 					Ingredient:
 				</label>
@@ -67,7 +68,7 @@ export default function IngredientsForm({
 					value={ ingredientName }
 					onBlur={ () => ingredientOnBlur() }
 					onChange={ (event) => handleIngredientInput(event, ingredientIndex) }
-					className={ `my-2 ${checkIngredientStatus()}` }
+					className={ `${checkIngredientStatus()}` }
 					required
 				>
 				</input>
@@ -101,18 +102,24 @@ export default function IngredientsForm({
 					value={ ingredientAmount }
 					onBlur={ () => ingredientOnBlur() }
 					onChange={ (event) => handleIngredientInput(event, ingredientIndex) }
-					className={ `my-2 ${checkIngredientStatus()}` }
+					className={ `${checkIngredientStatus()}` }
 					required
 				/>
 			</fieldset>
+
+			{ /* Botão para excluir o ingrediente */ }
 			<button
-				// hidden={ recipeIngredientsIndex === 0 ? true : false }
-				className='p-2 bg-red text-white rounded-2xl'
+				className='p-2 bg-red text-white rounded-full absolute top-4 right-4'
 				onClick={ (event) => deleteButtonClick(event) }
 			>
-					Delete
+				<Image
+					src={'/icons/delete.png'}
+					width={ 20 }
+					height={ 20 }
+					alt='Delete icon button'
+					className='invert'
+				/>
 			</button>
 		</section>
 	);
 }
- 
