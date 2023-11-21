@@ -34,16 +34,15 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 	const [recipeIngredients, setRecipeIngredients] = useState<TRecipeIngredient[]>([{ name: '', amount: '', status: IngredientStatusOptions.Empty }]);
 
 	function addIngredient(event: React.MouseEvent<HTMLButtonElement>): void {
-		// responsável por adicionar no array ingredients do estado uma chava vazia para capturar inputs do usuário
+		// Responsável por adicionar no array ingredients do estado uma chava vazia para capturar inputs do usuário
 		// referente ao nome e quantidade do ingrediente
 		event.preventDefault();
 		const updateIngredients = [...recipeIngredients, { name: '', amount: '', id: '', status: IngredientStatusOptions.Empty }];
 		setRecipeIngredients(updateIngredients);
 	}
-
-	// Essa função muda o valor dos estados "ingredientName" e "ingredientAmount"
-	// de acordo com a digitação do usuário
 	function handleIngredientInput(event: React.ChangeEvent<HTMLInputElement>, ingredientIndex: number) {
+		// Essa função muda o valor dos estados "ingredientName" e "ingredientAmount"
+		// de acordo com a digitação do usuário
 		const value = event.target.value;
 		const id = event.target.id;
 		const updateIngredients = [...recipeIngredients];
@@ -58,9 +57,9 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		}
 	}
 
-	// Função responsável por controlar se ambos os campos do ingrediente foram preenchidos
-	// se sim, coloca o estado "ingredientStatus" como true
 	function handleIngredientStatus(ingredientName: string, ingredientAmount: string, ingredientIndex: number): void {
+		// Função responsável por controlar se ambos os campos do ingrediente foram preenchidos
+		// se sim, coloca o estado "ingredientStatus" como true
 		setRecipeIngredients(prevIngredients => {
 			const updatedIngredients = [...prevIngredients];
 	
@@ -75,7 +74,6 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 				updatedIngredients[ingredientIndex].status = IngredientStatusOptions.Empty;
 				break;
 			default:
-				// Default case if none of the above conditions are met
 				break;
 			}
 	
@@ -84,6 +82,8 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 	}  
 
 	function updateIngredientId(ingredientName: string, ingredientIndex: number): null | number {
+		// Função que incrementa ao objeto do ingrediente sua ID respectiva,
+		// a partir da lista de todos os ingredientes disponíveis para cadastro de receita
 		const findIngredient = allIngredientsList.find((ingredient) => (
 			ingredient.ingredients_name === ingredientName
 		));
@@ -104,6 +104,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 	}
 
 	function removeIngredient(event: React.MouseEvent<HTMLButtonElement>, index: number): void {
+		// Função para remover um ingrediente da lista
 		event.preventDefault();
 
 		if (index === 0 && recipeIngredients.length === 1) {
@@ -170,7 +171,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 					<input
 						id='recipe_name'
 						type='text'
-						// placeholder='Lasagna al ragú'
+						placeholder='Traditional Cheesburguer'
 						className='border border-1 rounded-xl p-1 grow'
 						onChange={(e) => handleChange(e)}
 						required
@@ -255,7 +256,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 			</section>
 
 			{ /* Escolha dos ingredientes */}
-			<h1 className='text-center font-extrabold text-xl mt-4 mb-2'>Select Ingredients</h1>
+			<h1 className='text-center font-extrabold text-xl my-6'>Select Ingredients</h1>
 			<fieldset>
 				{ recipeIngredients.map((_ingredientAdded, index) => (
 					<IngredientsForm

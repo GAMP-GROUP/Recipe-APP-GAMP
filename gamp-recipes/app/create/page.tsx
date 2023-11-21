@@ -8,7 +8,7 @@ export default async function Create() {
 
 	return (
 		<section className='flex-row justify-center items-center h-auto my-6'>
-			<h1 className='text-center font-extrabold text-xl mb-2'>New Recipe</h1>
+			<h1 className='text-center font-extrabold text-xl my-6'>Create Recipe</h1>
 			<CreateRecipeForm
 				allIngredientsList={ fetchAllIngredients }
 				categoryList={ fetchRecipeCategories }
