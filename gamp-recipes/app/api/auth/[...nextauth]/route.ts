@@ -9,7 +9,7 @@ import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 
 
-type  ProfileWithLocale = Profile & { locale: string };
+type ProfileWithLocale = Profile & { locale: string };
 
 export const authOptions: AuthOptions = {
 	providers: [
@@ -49,10 +49,10 @@ export const authOptions: AuthOptions = {
 					return null;
 				}
 
-				if(email.endsWith('@prisma.io')) {
+				if (email.endsWith('@prisma.io')) {
 					return user as unknown as User;
 				}
-			
+
 
 				const userPassword = user.password_hash;
 
@@ -60,7 +60,7 @@ export const authOptions: AuthOptions = {
 
 
 				if (!isValidPassword) {
-					return null ;
+					return null;
 				}
 
 				return user as unknown as User;
@@ -100,8 +100,8 @@ export const authOptions: AuthOptions = {
 		async session(params: { session: Session; token: JWT; user: User }) {
 			if (params.session.user) {
 				params.session.user.email = params.token.email;
-			
-				
+
+
 			}
 
 			return params.session;
@@ -120,16 +120,16 @@ export const authOptions: AuthOptions = {
 
 			return params.token;
 		},
-		async signIn({ profile, credentials}) {
+		async signIn({ profile, credentials }) {
 			if (!profile?.email && !credentials) {
-				console.log('cre',credentials, 'pro' ,profile);
-				
+				console.log('cre', credentials, 'pro', profile);
+
 				throw new Error('No profile');
 			}
 
 			const profileWithLocale = profile as ProfileWithLocale;
 			console.log(profileWithLocale);
-			
+
 
 			if (profile?.email) {
 				await prisma.user.upsert({
@@ -147,9 +147,8 @@ export const authOptions: AuthOptions = {
 					},
 				});
 
-
 			}
-			
+
 			return true;
 		}
 

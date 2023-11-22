@@ -36,7 +36,8 @@ type drinkAPI = {
 };
 
 type ButtonProps = {
-  id: string,
+	id: string,
+
 }
 
 
@@ -44,20 +45,20 @@ type mealAPI = {
 	[meals: string]: externalRes;
 };
 type MealRes = {
-  'idMeal': string,
-  'strMeal': string,
-  'strDrinkAlternate': string | null,
-  'strCategory': string,
-  'strArea': string,
-  'strInstructions': string,
-  'strMealThumb': string,
-  'strTags': string,
-  'strYoutube': string,
-  'strSource': string | null,
-  'strImageSource': string | null,
-  'strCreativeCommonsConfirmed': string | null,
-  'dateModified': string | null,
-  [index: string]: string,
+	'idMeal': string,
+	'strMeal': string,
+	'strDrinkAlternate': string | null,
+	'strCategory': string,
+	'strArea': string,
+	'strInstructions': string,
+	'strMealThumb': string,
+	'strTags': string,
+	'strYoutube': string,
+	'strSource': string | null,
+	'strImageSource': string | null,
+	'strCreativeCommonsConfirmed': string | null,
+	'dateModified': string | null,
+	[index: string]: string,
 }
 
 type DrinkRes = {
@@ -99,7 +100,7 @@ type NewRecipeRequest = {
 };
 
 
- type RecipeData =  {
+type RecipeData = {
 	id: number;
 	recipe_name: string;
 	instructions: string;
@@ -113,9 +114,9 @@ type NewRecipeRequest = {
 	created_at: Date;
 	updated_at: Date;
 	ingredients: ingredientsAPI[];
- }
+}
 
-type UpdateRecipeRequest =  {
+type UpdateRecipeRequest = {
 	id: number; // O ID da receita a ser atualizada
 	recipe_name: tring; // Campos atualizáveis (adicione todos os campos que podem ser atualizados)
 	instructions?: string;
@@ -129,6 +130,8 @@ type UpdateRecipeRequest =  {
 	amount?: string[];
 	recipe_type_id?: number;
 }
+
+type Request = NewRecipeRequest | NextRequest
 
 type NewRecipeResponse = { message: string | RecipeData, TYPE: number };
 
