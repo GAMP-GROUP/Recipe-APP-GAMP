@@ -3,6 +3,7 @@ import { recipePost } from '@/types';
 import React, { useState } from 'react';
 import IngredientsForm from './IngredientForm';
 import { Ingredients } from '@prisma/client';
+import { useRouter } from 'next/navigation';
 
 type TCreateRecipeFormProps = {
 	allIngredientsList: Ingredients[],
@@ -27,11 +28,12 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		tags: '',
 		image: '',
 		instructions: '',
-		category: '1',
+		category: 1,
 		recipe_name: '',
-		recipe_type_id: '1',
+		recipe_type_id: 1,
 	});
 	const [recipeIngredients, setRecipeIngredients] = useState<TRecipeIngredient[]>([{ name: '', amount: '', status: IngredientStatusOptions.Empty }]);
+	const router = useRouter();
 
 	function addIngredient(event: React.MouseEvent<HTMLButtonElement>): void {
 		// Responsável por adicionar no array ingredients do estado uma chava vazia para capturar inputs do usuário
@@ -40,6 +42,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		const updateIngredients = [...recipeIngredients, { name: '', amount: '', id: '', status: IngredientStatusOptions.Empty }];
 		setRecipeIngredients(updateIngredients);
 	}
+
 	function handleIngredientInput(event: React.ChangeEvent<HTMLInputElement>, ingredientIndex: number) {
 		// Essa função muda o valor dos estados "ingredientName" e "ingredientAmount"
 		// de acordo com a digitação do usuário
@@ -89,7 +92,6 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 		));
 
 		if (!findIngredient) {
-			console.log('Ingrediente não encontrado');
 			return null;
 		}
 
@@ -127,12 +129,18 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 
 		const userInput = event.currentTarget.value;
 		const field = event.target.id;
-		const newPayload = { [field]: userInput };
+		let newPayload = {};
+
+		if (field === 'category' || field === 'recipe_type_id') {
+			newPayload = { [field]: Number(userInput) };
+		} else {
+			newPayload = { [field]: userInput };
+		}
 
 		setPayload({ ...payload, ...newPayload });
 	}
 
-	async function postRecipe(event: React.FormEvent<HTMLFormElement>) {
+	async function postRecipe(event: React.FormEvent<HTMLFormElement>): Promise<void> {
 		event.preventDefault();
 
 		const { tags, image, instructions, category, recipe_name, recipe_type_id } = payload;
@@ -148,12 +156,18 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 			amount: [],
 		};
 
-		recipeIngredients.forEach(({ name, amount, id: pk }) => {
-			body.ingredients.push({ ingredient_name: name, pk: Number(pk) });
-			body.amount.push(amount || null);
+		recipeIngredients.forEach(({ name, amount, id: pk, status }) => {
+			if (status === IngredientStatusOptions.Completed) {
+				body.ingredients.push({ ingredient_name: name, pk: Number(pk) });
+				body.amount.push(amount);
+			} else {
+				window.alert('Please, fill correctly all ingredients');
+			}
 		});
 
-		// const postBody = fetch('/localhost:3000/api/recipe/', { method: 'POST', body: JSON.stringify(body) });
+		const postRecipeResponse = await fetch('/api/recipe/', { method: 'POST', body: JSON.stringify(body) });
+		const jsonResponse = await postRecipeResponse.json();
+		router.push(`/${jsonResponse.id}`);
 	}
 
 	return (
@@ -186,6 +200,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 						id='recipe_type_id'
 						className='bg-white grow'
 						onChange={ (event) => handleChange(event) }
+						required
 					>
 						<option value='1'>meal</option>
 						<option value='2'>drink</option>
@@ -202,14 +217,15 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 						id="category"
 						className='bg-white grow'
 						onChange={ (event) => handleChange(event) }
+						required
 					>
 						{categoryList.map(({ id, name }) => {
 							return (
 								<option
-									key={id}
-									value={id}
+									key={ id }
+									value={ id }
 								>
-									{name}
+									{ name }
 								</option>
 							);
 						})}
@@ -249,10 +265,10 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 						id='instructions'
 						placeholder='Start by melting the butter in a frying pan...'
 						className='border border-1 rounded-xl p-2 grow'
-						required
 						cols={30}
 						rows={4}
 						onChange={(e) => handleChange(e)}
+						required
 					/>
 				</fieldset>
 			</section>

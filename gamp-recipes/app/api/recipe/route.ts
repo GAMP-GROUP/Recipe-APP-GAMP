@@ -16,7 +16,6 @@ export async function POST(request: NextRequest) {
 
 		return new NextResponse(JSON.stringify(data.message), { status: data.TYPE });
 	} catch (error) {
-		
 		return new NextResponse(JSON.stringify(error), { status: HttpStatusCode.InternalServerError });
 	}
 }
