@@ -16,11 +16,11 @@ export default function ShareButton({ id }: ButtonProps) {
 
 
 	async function ShareHandle() {
-		if (session.status === 'unauthenticated') {
-			window.alert('You need to sign in or register in GAMP in order to favorite recipes');
-			router.replace('/auth/signin');
-			return;
-		}
+		// if (session.status === 'unauthenticated') {
+		// 	window.alert('You need to sign in or register in GAMP in order to favorite recipes');
+		// 	router.replace('/auth/signin');
+		// 	return;
+		// }
 
 		if (session.status === 'loading') {
 			return;
@@ -48,7 +48,7 @@ export default function ShareButton({ id }: ButtonProps) {
 					id={id}
 					alt='Favorite button'
 					src='/icons/share.png'
-					className='w-8 h-8 m-auto'
+					className='w-7 h-7 m-auto'
 				/>
 			</picture>
 		</button>

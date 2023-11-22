@@ -1,16 +1,24 @@
 'use client';
 
+
 import { ChangeEvent, useEffect, useState } from 'react';
 import React from 'react';
 
-type IngredientList = {
-	ingredients: string[];
-};
 
-export default function IngredientList({ ingredients }: IngredientList) {
+
+type ingredientListProps = {
+	id: number;
+	ingredients: string[];
+}
+
+export default function IngredientList({ ingredients, id }: ingredientListProps) {
 	const [itemsChecked, setItemsChecked] = useState<{ [key: string]: boolean }>(
 		{}
 	);
+
+	const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
+
 
 	const handleCheckboxClick = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = event.target;
@@ -20,16 +28,19 @@ export default function IngredientList({ ingredients }: IngredientList) {
 		});
 	};
 
-	useEffect(() => {
-		const ingredientsLocal: string | null =
-			localStorage.getItem('ingredientList');
-		if (ingredientsLocal) {
-			setItemsChecked(JSON.parse(ingredientsLocal));
-		}
-	}, []);
+
 
 	useEffect(() => {
-		localStorage.setItem('ingredientList', JSON.stringify(itemsChecked));
+		const ingredientsLocal = {
+			id: id,
+			itemsChecked,
+		};
+		localStorage.setItem('ingredientList', JSON.stringify(ingredientsLocal));
+
+		console.log(ingredientsLocal);
+
+
+
 	}, [itemsChecked]);
 
 	const svgOptions = {
@@ -81,14 +92,21 @@ export default function IngredientList({ ingredients }: IngredientList) {
 								onChange={handleCheckboxClick}
 								className='hidden'
 							/>
-							<div className='flex justify-between w-full gap-8 h-12'>
+							<div className='flex row w-full  h-12'>
 								{svgOptions[itemsChecked[property] ? 'option1' : 'option2']}
-								<span>{property}</span>
+								<span className='text-left ml-2'>{property}</span>
 							</div>
 						</label>
 					</li>
 				))}
 			</ul>
+
+			<div>
+				<button type="button" disabled={isDisabled} onClick={() => console.log('está habilitado')} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+					Choose plan
+
+				</button>
+			</div>
 		</div>
 	);
 }

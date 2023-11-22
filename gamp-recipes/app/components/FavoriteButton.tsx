@@ -43,7 +43,7 @@ export default function FavButton({ id }: ButtonProps) {
 					id={id}
 					alt='Favorite button'
 					src='/icons/favorites-notactive.png'
-					className='w-8 h-8 m-auto'
+					className='w-7 h-7 m-auto'
 				/>
 			</picture>
 		</button>

@@ -7,12 +7,16 @@ import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import FavButton from '@/app/components/FavoriteButton';
 import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 
+
 type inProgressData =
 	{
 		recipe: RecipeData,
 		detailed: string
 	};
 export default function InProgressCard(inProgressData: inProgressData) {
+
+
+
 
 	const { share } = useBehaviorContext();
 
@@ -22,51 +26,63 @@ export default function InProgressCard(inProgressData: inProgressData) {
 		return ingName;
 	});
 
-	// const mainModalClass = !share ? 'text-center flex flex-col items-center' : 'text-center flex flex-col items-center opacity-2';
+
 
 	return (
 		<div
 
-			className={'text-center flex flex-col items-center'}
+			className={'text-center flex flex-col items-center font-croissant text-lg sm:text-s'}
 		>
 			<div>
 
 				<picture>
-					<img className={!share ? 'w-full mx-auto  h-fit' : 'w-full mx-auto  h-fit opacity-25'} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
+					<img className={'h-36 w-full object-cover shadow-md'} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 				</picture>
 
 				<h2
-					className={!share ? 'text-4xl font-semibold antialiased list' : 'text-4xl font-semibold antialiased list opacity-25'}
+					className={`text-4xl font-semibold antialiased list ${!share ? '' : 'opacity-25'}`}
 				>{inProgressData.recipe?.recipe_name}</h2>
 
 				<div className='flex flex-row justify-center'>
 
-					<FavButton
-						id={inProgressData.detailed.toString()}
+					<div className='flex flex-row self-center'>
 
-					/>
 
-					<ShareToSocialCard
-						id={inProgressData.detailed.toString()}
-						url={`https://gamp.vercel.app/${inProgressData.detailed}`}
-						img={inProgressData?.recipe.image as string}
-					/>
+						<FavButton
+							id={inProgressData.detailed.toString()}
 
+						/>
+						<span className='ml-2'>Share</span>
+					</div>
+
+					<div className={`flex flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} `}>
+
+						<ShareToSocialCard
+							id={inProgressData.detailed.toString()}
+							url={`https://gamp.vercel.app/${inProgressData.detailed}`}
+							img={inProgressData?.recipe.image as string}
+						/>
+						<span className='ml-2'>Favorite</span>
+
+					</div>
 				</div>
 
 				<h2
-					className={!share ? 'text-3xl text-center uppercase' : 'text-3xl text-center uppercase'}
+					className={'text-3xl text-center  '}
 				>
 					Instructions
 				</h2>
-				<p className='text-center'>{inProgressData?.recipe.instructions}</p>
+				<p className={' text-lg sm:text-sm text-left ml-2 mr-2 font-croissant'}>{inProgressData?.recipe.instructions}</p>
 			</div>
 
 			<section
-				className={!share ? 'w-3/4' : 'w-3/4 '}
+				className={'w-3/4 my-2'}
 			>
-				<IngredientList ingredients={ingredients as string[]} />
+				<IngredientList id={parseInt(inProgressData.detailed)} ingredients={ingredients as string[]} />
 			</section>
+
+
+
 		</div >
 	);
 }

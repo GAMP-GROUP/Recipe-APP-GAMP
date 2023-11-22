@@ -39,8 +39,8 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 
 
 	return (
-		<div className='flex items-center justify-center text-left z-0 h-0  relative font-croissant'>
-			<div className=' shadow-md bg-white	 w-full mx-4 p-3 rounded-xl md:w-1/2 lg:w-1/3 '>
+		<div className='flex items-center justify-center text-left z-0 h-0  font-croissant'>
+			<div className=' shadow-md bg-white	 w-full mx-4 p-3 rounded-xl md:w-1/2 lg:w-1/3 opacity-100'>
 				<div
 					className="flex justify-between items center border-b border-gray-200 py-3 "
 				>
@@ -73,7 +73,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 							onClick={handleOpenModal}
 							className=''>
 							<TwitterShareButton url={url}>
-								<TwitterIcon size={37} round />
+								<TwitterIcon size={40} round />
 							</TwitterShareButton>
 						</div>
 
@@ -81,7 +81,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 							onClick={handleOpenModal}
 							className=''>
 							<PinterestShareButton url={url} media={img}>
-								<PinterestIcon size={37} round />
+								<PinterestIcon size={40} round />
 							</PinterestShareButton>
 						</div>
 
@@ -89,7 +89,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 							onClick={handleOpenModal}
 							className=''>
 							<WhatsappShareButton url={url}>
-								<WhatsappIcon size={37} round />
+								<WhatsappIcon size={40} round />
 							</WhatsappShareButton>
 						</div>
 
