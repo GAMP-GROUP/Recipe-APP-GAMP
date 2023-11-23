@@ -20,45 +20,44 @@ export default function IngredientList({ ingredients, id }: ingredientListProps)
 		{}
 	);
 
+	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
-
-
-	function localStorageData(id: string, ingredients: string[], itemsChecked: { [key: string]: boolean }) {
-		const localStorageKey = `ingredients recipe ${id}`;
-		const items = localStorage.getItem(localStorageKey);
-		console.log('30', items);
-		console.log('checked', itemsChecked);
-
-
-
-		if (!items) {
-			// Se o item não existir ou for null, inicialize com um objeto padrão
-			const data = Object.fromEntries(ingredients.map(ingredient => [ingredient, false]));
-			console.log('33', data);
-
-			localStorage.setItem(localStorageKey, JSON.stringify(data));
-			return data;
+	const handleDisabled = () => {
+		const items = localStorage.getItem(`ingredients recipe ${id}`);
+		const data = JSON.parse(items || '{}');
+		const values = Object.values(data);
+		const result = values.every((value) => value === !false);
+		if (result) {
+			setIsDisabled(false);
 		} else {
-			// Se o item existir, parse para objeto
-			const ing = JSON.parse(items);
-			console.log('40', ing);
-
-			const data = Object.fromEntries(ingredients.map(ingredient => [ingredient, itemsChecked[ingredient] || false]));
-			localStorage.setItem(localStorageKey, JSON.stringify(data));
-
+			setIsDisabled(true);
 		}
-	}
+		console.log('27', result);
 
 
+	};
+
+
+	useEffect(() => {
+		const ingredientsLocal: string | null =
+			localStorage.getItem(`ingredients recipe ${id}`);
+		if (ingredientsLocal) {
+			setItemsChecked(JSON.parse(ingredientsLocal));
+		}
+	}, []);
+
+	useEffect(() => {
+		localStorage.setItem(`ingredients recipe ${id}`, JSON.stringify(itemsChecked));
+
+
+	}, [itemsChecked]);
 
 	const handleCheckboxClick = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = event.target;
 		setItemsChecked((prev) => ({ ...prev, [name]: checked }));
+
 	};
 
-	useEffect(() => {
-		localStorageData(id.toString(), ingredients, itemsChecked);
-	}, [id, ingredients, itemsChecked]);
 
 
 
