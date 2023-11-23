@@ -1,24 +1,25 @@
 import RecipesCard from './RecipesCard';
 import React from 'react';
 
+
 type TRecipesProps = {
-    id: number;
-    recipe_name: string;
-    instructions: string;
-    image: string;
-    tags: string;
-    video_source?: string | null;
-    area?: string | null;
-    alcoholic?: string | null;
-    recipe_type_id: number;
-    created_at: Date;
-    updated_at: Date;
+	id: number;
+	recipe_name: string;
+	instructions: string;
+	image: string;
+	tags: string;
+	video_source?: string | null;
+	area?: string | null;
+	alcoholic?: string | null;
+	recipe_type_id: number;
+	created_at: Date;
+	updated_at: Date;
 }
 
 type TRecipesFeed = {
-    recipesQuantity: number,
-    feedType: 'drink' | 'meal' | 'all',
-    recipes: TRecipesProps[],
+	recipesQuantity: number,
+	feedType: 'drink' | 'meal' | 'all',
+	recipes: TRecipesProps[],
 }
 
 export default async function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) {

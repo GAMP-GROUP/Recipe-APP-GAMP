@@ -1,14 +1,20 @@
 import { HttpStatusCode } from '@/app/lib/HTTPHandler';
+import { userAuth } from '@/app/middlewares/authToken';
 import prisma from '@/prisma/client';
-import { NewRecipeRequest, NewRecipeResponse, UpdateRecipeRequest } from '@/types';
+import { NewRecipeResponse, UpdateRecipeRequest, Request } from '@/types';
 
 
-export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipeResponse> {
+
+export async function createRecipe(request: Request): Promise<NewRecipeResponse> {
 	const { recipe_type_id, recipe_name, instructions, image, tags, category, ingredients, amount } = request;
+	const { message, user } = await userAuth(request);
+
+
+	if (message !== 'success' || user == undefined) return { message, TYPE: HttpStatusCode.Unauthorized };
 
 	const ingredientIds: number[] = [];
 
-        
+
 	for (const { ingredient_name } of ingredients) {
 
 		const existingIngredient = await prisma.ingredients.findFirst({
@@ -19,7 +25,7 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 
 		if (existingIngredient) {
 			ingredientIds.push(existingIngredient.id);
-			
+
 		} else {
 
 			const newIngredient = await prisma.ingredients.create({
@@ -30,9 +36,8 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 			console.log('LINHA 33', newIngredient);
 			ingredientIds.push(newIngredient.id);
 		}
-		
-	}
 
+	}
 
 	const categoriesCheck = await prisma.category.findFirst({
 		where: {
@@ -41,8 +46,8 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 	});
 
 	if (!categoriesCheck) {
-	
-		return {message: 'Category not found',  TYPE: HttpStatusCode.NotFound};
+
+		return { message: 'Category not found', TYPE: HttpStatusCode.NotFound };
 	}
 
 	const createdRecipe = await prisma.recipes.create({
@@ -72,7 +77,7 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 						},
 					},
 				},
-				
+
 			},
 		},
 	});
@@ -92,10 +97,19 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 			ing_amount: ingredient.ing_amount,
 		})),
 	};
-	
-    
 
-	return { message: response,  TYPE: HttpStatusCode.Created };
+
+	const addAuthor = await prisma.author_Recipe.create({
+		data: {
+			author_id: user.id,
+			recipe_id: createdRecipe.id,
+		},
+	});
+	if (addAuthor === null) {
+		return { message: 'Receita não encontrada', TYPE: HttpStatusCode.NotFound };
+	}
+
+	return { message: response, TYPE: HttpStatusCode.Created };
 }
 
 
@@ -104,12 +118,12 @@ export async function createRecipe(request: NewRecipeRequest): Promise<NewRecipe
 
 export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRecipeResponse> {
 	const { id, recipe_name, instructions, image, tags, category, ingredients, amount, recipe_type_id } = request;
-	
 
-	
+
+
 	const ingredientIds: number[] = [];
 
-	if(ingredients){
+	if (ingredients) {
 		for (const { ingredient_name } of ingredients) {
 
 			const existingIngredient = await prisma.ingredients.findFirst({
@@ -133,13 +147,13 @@ export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRec
 
 		}
 	}
-	
+
 	const ingredientRecipe = await prisma.ingredients_Recipes.findFirst({
 		where: {
 			recipe_id: id
 		}
 	});
-	if(!ingredientRecipe){
+	if (!ingredientRecipe) {
 		return { message: 'Receita não encontrada', TYPE: HttpStatusCode.NotFound };
 	}
 
@@ -156,9 +170,9 @@ export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRec
 			recipe_type_id,
 			Ingredients_Recipes: {
 				update: ingredientIds.map((ingredientId) => ({
-					where: { id:ingredientRecipe.id },
+					where: { id: ingredientRecipe.id },
 					data: {
-						ingredient: { connect: { id: ingredientId } }, 
+						ingredient: { connect: { id: ingredientId } },
 						ing_amount: amount && amount[ingredientIds.indexOf(ingredientId)]
 					},
 				})),
@@ -183,7 +197,7 @@ export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRec
 	});
 
 
-	if (updateRecipe === null){
+	if (updateRecipe === null) {
 		return { message: 'Receita não encontrada', TYPE: HttpStatusCode.NotFound };
 	}
 
@@ -207,9 +221,9 @@ export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRec
 }
 
 
-export async function  deleteRecipe (request: number) {
+export async function deleteRecipe(request: number) {
 	try {
-	
+
 		await prisma.ingredients_Recipes.deleteMany({
 			where: {
 				recipe_id: request,
@@ -223,5 +237,62 @@ export async function  deleteRecipe (request: number) {
 		});
 	} catch (error) {
 		console.error('Error deleting recipe:', error);
-	} 
+	}
+}
+
+
+export async function getRecipes() {
+	try {
+		const recipes = await prisma.recipes.findMany({
+			include: {
+				category_name: true,
+				recipe_type: true,
+				Ingredients_Recipes: {
+					select: {
+						ing_amount: true,
+						ingredient: {
+							select: {
+								ingredients_name: true,
+							},
+						},
+					},
+
+				},
+			},
+		});
+
+		return recipes;
+	} catch (error) {
+		console.error('Error getting recipes:', error);
+	}
+}
+
+
+export async function getRecipeById(request: number) {
+	try {
+		const recipe = await prisma.recipes.findFirst({
+			where: {
+				id: request,
+			},
+			include: {
+				category_name: true,
+				recipe_type: true,
+				Ingredients_Recipes: {
+					select: {
+						ing_amount: true,
+						ingredient: {
+							select: {
+								ingredients_name: true,
+							},
+						},
+					},
+
+				},
+			},
+		});
+
+		return recipe;
+	} catch (error) {
+		console.error('Error getting recipe:', error);
+	}
 }
