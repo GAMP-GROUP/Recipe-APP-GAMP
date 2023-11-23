@@ -9,39 +9,58 @@ import React from 'react';
 type ingredientListProps = {
 	id: number;
 	ingredients: string[];
+
+
 }
+
+
 
 export default function IngredientList({ ingredients, id }: ingredientListProps) {
 	const [itemsChecked, setItemsChecked] = useState<{ [key: string]: boolean }>(
 		{}
 	);
 
-	const [isDisabled, setIsDisabled] = useState<boolean>(true);
+
+
+
+	function localStorageData(id: string, ingredients: string[], itemsChecked: { [key: string]: boolean }) {
+		const localStorageKey = `ingredients recipe ${id}`;
+		const items = localStorage.getItem(localStorageKey);
+		console.log('30', items);
+		console.log('checked', itemsChecked);
+
+
+
+		if (!items) {
+			// Se o item não existir ou for null, inicialize com um objeto padrão
+			const data = Object.fromEntries(ingredients.map(ingredient => [ingredient, false]));
+			console.log('33', data);
+
+			localStorage.setItem(localStorageKey, JSON.stringify(data));
+			return data;
+		} else {
+			// Se o item existir, parse para objeto
+			const ing = JSON.parse(items);
+			console.log('40', ing);
+
+			const data = Object.fromEntries(ingredients.map(ingredient => [ingredient, itemsChecked[ingredient] || false]));
+			localStorage.setItem(localStorageKey, JSON.stringify(data));
+
+		}
+	}
 
 
 
 	const handleCheckboxClick = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = event.target;
-		setItemsChecked({
-			...itemsChecked,
-			[name]: checked,
-		});
+		setItemsChecked((prev) => ({ ...prev, [name]: checked }));
 	};
 
-
-
 	useEffect(() => {
-		const ingredientsLocal = {
-			id: id,
-			itemsChecked,
-		};
-		localStorage.setItem('ingredientList', JSON.stringify(ingredientsLocal));
-
-		console.log(ingredientsLocal);
+		localStorageData(id.toString(), ingredients, itemsChecked);
+	}, [id, ingredients, itemsChecked]);
 
 
-
-	}, [itemsChecked]);
 
 	const svgOptions = {
 		option1: (
@@ -102,7 +121,7 @@ export default function IngredientList({ ingredients, id }: ingredientListProps)
 			</ul>
 
 			<div>
-				<button type="button" disabled={isDisabled} onClick={() => console.log('está habilitado')} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+				<button type="button" onClick={() => console.log('está habilitado')} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 					Choose plan
 
 				</button>
