@@ -34,6 +34,7 @@ export default function RecipesCard({ id, image, title, type }: recipeProps): JS
 					<p className="text-sm uppercase font-[600] text-gray-500 tracking-[0.075rem]">{type === 2 ? 'meal' : 'drink'}</p>
 				</div>
 				<FavButton
+					ImgClass='w-7 h-7'
 					id={id.toString()}
 				></FavButton>
 			</section>

@@ -37,6 +37,7 @@ type drinkAPI = {
 
 type ButtonProps = {
 	id: string,
+	ImgClass?: string
 
 }
 

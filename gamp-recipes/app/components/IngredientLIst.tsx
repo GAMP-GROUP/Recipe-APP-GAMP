@@ -111,7 +111,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 	return (
 		<div>
 			<h2
-				className='text-2xl text-center uppercase font-semibold mb-5'
+				className='text-2xl text-left uppercase font-semibold mb-5'
 			>ingredients</h2>
 
 			{ingredients.map((property, index) => (

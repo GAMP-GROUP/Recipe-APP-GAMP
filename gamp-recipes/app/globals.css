@@ -3,18 +3,22 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Croissant+One&display=swap');
+@import '/home/gabriel/github-projects/gamp/Recipe-APP-GAMP/gamp-recipes/public/Argentum-Sans-Bold.ttf.woff';
 
 @layer base {
-  html {
-    font-family: 'Lato', sans-serif;
-  }
-  body {
-    @apply bg-white
-  }
-  h3 {
-    @apply text-5xl font-bold
-  }
-  h4 {
-    @apply text-xs my-1
-  }
+	html {
+		font-family: 'Lato', sans-serif;
+	}
+
+	body {
+		@apply bg-white
+	}
+
+	h3 {
+		@apply text-5xl font-bold
+	}
+
+	h4 {
+		@apply text-xs my-1
+	}
 }

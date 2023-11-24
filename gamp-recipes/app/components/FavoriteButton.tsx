@@ -5,7 +5,7 @@ import { ButtonProps } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-export default function FavButton({ id }: ButtonProps) {
+export default function FavButton({ id, ImgClass }: ButtonProps) {
 	const session = useSession();
 	const router = useRouter();
 
@@ -43,7 +43,7 @@ export default function FavButton({ id }: ButtonProps) {
 					id={id}
 					alt='Favorite button'
 					src='/icons/favorites-notactive.png'
-					className='w-7 h-7 m-auto'
+					className={ImgClass}
 				/>
 			</picture>
 		</button>
