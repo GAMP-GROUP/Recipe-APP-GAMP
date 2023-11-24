@@ -3,14 +3,14 @@ import { detailedParams } from '@/types';
 
 
 import InProgressCard from '@/app/components/InProgressCard';
-import { getRecipeById } from '@/app/api/recipe/recipe.service';
+import { getRecipeById } from '@/app/lib/recipeUtils';
 
 
 export default async function InProgress({
 	params: { detailed },
 }: detailedParams) {
 
-	const recipe = await getRecipeById(parseInt(detailed));
+	const recipe = await getRecipeById(detailed);
 	if (!recipe) return null;
 
 	return (
@@ -27,7 +27,8 @@ export default async function InProgress({
 			recipe_type_id: recipe.recipe_type_id,
 			created_at: recipe.created_at,
 			updated_at: recipe.updated_at,
-			ingredients: recipe.Ingredients_Recipes
+			ingredients: recipe.Ingredients_Recipes,
+			amount: recipe.Ingredients_Recipes.ing_amount,
 		}} detailed={detailed} />
 	);
 }

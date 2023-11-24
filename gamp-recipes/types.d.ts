@@ -114,6 +114,7 @@ type RecipeData = {
 	created_at: Date;
 	updated_at: Date;
 	ingredients: ingredientsAPI[];
+	amount: string[];
 }
 
 type UpdateRecipeRequest = {

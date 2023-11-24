@@ -16,15 +16,35 @@ type inProgressData =
 export default function InProgressCard(inProgressData: inProgressData) {
 
 
-
-
 	const { share } = useBehaviorContext();
 
 
-	const ingredients = inProgressData.recipe?.ingredients.map(({ ingredient: { ingredients_name } }) => {
-		const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
-		return ingName;
-	});
+	const getIngredientsAndAmount = () => {
+		const ingredients = inProgressData.recipe?.ingredients.map(({ ingredient: { ingredients_name } }) => {
+			const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
+			return ingName;
+		});
+
+		const amount = inProgressData.recipe?.ingredients.map(({ ing_amount }) => {
+			return ing_amount;
+		}
+		);
+		console.log('32-card', amount);
+
+		return { ingredients, amount };
+	};
+
+	const { ingredients, amount } = getIngredientsAndAmount();
+
+	// const ingredients = inProgressData.recipe?.ingredients.map(({ ingredient: { ingredients_name } }) => {
+	// 	const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
+	// 	return ingName;
+	// });
+
+	// const amount = inProgressData.recipe?.ingredients.map(({ ing_amount }) => {
+	// 	return ing_amount;
+	// }
+	// );
 
 
 
@@ -72,13 +92,13 @@ export default function InProgressCard(inProgressData: inProgressData) {
 				>
 					Instructions
 				</h2>
-				<p className={' text-lg sm:text-sm text-left ml-2 mr-2 font-croissant'}>{inProgressData?.recipe.instructions}</p>
+				<p className={'text-lg sm:text-sm text-left  p-3 ml-4 font-croissant'}>{inProgressData?.recipe.instructions}</p>
 			</div>
 
 			<section
 				className={'w-3/4 my-2'}
 			>
-				<IngredientList id={parseInt(inProgressData.detailed)} ingredients={ingredients as string[]} />
+				<IngredientList id={parseInt(inProgressData.detailed)} amount={amount} ingredients={ingredients as string[]} />
 			</section>
 
 
