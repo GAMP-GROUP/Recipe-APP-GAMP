@@ -1,4 +1,7 @@
+'use client';
+import React, { useEffect, useState } from 'react';
 import RecipesCard from './RecipesCard';
+import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 
 type TRecipesProps = {
 	id: number;
@@ -20,12 +23,19 @@ type TRecipesFeed = {
 	recipes: TRecipesProps[],
 }
 
-export default async function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) {
-	const filteredRecipes = recipes.slice(0, recipesQuantity);
+export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) {
+	const { menu } = useBehaviorContext();
+	const [filteredRecipes, setFilteredRecipes] = useState<TRecipesProps[]>([]);
+
+	useEffect(() => {
+		setFilteredRecipes(recipes.slice(0, recipesQuantity));
+	}, [recipes, recipesQuantity]);
 
 	return (
 		<>
-			<main>
+			<main
+				className={ `transition-transform duration-700 ${ menu ? 'translate-x-full' : 'translate-x-0' }` }
+			>
 				{filteredRecipes.map((recipe, index) => (
 					<div key={index}>
 						<RecipesCard
@@ -41,5 +51,5 @@ export default async function RecipesFeed({ recipesQuantity, recipes }: TRecipes
 				))}
 			</main>
 		</>
-	)
+	);
 }
