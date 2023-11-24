@@ -1,5 +1,6 @@
 import './reset.css';
 import './globals.css';
+import './animations.css';
 import type { Metadata } from 'next';
 import Providers from '@/contextAPI/provider/providers';
 import Header from './components/Header';

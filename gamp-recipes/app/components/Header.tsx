@@ -3,15 +3,13 @@ import Image from '@/node_modules/next/image';
 import Link from '@/node_modules/next/link';
 import { useState, useEffect } from 'react';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
-import { toggleMenu } from './UserMenu';
 import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
+import MenuIcon from './MenuIcon';
 
 export default function Header() {
 	const [userScroll, setUserScroll] = useState(true);
 	const [scrollPosition, setScrollPosition] = useState(0);
-
-	const { menu, setMenu } = useBehaviorContext();
 	const { setSearchBar } = useBehaviorContext();
 	const {status}  = useSession();
 
@@ -38,14 +36,11 @@ export default function Header() {
 			className={`w-full h-12 px-2 py-8 z-[60] bg-yellow flex justify-between items-center  top-0 transition-transform duration-300
             ${userScroll ? 'transform translate-y-0' : '-translate-y-full'}`}
 		>
-			<picture className='ml-1'>
-				<img
-					src={`${menu === false ? '/icons/menu.png' : '/icons/close.png'}`}
-					alt='Three stripes positioned horizontally one above the other, representing the menu icon'
-					onClick={() => toggleMenu(menu, setMenu)}
-					className={'opacity-60 place-self-center w-6 m-1'}
-				/>
-			</picture>
+			<div
+				className="w-[35px]"
+			>
+				<MenuIcon />
+			</div>
 			<Image
 				src='/icons/search.png'
 				width='25'
