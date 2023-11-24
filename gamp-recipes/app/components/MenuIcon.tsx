@@ -8,7 +8,7 @@ export default function MenuIcon() {
 
 	return (
 		<>
-			<label htmlFor='menu-icon' className='menu-icon opacity-60 ml-2'>
+			<label htmlFor='menu-icon' className={`menu-icon opacity-60 transition-transform duration-300 ${ menu === true ? 'translate-x-1' : '' }`}>
 				<input type="checkbox" name='menu-icon' id='menu-icon' onClick={ () => toggleMenu(menu, setMenu)}/>
 			</label>
 		</>

@@ -33,11 +33,11 @@ export default function Header() {
 	return (
 		<header
 			id='header'
-			className={`w-full h-12 px-2 py-8 z-[60] bg-yellow flex justify-between items-center  top-0 transition-transform duration-300
-            ${userScroll ? 'transform translate-y-0' : '-translate-y-full'}`}
+			className={ `w-full h-12 px-2 py-8 z-[60] bg-yellow flex justify-between items-center sticky top-0 transition-transform duration-300
+            ${ userScroll ? 'transform translate-y-0' : '-translate-y-full' }` }
 		>
 			<div
-				className="w-[35px]"
+				className='w-[35px] h-[35px] flex justify-center items-center'
 			>
 				<MenuIcon />
 			</div>

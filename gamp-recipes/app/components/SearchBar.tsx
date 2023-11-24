@@ -47,7 +47,7 @@ export default function SearchBar() {
 		<section
 			id='searchBar'
 			className='z-[99] relative'
-			hidden={searchBar === true ? false : true}>
+			hidden={ searchBar === true ? false : true }>
 			{/* A tela toda */}
 			<section
 				className={'w-screen h-16 fixed top-0 bg-white py-3 px-6 flex justify-between items-center'}
