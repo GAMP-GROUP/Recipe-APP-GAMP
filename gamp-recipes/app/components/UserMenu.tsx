@@ -1,16 +1,23 @@
 'use client';
 import React from 'react';
 import Link from '@/node_modules/next/link';
+import { useScrollBlock } from '../utils/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 
 export default function UserMenu() {
 	const { menu, setMenu } = useBehaviorContext();
+	const [, allowScroll] = useScrollBlock();
 	const menuItems = ['Profile', 'Meals', 'Drinks', 'Favorites'];
 
 	function closeMenu() {
+		const menuIcon = document.querySelector('#menu-icon') as HTMLInputElement;
+		
+		if (menuIcon) {
+			menuIcon.checked = false;
+		}
+
 		setMenu(false);
-		const body = document.querySelector('body') as HTMLElement;
-		body.style.overflow = '';
+		allowScroll();
 	}
 
 	return (
