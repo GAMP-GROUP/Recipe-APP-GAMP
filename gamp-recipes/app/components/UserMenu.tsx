@@ -12,7 +12,7 @@ export function toggleMenu(menu: boolean, setMenu: Dispatch<SetStateAction<boole
 
 export default function UserMenu() {
 	const { menu, setMenu } = useBehaviorContext();
-	const menuItems = ['Profile', 'Meals', 'Drinks', 'Favorites'];
+	const menuItems = ['Profile', 'Meals', 'Drinks', 'Favorites', 'Create'];
 	function removeOverflow() {
 		const body = document.querySelector('body');
 		body?.classList.remove('overflow-hidden');
