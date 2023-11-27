@@ -22,13 +22,13 @@ export default function ShareButton({ id }: ButtonProps) {
 		// 	return;
 		// }
 
-		if (session.status === 'loading') {
-			return;
-		}
 
-		if (share === true) return setShare(false);
 
-		return setShare(true);
+
+		setShare(!share);
+		console.log(share);
+
+
 	}
 
 	const BtnClass = 'rounded-full w-14 h-14 z-3';

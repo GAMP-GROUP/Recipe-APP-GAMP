@@ -1,19 +1,44 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
-import { TwitterShareButton, TwitterIcon, PinterestShareButton, PinterestIcon, WhatsappShareButton, WhatsappIcon } from 'next-share';
+import { TwitterShareButton, TwitterIcon, PinterestShareButton, PinterestIcon, WhatsappShareButton, WhatsappIcon, FacebookIcon, FacebookShareButton } from 'next-share';
 import { enqueueSnackbar } from 'notistack';
 
 
 
-export function ShareModal({ url, img }: { url: string, img: string, id: string }) {
-	const { setShare } = useBehaviorContext();
+
+export function ShareModal({ url, img }: { url: string, img: string, id: string }, setShareModal) {
+	const { setShare, share } = useBehaviorContext();
 	const [inputText, setInputText] = React.useState(url);
 
 	const copyTextToClipboard = (text: string) => {
 		navigator.clipboard.writeText(text);
 	};
+
+	const modal = useRef<HTMLDivElement>(null);
+
+
+
+	function handleClick(event: MouseEvent) {
+		if (modal.current && !modal.current.contains(event.target as Node)) {
+			setShare(false);
+		}
+	}
+
+
+	useEffect(() => {
+		if (share) {
+			window.addEventListener('click', handleClick);
+		}
+
+
+		return () => {
+			window.removeEventListener('click', handleClick);
+
+		};
+	}, [share]);
+
 
 	const handleCopyClick = (event: { preventDefault: () => void; }) => {
 		event.preventDefault();
@@ -39,8 +64,8 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 
 
 	return (
-		<div className='flex items-center justify-center text-left z-0 h-fit w-full  font-lato'>
-			<div className=' shadow-md bg-white	 w-full mx-4 p-3 rounded-xl md:w-1/2 lg:w-1/3 opacity-100'>
+		<div className='flex items-center justify-center text-left h-fit w-max  font-lato' ref={modal} >
+			<div className=' shadow-md bg-white	 w-full mx-4 p-3 rounded-xl md:w-1/2 lg:w-1/3 opacity-100 '>
 				<div
 					className="flex justify-between items center border-b border-gray-200 py-3 "
 				>
@@ -57,7 +82,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 							onClick={() => setShare(false)}
 
 						>
-							<img src='/icons/close.png' alt='close icon' className='w-4' />
+							<img src='/icons/close.png' alt='close icon' className='w-7' />
 
 						</button>
 
@@ -67,7 +92,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 				<div className="my-4">
 					<p className="text-lg">Share this via</p>
 
-					<div className="flex justify-center gap-5 my-4" >
+					<div className="flex justify-between gap-5 my-4" >
 
 						<div
 							onClick={handleOpenModal}
@@ -75,6 +100,14 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 							<TwitterShareButton url={url}>
 								<TwitterIcon size={40} round />
 							</TwitterShareButton>
+						</div>
+
+						<div
+							onClick={handleOpenModal}
+							className=''>
+							<FacebookShareButton url={url}>
+								<FacebookIcon size={40} round />
+							</FacebookShareButton>
 						</div>
 
 						<div
@@ -133,4 +166,8 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 		</div>
 	);
 
+}
+
+function ShareHandle() {
+	throw new Error('Function not implemented.');
 }

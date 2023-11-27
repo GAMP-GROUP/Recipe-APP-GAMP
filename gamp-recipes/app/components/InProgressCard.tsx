@@ -31,7 +31,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 			return ing_amount;
 		}
 		);
-		console.log('32-card', amount);
+
 
 		return { ingredients, amount };
 	};

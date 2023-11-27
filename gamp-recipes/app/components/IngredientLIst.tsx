@@ -41,6 +41,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 			localStorage.getItem(`ingredients recipe ${id}`);
 		if (ingredientsLocal) {
 			setItemsChecked(JSON.parse(ingredientsLocal));
+
 		}
 
 
