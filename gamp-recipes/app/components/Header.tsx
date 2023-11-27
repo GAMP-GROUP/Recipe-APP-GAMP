@@ -13,7 +13,7 @@ export default function Header() {
 
 	const { menu, setMenu } = useBehaviorContext();
 	const { setSearchBar } = useBehaviorContext();
-	const {status}  = useSession();
+	const { status } = useSession();
 
 	const sessionStatus = status === 'authenticated' ? true : false;
 
@@ -35,7 +35,7 @@ export default function Header() {
 	return (
 		<header
 			id='header'
-			className={`w-full h-12 px-2 py-8 z-[60] bg-yellow flex justify-between items-center  top-0 transition-transform duration-300
+			className={`w-full h-12 px-2 py-8 z-[60] bg-white shadow-sm flex justify-between items-center  top-0 transition-transform duration-300
             ${userScroll ? 'transform translate-y-0' : '-translate-y-full'}`}
 		>
 			<picture className='ml-1'>
@@ -70,16 +70,16 @@ export default function Header() {
 						onClick={() => signOut()}
 						className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
 					>
-				Sign Out
+						Sign Out
 					</button>
-					
+
 				) : (
 					<Link href='/auth/signin'>
 						<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
-					Sign In
+							Sign In
 						</button>
 					</Link>
-				
+
 				)
 			}
 		</header>

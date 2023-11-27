@@ -3,7 +3,7 @@
 import React from 'react';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { TwitterShareButton, TwitterIcon, PinterestShareButton, PinterestIcon, WhatsappShareButton, WhatsappIcon } from 'next-share';
-import { enqueueSnackbar, SnackbarProvider } from 'notistack';
+import { enqueueSnackbar } from 'notistack';
 
 
 
@@ -39,7 +39,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 
 
 	return (
-		<div className='flex items-center justify-center text-left z-0 h-0  font-croissant'>
+		<div className='flex items-center justify-center text-left z-0 h-fit w-full  font-lato'>
 			<div className=' shadow-md bg-white	 w-full mx-4 p-3 rounded-xl md:w-1/2 lg:w-1/3 opacity-100'>
 				<div
 					className="flex justify-between items center border-b border-gray-200 py-3 "
@@ -65,7 +65,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 				</div >
 
 				<div className="my-4">
-					<p className="text-sm">Share this via</p>
+					<p className="text-lg">Share this via</p>
 
 					<div className="flex justify-center gap-5 my-4" >
 
@@ -95,13 +95,13 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 
 					</div>
 
-					<p className="text-sm">Or copy link</p>
+					<p className="text-lg">Or copy link</p>
 
 					<div className="border-2 border-gray-200 flex justify-between items-center mt-4 py-2">
 
 						<input
 							onChange={(event) => setInputText(event.target.value)}
-							className="w-full  outline-none bg-transparent  truncate" type="text" placeholder="link" value={url} />
+							className="w-full  outline-none bg-transparent text-lg truncate" type="text" placeholder="link" value={url} />
 
 
 						<button
@@ -127,9 +127,7 @@ export function ShareModal({ url, img }: { url: string, img: string, id: string 
 					</div>
 				</div>
 
-				<div className=" my-4">
-					<SnackbarProvider maxSnack={1} />
-				</div>
+
 			</div>
 
 		</div>

@@ -19,7 +19,9 @@ const config: Config = {
 			},
 			fontFamily: {
 				'croissant': ['Croissant One', 'cursive'],
-				'argentum': ['Argentum-Sans-Bold',]
+				'lato': ['Lato', 'sans-serif'],
+				'argentum': ['Argentum-Sans-Bold',],
+				'poppins': ['Poppins', 'sans-serif'],
 
 			}
 		},

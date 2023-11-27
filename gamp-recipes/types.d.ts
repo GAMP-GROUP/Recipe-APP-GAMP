@@ -108,6 +108,8 @@ type RecipeData = {
 	image: string;
 	tags: string;
 	category: number;
+	category_name?: string;
+	recipe_type_name?: string;
 	video_source?: string | null;
 	area?: string | null;
 	alcoholic?: string | null;

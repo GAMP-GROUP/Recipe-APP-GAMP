@@ -4,6 +4,7 @@
 
 import { ChangeEvent, useEffect, useState } from 'react';
 import React from 'react';
+import { motion } from 'framer-motion';
 
 
 
@@ -27,6 +28,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
 
+
 	const handleFinishBtn = () => {
 		console.log(isDisabled);
 
@@ -40,7 +42,6 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		if (ingredientsLocal) {
 			setItemsChecked(JSON.parse(ingredientsLocal));
 		}
-
 
 
 	}, []);
@@ -108,54 +109,68 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		),
 	};
 
+
+
 	return (
-		<div>
+		<div className='flex-col'>
 			<h2
-				className='text-2xl text-left uppercase font-semibold mb-5'
+				className='text-2xl text-left uppercase ml-3 font-lato font-semibold mb-5'
 			>ingredients</h2>
+			<section className='flex-col'>
 
-			{ingredients.map((property, index) => (
-				<div className='flex flex-row justify-between' key={index}>
-					<ul
-						className=''
+				{ingredients.map((property, index) => (
+					<motion.div
+						animate={{
+							backgroundColor: itemsChecked[property]
+								? 'rgb(134, 239, 172)'
+								: 'hsl(0, 0%, 100%)', // Branco para false
+						}}
+
+
+						className={`flex flex-row justify-between shadow-lg rounded-xl mb-2 h-fit  ml-3 mr-3 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
+						<ul
+							className='self-center'
+						>
+							<li>
+								<label>
+									<input
+										type='checkbox'
+										name={property}
+										checked={itemsChecked[property] || false}
+										onChange={handleCheckboxClick}
+										className='hidden'
+									/>
+									<div className='flex row  items-center justify-around  mb-2 ml-2 h-12 '>
+
+										{svgOptions[itemsChecked[property] ? 'option1' : 'option2']}
+										<li className='text-left ml-2 w-full text-xl text-gray-600 h-fit '>{amount[index]}  {property}</li>
+
+
+									</div>
+
+								</label>
+							</li>
+						</ul>
+					</motion.div>
+				))}
+
+
+
+
+				<div className='self-end w-screen'>
+					<button
+						type="button"
+						disabled={isDisabled}
+						onClick={handleFinishBtn}
+						className={` self-end text-white bg-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center ${isDisabled ? 'bg-gray-300' : 'bg-gray-800'}`}
 					>
-						<li>
-							<label>
-								<input
-									type='checkbox'
-									name={property}
-									checked={itemsChecked[property] || false}
-									onChange={handleCheckboxClick}
-									className='hidden'
-								/>
-								<div className='flex row w-full justify-around  h-12'>
-
-									{svgOptions[itemsChecked[property] ? 'option1' : 'option2']}
-									<span className='text-left ml-2'>{amount[index]}</span>
-									<span className='text-left ml-2'>{property}</span>
-
-
-								</div>
-
-							</label>
-						</li>
-					</ul>
+						Finish
+					</button>
 				</div>
-			))}
 
 
+			</section>
 
-
-
-
-			<div>
-
-				<button type="button" disabled={isDisabled} onClick={handleFinishBtn} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-					Choose plan
-
-				</button>
-			</div>
-
-		</div>
+		</div >
 	);
 }

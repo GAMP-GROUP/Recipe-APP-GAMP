@@ -17,8 +17,9 @@ export async function POST(request: NextRequest) {
 
 		return new NextResponse(JSON.stringify(data.message), { status: data.TYPE });
 	} catch (error) {
+		const err = error + ' ' + 'Error caught in POST request:';
 
-		return new NextResponse(JSON.stringify(error), { status: HttpStatusCode.InternalServerError });
+		return new NextResponse(JSON.stringify(err), { status: HttpStatusCode.InternalServerError });
 	}
 }
 
