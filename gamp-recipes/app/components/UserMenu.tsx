@@ -19,7 +19,7 @@ export default function UserMenu() {
 	}
 
 	return (
-		<main id='menu-screen' className='w-screen fixed top-16 z-[50]' hidden={ menu === false ? true : false }>
+		<section id='menu-screen' className='w-screen fixed top-16 z-[50]' hidden={ menu === false ? true : false }>
 			<nav
 				id='menu'
 				className={'h-screen w-full bg-white'}
@@ -50,6 +50,6 @@ export default function UserMenu() {
 				onClick={ () => toggleMenu(menu, setMenu) }
 			>
 			</aside>
-		</main>
+		</section>
 	);
 }

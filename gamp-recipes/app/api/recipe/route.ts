@@ -1,6 +1,7 @@
 import { HttpStatusCode } from '@/app/lib/HTTPHandler';
-import { createRecipe, deleteRecipe, updateRecipe } from './recipe.service';
+import { createRecipe, deleteRecipe, getRecipes, updateRecipe } from './recipe.service';
 import { NextRequest, NextResponse } from 'next/server';
+
 
 
 export async function POST(request: NextRequest) {
@@ -11,12 +12,12 @@ export async function POST(request: NextRequest) {
 		const data = await createRecipe(json);
 
 		if (data.TYPE === HttpStatusCode.NotFound) {
-			return new NextResponse(JSON.stringify(data.message), { status: data.TYPE });
+			return NextResponse.json(data.message, { status: data.TYPE });
 		}
 
-		return new NextResponse(JSON.stringify(data.message), { status: data.TYPE });
+		return NextResponse.json(data.message, { status: data.TYPE });
 	} catch (error) {
-		return new NextResponse(JSON.stringify(error), { status: HttpStatusCode.InternalServerError });
+		return NextResponse.json(error, { status: HttpStatusCode.InternalServerError });
 	}
 }
 
@@ -28,12 +29,13 @@ export async function PUT(request: NextRequest) {
 		const data = await updateRecipe(json);
 
 		if (data.TYPE === HttpStatusCode.NotFound) {
-			return new NextResponse(JSON.stringify(data.message), { status: data.TYPE });
+			return NextResponse.json(data.message, { status: data.TYPE });
 		}
 
-		return new NextResponse(JSON.stringify(data.message), { status: data.TYPE });
+		return NextResponse.json(data.message, { status: data.TYPE });
+
 	} catch (error) {
-		return new NextResponse(JSON.stringify(error), { status: HttpStatusCode.InternalServerError });
+		return NextResponse.json(error, { status: HttpStatusCode.InternalServerError });
 	}
 }
 
@@ -41,17 +43,29 @@ export async function DELETE(request: NextRequest) {
 
 	try {
 
-		const { id } =  await request.json();
-		
+		const { id } = await request.json();
+
 		if (!id) {
-			return new NextResponse(JSON.stringify('Id is missing in Request'), { status: HttpStatusCode.BadRequest });
+			return NextResponse.json('Id is missing in Request', { status: HttpStatusCode.BadRequest });
 		}
 		const data = await deleteRecipe(parseInt(id));
-		
-		return new NextResponse(JSON.stringify(data), { status: 204 });
+
+		return NextResponse.json(data, { status: 204 });
 	} catch (error) {
-		// Adicione informações de depuração para identificar o erro
+
 		console.error('Error caught in DELETE request:', error);
-		return new NextResponse(JSON.stringify(error), { status: HttpStatusCode.InternalServerError });
+		return NextResponse.json(error, { status: HttpStatusCode.InternalServerError });
+	}
+}
+
+
+
+export async function GET() {
+
+	try {
+		const data = await getRecipes();
+		return NextResponse.json(data, { status: HttpStatusCode.OK });
+	} catch (error) {
+		return NextResponse.json(error, { status: HttpStatusCode.InternalServerError });
 	}
 }

@@ -5,9 +5,11 @@ import { useState, useEffect } from 'react';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { toggleMenu } from './UserMenu';
 import { signOut, useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 export default function Header() {
+	const pathname = usePathname();
 	const [userScroll, setUserScroll] = useState(true);
 	const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -31,6 +33,10 @@ export default function Header() {
 			window.removeEventListener('scroll', scrollPage);
 		};
 	}, [scrollPosition]);
+
+	useEffect(() => {
+		toggleMenu(true, setMenu);
+	}, [pathname]);
 
 	return (
 		<header
@@ -61,6 +67,7 @@ export default function Header() {
 						className='transition-all duration-300 w-[62px]'
 						src='/images/logo-simple.png'
 						alt='Our logo'
+						onClick={ () => toggleMenu(true, setMenu)}
 					/>
 				</picture>
 			</Link>
@@ -74,13 +81,13 @@ export default function Header() {
 					
 			) : (
 				<Link href='/auth/signin'>
-					<button
-						className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
+					<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
+						onClick={() => toggleMenu(true, setMenu)}
 					>
-						Sign In
+					Sign In
 					</button>
-				</Link>
-			) }
+				</Link>)
+			}
 		</header>
 	);
 }
