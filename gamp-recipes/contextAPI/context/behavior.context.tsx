@@ -32,15 +32,6 @@ export const BehaviorContext = createContext({
 	setSearchBar: () => {},
 	recipeSearch: '',
 	setRecipeSearch: () => {},
-} as BehaviorProps);
-
-export function BehaviorProvider({ children }: Props) {
-	const [menu, setMenu] = useState(false);
-	setMenu: () => { },
-	searchBar: false,
-	setSearchBar: () => { },
-	recipeSearch: '',
-	setRecipeSearch: () => { },
 } as unknown as BehaviorProps);
 
 export function BehaviorProvider({ children }: Props) {
