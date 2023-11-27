@@ -164,10 +164,13 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 				window.alert('Please, fill correctly all ingredients');
 			}
 		});
-
+		console.log(body);
 		const postRecipeResponse = await fetch('/api/recipe/', { method: 'POST', body: JSON.stringify(body) });
-		const jsonResponse = await postRecipeResponse.json();
-		router.push(`/${jsonResponse.id}`);
+		const created = await postRecipeResponse.json();
+
+		if (!created.id) window.alert('Something went wrong!');
+		
+		router.push(`/${created.id}`);
 	}
 
 	return (

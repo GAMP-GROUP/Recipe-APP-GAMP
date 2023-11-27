@@ -22,13 +22,13 @@ export async function middleware(req: NextRequest) {
 	}
 
 	if (route.includes('recipe')) {
-		// const token = authToken(req);
+		const token = authToken(req);
 		const recipe = await validateRecipeMiddleware(req);
 
-		// if (token.message !== 'success') {
-		// // 	const { message, error, code } = token;
-		// // 	return NextResponse.json({ message, error }, { status: code });
-		// // }
+		if (token.message !== 'success') {
+			const { message, error, code } = token;
+			return NextResponse.json({ message, error }, { status: code });
+		}
 
 		if (recipe?.message !== 'success') {
 			return NextResponse.json({ message: recipe?.message }, { status: recipe?.status });
