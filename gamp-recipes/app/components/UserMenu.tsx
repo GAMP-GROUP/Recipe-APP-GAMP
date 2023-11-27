@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Link from '@/node_modules/next/link';
 import { useScrollBlock } from '../utils/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
@@ -20,6 +20,20 @@ export default function UserMenu() {
 		allowScroll();
 	}
 
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') {
+				closeMenu();
+			}
+		};
+	
+		document.addEventListener('keydown', handleKeyDown);
+  
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+		};
+	}, []);
+
 	return (
 		<main
 			id='menu-screen'
@@ -31,6 +45,7 @@ export default function UserMenu() {
 						<Link href={`/${item.toLowerCase()}`} key={ index }>
 							<li
 								onClick={ () => closeMenu() }
+								onTouchStart={ () => closeMenu() }
 								className={`relative flex-1 py-4 pl-4 w-full text-lg font-bold ${index === 0 ? 'font-extrabold text-black' : 'font-medium text-gray-500'
 								} flex items-center`}>
 								<picture>

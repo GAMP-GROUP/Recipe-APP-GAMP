@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../custom-styles.css';
 import { useScrollBlock } from '../utils/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
@@ -45,6 +45,20 @@ export default function SearchBar() {
 			closeSearchBar();
 		}
 	};
+
+	useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === 'Escape') {
+				closeSearchBar();
+			}
+		};
+	
+		document.addEventListener('keydown', handleKeyDown);
+  
+		return () => {
+			document.removeEventListener('keydown', handleKeyDown);
+		};
+	}, []);
 
 	return (
 		<section

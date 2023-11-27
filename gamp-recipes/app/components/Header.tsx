@@ -20,8 +20,8 @@ export default function Header() {
 	// após navegar pela parte de baixo da aplicação
 	function scrollPage(): void {
 		const currentScrollY = window.scrollY;
-		const showHeader = scrollPosition > currentScrollY;
-
+		const showHeader = currentScrollY === 0 || currentScrollY < scrollPosition;
+	
 		setUserScroll(showHeader);
 		setScrollPosition(currentScrollY);
 	}
