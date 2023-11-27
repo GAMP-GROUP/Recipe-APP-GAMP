@@ -1,26 +1,46 @@
 'use client';
+import React, { useState, useEffect } from 'react';
 import Image from '@/node_modules/next/image';
 import Link from '@/node_modules/next/link';
-import { useState, useEffect } from 'react';
+import { useScrollBlock } from '../utils/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { signOut, useSession } from 'next-auth/react';
-import React from 'react';
 import MenuIcon from './MenuIcon';
 
 export default function Header() {
 	const [userScroll, setUserScroll] = useState(true);
+	const [blockScroll, allowScroll] = useScrollBlock();
 	const [scrollPosition, setScrollPosition] = useState(0);
-	const { setSearchBar } = useBehaviorContext();
-	const {status}  = useSession();
+	const { setSearchBar, menu, setMenu } = useBehaviorContext();
+	const { status }  = useSession();
 
 	const sessionStatus = status === 'authenticated' ? true : false;
 
+	// Função responsável por reabrir o Header, caso o usuário role a página para cima
+	// após navegar pela parte de baixo da aplicação
 	function scrollPage(): void {
 		const currentScrollY = window.scrollY;
 		const showHeader = scrollPosition > currentScrollY;
 
 		setUserScroll(showHeader);
 		setScrollPosition(currentScrollY);
+	}
+
+	// Abre a barra de pesquisa e impossibilita a rolagem da página pelo usuário
+	function openSearchBar():void {
+		blockScroll();
+		setSearchBar(true);
+	}
+	
+	// Abre e fecha o menu a partir do clique no ícone
+	function toggleMenu(menu: boolean): void {
+		if (menu) {
+			setMenu(false);
+			allowScroll();
+		} else {
+			setMenu(true);
+			blockScroll();
+		}
 	}
 
 	useEffect(() => {
@@ -39,7 +59,10 @@ export default function Header() {
 			<div
 				className='w-[35px] h-[35px] flex justify-center items-center'
 			>
-				<MenuIcon />
+				<MenuIcon
+					menu={ menu }
+					toggleMenu={ toggleMenu }
+				/>
 			</div>
 			<Image
 				src='/icons/search.png'
@@ -47,7 +70,7 @@ export default function Header() {
 				height='25'
 				alt='A magnifiyng glass vectorized, representing the search icon'
 				className='place-content-end opacity-60'
-				onClick={() => setSearchBar(true)}
+				onClick={ () => openSearchBar() }
 			/>
 			<Link href='/'>
 				<picture>

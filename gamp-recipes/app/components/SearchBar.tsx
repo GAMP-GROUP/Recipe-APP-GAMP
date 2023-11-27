@@ -2,6 +2,7 @@
 
 import React from 'react';
 import '../custom-styles.css';
+import { useScrollBlock } from '../utils/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { useState } from 'react';
 import Image from '@/node_modules/next/image';
@@ -12,11 +13,13 @@ export default function SearchBar() {
 		searchBar, setSearchBar,
 		setRecipeSearch
 	} = useBehaviorContext();
+	const [, allowScroll] = useScrollBlock();
 	const [currentSearch, setCurrentSearch] = useState('');
 	const router = useRouter();
 
-	// Limpa o estado local da pesquisa e fecha a barra de pesquisa
+	// Limpa o estado local da pesquisa, possibilita a rolagem da página e fecha a barra de pesquisa
 	function closeSearchBar() {
+		allowScroll();
 		setCurrentSearch('');
 		setSearchBar(false);
 	}
@@ -46,11 +49,11 @@ export default function SearchBar() {
 	return (
 		<section
 			id='searchBar'
-			className='z-[99] relative'
-			hidden={ searchBar === true ? false : true }>
+			className={ `z-[99] relative transition-transform ${ searchBar ? 'translate-y-0' : '-translate-y-16' }` }
+		>
 			{/* A tela toda */}
 			<section
-				className={'w-screen h-16 fixed top-0 bg-white py-3 px-6 flex justify-between items-center'}
+				className={ 'w-screen h-16 fixed top-0 bg-white py-3 px-6 flex justify-between items-center' }
 			> {/* O container branco */}
 				<fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center'>
 					<input
@@ -87,8 +90,8 @@ export default function SearchBar() {
 			{searchBar &&
 				<div
 					className='overlay'
-					onClick={() => setSearchBar(false)}
-				/>} {/* Resto da tela além da barra de pesquisa */}
+					onClick={ () => closeSearchBar() }
+				/>} { /*Resto da tela além da barra de pesquisa*/ }
 		</section>
 	);
 }

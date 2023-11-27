@@ -6,5 +6,5 @@
     width: 100vw;
     height: 100vh;
     opacity: 100;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), transparent);
+    background: linear-gradient(rgba(0, 0, 0, 0.35), transparent);
 }
