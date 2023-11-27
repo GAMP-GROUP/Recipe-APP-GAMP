@@ -16,7 +16,7 @@ type recipeProps = {
 
 export default function RecipesCard({ id, image, title, type }: recipeProps): JSX.Element {
 	return (
-		<div className="p-6 text-center mb-4 relative">
+		<div className="p-6 text-center mb-4">
 			<Link href={`/${id}`} replace>
 				<picture>
 					<img
@@ -26,16 +26,14 @@ export default function RecipesCard({ id, image, title, type }: recipeProps): JS
 					/>
 				</picture>
 			</Link>
-			<section className="mt-2 px-4 flex items-center justify-between">
-				<div
-					id='text-info flex row items-center'
-				>
-					<h2 className="text-[1.75rem] font-black mr-4 font-croissant">{title}</h2>
+			<section className="mt-2 px-4 flex items-left justify-between">
+				<div>
+					<h2 className="text-[1.75rem] font-black font-croissant">{title}</h2>
 					<p className="text-sm uppercase font-[600] text-gray-500 tracking-[0.075rem]">{type === 2 ? 'meal' : 'drink'}</p>
 				</div>
 				<FavButton
-					id={id.toString()}
-				></FavButton>
+					id={ id.toString() }
+				/>
 			</section>
 		</div>
 	);

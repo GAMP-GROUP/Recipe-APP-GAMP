@@ -33,8 +33,8 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) 
 
 	return (
 		<>
-			<main
-				className={ `transition-transform duration-700 ${ menu ? 'translate-x-full' : 'translate-x-0' }` }
+			<section
+				className={ `w-screen transition-transform duration-700 ${ menu ? 'translate-x-full' : 'translate-x-0' }` }
 			>
 				{filteredRecipes.map((recipe, index) => (
 					<div key={index}>
@@ -49,7 +49,7 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) 
 						/>
 					</div>
 				))}
-			</main>
+			</section>
 		</>
 	);
 }

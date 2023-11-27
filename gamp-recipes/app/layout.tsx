@@ -3,8 +3,7 @@ import './globals.css';
 import './animations.css';
 import type { Metadata } from 'next';
 import Providers from '@/contextAPI/provider/providers';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import NavigationBar from './components/NavigationBar';
 import UserMenu from './components/UserMenu';
 import SearchBar from './components/SearchBar';
 import React from 'react';
@@ -23,14 +22,13 @@ export default function RootLayout({
 
 	return (
 		<html lang='en'>
-			<body className='flex-col'>
+			<body className='flex-col relative bg-white w-screen overflow-x-hidden'>
 				<Providers>
 					<AuthProvider>
 						<SearchBar />
-						<UserMenu />
-						<Header />
 						{children}
-						<Footer />
+						<UserMenu />
+						<NavigationBar />
 					</AuthProvider>
 				</Providers>
 			</body>

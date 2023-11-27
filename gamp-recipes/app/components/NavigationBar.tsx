@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from '@/node_modules/next/image';
 import Link from '@/node_modules/next/link';
 import { useScrollBlock } from '../utils/useScrollBlock';
@@ -7,31 +7,19 @@ import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { signOut, useSession } from 'next-auth/react';
 import MenuIcon from './MenuIcon';
 
-export default function Header() {
-	const [userScroll, setUserScroll] = useState(true);
+export default function NavigationBar() {
 	const [blockScroll, allowScroll] = useScrollBlock();
-	const [scrollPosition, setScrollPosition] = useState(0);
 	const { setSearchBar, menu, setMenu } = useBehaviorContext();
-	const { status }  = useSession();
+	const { status } = useSession();
 
 	const sessionStatus = status === 'authenticated' ? true : false;
 
-	// Função responsável por reabrir o Header, caso o usuário role a página para cima
-	// após navegar pela parte de baixo da aplicação
-	function scrollPage(): void {
-		const currentScrollY = window.scrollY;
-		const showHeader = currentScrollY === 0 || currentScrollY < scrollPosition;
-	
-		setUserScroll(showHeader);
-		setScrollPosition(currentScrollY);
-	}
-
 	// Abre a barra de pesquisa e impossibilita a rolagem da página pelo usuário
-	function openSearchBar():void {
+	function openSearchBar(): void {
 		blockScroll();
 		setSearchBar(true);
 	}
-	
+
 	// Abre e fecha o menu a partir do clique no ícone
 	function toggleMenu(menu: boolean): void {
 		if (menu) {
@@ -43,25 +31,16 @@ export default function Header() {
 		}
 	}
 
-	useEffect(() => {
-		window.addEventListener('scroll', scrollPage);
-		return () => {
-			window.removeEventListener('scroll', scrollPage);
-		};
-	}, [scrollPosition]);
-
 	return (
-		<header
-			id='header'
-			className={ `w-full h-12 px-2 py-8 z-[60] bg-yellow flex justify-between items-center sticky top-0 transition-transform duration-300
-            ${ userScroll ? 'transform translate-y-0' : '-translate-y-full' }` }
+		<nav
+			className='fixed bottom-0 left-0 right-0 w-screen h-16 px-8 bg-transparent z-60 flex justify-around items-center'
 		>
 			<div
 				className='w-[35px] h-[35px] flex justify-center items-center'
 			>
 				<MenuIcon
-					menu={ menu }
-					toggleMenu={ toggleMenu }
+					menu={menu}
+					toggleMenu={toggleMenu}
 				/>
 			</div>
 			<Image
@@ -69,7 +48,7 @@ export default function Header() {
 				width='25'
 				height='25'
 				alt='A magnifiyng glass vectorized, representing the search icon'
-				className='place-content-end opacity-60'
+				className='place-content-end'
 				onClick={ () => openSearchBar() }
 			/>
 			<Link href='/'>
@@ -88,18 +67,18 @@ export default function Header() {
 						onClick={() => signOut()}
 						className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
 					>
-				Sign Out
+						Sign Out
 					</button>
-					
+
 				) : (
 					<Link href='/auth/signin'>
 						<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
-					Sign In
+							Sign In
 						</button>
 					</Link>
-				
+
 				)
 			}
-		</header>
+		</nav>
 	);
 }

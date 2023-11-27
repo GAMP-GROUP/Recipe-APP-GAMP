@@ -7,9 +7,7 @@
 @layer base {
   html {
     font-family: 'Lato', sans-serif;
-  }
-  body {
-    @apply bg-white
+    @apply w-screen
   }
   h3 {
     @apply text-5xl font-bold

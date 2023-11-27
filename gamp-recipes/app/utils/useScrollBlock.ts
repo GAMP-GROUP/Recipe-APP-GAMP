@@ -9,8 +9,8 @@ const useScrollBlock = () => {
 
 		if (!body || !body.style) return;
 
-		html.style.overflow = 'hidden';
-		body.style.overflow = 'hidden';
+		html.style.overflowY = 'hidden';
+		body.style.overflowY = 'hidden';
 	};
 
 	const allowScroll = () => {
@@ -21,8 +21,8 @@ const useScrollBlock = () => {
 
 		if (!body || !body.style ) return;
 
-		html.style.overflow = '';
-		body.style.overflow = '';
+		html.style.overflowY = '';
+		body.style.overflowY = '';
 	};
 
 	return [blockScroll, allowScroll];
