@@ -63,18 +63,18 @@ export default function SearchBar() {
 	return (
 		<section
 			id='searchBar'
-			className={ `z-[99] relative transition-transform ${ searchBar ? 'translate-y-0' : '-translate-y-16' }` }
+			className={ `z-[99] fixed top-0 transition-transform ${ searchBar ? 'translate-y-0' : '-translate-y-16' }` }
 		>
 			{/* A tela toda */}
 			<section
-				className={ 'w-screen h-16 fixed top-0 bg-white py-3 px-6 flex justify-between items-center' }
+				className={ 'w-screen h-16 bg-white py-3 px-6 flex justify-between items-center' }
 			> {/* O container branco */}
 				<fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center'>
 					<input
 						type='text'
 						placeholder='Recipe or ingredient'
 						className='bg-gray-200 ml-3'
-						value={currentSearch}
+						value={ currentSearch }
 						onChange={(element) => setCurrentSearch(element.target.value)}
 						onKeyDown={(event) => handleSearchClick(event)}
 					/> {/* O campo para inserir o termo de pesquisa */}
@@ -87,11 +87,11 @@ export default function SearchBar() {
 							width={15}
 							height={15}
 							alt='Search icon'
-							onClick={closeSearchBar}
+							onClick={ closeSearchBar }
 						/> {/* Icone de pesquisa */}
 					</button> {/* Botão para fazer a pesquisa */}
 				</fieldset> {/* Todo container que abrange o campo input mais o botão */}
-				<button onClick={closeSearchBar}>
+				<button onClick={ closeSearchBar }>
 					<picture>
 						<img
 							src='/icons/close-white.png'

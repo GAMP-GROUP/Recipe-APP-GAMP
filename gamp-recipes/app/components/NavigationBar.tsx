@@ -9,15 +9,20 @@ import MenuIcon from './MenuIcon';
 
 export default function NavigationBar() {
 	const [blockScroll, allowScroll] = useScrollBlock();
-	const { setSearchBar, menu, setMenu } = useBehaviorContext();
+	const { searchBar, setSearchBar, menu, setMenu } = useBehaviorContext();
 	const { status } = useSession();
 
 	const sessionStatus = status === 'authenticated' ? true : false;
 
 	// Abre a barra de pesquisa e impossibilita a rolagem da página pelo usuário
-	function openSearchBar(): void {
-		blockScroll();
-		setSearchBar(true);
+	function toggleSearchBar(): void {
+		if (searchBar) {
+			setSearchBar(false);
+			allowScroll();
+		} else {
+			setSearchBar(true);
+			blockScroll();
+		}
 	}
 
 	// Abre e fecha o menu a partir do clique no ícone
@@ -49,7 +54,7 @@ export default function NavigationBar() {
 				height='25'
 				alt='A magnifiyng glass vectorized, representing the search icon'
 				className='place-content-end'
-				onClick={ () => openSearchBar() }
+				onClick={ () => toggleSearchBar() }
 			/>
 			<Link href='/'>
 				<picture>
