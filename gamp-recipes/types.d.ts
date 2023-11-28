@@ -35,12 +35,20 @@ type drinkAPI = {
 	[drinks: string]: externalRes;
 };
 
+type ShareBtnProps = {
+	id: string,
+	ImgClass?: string
+	setState: React.Dispatch<React.SetStateAction<boolean>>;
+	shareModal: boolean;
+
+}
+
+
 type ButtonProps = {
 	id: string,
 	ImgClass?: string
 
 }
-
 
 type mealAPI = {
 	[meals: string]: externalRes;

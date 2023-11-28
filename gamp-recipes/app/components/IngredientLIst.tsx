@@ -144,7 +144,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 									<div className='flex row  items-center justify-around  mb-2 ml-2 h-12 '>
 
 										{svgOptions[itemsChecked[property] ? 'option1' : 'option2']}
-										<li className='text-left ml-2 w-full text-xl text-gray-600 h-fit '>{amount[index]}  {property}</li>
+										<p className='text-left ml-2 w-full text-xl text-gray-600 h-fit '>{amount[index]}  {property}</p>
 
 
 									</div>

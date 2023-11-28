@@ -1,17 +1,17 @@
 'use client';
 
 import React from 'react';
-import { ButtonProps } from '@/types';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+import { ShareBtnProps } from '@/types';
+// import { useSession } from 'next-auth/react';
+// import { useRouter } from 'next/navigation';
 
 
-export default function ShareButton({ id }: ButtonProps) {
-	const session = useSession();
-	const router = useRouter();
 
-	const { setShare, share } = useBehaviorContext();
+export default function ShareButton({ id, setState, shareModal }: ShareBtnProps) {
+	// const session = useSession();
+	// const router = useRouter();
+
+
 
 
 
@@ -25,8 +25,8 @@ export default function ShareButton({ id }: ButtonProps) {
 
 
 
-		setShare(!share);
-		console.log(share);
+		setState(!shareModal);
+		console.log(shareModal);
 
 
 	}
