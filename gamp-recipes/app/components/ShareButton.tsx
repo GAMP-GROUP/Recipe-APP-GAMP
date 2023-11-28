@@ -48,7 +48,7 @@ export default function ShareButton({ id, setState, shareModal }: ShareBtnProps)
 					id={id}
 					alt='Favorite button'
 					src='/icons/share.png'
-					className='w-7 h-7 m-auto'
+					className='w-7 h-7 m-auto lg:-mt-2'
 				/>
 			</picture>
 		</button>

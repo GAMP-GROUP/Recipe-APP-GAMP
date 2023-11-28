@@ -23,7 +23,10 @@ const config: Config = {
 				'argentum': ['Argentum-Sans-Bold',],
 				'poppins': ['Poppins', 'sans-serif'],
 
-			}
+			},
+
+
+
 		},
 	},
 	plugins: [],

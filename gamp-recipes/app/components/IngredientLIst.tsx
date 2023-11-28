@@ -122,7 +122,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 	return (
-		<div className='flex-col'>
+		<div className='flex-col  mr-3 '>
 			<h2
 				className='text-2xl text-left uppercase ml-3 font-lato font-semibold mb-5'
 			>ingredients</h2>
@@ -137,9 +137,9 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 						}}
 
 
-						className={`flex flex-row justify-between shadow-lg rounded-xl mb-2 h-fit  ml-3 mr-3 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
+						className={`flex mb-3 flex-row justify-between shadow-lg rounded-xl h-fit  ml-3 mr-10 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
 						<ul
-							className='self-center'
+							className='self-center w-full '
 						>
 							<li>
 								<label>
@@ -148,7 +148,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 										name={property}
 										checked={itemsChecked[property] || false}
 										onChange={handleCheckboxClick}
-										className='hidden'
+										className='hidden w-full'
 									/>
 									<div className='flex row  items-center justify-around  mb-2 ml-2 h-12 '>
 
@@ -172,7 +172,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 						type="button"
 						disabled={isDisabled}
 						onClick={handleFinishBtn}
-						className={` self-end text-white bg-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center ${isDisabled ? 'bg-gray-300' : 'bg-gray-800'}`}
+						className={`  text-white bg-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex  ${isDisabled ? 'bg-gray-300' : 'bg-gray-800'}`}
 					>
 						Finish
 					</button>

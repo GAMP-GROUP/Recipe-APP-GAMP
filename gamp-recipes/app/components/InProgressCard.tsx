@@ -45,94 +45,92 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={'text-center flex flex-col items-center  overflow-y-scroll no-scrollbar   text-lg sm:text-s'}
+			className={'text-center flex flex-col lg:flex-row lg:justify-center font-lato     text-lg sm:text-s'}
 		>
-			<div>
 
-				<section className='text-left ml-2'>
 
-					<div className='grid grid-cols-2 gap-4 p-3 ml-3  shadow-lg rounded-lg mt-3 '>
 
-						<div className=''>
-							<h2
-								className={'text-4xl font-bold antialiased list h-10} '}
-							>{inProgressData.recipe?.recipe_name}
-							</h2>
+			<section className='text-left ml-2 lg:w-full '>
 
-							<h4 className='text-gray-600 font-lato  text-lg'>
-								{inProgressData.recipe?.category_name}, {inProgressData.recipe?.recipe_type_name} , {ingredients.map((ing, index) => {
-									if (index === ingredients.length - 1) {
-										return ing;
-									}
-									return `${ing}, `;
+				<div
+					className='grid grid-cols-2 gap-4 p-3 ml-3  mt-3 mr-5 lg:shadow-none  lg:-mt-12 lg:flex lg:flex-col lg:w-full'>
+
+					<div className='lg:grid-cols-2 h-fit lg:absolute lg:ml-4 lg:top-2/4'>
+						<h2
+							className={'text-4xl font-bold antialiased list h-10 lg:ml-3 font-lato lg:mt-32 lg:w-fit lg:text-white lg:font-extrabold'}
+						>{inProgressData.recipe?.recipe_name}
+						</h2>
+
+						<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl  lg: lg:ml-3 lg:text-white lg:font-semibold'>
+							{inProgressData.recipe?.category_name}, {inProgressData.recipe?.recipe_type_name} , {ingredients.map((ing, index) => {
+								if (index === ingredients.length - 1) {
+									return ing;
 								}
-								)}
-							</h4>
+								return `${ing}, `;
+							}
+							)}
+						</h4>
 
-							<div className='flex flex-row justify-start ml-2 w-fit'>
+						<div className=' flex  mt-7 '>
 
-								<div className='flex flex-row self-center h'>
-
-
-									<FavButton
-										id={inProgressData.detailed.toString()}
-										ImgClass='w-full h-6 m-auto'
-
-									/>
-
-								</div>
-
-								<div className={`flex flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} `}>
-
-									<ShareToSocialCard
-										id={inProgressData.detailed.toString()}
-										url={`https://gamp.vercel.app/${inProgressData.detailed}`}
-										img={inProgressData?.recipe.image as string}
-									/>
+							<div className='self-center'>
 
 
-								</div>
+								<FavButton
+									id={inProgressData.detailed.toString()}
+									ImgClass='w-full h-6 m-auto'
+
+								/>
+
+							</div>
+
+							<div className={`flex flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} lg:self-center `}>
+
+								<ShareToSocialCard
+									id={inProgressData.detailed.toString()}
+									url={`https://gamp.vercel.app/${inProgressData.detailed}`}
+									img={inProgressData?.recipe.image as string}
+								/>
+
+
 							</div>
 						</div>
+					</div>
 
-						<div className='h-fit p-2'>
-							<picture >
-								<img className={'w-full shadow-md rounded-2xl '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
-							</picture>
-						</div>
+					<div className='h-full p-2 w-full '>
 
-
-
-
+						<img className={'w-full shadow-md rounded-2xl lg:h-fit lg:w-fit lg:rounded-md '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 
 					</div>
 
-				</section>
+				</div>
+
+			</section >
+
+			<section className=' text-left ml-2 lg:w-2/4 flex-col '>
 
 
-				<section className='flex flex-col justify-start p-2'>
+				<section className='w-fit lg:items-center lg:border-b-4 lg:border-gray-100 lg:border-solid lg:w-fit	'>
 					<h2
-						className={'text-3xl text-left p-3 ml-2 font-semibold  font-lato'}
+						className={'text-3xl text-left mt-2 ml-5 font-bold  font-lato lg:text-left'}
 					>
 						Instructions
 					</h2>
-					<p className={'text-2xl text-left p-3 ml-2  text-gray-600 font-lato '}>{inProgressData?.recipe.instructions}</p>
+					<p className={'text-2xl text-left p-4 ml-3 mr-3  text-gray-600 font-lato  lg:text-left max-w-lg'}>{inProgressData?.recipe.instructions}</p>
 				</section>
-
 
 
 				<section
-					className={'w-full my-2 p-3 ml-2 flex '}
+					className={'w-full my-2  ml-2 flex  '}
 				>
 					<IngredientList id={parseInt(inProgressData.detailed)} amount={amount} ingredients={ingredients as string[]} />
 				</section>
-
-				<div className=" my-4">
-					<SnackbarProvider maxSnack={1} />
-				</div>
+			</section>
+			<div className=" my-4">
+				<SnackbarProvider maxSnack={1} />
 			</div>
-
-
 		</div >
+
+
 	);
 }
