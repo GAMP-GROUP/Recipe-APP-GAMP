@@ -12,17 +12,13 @@ type ingredientListProps = {
 	id: number;
 	ingredients: string[];
 	amount: string[];
-
-
-}
-
-
+};
 
 export default function IngredientList({ ingredients, id, amount }: ingredientListProps) {
-	const [itemsChecked, setItemsChecked] = useState<{ [key: string]: boolean }>(
-		{}
-	);
 
+
+	const initialItemsChecked = JSON.parse(localStorage.getItem('itemsChecked') ?? '') || {};
+	const [itemsChecked, setItemsChecked] = useState(initialItemsChecked);
 	const [count, setCount] = useState<number>(0);
 
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
@@ -53,17 +49,29 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 	}, [itemsChecked]);
+
+
 	const handleCheckboxClick = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, checked } = event.target;
+
+		const itemsAlreadyInLocalStorage = Object.values(itemsChecked) as boolean[];
+
+		const initialCount = Object.values(itemsAlreadyInLocalStorage).filter((item) => item).length;
+		console.log('prevCount', initialCount);
+
+
+
 		setItemsChecked((prev) => ({ ...prev, [name]: checked }));
+
 
 		setCount((prevCount) => {
 			// Incrementa se checked é true, decrementa se checked é false
-			return checked ? prevCount + 1 : prevCount - 1;
+			return checked ? initialCount + 1 : Math.max(prevCount - 1, 0); // Ensure count is not negative
 		});
 
 		// Este código será executado após o estado ser atualizado
-		const updatedCount = checked ? count + 1 : count - 1;
+		const updatedCount = checked ? count + 1 : Math.max(count - 1, 0); // Ensure count is not negative
+		console.log('updatedCount', updatedCount);
 
 		if (updatedCount === ingredients.length) {
 			setIsDisabled(false);
@@ -74,6 +82,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		console.log('count', updatedCount);
 		console.log('ingredients.length', ingredients.length);
 	};
+
 
 
 
