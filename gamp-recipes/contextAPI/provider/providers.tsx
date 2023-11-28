@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 import { UserProvider } from '../context';
 import { BehaviorProvider } from '../context/behavior.context';

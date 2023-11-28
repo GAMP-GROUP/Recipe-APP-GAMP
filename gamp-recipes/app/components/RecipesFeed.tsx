@@ -34,9 +34,9 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) 
 	return (
 		<>
 			<section
-				className={ `w-screen transition-transform duration-700 ${ menu ? 'translate-x-full' : 'translate-x-0' }` }
+				className={ `w-screen h-full pb-12 transition-transform duration-700 ${ menu ? 'translate-x-full' : 'translate-x-0' }` }
 			>
-				{filteredRecipes.map((recipe, index) => (
+				{ filteredRecipes.map((recipe, index) => (
 					<div key={index}>
 						<RecipesCard
 							type={recipe.recipe_type_id}
@@ -48,7 +48,7 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) 
 							alcoholic={recipe.recipe_type_id === 1 ? recipe.alcoholic : null}
 						/>
 					</div>
-				))}
+				)) }
 			</section>
 		</>
 	);

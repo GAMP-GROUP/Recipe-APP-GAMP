@@ -22,6 +22,12 @@ export default function NavigationBar() {
 		} else {
 			setSearchBar(true);
 			blockScroll();
+
+			const searchInput = document.getElementById('search-input');
+
+			if (searchInput) {
+				searchInput.focus();
+			}
 		}
 	}
 
@@ -69,7 +75,7 @@ export default function NavigationBar() {
 			{
 				sessionStatus ? (
 					<button
-						onClick={() => signOut()}
+						onClick={ () => signOut() }
 						className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
 					>
 						Sign Out

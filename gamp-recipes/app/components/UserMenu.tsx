@@ -40,7 +40,7 @@ export default function UserMenu() {
 			className={ `w-screen fixed top-0 left-0 right-0 transition-transform duration-700 ${ menu ? 'translate-x-0' : '-translate-x-full' }` }
 		>
 			<ul className="flex-row w-full">
-				{menuItems.map((item, index) => (
+				{ menuItems.map((item, index) => (
 					<Link href={`/${item.toLowerCase()}`} key={ index }>
 						<li
 							onClick={ () => closeMenu() }
@@ -57,7 +57,7 @@ export default function UserMenu() {
 							<hr className="absolute w-11/12 opacity-20 border-b border-gray-500 bottom-0 left-1/2 transform -translate-x-1/2" />
 						</li>
 					</Link>
-				))}
+				)) }
 			</ul>
 			<aside
 				id='outside-menu'

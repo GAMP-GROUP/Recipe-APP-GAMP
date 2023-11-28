@@ -54,7 +54,7 @@ export default function SearchBar() {
 		};
 	
 		document.addEventListener('keydown', handleKeyDown);
-  
+
 		return () => {
 			document.removeEventListener('keydown', handleKeyDown);
 		};
@@ -71,9 +71,10 @@ export default function SearchBar() {
 			> {/* O container branco */}
 				<fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center'>
 					<input
+						id='search-input'
 						type='text'
 						placeholder='Recipe or ingredient'
-						className='bg-gray-200 ml-3'
+						className='bg-gray-200 ml-3 w-full'
 						value={ currentSearch }
 						onChange={(element) => setCurrentSearch(element.target.value)}
 						onKeyDown={(event) => handleSearchClick(event)}
@@ -88,6 +89,7 @@ export default function SearchBar() {
 							height={15}
 							alt='Search icon'
 							onClick={ closeSearchBar }
+							className='ml-2'
 						/> {/* Icone de pesquisa */}
 					</button> {/* Botão para fazer a pesquisa */}
 				</fieldset> {/* Todo container que abrange o campo input mais o botão */}
