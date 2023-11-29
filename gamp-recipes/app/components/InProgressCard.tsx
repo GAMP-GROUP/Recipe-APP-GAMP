@@ -38,6 +38,15 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 	const { ingredients, amount } = getIngredientsAndAmount();
 
+	const instructions = inProgressData.recipe?.instructions.split('\n').map((instruction, index) => {
+		return (
+			<p key={index} className={'text-2xl text-left p-2 mr-3  text-gray-600 font-lato  lg:text-left '}>{instruction}</p>
+		);
+	}
+	);
+	console.log(instructions);
+
+
 
 
 
@@ -84,7 +93,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 					<div className='h-fit w-fit lg:w-[672px] self-end justify-end relative'>
 
-						<img className={'w-full shadow-md rounded-2xl lg:h-full lg:min-h-fit  lg:max-w-lg     lg:rounded-md max-w-3xl '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
+						<img className={'w-full shadow-md rounded-2xl lg:h-full lg:min-h-fit  lg:max-w-lg     lg:rounded-sm max-w-3xl '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 
 					</div>
 
@@ -148,7 +157,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 						>
 							Instructions
 						</h2>
-						<p className={'text-2xl text-left p-4 mr-3  text-gray-600 font-lato  lg:text-left '}>{inProgressData?.recipe.instructions}</p>
+						<p className={'text-2xl text-left p-4 mr-3  text-gray-600 font-lato  lg:text-left '}>{instructions}</p>
 					</section>
 				</div>
 
