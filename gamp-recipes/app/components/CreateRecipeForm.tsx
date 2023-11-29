@@ -297,7 +297,7 @@ export default function CreateRecipeForm({ allIngredientsList, categoryList }: T
 
 			{ /* Botão para adicionar mais ingredientes */}
 			<button
-				onClick={(event) => addIngredient(event)}
+				onClick={ (event) => addIngredient(event) }
 				className='text-sm font-semibold py-1 mr-2 bg-yellow text-black rounded-2xl w-full'
 			>
 				New Ingredient
