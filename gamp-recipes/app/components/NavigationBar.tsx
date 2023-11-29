@@ -44,52 +44,63 @@ export default function NavigationBar() {
 
 	return (
 		<nav
-			className='fixed bottom-0 left-0 right-0 w-screen h-16 px-8 bg-transparent z-60 flex justify-around items-center'
+			id='navigation-bar'
+			className='fixed mx-auto bottom-6 rounded-3xl h-16 px-4 bg-yellow z-60 flex justify-evenly items-center gap-8 shadow-md'
 		>
 			<div
-				className='w-[35px] h-[35px] flex justify-center items-center'
+				id='left-navigation-bar'
+				className='flex flex-row w-18 gap-6 items-center'
 			>
-				<MenuIcon
-					menu={menu}
-					toggleMenu={toggleMenu}
+				<div className="w-7">
+					<MenuIcon
+						menu={menu}
+						toggleMenu={toggleMenu}
+					/>
+				</div>
+				<Image
+					src='/icons/search.png'
+					width='25'
+					height='25'
+					alt='A magnifiyng glass vectorized, representing the search icon'
+					onClick={ () => toggleSearchBar() }
 				/>
 			</div>
-			<Image
-				src='/icons/search.png'
-				width='25'
-				height='25'
-				alt='A magnifiyng glass vectorized, representing the search icon'
-				className='place-content-end'
-				onClick={ () => toggleSearchBar() }
-			/>
-			<Link href='/'>
-				<picture>
-					<img
-						id='gamp-logo'
-						className='transition-all duration-300 w-[62px]'
+			<div
+				id="center-navigation-bar"
+				className='w-18'
+			>
+				<Link href='/'>
+					<Image
 						src='/images/logo-simple.png'
-						alt='Our logo'
+						width={ 60 }
+						height={ 60 }
+						alt='logo'
 					/>
-				</picture>
-			</Link>
-			{
-				sessionStatus ? (
-					<button
-						onClick={ () => signOut() }
-						className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
-					>
+				</Link>
+			</div>
+			<div
+				id="right-navigation-bar"
+				className='w-18'
+			>
+				{
+					sessionStatus ? (
+						<button
+							onClick={ () => signOut() }
+							className='text-sm font-semibold px-5 py-1 bg-black text-white rounded-2xl'
+						>
 						Sign Out
-					</button>
-
-				) : (
-					<Link href='/auth/signin'>
-						<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
-							Sign In
 						</button>
-					</Link>
 
-				)
-			}
+					) : (
+						<Link href='/auth/signin'>
+							<button className='text-sm font-semibold px-4 py-1 bg-black text-white rounded-2xl'>
+							Sign In
+							</button>
+						</Link>
+
+					)
+				}
+			</div>
 		</nav>
 	);
 }

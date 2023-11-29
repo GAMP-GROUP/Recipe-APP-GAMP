@@ -7,10 +7,8 @@ type TMenuIconProps = {
 
 export default function MenuIcon({ menu, toggleMenu }: TMenuIconProps) {
 	return (
-		<>
-			<label htmlFor='menu-icon' className={`menu-icon transition-transform duration-300 ${ menu === true ? 'translate-x-1' : '' }`}>
-				<input type="checkbox" name='menu-icon' id='menu-icon' onClick={ () => toggleMenu(menu) } />
-			</label>
-		</>
+		<label htmlFor='menu-icon' className={`menu-icon transition-transform duration-300 ${ menu === true ? 'translate-x-[0.1rem]' : '' }`}>
+			<input type="checkbox" name='menu-icon' id='menu-icon' onClick={ () => toggleMenu(menu) } />
+		</label>
 	);
 }

@@ -34,18 +34,19 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) 
 	return (
 		<>
 			<section
-				className={ `w-screen h-full pb-12 transition-transform duration-700 ${ menu ? 'translate-x-full' : 'translate-x-0' }` }
+				id='recipes-feed'
+				className={ `transition-opacity duration-500 ${ menu ? 'opacity-0' : 'opacity-100' }` }
 			>
 				{ filteredRecipes.map((recipe, index) => (
-					<div key={index}>
+					<div key={ index }>
 						<RecipesCard
-							type={recipe.recipe_type_id}
-							id={recipe.id}
-							title={recipe.recipe_name}
-							tags={recipe.tags}
-							image={recipe.image}
-							area={recipe.recipe_type_id === 2 ? recipe.area : null}
-							alcoholic={recipe.recipe_type_id === 1 ? recipe.alcoholic : null}
+							type={ recipe.recipe_type_id }
+							id={ recipe.id }
+							title={ recipe.recipe_name }
+							tags={ recipe.tags }
+							image={ recipe.image }
+							area={ recipe.recipe_type_id === 2 ? recipe.area : null }
+							alcoholic={ recipe.recipe_type_id === 1 ? recipe.alcoholic : null }
 						/>
 					</div>
 				)) }

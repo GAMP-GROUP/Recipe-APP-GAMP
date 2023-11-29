@@ -18,12 +18,10 @@ export default async function Home() {
 	allRecipes.sort(getRandomNumber);
 
 	return (
-		<section className="flex-row">
-			<RecipesFeed
-				recipesQuantity={25}
-				feedType={'all'}
-				recipes={allRecipes}
-			/>
-		</section>
+		<RecipesFeed
+			recipesQuantity={25}
+			feedType={'all'}
+			recipes={allRecipes}
+		/>
 	);
 }

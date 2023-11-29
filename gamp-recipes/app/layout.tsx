@@ -21,8 +21,8 @@ export default function RootLayout({
 }) {
 
 	return (
-		<html lang='en'>
-			<body className='flex-col relative bg-white w-screen h-full overflow-x-hidden'>
+		<html lang='en' className='w-screen h-full'>
+			<body className='w-screen h-full bg-white overflow-x-hidden flex justify-center'>
 				<Providers>
 					<AuthProvider>
 						<SearchBar />
