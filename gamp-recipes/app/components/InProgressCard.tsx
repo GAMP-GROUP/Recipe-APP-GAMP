@@ -45,7 +45,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={'text-center flex flex-col lg:flex-row lg:justify-center font-lato     text-lg sm:text-s'}
+			className={'text-center flex flex-col lg:flex-row lg:justify-center font-lato  overflow-y-scroll no-scrollbar  text-lg sm:text-s'}
 		>
 
 
@@ -53,15 +53,17 @@ export default function InProgressCard(inProgressData: inProgressData) {
 			<section className='text-left ml-2 lg:w-full '>
 
 				<div
-					className='grid grid-cols-2 gap-4 p-3 ml-3  mt-3 mr-5 lg:shadow-none  lg:-mt-12 lg:flex lg:flex-col lg:w-full'>
+					className={'grid grid-cols-2 gap-4 p-3 ml-3 lg:ml-10 mt-3 mr-5 lg:shadow-none  lg:max-w-full lg:min-w-full lg:-mt-12 lg:flex lg:flex-col lg:h-[1000px]'}
+				>
 
-					<div className='lg:grid-cols-2 h-fit lg:absolute lg:ml-4 lg:top-2/4'>
+					<div className='lg:grid-cols-2 h-fit lg:relative lg:z-10 lg:ml-4 lg:top-2/4 lg:opacity-100'>
 						<h2
-							className={'text-4xl font-bold antialiased list h-10 lg:ml-3 font-lato lg:mt-32 lg:w-fit lg:text-white lg:font-extrabold'}
+							className={'text-4xl font-bold antialiased list h-10 lg:ml-3 font-lato lg:mt-28 lg:w-fit  lg:text-white lg:font-extrabold'}
 						>{inProgressData.recipe?.recipe_name}
 						</h2>
 
-						<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl  lg: lg:ml-3 lg:text-white lg:font-semibold'>
+
+						<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl   lg:h-fit  lg: lg:ml-3 lg:text-white lg:font-semibold'>
 							{inProgressData.recipe?.category_name}, {inProgressData.recipe?.recipe_type_name} , {ingredients.map((ing, index) => {
 								if (index === ingredients.length - 1) {
 									return ing;
@@ -71,7 +73,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 							)}
 						</h4>
 
-						<div className=' flex  mt-7 '>
+						<div className=' flex  mt-7   lg:ml-1   '>
 
 							<div className='self-center'>
 
@@ -84,7 +86,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 							</div>
 
-							<div className={`flex flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} lg:self-center `}>
+							<div className={`flex  flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} lg:self-center `}>
 
 								<ShareToSocialCard
 									id={inProgressData.detailed.toString()}
@@ -94,12 +96,17 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 
 							</div>
+							<div>
+								<h4 className='text-black font-lato  text-xl ml-1 lg:max-w-2xl  lg:ml-3 lg:text-black lg:font-semibold'>
+									created by gabriel
+								</h4>
+							</div>
 						</div>
 					</div>
 
-					<div className='h-full p-2 w-full '>
+					<div className='h-fit w-fit lg:bg-black lg:absolute lg:-z-10  lg:w-[701px] lg:h-[701px] '>
 
-						<img className={'w-full shadow-md rounded-2xl lg:h-fit lg:w-fit lg:rounded-md '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
+						<img className={'w-full shadow-md rounded-2xl lg:h-full  lg:w-full lg:opacity-75 lg:rounded-md max-w-3xl '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 
 					</div>
 
@@ -116,7 +123,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 					>
 						Instructions
 					</h2>
-					<p className={'text-2xl text-left p-4 ml-3 mr-3  text-gray-600 font-lato  lg:text-left max-w-lg'}>{inProgressData?.recipe.instructions}</p>
+					<p className={'text-2xl text-left p-4 ml-3 mr-3  text-gray-600 font-lato  lg:text-left max-w-3xl'}>{inProgressData?.recipe.instructions}</p>
 				</section>
 
 

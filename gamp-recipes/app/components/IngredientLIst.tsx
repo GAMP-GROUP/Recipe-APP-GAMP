@@ -122,11 +122,9 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 	return (
-		<div className='flex-col  mr-3 '>
-			<h2
-				className='text-2xl text-left uppercase ml-3 font-lato font-semibold mb-5'
-			>ingredients</h2>
-			<section className='flex-col'>
+		<div className='flex-col flex lg:flex-col-reverse  mr-3 '>
+
+			<section className='flex flex-col  w-screen '>
 
 				{ingredients.map((property, index) => (
 					<motion.div
@@ -153,7 +151,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 									<div className='flex row  items-center justify-around  mb-2 ml-2 h-12 '>
 
 										{svgOptions[itemsChecked[property] ? 'option1' : 'option2']}
-										<p className='text-left ml-2 w-full text-xl text-gray-600 h-fit '>{amount[index]}  {property}</p>
+										<p className='text-left ml-2 w-full text-2xl font-semibold text-gray-600 h-fit  '>{amount[index]}  {property}</p>
 
 
 									</div>
@@ -165,21 +163,25 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 				))}
 
 
-
-
-				<div className='self-end w-screen'>
-					<button
-						type="button"
-						disabled={isDisabled}
-						onClick={handleFinishBtn}
-						className={`  text-white bg-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex  ${isDisabled ? 'bg-gray-300' : 'bg-gray-800'}`}
-					>
-						Finish
-					</button>
-				</div>
-
-
 			</section>
+
+			<div className='lg:flex max-w-screen-sm lg:flex-row-reverse  lg:justify-between'>
+				<button
+					type="button"
+					disabled={isDisabled}
+					onClick={handleFinishBtn}
+					className={`  text-white lg:mb-3  bg-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex  ${isDisabled ? 'bg-gray-300' : 'bg-gray-800'}`}
+				>
+					Finish
+				</button>
+
+				<h2
+					className='text-2xl text-left uppercase ml-3 font-lato font-semibold mb-5'
+				>ingredients</h2>
+			</div>
+
+
+
 
 		</div >
 	);
