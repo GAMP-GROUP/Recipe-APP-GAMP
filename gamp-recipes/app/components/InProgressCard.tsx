@@ -45,86 +45,88 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={'text-center flex flex-col lg:flex-row lg:justify-center font-lato  overflow-y-scroll no-scrollbar  text-lg sm:text-s'}
+			className={' lg:grid lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-12 overflow-y-scroll no-scrollbar  text-center flex flex-col lg:flex-row lg:justify-center font-lato    text-lg sm:text-s overflow-scroll-y no-scroll'}
 		>
 
 
 
-			<section className='text-left ml-2 lg:w-full '>
+			<section className='text-left ml-2  lg:w-full '>
 
 				<div
-					className={'grid grid-cols-2 gap-4 p-3 ml-3 lg:ml-10 mt-3 mr-5 lg:shadow-none  lg:max-w-full lg:min-w-full lg:-mt-12 lg:flex lg:flex-col lg:h-[1000px]'}
+					className={'   gap-4 p-3 ml-3  mt-3 lg:shadow-none lg:justify-end lg:items-end	lg:ml-0 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
 				>
 
-					<div className='lg:grid-cols-2 h-fit lg:relative lg:z-10 lg:ml-4 lg:top-2/4 lg:opacity-100'>
+					<div className='lg:w-[672px] w-fit h-fit'>
 						<h2
-							className={'text-4xl font-bold antialiased list h-10 lg:ml-3 font-lato lg:mt-28 lg:w-fit  lg:text-white lg:font-extrabold'}
+							className={'text-4xl font-bold antialiased list   font-lato  lg:text-black lg:font-extrabold'}
 						>{inProgressData.recipe?.recipe_name}
 						</h2>
 
-
-						<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl   lg:h-fit  lg: lg:ml-3 lg:text-white lg:font-semibold'>
-							{inProgressData.recipe?.category_name}, {inProgressData.recipe?.recipe_type_name} , {ingredients.map((ing, index) => {
-								if (index === ingredients.length - 1) {
-									return ing;
-								}
-								return `${ing}, `;
-							}
-							)}
-						</h4>
-
-						<div className=' flex  mt-7   lg:ml-1   '>
-
-							<div className='self-center'>
+						<div className='flex gap-3'>
+							<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl    lg:  lg:text-black lg:font-semibold'>
+								Category: {inProgressData.recipe?.category_name}
+							</h4>
 
 
-								<FavButton
-									id={inProgressData.detailed.toString()}
-									ImgClass='w-full h-6 m-auto'
+							<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl    lg:  lg:text-black lg:font-semibold'>
+								Author: {inProgressData.recipe?.category_name}
+							</h4>
 
-								/>
-
-							</div>
-
-							<div className={`flex  flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} lg:self-center `}>
-
-								<ShareToSocialCard
-									id={inProgressData.detailed.toString()}
-									url={`https://gamp.vercel.app/${inProgressData.detailed}`}
-									img={inProgressData?.recipe.image as string}
-								/>
-
-
-							</div>
-							<div>
-								<h4 className='text-black font-lato  text-xl ml-1 lg:max-w-2xl  lg:ml-3 lg:text-black lg:font-semibold'>
-									created by gabriel
-								</h4>
-							</div>
+							<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl    lg:  lg:text-black lg:font-semibold'>
+								Date: {inProgressData.recipe?.category_name}
+							</h4>
 						</div>
-					</div>
 
-					<div className='h-fit w-fit lg:bg-black lg:absolute lg:-z-10  lg:w-[701px] lg:h-[701px] '>
-
-						<img className={'w-full shadow-md rounded-2xl lg:h-full  lg:w-full lg:opacity-75 lg:rounded-md max-w-3xl '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 
 					</div>
+
+
+
+					<div className='h-fit w-fit lg:w-[672px] self-end justify-end relative'>
+
+						<img className={'w-full shadow-md rounded-2xl lg:h-full lg:min-h-fit  lg:max-w-lg     lg:rounded-md max-w-3xl '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
+
+					</div>
+
 
 				</div>
 
+
+
 			</section >
 
-			<section className=' text-left ml-2 lg:w-2/4 flex-col '>
+			<section className=' text-left lg:h-fit ml-2 lg:w-2/4 flex-col '>
+
+				<div className=' flex  mt-7   lg:ml-1   '>
+
+					<div className='self-center'>
 
 
-				<section className='w-fit lg:items-center lg:border-b-4 lg:border-gray-100 lg:border-solid lg:w-fit	'>
-					<h2
-						className={'text-3xl text-left mt-2 ml-5 font-bold  font-lato lg:text-left'}
-					>
-						Instructions
-					</h2>
-					<p className={'text-2xl text-left p-4 ml-3 mr-3  text-gray-600 font-lato  lg:text-left max-w-3xl'}>{inProgressData?.recipe.instructions}</p>
-				</section>
+						<FavButton
+							id={inProgressData.detailed.toString()}
+							ImgClass='w-full h-6 m-auto'
+
+						/>
+
+					</div>
+
+					<div className={`flex   flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} lg:self-center `}>
+
+						<ShareToSocialCard
+							id={inProgressData.detailed.toString()}
+							url={`https://gamp.vercel.app/${inProgressData.detailed}`}
+							img={inProgressData?.recipe.image as string}
+						/>
+
+
+					</div>
+					<div>
+						<h4 className='text-black font-lato  text-xl ml-1 lg:max-w-2xl  lg:ml-3 lg:text-black lg:font-semibold'>
+							created by gabriel
+						</h4>
+					</div>
+				</div>
+
 
 
 				<section
@@ -132,10 +134,28 @@ export default function InProgressCard(inProgressData: inProgressData) {
 				>
 					<IngredientList id={parseInt(inProgressData.detailed)} amount={amount} ingredients={ingredients as string[]} />
 				</section>
+
+
+
+
 			</section>
-			<div className=" my-4">
+
+			<section className=' col-span-2 row-span-3 lg:mt-2 lg:border-t-2  lg:flex  lg:flex-col  lg:justify-end lg:items-center lg:border-gray-200 lg:border-solid  '>
+				<div className='lg:mt-5 lg:mb-5     '>
+					<section className='lg:w-[1286px]  lg:mr-40 '>
+						<h2
+							className={'text-3xl p-4 text-left mt-2 font-bold  font-lato lg:text-left'}
+						>
+							Instructions
+						</h2>
+						<p className={'text-2xl text-left p-4 mr-3  text-gray-600 font-lato  lg:text-left '}>{inProgressData?.recipe.instructions}</p>
+					</section>
+				</div>
+
+			</section>
+			{/* <div className=" my-4">
 				<SnackbarProvider maxSnack={1} />
-			</div>
+			</div> */}
 		</div >
 
 

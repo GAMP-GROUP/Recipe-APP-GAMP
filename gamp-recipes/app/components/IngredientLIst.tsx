@@ -124,7 +124,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 	return (
 		<div className='flex-col flex lg:flex-col-reverse  mr-3 '>
 
-			<section className='flex flex-col  w-screen '>
+			<section className='flex flex-col  w-fit'>
 
 				{ingredients.map((property, index) => (
 					<motion.div
@@ -135,7 +135,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 						}}
 
 
-						className={`flex mb-3 flex-row justify-between shadow-lg rounded-xl h-fit  ml-3 mr-10 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
+						className={`flex mb-3 flex-row justify-between shadow-lg lg:rounded-lg rounded-xl h-fit  ml-3 mr-10 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
 						<ul
 							className='self-center w-full '
 						>
