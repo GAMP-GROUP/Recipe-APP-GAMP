@@ -275,6 +275,7 @@ export async function getRecipeById(request: number) {
 				id: request,
 			},
 			include: {
+				Author_Recipe: true,
 				category_name: true,
 				recipe_type: true,
 				Ingredients_Recipes: {
