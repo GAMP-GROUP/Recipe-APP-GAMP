@@ -2,9 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import RecipesCard from './RecipesCard';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+import LoadingScreen from './LoadingScreen';
 
 type TRecipesProps = {
-	id: number;
+	id: number | null;
 	recipe_name: string;
 	instructions: string;
 	image: string;
@@ -37,19 +38,20 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) 
 				id='recipes-feed'
 				className={ `transition-opacity duration-500 ${ menu ? 'opacity-0' : 'opacity-100' }` }
 			>
-				{ filteredRecipes.map((recipe, index) => (
-					<div key={ index }>
-						<RecipesCard
-							type={ recipe.recipe_type_id }
-							id={ recipe.id }
-							title={ recipe.recipe_name }
-							tags={ recipe.tags }
-							image={ recipe.image }
-							area={ recipe.recipe_type_id === 2 ? recipe.area : null }
-							alcoholic={ recipe.recipe_type_id === 1 ? recipe.alcoholic : null }
-						/>
-					</div>
-				)) }
+				{	filteredRecipes.length <= 0 ? <LoadingScreen /> : 
+					filteredRecipes.map((recipe, index) => (
+						<div key={ index }>
+							<RecipesCard
+								type={ recipe.recipe_type_id }
+								id={ recipe.id }
+								title={ recipe.recipe_name }
+								tags={ recipe.tags }
+								image={ recipe.image }
+								area={ recipe.recipe_type_id === 2 ? recipe.area : null }
+								alcoholic={ recipe.recipe_type_id === 1 ? recipe.alcoholic : null }
+							/>
+						</div>
+					)) }
 			</section>
 		</>
 	);

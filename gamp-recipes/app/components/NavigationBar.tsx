@@ -45,7 +45,7 @@ export default function NavigationBar() {
 	return (
 		<nav
 			id='navigation-bar'
-			className='fixed mx-auto bottom-6 rounded-3xl h-16 px-4 bg-gradient-to-b from-yellow to-amber-300 z-60 flex justify-evenly items-center gap-8 shadow-md'
+			className='fixed mx-auto bottom-6 rounded-3xl h-16 px-4 bg-gradient-to-b from-yellow to-amber-300 z-60 flex justify-evenly items-center gap-8 shadow-lg'
 		>
 			<div
 				id='left-navigation-bar'

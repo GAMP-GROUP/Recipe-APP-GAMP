@@ -3,7 +3,7 @@ import React from 'react';
 import FavButton from './FavoriteButton';
 
 type recipeProps = {
-	id: number,
+	id?: number | null,
 	image: string,
 	title: string,
 	tags: string,
@@ -32,7 +32,7 @@ export default function RecipesCard({ id, image, title, type }: recipeProps): JS
 					<p className="text-sm uppercase font-[600] text-gray-500 tracking-[0.075rem]">{type === 2 ? 'meal' : 'drink'}</p>
 				</div>
 				<FavButton
-					id={ id.toString() }
+					id={ id!.toString() }
 				/>
 			</section>
 		</div>
