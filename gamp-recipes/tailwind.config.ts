@@ -24,6 +24,11 @@ const config: Config = {
 				'poppins': ['Poppins', 'sans-serif'],
 
 			},
+			backgroundColor: {
+
+
+				semiwhite: 'rgb(249, 250, 251)'
+			}
 
 
 

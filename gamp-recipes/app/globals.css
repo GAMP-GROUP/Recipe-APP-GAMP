@@ -25,6 +25,7 @@
 
 
 
+
 	@layer utilities {
 		@variants responsive {
 
@@ -40,6 +41,8 @@
 				scrollbar-width: none;
 				/* Firefox */
 			}
+
+			/* // apply this colocr: bg-249-250-251  */
 		}
 	}
 }

@@ -31,7 +31,7 @@ export default function ShareButton({ id, setState, shareModal }: ShareBtnProps)
 
 	}
 
-	const BtnClass = 'rounded-full w-14 h-14 z-3';
+	const BtnClass = 'w-fit h-8 flex justify-center items-center gap-3 p-5 text-xs font-semibold focus:outline-none hover:bg-yellow font-medium rounded-full bg-gray-white border-solid border-black';
 
 
 
@@ -43,14 +43,16 @@ export default function ShareButton({ id, setState, shareModal }: ShareBtnProps)
 		>
 			<picture
 				id={id}
-				className='m-auto'>
+				className=''>
 				<img
 					id={id}
 					alt='Favorite button'
 					src='/icons/share.png'
-					className='w-7 h-7 m-auto lg:-mt-2'
+					className='w-fit h-5  text'
 				/>
 			</picture>
+
+			Share this recipe
 		</button>
 	);
 

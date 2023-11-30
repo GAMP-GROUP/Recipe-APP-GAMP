@@ -87,7 +87,6 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 
-
 	const svgOptions = {
 		option1: (
 			<svg
@@ -122,12 +121,13 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 	return (
-		<div className='flex-col flex lg:flex-col-reverse  mr-3 '>
+		<div className='flex-col flex lg:flex-col-reverse   mr-3 '>
 
-			<section className='flex flex-col  w-fit'>
+			<section className='flex flex-col  w-fit overflow-y-auto lg:max-h-96'>
 
 				{ingredients.map((property, index) => (
 					<motion.div
+
 						animate={{
 							backgroundColor: itemsChecked[property]
 								? 'rgb(134, 239, 172)'
@@ -135,9 +135,9 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 						}}
 
 
-						className={`flex mb-3 flex-row justify-between shadow-lg lg:rounded-lg rounded-xl h-fit  ml-3 mr-10 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
+						className={`flex mb-3 flex-row justify-between shadow-lg lg:min-w-[171px] items-center  lg:rounded-md rounded-xl h-fit lg:h-10  ml-3 mr-10 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
 						<ul
-							className='self-center w-full '
+							className='self-center w-full lg:w-full lg:mt-2 lg:h-fit '
 						>
 							<li>
 								<label>
@@ -151,7 +151,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 									<div className='flex row  items-center justify-around  mb-2 ml-2 h-12 '>
 
 										{svgOptions[itemsChecked[property] ? 'option1' : 'option2']}
-										<p className='text-left ml-2 w-full text-2xl font-semibold text-gray-600 h-fit  '>{amount[index]}  {property}</p>
+										<p className='text-left ml-2 w-full text-2xl  lg:text-xs font-semibold text-gray-600 h-fit  '>{amount[index]}  {property}</p>
 
 
 									</div>
@@ -165,19 +165,17 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 			</section>
 
-			<div className='lg:flex max-w-screen-sm lg:flex-row-reverse  lg:justify-between'>
-				<button
-					type="button"
-					disabled={isDisabled}
-					onClick={handleFinishBtn}
-					className={`  text-white lg:mb-3  bg-gray-600 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex  ${isDisabled ? 'bg-gray-300' : 'bg-gray-800'}`}
-				>
-					Finish
-				</button>
+			<div className='lg:max-w-[360] lg:w-[360px] lg:min-w-[360px] flex flex-col-reverse items-start h-fit '>
+				<div className='flex gap-2 lg:mb-2'>
+
+
+				</div>
+
+
 
 				<h2
-					className='text-2xl text-left uppercase ml-3 font-lato font-semibold mb-5'
-				>ingredients</h2>
+					className='text-lg text-left ml-3 text-gray-700 font-lato font-semibold  h-fit'
+				>Ingredients</h2>
 			</div>
 
 

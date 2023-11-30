@@ -40,7 +40,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 	const instructions = inProgressData.recipe?.instructions.split('\n').map((instruction, index) => {
 		return (
-			<p key={index} className={'text-2xl text-left p-2 mr-3  text-gray-600 font-lato  lg:text-left '}>{instruction}</p>
+			<p key={index} className={'text-lg max-w-4xl text-left p-2 mr-3  text-gray-600 font-lato  m lg:min-w-[896px] lg:text-left '}>{instruction}</p>
 		);
 	}
 	);
@@ -54,47 +54,77 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={' lg:grid lg:grid-cols-2 lg:grid-rows-1 lg:gap-x-12 overflow-y-scroll no-scrollbar  text-center flex flex-col lg:flex-row lg:justify-center font-lato    text-lg sm:text-s overflow-scroll-y no-scroll'}
+			className={'  bg-slate-50 w-fit lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col lg:flex-row lg:justify-center font-lato    text-lg sm:text-s overflow-scroll-y no-scroll'}
 		>
 
 
 
-			<section className='text-left ml-2  lg:w-full '>
+			<section className='text-left ml-2 self-center flex justify-center items-center '>
 
 				<div
-					className={'   gap-4 p-3 ml-3  mt-3 lg:shadow-none lg:justify-end lg:items-end	lg:ml-0 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
+					className={'  lg:mr-20 gap-4  ml-3  mb-5 min-h-min lg:shadow-none lg:ml-4 lg:pr-10 lg:justify-center lg:items-center	 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
 				>
+					<div className='flex justify-end mr-20  items-center lg:w-[672px] '>
 
-					<div className='lg:w-[672px] w-fit h-fit'>
-						<h2
-							className={'text-4xl font-bold antialiased list   font-lato  lg:text-black lg:font-extrabold'}
-						>{inProgressData.recipe?.recipe_name}
-						</h2>
+						<div className='lg:max-w-[360] lg:w-[360px] lg:min-w-[360px] flex flex-col justify-start items-start h-fit'>
 
-						<div className='flex gap-3'>
-							<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl    lg:  lg:text-black lg:font-semibold'>
-								Category: {inProgressData.recipe?.category_name}
-							</h4>
+							<h2
+								className={'text-2xl font-bold antialiased list  font-lato  lg:text-gray-700 lg:font-extrabold'}
+							>{inProgressData.recipe?.recipe_name}
+							</h2>
+
+							<div className='flex gap-2 lg:mb-2'>
+								<h4 className='text-gray-600 font-lato  text-md  lg:max-w-2xl    lg:  lg:text-gray-500 lg:font-semibold'>
+									Category:   <span className='text-yellow mr-1'>{inProgressData.recipe?.category_name} </span>
+									Category:   <span className='text-yellow'>{inProgressData.recipe?.category_name} </span>
+									Category:   <span className='text-yellow ml-1'>{inProgressData.recipe?.category_name} </span>
+								</h4>
+
+							</div>
 
 
-							<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl    lg:  lg:text-black lg:font-semibold'>
-								Author: {inProgressData.recipe?.category_name}
-							</h4>
 
-							<h4 className='text-gray-600 font-lato  text-xl ml-1 lg:max-w-2xl    lg:  lg:text-black lg:font-semibold'>
-								Date: {inProgressData.recipe?.category_name}
-							</h4>
 						</div>
-
-
 					</div>
 
 
 
-					<div className='h-fit w-fit lg:w-[672px] self-end justify-end relative'>
+					<div className='h-fit w-fit lg:w-[672px] flex justify-end mr-20 items-center lg:-mt-5'>
 
-						<img className={'w-full shadow-md rounded-2xl lg:h-full lg:min-h-fit  lg:max-w-lg     lg:rounded-sm max-w-3xl '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
+						<img className={'w-fit shadow-md rounded-2xl lg:h-80 lg:max-w-[360] lg:w-[360px]   lg:rounded-sm max-w-3xl '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 
+					</div>
+
+					<div className='lg:w-[672px] self-end'>
+						<div className=' flex  lg:justify-center lg:items-center gap-1  '>
+
+							<div className='flex gap-2'>
+
+
+								<FavButton
+									id={inProgressData.detailed.toString()}
+									ImgClass='w-full h-6 m-auto'
+
+								/>
+
+
+
+							</div>
+
+							<div className={`flex   flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} lg:self-center `}>
+
+								<ShareToSocialCard
+									id={inProgressData.detailed.toString()}
+									url={`https://gamp.vercel.app/${inProgressData.detailed}`}
+									img={inProgressData?.recipe.image as string}
+								/>
+
+
+
+
+							</div>
+
+						</div>
 					</div>
 
 
@@ -104,42 +134,14 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 			</section >
 
-			<section className=' text-left lg:h-fit ml-2 lg:w-2/4 flex-col '>
-
-				<div className=' flex  mt-7   lg:ml-1   '>
-
-					<div className='self-center'>
+			<section className=' text-left lg:h-fit ml-2 lg:w-full justify-center  flex flex-col '>
 
 
-						<FavButton
-							id={inProgressData.detailed.toString()}
-							ImgClass='w-full h-6 m-auto'
-
-						/>
-
-					</div>
-
-					<div className={`flex   flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} lg:self-center `}>
-
-						<ShareToSocialCard
-							id={inProgressData.detailed.toString()}
-							url={`https://gamp.vercel.app/${inProgressData.detailed}`}
-							img={inProgressData?.recipe.image as string}
-						/>
-
-
-					</div>
-					<div>
-						<h4 className='text-black font-lato  text-xl ml-1 lg:max-w-2xl  lg:ml-3 lg:text-black lg:font-semibold'>
-							created by gabriel
-						</h4>
-					</div>
-				</div>
 
 
 
 				<section
-					className={'w-full my-2  ml-2 flex  '}
+					className={'sm:w-full sm:my-2  sm:ml-2 sm:flex sm:self-center '}
 				>
 					<IngredientList id={parseInt(inProgressData.detailed)} amount={amount} ingredients={ingredients as string[]} />
 				</section>
@@ -150,14 +152,14 @@ export default function InProgressCard(inProgressData: inProgressData) {
 			</section>
 
 			<section className=' col-span-2 row-span-3 lg:mt-2 lg:border-t-2  lg:flex  lg:flex-col  lg:justify-end lg:items-center lg:border-gray-200 lg:border-solid  '>
-				<div className='lg:mt-5 lg:mb-5     '>
-					<section className='lg:w-[1286px]  lg:mr-40 '>
+				<div className='lg:mt-5 lg:mb-5    '>
+					<section className='lg:w-fit lg:ml-2'>
 						<h2
-							className={'text-3xl p-4 text-left mt-2 font-bold  font-lato lg:text-left'}
+							className={'text-2xl  pl-6  text-left mt-2 lg:ml-4 font-bold text-gray-700 font-lato lg:text-left'}
 						>
 							Instructions
 						</h2>
-						<p className={'text-2xl text-left p-4 mr-3  text-gray-600 font-lato  lg:text-left '}>{instructions}</p>
+						<p className={' text-left p-4 mr-3 pt-2  text-gray-600  lg:ml-4 font-lato  lg:text-left '}>{instructions}</p>
 					</section>
 				</div>
 
