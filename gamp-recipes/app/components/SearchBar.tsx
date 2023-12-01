@@ -69,7 +69,7 @@ export default function SearchBar() {
 			<section
 				className={ 'w-full h-16 bg-white py-3 px-6 flex justify-between items-center 2xl:bg-transparent' }
 			> {/* O container branco */}
-				<fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center 2xl:bg-amber-200'>
+				<fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center'>
 					<input
 						id='search-input'
 						type='text'

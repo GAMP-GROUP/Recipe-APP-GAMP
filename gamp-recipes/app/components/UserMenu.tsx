@@ -40,7 +40,7 @@ export default function UserMenu() {
 		<menu
 			id='user-menu'
 			className={`w-screen fixed top-0 left-0 right-0 transition-transform duration-300 ${ width <= 1536 ? menu ? 'translate-x-0' : '-translate-x-full' : '' }
-			2xl:z-50 2xl:top-16 2xl:left-0 2xl:h-screen 2xl:w-screen 2xl:mr-auto 2xl:flex 2xl:transition-none` }
+			2xl:z-50 2xl:top-20 2xl:left-5 2xl:h-screen 2xl:w-screen 2xl:mr-auto 2xl:flex 2xl:transition-none` }
 		>
 			<ul className={`flex-row h-full w-screen
 			2xl:w-1/5` }>
