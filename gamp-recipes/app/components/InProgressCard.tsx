@@ -40,7 +40,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 	const instructions = inProgressData.recipe?.instructions.split('\n').map((instruction, index) => {
 		return (
-			<p key={index} className={'text-lg max-w-4xl text-left p-2 mr-3  text-gray-600 font-lato  m lg:min-w-[896px] lg:text-left '}>{instruction}</p>
+			<p key={index} className={'text-lg max-w-4xl text-left p-2 lg:-ml-1 text-gray-600 font-lato  m lg:min-w-[896px] lg:text-left '}>{instruction}</p>
 		);
 	}
 	);
@@ -54,17 +54,17 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={'  bg-slate-50 lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col lg:flex-row lg:justify-center font-lato    text-lg sm:text-s overflow-scroll-y no-scroll'}
+			className={' bg-slate-50 ml-7 mr-7  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato    text-lg sm:text-s overflow-scroll-y no-scroll'}
 		>
 
 
 
-			<section className='text-left     xl:justify-end  flex justify-end items-center '>
+			<section className='text-left     xl:justify-end  lg:flex lg:justify-end lg:items-center order-1 '>
 
 				<div
-					className={'   gap-4  ml-3  mb-5 min-h-min lg:shadow-none lg:ml-4 w-fit lg:justify-end lg:items-center	 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
+					className={' gap-4  ml-3 sm:10 mb-5 min-h-min lg:shadow-none lg:ml-4 w-fit lg:justify-end lg:items-center	 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
 				>
-					<div className='flex justify-end mr-20  items-center lg:w-[672px] '>
+					<div className='lg:flex lg:justify-end mr-20  items-center lg:w-[672px] '>
 
 						<div className='lg:max-w-[360] lg:w-[360px] lg:min-w-[360px] flex flex-col justify-start items-start h-fit'>
 
@@ -89,13 +89,13 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 
 
-					<div className='h-fit w-fit lg:w-[672px] flex justify-end mr-20 items-center lg:-mt-5'>
+					<div className='lg:h-fit lg:w-[672px] flex max-w-xs  lg:max-w-2xl lg:flex lg:justify-end mr-20  lg:items-center lg:-mt-5'>
 
-						<img className={'w-fit shadow-md rounded-2xl lg:h-80 lg:max-w-[360] lg:w-[360px]   lg:rounded-sm max-w-3xl '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
+						<img className={'  shadow-md rounded-sm lg:h-80 lg:w-[360px] w-60  lg:rounded-sm lg:max-w-3xl max-w-xs '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 
 					</div>
 
-					<div className='lg:w-[672px] self-end'>
+					<div className='lg:w-[672px] lg:self-end lg:mr-2 lg:-mt-3    mb-5 min-h-min'>
 						<div className=' flex  lg:justify-center lg:items-center gap-1  '>
 
 							<div className='flex gap-2'>
@@ -134,14 +134,14 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 			</section >
 
-			<section className=' text-left  lg:h-fit ml-2 lg:w-full justify-center  flex flex-col '>
 
 
+			<div className=' text-left  lg:h-fit ml-2 lg:w-full justify-center  flex flex-col order-3 lg:order-2 '>
 
 
 
 				<section
-					className={'sm:w-full sm:my-2  xl:flex xl:self-start xl:w-3/4 lg:justify-start sm:ml-2 sm:flex sm:self-center  lg:flex lg:mt-0 lg:items-center lg:min-h-[432px]'}
+					className={'  w-[358px] -ml-2 lg:-ml-0 xl:flex xl:self-start xl:w-3/4 lg:justify-start  lg:flex lg:mt-0 lg:items-center lg:min-h-[432px]'}
 				>
 					<IngredientList id={parseInt(inProgressData.detailed)} amount={amount} ingredients={ingredients as string[]} />
 				</section>
@@ -149,13 +149,13 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 
 
-			</section>
+			</div>
 
-			<section className=' col-span-2 row-span-3 lg:mt-2 lg:border-t-2  lg:flex  lg:flex-col  lg:justify-end lg:items-center lg:border-gray-200 lg:border-solid  '>
-				<div className='lg:mb-5  lg:max-w-4xl  '>
-					<section className='lg:w-full g:ml-2'>
+			<section className=' col-span-2 lg:ml-2  row-span-3 lg:mt-2  order-2  lg:border-t-2  lg:flex  lg:flex-col  lg:justify-end lg:items-center lg:border-gray-200 lg:border-solid  '>
+				<div className='lg:mb-5 lg:mr-2  lg:max-w-4xl  '>
+					<section className='lg:w-full '>
 						<h2
-							className={'text-2xl    text-left mt-2 lg:ml-4 font-bold text-gray-700 font-lato lg:text-left'}
+							className={'lg:text-xl ml-2 text-2xl   text-left mt-2 lg:ml-1 font-bold text-gray-700 font-lato lg:text-left'}
 						>
 							Instructions
 						</h2>
@@ -164,7 +164,8 @@ export default function InProgressCard(inProgressData: inProgressData) {
 				</div>
 
 			</section>
-			<div className=" my-4">
+
+			<div className=" my-4 order-last">
 				<SnackbarProvider maxSnack={1} />
 			</div>
 		</div >

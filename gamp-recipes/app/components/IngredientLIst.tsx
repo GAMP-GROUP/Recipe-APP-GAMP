@@ -90,7 +90,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 	const svgOptions = {
 		option1: (
 			<svg
-				className='h-8 w-8 text-green-500'
+				className='h-8 w-8 text-green-500 mt-2'
 				viewBox='0 0 24 24'
 				fill='none'
 				stroke='currentColor'
@@ -104,7 +104,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		),
 		option2: (
 			<svg
-				className='h-6 w-6 text-yellow'
+				className='h-6 w-6 text-yellow mt-2'
 				viewBox='0 0 24 24'
 				fill='none'
 				stroke='currentColor'
@@ -121,14 +121,14 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 	return (
-		<div className='flex-col gap-3 flex lg:flex-col lg:flex  mr-3 '>
+		<div className='flex-col gap-3 min-w-[358px] w-full flex lg:flex-col lg:flex  mr-3 '>
 
 			<h2
 				className='text-lg text-left ml-3 text-gray-700 font-lato font-semibold  h-fit'
 			>Ingredients</h2>
 
 
-			<section className=' w-fit overflow-y-auto scrollbar-thumb-slate-400 hover:scrollbar-thumb-slate-700 scrollbar-thin scrollbar-track-slate-100     lg:min-h-[320px] lg:max-h-80'>
+			<section className=' w-fit overflow-y-auto scrollbar-thumb-slate-400 hover:scrollbar-thumb-slate-700 max-h-96 scrollbar-thin scrollbar-track-slate-100  lg:h-fit   lg:max-h-80'>
 
 
 
@@ -142,7 +142,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 						}}
 
 
-						className={`  flex mb-3 flex-row justify-between shadow-lg lg:min-w-[171px] items-center  lg:rounded-md rounded-xl h-fit lg:h-10  ml-3 mr-10 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
+						className={`  flex mb-3 flex-row justify-between shadow-lg lg:min-w-[171px] items-center max-h-11 lg:rounded-md rounded-xl h-fit lg:max-w-sm lg:h-10  ml-3 mr-10  ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
 						<ul
 							className='self-center w-full lg:w-full lg:mt-2 lg:h-fit '
 						>
@@ -158,7 +158,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 									<div className='flex row  items-center justify-around  mb-2 ml-2 h-12 '>
 
 										{svgOptions[itemsChecked[property] ? 'option1' : 'option2']}
-										<p className='text-left ml-2 w-full text-2xl  lg:text-xs font-semibold text-gray-600 h-fit  '>{amount[index]}  {property}</p>
+										<p className='text-left ml-2 w-full text-xl mt-2  lg:text-xs font-semibold text-gray-600 h-fit  '>{amount[index]}  {property}</p>
 
 
 									</div>
