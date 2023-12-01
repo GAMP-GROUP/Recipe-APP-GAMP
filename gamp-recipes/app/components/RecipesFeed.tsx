@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import RecipesCard from './RecipesCard';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import LoadingScreen from './LoadingScreen';
+import useWindowDimensions from '../hooks/useWindowDimensions';
 
 type TRecipesProps = {
 	id: number | null;
@@ -26,6 +27,7 @@ type TRecipesFeed = {
 
 export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) {
 	const { menu } = useBehaviorContext();
+	const { width } = useWindowDimensions();
 	const [filteredRecipes, setFilteredRecipes] = useState<TRecipesProps[]>([]);
 
 	useEffect(() => {
@@ -36,7 +38,8 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) 
 		<>
 			<section
 				id='recipes-feed'
-				className={ `transition-opacity duration-500 ${ menu ? 'opacity-0' : 'opacity-100' }` }
+				className={ `transition-opacity duration-500 ${ width >= 1536 ? '' : menu ? 'opacity-0' : 'opacity-100' } 
+				2xl:absolute 2xl:right-0 2xl:top-20 2xl:grid 2xl:grid-cols-4 2xl:w-9/12 2xl:transition-none` }
 			>
 				{	filteredRecipes.length <= 0 ? <LoadingScreen /> : 
 					filteredRecipes.map((recipe, index) => (

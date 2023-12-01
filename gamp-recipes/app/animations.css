@@ -32,6 +32,7 @@
 }
 
 .menu-icon input {
+    width: var(--x-width);
     appearance: none;
     padding: 0;
     margin: 0;

@@ -22,11 +22,12 @@ export default function RootLayout({
 
 	return (
 		<html lang='en' className='w-screen h-full'>
-			<body className='w-screen h-full bg-white overflow-x-hidden flex justify-center'>
+			<body className={ `w-screen h-full bg-white overflow-x-hidden flex justify-center
+			` }>
 				<Providers>
 					<AuthProvider>
 						<SearchBar />
-						{children}
+						{ children }
 						<UserMenu />
 						<NavigationBar />
 					</AuthProvider>
