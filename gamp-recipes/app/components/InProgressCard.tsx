@@ -54,15 +54,15 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={'  bg-slate-50 w-fit lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col lg:flex-row lg:justify-center font-lato    text-lg sm:text-s overflow-scroll-y no-scroll'}
+			className={'  bg-slate-50 lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col lg:flex-row lg:justify-center font-lato    text-lg sm:text-s overflow-scroll-y no-scroll'}
 		>
 
 
 
-			<section className='text-left ml-2 self-center flex justify-center items-center '>
+			<section className='text-left     xl:justify-end  flex justify-end items-center '>
 
 				<div
-					className={'  lg:mr-20 gap-4  ml-3  mb-5 min-h-min lg:shadow-none lg:ml-4 lg:pr-10 lg:justify-center lg:items-center	 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
+					className={'   gap-4  ml-3  mb-5 min-h-min lg:shadow-none lg:ml-4 w-fit lg:justify-end lg:items-center	 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
 				>
 					<div className='flex justify-end mr-20  items-center lg:w-[672px] '>
 
@@ -134,14 +134,14 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 			</section >
 
-			<section className=' text-left lg:h-fit ml-2 lg:w-full justify-center  flex flex-col '>
+			<section className=' text-left  lg:h-fit ml-2 lg:w-full justify-center  flex flex-col '>
 
 
 
 
 
 				<section
-					className={'sm:w-full sm:my-2  sm:ml-2 sm:flex sm:self-center '}
+					className={'sm:w-full sm:my-2  xl:flex xl:self-start xl:w-3/4 lg:justify-start sm:ml-2 sm:flex sm:self-center  lg:flex lg:mt-0 lg:items-center lg:min-h-[432px]'}
 				>
 					<IngredientList id={parseInt(inProgressData.detailed)} amount={amount} ingredients={ingredients as string[]} />
 				</section>
@@ -152,21 +152,21 @@ export default function InProgressCard(inProgressData: inProgressData) {
 			</section>
 
 			<section className=' col-span-2 row-span-3 lg:mt-2 lg:border-t-2  lg:flex  lg:flex-col  lg:justify-end lg:items-center lg:border-gray-200 lg:border-solid  '>
-				<div className='lg:mt-5 lg:mb-5    '>
-					<section className='lg:w-fit lg:ml-2'>
+				<div className='lg:mb-5  lg:max-w-4xl  '>
+					<section className='lg:w-full g:ml-2'>
 						<h2
-							className={'text-2xl  pl-6  text-left mt-2 lg:ml-4 font-bold text-gray-700 font-lato lg:text-left'}
+							className={'text-2xl    text-left mt-2 lg:ml-4 font-bold text-gray-700 font-lato lg:text-left'}
 						>
 							Instructions
 						</h2>
-						<p className={' text-left p-4 mr-3 pt-2  text-gray-600  lg:ml-4 font-lato  lg:text-left '}>{instructions}</p>
+						{instructions}
 					</section>
 				</div>
 
 			</section>
-			{/* <div className=" my-4">
+			<div className=" my-4">
 				<SnackbarProvider maxSnack={1} />
-			</div> */}
+			</div>
 		</div >
 
 

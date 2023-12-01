@@ -121,9 +121,16 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 	return (
-		<div className='flex-col flex lg:flex-col-reverse   mr-3 '>
+		<div className='flex-col gap-3 flex lg:flex-col lg:flex  mr-3 '>
 
-			<section className='flex flex-col  w-fit overflow-y-auto lg:max-h-96'>
+			<h2
+				className='text-lg text-left ml-3 text-gray-700 font-lato font-semibold  h-fit'
+			>Ingredients</h2>
+
+
+			<section className=' w-fit overflow-y-auto scrollbar-thumb-slate-400 hover:scrollbar-thumb-slate-700 scrollbar-thin scrollbar-track-slate-100     lg:min-h-[320px] lg:max-h-80'>
+
+
 
 				{ingredients.map((property, index) => (
 					<motion.div
@@ -135,7 +142,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 						}}
 
 
-						className={`flex mb-3 flex-row justify-between shadow-lg lg:min-w-[171px] items-center  lg:rounded-md rounded-xl h-fit lg:h-10  ml-3 mr-10 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
+						className={`  flex mb-3 flex-row justify-between shadow-lg lg:min-w-[171px] items-center  lg:rounded-md rounded-xl h-fit lg:h-10  ml-3 mr-10 max-w-screen-sm ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
 						<ul
 							className='self-center w-full lg:w-full lg:mt-2 lg:h-fit '
 						>
@@ -165,17 +172,13 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 			</section>
 
-			<div className='lg:max-w-[360] lg:w-[360px] lg:min-w-[360px] flex flex-col-reverse items-start h-fit '>
-				<div className='flex gap-2 lg:mb-2'>
+			<div className='flex justify-end items-center'>
+				<button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-max p-2 text-sm rounded inline-flex items-center">
+
+					<span>Finish Recipe</span>
+				</button>
 
 
-				</div>
-
-
-
-				<h2
-					className='text-lg text-left ml-3 text-gray-700 font-lato font-semibold  h-fit'
-				>Ingredients</h2>
 			</div>
 
 
