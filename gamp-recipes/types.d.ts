@@ -35,8 +35,11 @@ type drinkAPI = {
 	[drinks: string]: externalRes;
 };
 
-type ButtonProps = {
+type ShareBtnProps = {
 	id: string,
+	ImgClass?: string
+	setState: React.Dispatch<React.SetStateAction<boolean>>;
+	shareModal: boolean;
 
 }
 
@@ -58,6 +61,12 @@ type recipePost = {
   ingredients: ingredientForm[],
 }
 
+
+type ButtonProps = {
+	id: string,
+	ImgClass?: string
+
+}
 
 type mealAPI = {
 	[meals: string]: externalRes;
@@ -125,6 +134,8 @@ type RecipeData = {
 	image: string;
 	tags: string;
 	category: number;
+	category_name?: string;
+	recipe_type_name?: string;
 	video_source?: string | null;
 	area?: string | null;
 	alcoholic?: string | null;
@@ -132,6 +143,7 @@ type RecipeData = {
 	created_at: Date;
 	updated_at: Date;
 	ingredients: ingredientsAPI[];
+	amount: string[];
 }
 
 type UpdateRecipeRequest = {

@@ -7,17 +7,18 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function POST(request: NextRequest) {
 
 	try {
-		
+
 		const data = await createRecipe(request);
 
 		if (data.TYPE === HttpStatusCode.NotFound) {
 			return NextResponse.json(data.message, { status: data.TYPE });
 		}
 
-		return NextResponse.json(data.message, { status: data.TYPE });
-
+		return new NextResponse(JSON.stringify(data.message), { status: data.TYPE });
 	} catch (error) {
-		return NextResponse.json(error, { status: HttpStatusCode.InternalServerError });
+		const err = error + ' ' + 'Error caught in POST request:';
+
+		return new NextResponse(JSON.stringify(err), { status: HttpStatusCode.InternalServerError });
 	}
 }
 

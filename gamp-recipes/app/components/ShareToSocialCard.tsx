@@ -1,25 +1,55 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
-import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+
 
 import ShareButton from './ShareButton';
 import { ShareModal } from './ShareModal';
 
 export default function ShareToSocialCard({ url, img, id }: { url: string, img: string, id: string }) {
-	const { share } = useBehaviorContext();
+
+	const [shareModal, setShareModal] = React.useState(false);
+
+	const modal = useRef<HTMLDivElement>(null);
+
+
+	function handleClick(event: MouseEvent) {
+		if (modal.current && !modal.current.contains(event.target as Node)) {
+			console.log('You clicked outside of me!');
+
+			setShareModal(false);
+		}
+	}
+
+	useEffect(() => {
+		if (shareModal === true) {
+			document.addEventListener('click', handleClick);
+
+		}
+
+		return () => {
+			document.removeEventListener('click', handleClick);
+		};
+
+	}, [shareModal]);
+
+
 
 	return (
 		<div>
-			{share === false ? (
-				<ShareButton id={id} />
+			{shareModal === false ? (
+				<ShareButton shareModal={shareModal} setState={setShareModal} id={id} />
 			) : (
+
 				<ShareModal
 					url={url}
 					img={img}
 					id={id}
+					setState={setShareModal}
+					refModal={modal}
 				/>
+
 			)}
 		</div>
 	);
