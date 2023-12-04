@@ -195,13 +195,13 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 			</section>
 
-			<div className='flex justify-end items-center'>
+			<div className='flex justify-center lg:justify-end items-center'>
 				<button
 					onClick={handleFinishBtn}
 					disabled={isDisabled}
-					className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-max p-2 text-sm rounded inline-flex items-center">
+					className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-fit p-2 text-sm rounded inline-flex items-center">
 
-					<span>Finish Recipe</span>
+					Finish Recipe
 				</button>
 
 
