@@ -1,5 +1,13 @@
 import * as mock from '../mocks/recipeapi.mock';
 
+const userData = {
+	username: 'validU',
+	nationality: 'AA',
+	email: 'user@email.com',
+	password: 'some123password'
+};
+
+
 describe('Tests for the api/recipe route - CRUD Recipe', () => {
   
 	it('LIST - GET Recipe - checks the status code and the body of the response', () => {
@@ -15,11 +23,18 @@ describe('Tests for the api/recipe route - CRUD Recipe', () => {
 			});
 	});
   
-	// it('ON_SUCCESS - POST Recipe - verify persistent data after post recipe', () => {
-	// 	cy.visit('/auth/signup');
+	it('ON_SUCCESS - POST Recipe - verify persistent data after post recipe', () => {
+		cy.visit('/auth/signup');
 
-	// 	cy.get('input');
-	// });
+		cy.get('.username').type(userData.username);
+		cy.get('.nationality').type(userData.nationality);
+		cy.get('.email').type(userData.email);
+		cy.get('.password').type(userData.password);
+
+		cy.get('.signup').click();
+
+		cy.find('h1');
+	});
     
 	it('AUTH - POST Recipe - with valid body but no auth cookie should return with Unauthorized 401', () => {
 		cy.request({
