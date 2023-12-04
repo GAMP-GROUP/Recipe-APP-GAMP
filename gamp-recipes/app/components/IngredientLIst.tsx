@@ -17,8 +17,12 @@ type ingredientListProps = {
 export default function IngredientList({ ingredients, id, amount }: ingredientListProps) {
 
 
-	const initialItemsChecked = JSON.parse(localStorage.getItem('itemsChecked') ?? '') || {};
-	const [itemsChecked, setItemsChecked] = useState(initialItemsChecked);
+	if (localStorage.getItem(`ingredients recipe ${id}`) === null) {
+		localStorage.setItem(`ingredients recipe ${id}`, JSON.stringify({}));
+	}
+
+
+	const [itemsChecked, setItemsChecked] = useState<Record<string, boolean>>({});
 	const [count, setCount] = useState<number>(0);
 
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
@@ -31,14 +35,29 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		console.log('finish');
 	};
 
+	const allItemsAreChecked = (itemsChecked: Record<string, boolean>) => {
+		return Object.values(itemsChecked).every((item) => item === true);
+
+	};
+
+
 
 	useEffect(() => {
 		const ingredientsLocal: string | null =
 			localStorage.getItem(`ingredients recipe ${id}`);
 		if (ingredientsLocal) {
 			setItemsChecked(JSON.parse(ingredientsLocal));
+			console.log('49', JSON.parse(ingredientsLocal));
+			allItemsAreChecked(JSON.parse(ingredientsLocal)) ? setIsDisabled(false) : setIsDisabled(true);
+			console.log('allItemsAreChecked', allItemsAreChecked(JSON.parse(ingredientsLocal)));
 
 		}
+
+		if (ingredientsLocal?.length === ingredients.length) {
+			setIsDisabled(false);
+
+		}
+
 
 
 	}, []);
@@ -70,14 +89,18 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		});
 
 		// Este código será executado após o estado ser atualizado
-		const updatedCount = checked ? count + 1 : Math.max(count - 1, 0); // Ensure count is not negative
+		let updatedCount = checked ? count + 1 : Math.max(count - 1, 0); // Ensure count is not negative
 		console.log('updatedCount', updatedCount);
 
-		if (updatedCount === ingredients.length) {
+		if (updatedCount === ingredients.length || updatedCount > ingredients.length) {
+			updatedCount = ingredients.length;
 			setIsDisabled(false);
 		} else {
 			setIsDisabled(true);
 		}
+
+
+
 
 		console.log('count', updatedCount);
 		console.log('ingredients.length', ingredients.length);
@@ -173,7 +196,10 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 			</section>
 
 			<div className='flex justify-end items-center'>
-				<button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-max p-2 text-sm rounded inline-flex items-center">
+				<button
+					onClick={handleFinishBtn}
+					disabled={isDisabled}
+					className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-max p-2 text-sm rounded inline-flex items-center">
 
 					<span>Finish Recipe</span>
 				</button>
