@@ -10,7 +10,8 @@
     "dev": "prisma generate && prisma migrate reset --force && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@prisma/client": "^5.2.0",
@@ -37,6 +38,7 @@
     "@types/node": "^20.6.0",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
+    "cypress": "^13.5.0",
     "eslint": "^8.49.0",
     "eslint-plugin-react": "^7.33.2",
     "prisma": "^5.2.0",

@@ -40,6 +40,24 @@ type ButtonProps = {
 
 }
 
+type ingredientForm = {
+  ingredient_name: string,
+  pk: number,
+}
+
+type amountNullable = string | null
+
+type recipePost = {
+  recipe_name: string,
+  instructions: string,
+  recipe_type_id: number,
+  category: number,
+  image: string,
+  tags: string,
+  amount: amountNullable[],
+  ingredients: ingredientForm[],
+}
+
 
 type mealAPI = {
 	[meals: string]: externalRes;

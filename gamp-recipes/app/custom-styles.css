@@ -8,3 +8,18 @@
     opacity: 100;
     background: linear-gradient(rgba(0, 0, 0, 0.35), transparent);
 }
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+    width: calc(100vw - 15%);
+    height: 93%;
+    position: relative;
+}
+
+.create-button {
+    width: 100%;
+    justify-self: center;
+    bottom: 10px;
+    left: 0;
+}
