@@ -98,7 +98,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 			<div
 				className='mb-8 flex flex-col items-center'	
 			>
-				<FavButton id={id.toString()} />
+				<FavButton id={id.toString()} ImgClass='w-7 h-7' />
 				<StartRecipeButton id={id.toString()} />
 			</div>
 		</div>
