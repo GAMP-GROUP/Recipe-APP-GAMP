@@ -14,10 +14,14 @@ type inProgressData =
 export default function InProgressCard(inProgressData: inProgressData) {
 
 	let author = inProgressData.recipe.author;
+	console.log('17', author);
+
 
 	if (inProgressData.recipe.author === null || inProgressData.recipe.author === '' || inProgressData.recipe.author === undefined) {
 		author = 'Jacquin';
 	}
+
+	console.log('24', author);
 
 	console.log(inProgressData.recipe.author);
 	console.log(author);

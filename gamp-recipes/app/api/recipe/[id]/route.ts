@@ -14,9 +14,10 @@ export async function GET(req: NextRequest) {
 
 		const recipe = await getRecipeById(parseInt(id));
 
-		return new NextResponse(JSON.stringify(recipe), { status: HttpStatusCode.OK });
+
+		return NextResponse.json(recipe, { status: 200 });
 	} catch (error) {
 		console.error('Error caught in GET request:', error);
-		return new NextResponse(JSON.stringify(error), { status: HttpStatusCode.InternalServerError });
+		return NextResponse.json(error, { status: HttpStatusCode.InternalServerError });
 	}
 }

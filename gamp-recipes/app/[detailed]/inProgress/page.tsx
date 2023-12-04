@@ -11,6 +11,16 @@ export default async function InProgress({
 }: detailedParams) {
 
 	const recipe = await getRecipeById(detailed);
+	console.log('recipe', recipe);
+
+	const test = async (detailed) => {
+		const recipe = await getRecipeById(detailed);
+		console.log('3', recipe);
+
+	};
+
+	await test(detailed);
+
 	if (!recipe) return null;
 
 	return (
@@ -31,7 +41,7 @@ export default async function InProgress({
 
 			category_name: recipe.category_name.name,
 			recipe_type_name: recipe.recipe_type.name,
-			author: recipe.author,
+			author: recipe.Author_Recipe,
 		}} detailed={detailed} />
 	);
 }
