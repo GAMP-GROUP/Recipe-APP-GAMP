@@ -15,5 +15,6 @@ export const getRecipeById = async (id: string) => {
 	}).then((res) => {
 		return res.json();
 	});
+
 	return recipe;
 };

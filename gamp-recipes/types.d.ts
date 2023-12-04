@@ -44,21 +44,21 @@ type ShareBtnProps = {
 }
 
 type ingredientForm = {
-  ingredient_name: string,
-  pk: number,
+	ingredient_name: string,
+	pk: number,
 }
 
 type amountNullable = string | null
 
 type recipePost = {
-  recipe_name: string,
-  instructions: string,
-  recipe_type_id: number,
-  category: number,
-  image: string,
-  tags: string,
-  amount: amountNullable[],
-  ingredients: ingredientForm[],
+	recipe_name: string,
+	instructions: string,
+	recipe_type_id: number,
+	category: number,
+	image: string,
+	tags: string,
+	amount: amountNullable[],
+	ingredients: ingredientForm[],
 }
 
 
@@ -144,6 +144,7 @@ type RecipeData = {
 	updated_at: Date;
 	ingredients: ingredientsAPI[];
 	amount: string[];
+	author?: string;
 }
 
 type UpdateRecipeRequest = {
