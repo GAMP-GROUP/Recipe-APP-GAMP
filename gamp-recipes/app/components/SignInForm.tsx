@@ -14,7 +14,7 @@ export default function SignInForm() {
 		handleInputChange,
 		user: { email, password },
 	} = useContext(UserContext);
-	
+
 	const handleSubmit = (event: React.FormEvent) => {
 		event.preventDefault();
 
@@ -23,10 +23,15 @@ export default function SignInForm() {
 
 
 	const handleSignInBtn = async () => {
-		if(email === '' || password === '') {
+		if (email === '' || password === '') {
 			return window.alert('Please fill in all fields');
 		}
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 0322e5c53a4e4726e5e3d9ba079b67f2bae4b52b
 		try {
 			const signInResponse = await signIn('credentials', {
 				redirect: false,
@@ -41,8 +46,8 @@ export default function SignInForm() {
 
 			if (!signInResponse?.url || signInResponse.ok !== true) {
 				return window.alert('Invalid credentials');
-			} 
-			
+			}
+
 		} catch (err) {
 			console.log(err);
 		}
@@ -53,7 +58,7 @@ export default function SignInForm() {
 			router.refresh();
 			router.push('/');
 		}
-		
+
 	}, [status]);
 
 	const content = (
@@ -70,7 +75,7 @@ export default function SignInForm() {
 					</a>.
 				</p>
 			</div>
-			<form  onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit}>
 				<div className='bg-white text-slate-950  flex-row items-center justify-between p-5'>
 					<label className='block text-gray-700 text-sm font-bold mb-2 mt-1'>
 						Email:
@@ -98,28 +103,28 @@ export default function SignInForm() {
 						className='mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-stone-800  leading-tight focus:outline-none focus:shadow-outline'
 					/>
 				</div>
-				
+
 
 				<div className='flex flex-col items-center justify-between py-3 '>
 					<button
 						type='button'
 						onClick={() => handleSignInBtn()}
 						className="w-80 mt-4 content-center flex items-center justify-center bg-yellow border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
-					
+
 						SIGN IN
 					</button>
 				</div>
-				
+
 				<div className="my-2 border-b text-center flex  items-cente0 justify-center ">
 					<span className="w-2/6 border-b border-gray-300 border-solid"></span>
 					<p
 						className="leading-none px-4 self-center text-xs text-gray-600 tracking-wide font-medium bg-white transform translate-y-1/2">
-							Or
+						Or
 					</p>
 					<span className="w-2/6 border-b border-gray-300 border-solid"></span>
 				</div>
 
-					
+
 				<div className='flex flex-col items-center justify-between py-3 '>
 					<button
 						type='button'
@@ -130,9 +135,17 @@ export default function SignInForm() {
 						<span>Continue with Google</span>
 					</button>
 				</div>
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> 0322e5c53a4e4726e5e3d9ba079b67f2bae4b52b
 			</form>
 		</div>
-		
+
 	);
 
 	return content;

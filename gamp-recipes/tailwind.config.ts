@@ -18,10 +18,25 @@ const config: Config = {
 				'red': '#F21D55',
 			},
 			fontFamily: {
-				'croissant': ['Croissant One', 'cursive']
+				'croissant': ['Croissant One', 'cursive'],
+				'lato': ['Lato', 'sans-serif'],
+				'argentum': ['Argentum-Sans-Bold',],
+				'poppins': ['Poppins', 'sans-serif'],
+
+			},
+			backgroundColor: {
+
+
+				semiwhite: 'rgb(249, 250, 251)'
 			}
+
+
+
+
 		},
 	},
-	plugins: [],
+	plugins: [
+		require('tailwind-scrollbar'),
+	],
 };
 export default config;

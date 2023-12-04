@@ -95,6 +95,7 @@ export async function createRecipe(request: Request): Promise<NewRecipeResponse>
 			ingredient_name: ingredient.ingredient.ingredients_name,
 			ing_amount: ingredient.ing_amount,
 		})),
+		amount: amount,
 	};
 
 
@@ -214,6 +215,7 @@ export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRec
 			ingredient_name: ingredient.ingredient.ingredients_name,
 			ing_amount: ingredient.ing_amount,
 		})),
+		amount: amount as unknown as string[],
 	};
 
 	return { message: response, TYPE: HttpStatusCode.OK };
@@ -274,6 +276,7 @@ export async function getRecipeById(request: number) {
 				id: request,
 			},
 			include: {
+				Author_Recipe: true,
 				category_name: true,
 				recipe_type: true,
 				Ingredients_Recipes: {

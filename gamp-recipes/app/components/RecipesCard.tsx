@@ -35,8 +35,14 @@ export default function RecipesCard({ id, image, title, type }: recipeProps): JS
 					</p>
 				</div>
 				<FavButton
+<<<<<<< HEAD
 					id={ id!.toString() }
 				/>
+=======
+					ImgClass='w-7 h-7'
+					id={id.toString()}
+				></FavButton>
+>>>>>>> 0322e5c53a4e4726e5e3d9ba079b67f2bae4b52b
 			</section>
 		</div>
 	);
