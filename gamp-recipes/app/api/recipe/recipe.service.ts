@@ -6,9 +6,8 @@ import { NewRecipeResponse, UpdateRecipeRequest, Request } from '@/types';
 
 
 export async function createRecipe(request: Request): Promise<NewRecipeResponse> {
-	const { recipe_type_id, recipe_name, instructions, image, tags, category, ingredients, amount } = request;
+	const { recipe_type_id, recipe_name, instructions, image, tags, category, ingredients, amount } = await request.json();
 	const { message, user } = await userAuth(request);
-
 
 	if (message !== 'success' || user == undefined) return { message, TYPE: HttpStatusCode.Unauthorized };
 
@@ -277,6 +276,7 @@ export async function getRecipeById(request: number) {
 				id: request,
 			},
 			include: {
+				Author_Recipe: true,
 				category_name: true,
 				recipe_type: true,
 				Ingredients_Recipes: {

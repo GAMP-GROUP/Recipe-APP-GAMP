@@ -5,9 +5,11 @@ import { useState, useEffect } from 'react';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { toggleMenu } from './UserMenu';
 import { signOut, useSession } from 'next-auth/react';
+import { usePathname } from 'next/navigation';
 import React from 'react';
 
 export default function Header() {
+	const pathname = usePathname();
 	const [userScroll, setUserScroll] = useState(true);
 	const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -32,10 +34,14 @@ export default function Header() {
 		};
 	}, [scrollPosition]);
 
+	useEffect(() => {
+		toggleMenu(true, setMenu);
+	}, [pathname]);
+
 	return (
 		<header
 			id='header'
-			className={`w-full h-12 px-2 py-8 z-[60] bg-white shadow-sm flex justify-between items-center  top-0 transition-transform duration-300
+			className={`w-full h-12 px-2 py-8 z-[9] bg-yellow flex justify-between items-center top-0 sticky transition-transform duration-300
             ${userScroll ? 'transform translate-y-0' : '-translate-y-full'}`}
 		>
 			<picture className='ml-1'>
@@ -61,26 +67,26 @@ export default function Header() {
 						className='transition-all duration-300 w-[62px]'
 						src='/images/logo-simple.png'
 						alt='Our logo'
+						onClick={() => toggleMenu(true, setMenu)}
 					/>
 				</picture>
 			</Link>
-			{
-				sessionStatus ? (
-					<button
-						onClick={() => signOut()}
-						className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
+			{sessionStatus ? (
+				<button
+					onClick={() => signOut()}
+					className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
+				>
+					Sign Out
+				</button>
+
+			) : (
+				<Link href='/auth/signin'>
+					<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'
+						onClick={() => toggleMenu(true, setMenu)}
 					>
-						Sign Out
+						Sign In
 					</button>
-
-				) : (
-					<Link href='/auth/signin'>
-						<button className='text-sm font-semibold px-5 py-1 mr-2 bg-black text-white rounded-2xl'>
-							Sign In
-						</button>
-					</Link>
-
-				)
+				</Link>)
 			}
 		</header>
 	);

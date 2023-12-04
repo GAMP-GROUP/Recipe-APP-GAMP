@@ -41,11 +41,12 @@ model Ingredients {
 }
 
 model Author_Recipe {
-   id        Int     @id @default(autoincrement())
+   id        Int @id @default(autoincrement())
    author_id Int
-   recipe_id Int     @unique
-   author    User    @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-   recipes   Recipes @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   recipe_id Int @unique
+
+   author  User    @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   recipes Recipes @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Recipes {
