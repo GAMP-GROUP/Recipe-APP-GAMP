@@ -8,17 +8,17 @@ export async function POST(request: NextRequest) {
 
 	try {
 
-		const json = await request.json();
-		const data = await createRecipe(json);
+		const data = await createRecipe(request);
 
 		if (data.TYPE === HttpStatusCode.NotFound) {
 			return NextResponse.json(data.message, { status: data.TYPE });
 		}
 
-		return NextResponse.json(data.message, { status: data.TYPE });
+		return new NextResponse(JSON.stringify(data.message), { status: data.TYPE });
 	} catch (error) {
+		const err = error + ' ' + 'Error caught in POST request:';
 
-		return NextResponse.json(error, { status: HttpStatusCode.InternalServerError });
+		return new NextResponse(JSON.stringify(err), { status: HttpStatusCode.InternalServerError });
 	}
 }
 

@@ -28,12 +28,13 @@ export default function RecipesCard({ id, image, title, type }: recipeProps): JS
 			</Link>
 			<section className="mt-2 px-4 flex items-center justify-between">
 				<div
-					id='text-info flex row items-center'
+					id='flex row'
 				>
 					<h2 className="text-[1.75rem] font-black mr-4 font-croissant">{title}</h2>
 					<p className="text-sm uppercase font-[600] text-gray-500 tracking-[0.075rem]">{type === 2 ? 'meal' : 'drink'}</p>
 				</div>
 				<FavButton
+					ImgClass='w-7 h-7'
 					id={id.toString()}
 				></FavButton>
 			</section>

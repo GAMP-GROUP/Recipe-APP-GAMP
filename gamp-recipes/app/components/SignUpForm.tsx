@@ -74,7 +74,7 @@ export default function SignUpForm() {
 	}, [status]);
 
 	const content = (
-		<div className='flex flex-col bg-white shadow-2xl py-6 px-4 rounded-lg w-11/12 max-w-md overflow-hidden'>
+		<div className='flex flex-col bg-white shadow-lg py-6 px-4 rounded-lg w-11/12 max-w-md overflow-hidden'>
 			<div className='  sm:mx-auto sm:w-full sm:max-w-sm'>
 				<h2 className='text-center text-2xl font-bold text-gray-900 my-2'>
 					Create account

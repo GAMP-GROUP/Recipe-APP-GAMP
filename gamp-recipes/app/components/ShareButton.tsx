@@ -1,37 +1,37 @@
 'use client';
 
 import React from 'react';
-import { ButtonProps } from '@/types';
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+import { ShareBtnProps } from '@/types';
+// import { useSession } from 'next-auth/react';
+// import { useRouter } from 'next/navigation';
 
 
-export default function ShareButton({ id }: ButtonProps) {
-	const session = useSession();
-	const router = useRouter();
 
-	const { setShare, share } = useBehaviorContext();
+export default function ShareButton({ id, setState, shareModal }: ShareBtnProps) {
+	// const session = useSession();
+	// const router = useRouter();
+
+
 
 
 
 	async function ShareHandle() {
-		if (session.status === 'unauthenticated') {
-			window.alert('You need to sign in or register in GAMP in order to favorite recipes');
-			router.replace('/auth/signin');
-			return;
-		}
+		// if (session.status === 'unauthenticated') {
+		// 	window.alert('You need to sign in or register in GAMP in order to favorite recipes');
+		// 	router.replace('/auth/signin');
+		// 	return;
+		// }
 
-		if (session.status === 'loading') {
-			return;
-		}
 
-		if (share === true) return setShare(false);
 
-		return setShare(true);
+
+		setState(!shareModal);
+		console.log(shareModal);
+
+
 	}
 
-	const BtnClass = 'rounded-full w-14 h-14 z-3';
+	const BtnClass = 'w-fit h-8 flex justify-center items-center gap-3 p-5 text-xs font-semibold focus:outline-none hover:bg-yellow font-medium rounded-full bg-gray-white border-solid border-black';
 
 
 
@@ -43,14 +43,16 @@ export default function ShareButton({ id }: ButtonProps) {
 		>
 			<picture
 				id={id}
-				className='m-auto'>
+				className=''>
 				<img
 					id={id}
 					alt='Favorite button'
 					src='/icons/share.png'
-					className='w-8 h-8 m-auto'
+					className='w-fit h-5  text'
 				/>
 			</picture>
+
+			Share this recipe
 		</button>
 	);
 

@@ -43,6 +43,7 @@
     "eslint": "^8.49.0",
     "eslint-plugin-react": "^7.33.2",
     "prisma": "^5.2.0",
+    "tailwind-scrollbar": "^3.0.5",
     "ts-node": "^10.9.1"
   }
 }

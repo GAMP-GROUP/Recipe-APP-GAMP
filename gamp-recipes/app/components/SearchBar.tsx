@@ -1,7 +1,6 @@
 'use client';
-
-import React from 'react';
 import '../custom-styles.css';
+import React from 'react';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { useState } from 'react';
 import Image from '@/node_modules/next/image';

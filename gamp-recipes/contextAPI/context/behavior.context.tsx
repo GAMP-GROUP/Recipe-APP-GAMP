@@ -27,11 +27,11 @@ type BehaviorProps = {
 
 export const BehaviorContext = createContext({
 	menu: false,
-	setMenu: () => { },
+	setMenu: () => {},
 	searchBar: false,
-	setSearchBar: () => { },
+	setSearchBar: () => {},
 	recipeSearch: '',
-	setRecipeSearch: () => { },
+	setRecipeSearch: () => {},
 } as unknown as BehaviorProps);
 
 export function BehaviorProvider({ children }: Props) {
@@ -51,7 +51,7 @@ export function BehaviorProvider({ children }: Props) {
 		searchBar,
 		setSearchBar,
 		recipeSearch,
-		setRecipeSearch
+		setRecipeSearch,
 	};
 
 	return (

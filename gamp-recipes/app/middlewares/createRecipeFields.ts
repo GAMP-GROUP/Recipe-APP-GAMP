@@ -2,7 +2,7 @@ import { NextRequest } from 'next/server';
 
 export async function validateRecipeMiddleware(req: NextRequest) {
 	if (req.method === 'POST' || req.method === 'PUT') {
-		const { recipe_name, instructions, ingredients, recipe_type, category } = await req.json();
+		const { recipe_name, instructions, ingredients, recipe_type_id, category } = await req.json();
 
 		if (typeof recipe_name !== 'string') {
 			return {
@@ -25,7 +25,7 @@ export async function validateRecipeMiddleware(req: NextRequest) {
 			};
 		}
 
-		if (typeof recipe_type !== 'number') {
+		if (typeof recipe_type_id !== 'number') {
 			return {
 				message: 'O campo "recipe_type" deve ser um número.',
 				status: 400
