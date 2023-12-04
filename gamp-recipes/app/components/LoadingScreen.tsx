@@ -9,7 +9,6 @@ export default function LoadingScreen() {
 
 	function randomLoadingMessage(loadingMessagesArray: string[]): string {
 		const randomMessageIndex = Math.floor(Math.random() * loadingMessagesArray.length);
-		console.log(randomMessageIndex, loadingMessagesArray.length);
 		const randomMessage = loadingMessages[randomMessageIndex];
 		return randomMessage;
 	}

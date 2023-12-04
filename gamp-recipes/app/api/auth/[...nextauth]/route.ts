@@ -53,7 +53,6 @@ export const authOptions: AuthOptions = {
 					return user as unknown as User;
 				}
 
-
 				const userPassword = user.password_hash;
 
 				const isValidPassword = bcrypt.compareSync(password, userPassword);

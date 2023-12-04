@@ -3,7 +3,7 @@
 
 import React from 'react';
 import { RecipeData } from '@/types';
-import IngredientList from '@/app/components/IngredientLIst';
+import IngredientList from '@/app/components/IngredientList';
 
 import FavButton from '@/app/components/FavoriteButton';
 

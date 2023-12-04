@@ -53,7 +53,7 @@ export default function NavigationBar() {
 	return (
 		<nav
 			id='navigation-bar'
-			className={`fixed mx-auto bottom-6 rounded-3xl h-16 px-4 bg-white z-60 flex justify-evenly items-center gap-8 shadow-lg
+			className={`fixed w-screen bottom-0 h-16 px-4 bg-yellow z-60 flex justify-evenly items-center gap-8 shadow-lg
 			2xl:w-screen 2xl:top-0 2xl:justify-between 2xl:rounded-none 2xl:shadow-none` }
 		>
 			<MenuIcon
@@ -72,7 +72,7 @@ export default function NavigationBar() {
 
 			<Link
 				href='/'
-				className={`bg-yellow p-1 rounded-full ${screenWidth >= 1536 ? 'order-first' : ''}`}
+				className={`${screenWidth >= 1536 ? 'order-first' : ''}`}
 			>
 				<Image
 					src={'/images/logo-simple.png'}

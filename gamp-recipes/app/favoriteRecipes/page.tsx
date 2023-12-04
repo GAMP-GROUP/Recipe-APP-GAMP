@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 export default function page() {
-  return (
-    <div>Favorite Recipes</div>
-  )
+	return (
+		<div>Favorite Recipes</div>
+	);
 }
