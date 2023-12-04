@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Ingredients } from '@prisma/client';
 import { IngredientStatusOptions } from './CreateRecipeForm';
@@ -25,7 +25,9 @@ export default function IngredientsForm({
 	ingredientName,
 	ingredientAmount,
 	ingredientStatus
-}: TIngredientsFormProps) {	
+}: TIngredientsFormProps) {
+	const [newIngredient, setNewIngredient] = useState(true);
+
 	function checkIngredientStatus() {
 		if (ingredientStatus === IngredientStatusOptions.Completed) {
 			return 'bg-lime-400';
@@ -45,10 +47,14 @@ export default function IngredientsForm({
 	function deleteButtonClick(event: React.MouseEvent<HTMLButtonElement>) {
 		removeIngredient(event, ingredientIndex);
 	}
+
+	useEffect(() => {
+		setNewIngredient(false);
+	}, []);
 	
 	return (
 		<section
-			className={ `relative py-2 px-4 mb-6 rounded-3xl ${checkIngredientStatus()} shadow-md` }
+			className={ `relative py-2 px-4 mb-6 rounded-3xl ${ checkIngredientStatus() } transition-opacity duration-500 ${ ingredientIndex === 0 ? '' : newIngredient ? 'opacity-0' : 'opacity-100' } shadow-md` }
 		>
 			{ /* Escolha do ingrediente */}
 			<fieldset
