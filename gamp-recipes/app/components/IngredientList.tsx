@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 type ingredientListProps = {
 	id: number;
 	ingredients: string[];
-	amount: string[];
+	amount: string[] | [];
 };
 
 export default function IngredientList({ ingredients, id, amount }: ingredientListProps) {

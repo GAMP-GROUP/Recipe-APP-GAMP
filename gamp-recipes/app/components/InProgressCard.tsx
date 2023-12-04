@@ -36,10 +36,18 @@ export default function InProgressCard(inProgressData: inProgressData) {
 			return ingName;
 		});
 
+
+
 		const amount = inProgressData.recipe?.ingredients.map(({ ing_amount }) => {
 			return ing_amount;
 		}
 		);
+
+		console.log('amount', amount);
+
+		if (amount === undefined) {
+			return { ingredients, amount: [] };
+		}
 		return { ingredients, amount };
 	};
 
@@ -108,7 +116,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 				<section
 					className={'  w-[358px] -ml-2 lg:-ml-0 xl:flex xl:self-start xl:w-3/4 lg:justify-start  lg:flex lg:mt-0 lg:items-center lg:min-h-[432px]'}
 				>
-					<IngredientList id={parseInt(inProgressData.detailed)} amount={amount} ingredients={ingredients as string[]} />
+					<IngredientList id={parseInt(inProgressData.detailed)} amount={amount as unknown as string[]} ingredients={ingredients as string[]} />
 				</section>
 			</div>
 			<section className=' col-span-2 lg:ml-2  row-span-3 lg:mt-2  order-2  lg:border-t-2  lg:flex  lg:flex-col  lg:justify-end lg:items-center lg:border-gray-200 lg:border-solid  '>

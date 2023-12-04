@@ -28,7 +28,7 @@ export default async function InProgress({
 			created_at: recipe.created_at,
 			updated_at: recipe.updated_at,
 			ingredients: recipe.Ingredients_Recipes,
-			amount: recipe.Ingredients_Recipes.ing_amount,
+
 			category_name: recipe.category_name.name,
 			recipe_type_name: recipe.recipe_type.name,
 			author: recipe.author,
