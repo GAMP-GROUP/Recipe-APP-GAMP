@@ -32,7 +32,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 
 	console.log(recipe);
 
-	const titleImage = <section className="title-card w-3/4 mt-4 p-2 border-solid border border-slate-300 rounded-md shadow-md max-w-[406px]">
+	const titleImage = <section className="title-card w-3/4 mt-4 p-2 border-solid border border-slate-300 rounded-lg shadow-md max-w-[406px] lg:order-1 lg:w-11/12 lg:max-w-[609px] lg:self-start lg:col-span-2 lg:row-span-2">
 		<div
 			className='grid grid-cols-2'
 		>
@@ -50,7 +50,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 		</div>	
 		<picture>
 			<img
-				className='rounded-md mx-auto'
+				className='rounded-lg mx-auto'
 				src={recipe?.image}
 				alt={recipe?.recipe_name}
 			/>
@@ -59,11 +59,11 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 
 	return (
 		<div
-			className='flex flex-col items-center gap-2 w-full'
+			className='flex flex-col m-auto items-center gap-2 w-full lg:grid lg:grid-cols-3 lg:justify-items-center lg:max-w-[1024px]'
 		>
 			{titleImage}
 			<section
-				className='w-3/4 shadow-md border-solid border border-slate-300 rounded-md mt-2 max-w-[406px]'
+				className='w-3/4 shadow-md border-solid border border-slate-300 rounded-lg mt-4 max-w-[406px] lg:order-3 lg:self-start lg:max-h-[412px] lg:w-11/12 lg:h-[290px] overflow-auto'
 			>
 				<h2
 					className='ml-2 text-lg text-left mt-2'
@@ -73,7 +73,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 				<ReadMore text={recipe?.instructions as string} />
 			</section>
 			<section
-				className='w-3/4 border-solid border border-slate-300 rounded-md shadow-md mt-2 max-w-[406px]'
+				className='w-3/4 border-solid border border-slate-300 rounded-lg shadow-md mt-4 max-w-[406px] lg:order-2 lg:w-11/12 lg:max-w-full lg:self-start lg:h-[290px] overflow-y-auto overflow-x-hidden'
 			>
 				<h2
 					className='ml-2 w-full text-lg mt-2'
@@ -102,10 +102,10 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 				recipe?.video_source === null 
 					? null
 					: <div
-						className={ recipe?.recipe_type_id === 1 ? '' : 'aspect-video w-3/4 max-w-[406px]'
+						className={ recipe?.recipe_type_id === 1 ? '' : 'mt-4 aspect-video w-3/4 max-w-[406px] lg:order-4 lg:w-11/12 lg:max-w-[1024px] lg:self-start lg:col-span-3'
 						}>
 						<iframe
-							className='rounded-md'
+							className='rounded-lg'
 							id="recipe video"
 							width="100%"
 							height="100%"
@@ -114,7 +114,11 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 						/>
 					</div>
 			}
-			<StartRecipeButton id={id.toString()} />
+			<div
+				className='lg:col-span-3 order-5'
+			>
+				<StartRecipeButton id={id.toString()} />
+			</div>
 		</div>
 	);
 }
