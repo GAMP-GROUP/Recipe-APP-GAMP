@@ -1,6 +1,7 @@
 import { detailedParams } from '@/types';
 import prisma from '@/prisma/client';
 import React from 'react';
+import ReadMore from '../components/ReadMore';
 import StartRecipeButton from '../components/StartRecipeButton'; 
 import FavButton from '../components/FavoriteButton';
 
@@ -11,6 +12,12 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 			id 
 		},
 		include: {
+			category_name: {
+				select: { name: true }
+			},
+			recipe_type: {
+				select: { name: true }
+			},
 			Ingredients_Recipes: {
 				include: {
 					ingredient: {
@@ -23,69 +30,81 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 		}
 	});
 
+	console.log(recipe);
+
+	const titleImage = <section className="title-card w-3/4 mt-4 p-2 border-solid border border-slate-300 rounded-md shadow-md max-w-[406px]">
+		<div
+			className='grid grid-cols-2'
+		>
+			<div>
+				<h1
+					className='text-2xl font-bold antialiased list font-lato lg:font-extrabold'
+				>{recipe?.recipe_name}</h1>
+				<span className='text-gray-600 font-lato  text-sm'>{recipe?.area ? recipe?.area + ' -' : null} {recipe?.category_name.name}</span>
+			</div>
+			<div
+				className='justify-self-end self-center'
+			>
+				<FavButton id={id.toString()} ImgClass='w-10 h-10 mr-2' />
+			</div>
+		</div>	
+		<picture>
+			<img
+				className='rounded-md mx-auto'
+				src={recipe?.image}
+				alt={recipe?.recipe_name}
+			/>
+		</picture>
+	</section>;
+
 	return (
 		<div
-			className='flex flex-col items-center gap-4 w-full'
+			className='flex flex-col items-center gap-2 w-full'
 		>
-			<h1
-				className='text-4xl font-semibold antialiased'
-			>{recipe?.recipe_name}</h1>
-			<picture>
-				<img
-					className='rounded-md w-10/12 mx-auto'
-					src={recipe?.image}
-					alt={recipe?.recipe_name}
-				/>
-			</picture>
-			<div
-				className='flex flex-row gap-8'
-			>
-			</div>
+			{titleImage}
 			<section
-				className='w-3/4'
+				className='w-3/4 shadow-md border-solid border border-slate-300 rounded-md mt-2 max-w-[406px]'
 			>
 				<h2
-					className='text-3xl text-center uppercase'
+					className='ml-2 text-lg text-left mt-2'
 				>
           Instructions
 				</h2>
-				<p
-					className='text-center'
-				>
-					{recipe?.instructions}
-				</p>
+				<ReadMore text={recipe?.instructions as string} />
 			</section>
-			<h2
-				className='text-2xl uppercase'
-			>Ingredients
-			</h2>
-			<ul
-				className='w-3/4'
+			<section
+				className='w-3/4 border-solid border border-slate-300 rounded-md shadow-md mt-2 max-w-[406px]'
 			>
-				{recipe?.Ingredients_Recipes.map((each) => {
-					const word = each.ingredient.ingredients_name;
-					const ingName = word.charAt(0).toUpperCase() + word.slice(1);
-					return (
-						<li
-							key={each.id}
-							className='flex justify-between w-full gap-8'
-						>
-							<span>{`${ingName}`}</span>
-							<span>{`${each.ing_amount === null ? '' : each.ing_amount}`}</span>
-						</li>
-					);
-				})}
-			</ul>
+				<h2
+					className='ml-2 w-full text-lg mt-2'
+				>Ingredients
+				</h2>
+				<ul
+					className='w-full'
+				>
+					{recipe?.Ingredients_Recipes.map((each) => {
+						const word = each.ingredient.ingredients_name;
+						const ingName = word.charAt(0).toUpperCase() + word.slice(1);
+						return (
+							<li
+								key={each.id}
+								className='w-full'
+							>
+								<span className='text-left ml-2 w-full text-sm text-gray-600 font-lato'>{`${each.ing_amount === null ? '' : each.ing_amount}`}  {`${ingName}`}</span>
+							</li>
+						);
+					})}
+				</ul>
+			</section>
 
-			<div
-				className={ recipe?.recipe_type_id === 1 ? '' : 'aspect-video w-3/4'
-				}>
-				{
-					recipe?.video_source === null 
-						? <p
-							className="text-center"
-						>{`Type: ${recipe.alcoholic}`}</p> 
-						: <iframe
+
+			{
+				recipe?.video_source === null 
+					? null
+					: <div
+						className={ recipe?.recipe_type_id === 1 ? '' : 'aspect-video w-3/4 max-w-[406px]'
+						}>
+						<iframe
 							className='rounded-md'
 							id="recipe video"
 							width="100%"
@@ -93,14 +112,9 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 							title={`video recipe for ${recipe?.recipe_name}`}
 							src={`https://www.youtube.com/embed/${recipe?.video_source.split('=')[1]}`}
 						/>
-				}
-			</div>
-			<div
-				className='mb-8 flex flex-col items-center'	
-			>
-				<FavButton id={id.toString()} ImgClass='w-7 h-7' />
-				<StartRecipeButton id={id.toString()} />
-			</div>
+					</div>
+			}
+			<StartRecipeButton id={id.toString()} />
 		</div>
 	);
 }

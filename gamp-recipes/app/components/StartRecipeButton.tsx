@@ -23,7 +23,7 @@ export default function StartRecipeButton({ id }: ButtonProps) {
 		<>
 			<button
 				onClick={(e) => { startHandle(e);}}
-				className='rounded-full bg-yellow bg-auto p-5 my-2 uppercase'
+				className='rounded-full bg-yellow bg-auto p-5 my-4 uppercase'
 				id={id}
 			>{isStarted ? 'Continue Recipe' : 'Start Recipe' }
 			</button>
