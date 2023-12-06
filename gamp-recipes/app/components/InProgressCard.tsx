@@ -13,6 +13,17 @@ type inProgressData =
 	};
 export default function InProgressCard(inProgressData: inProgressData) {
 
+	const timestampObj: Date = new Date(inProgressData.recipe.updated_at);
+
+	const formattedDate: string = timestampObj.toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: '2-digit',
+		day: '2-digit',
+	});
+
+
+	console.log(timestampObj);
+
 	let author = inProgressData.recipe.author;
 	console.log('17', author);
 
@@ -89,7 +100,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 								<h4 className='text-gray-600 font-lato  text-md  lg:max-w-2xl    lg:  lg:text-gray-500 lg:font-semibold'>
 									Category:   <span className='text-yellow mr-1'>{inProgressData.recipe?.category_name} </span>
 									Author:   <span className='text-yellow'>{author} </span>
-									Category:   <span className='text-yellow ml-1'>{inProgressData.recipe?.category_name} </span>
+									Date:   <span className='text-yellow ml-1'>{formattedDate} </span>
 								</h4>
 							</div>
 						</div>

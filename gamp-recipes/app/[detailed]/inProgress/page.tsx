@@ -13,13 +13,13 @@ export default async function InProgress({
 	const recipe = await getRecipeById(detailed);
 	console.log('recipe', recipe);
 
-	const test = async (detailed) => {
+	const test = async (detailed: number) => {
 		const recipe = await getRecipeById(detailed);
-		console.log('3', recipe);
+		console.log('19', recipe);
 
 	};
 
-	await test(detailed);
+	await test(parseInt(detailed));
 
 	if (!recipe) return null;
 

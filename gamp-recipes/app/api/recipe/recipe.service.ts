@@ -278,13 +278,14 @@ export async function getRecipeById(request: number) {
 			include: {
 				Author_Recipe: {
 					select: {
+						author_id: true,
 						author: {
 							select: {
 								username: true,
 							},
 						},
-
 					},
+
 				},
 				category_name: true,
 				recipe_type: true,
