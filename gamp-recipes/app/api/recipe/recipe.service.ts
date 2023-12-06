@@ -270,23 +270,15 @@ export async function getRecipes() {
 
 
 export async function getRecipeById(request: number) {
+
+
 	try {
-		const recipe = await prisma.recipes.findFirst({
+		const recipe = await prisma.recipes.findUnique({
 			where: {
 				id: request,
 			},
 			include: {
-				Author_Recipe: {
-					select: {
-						author_id: true,
-						author: {
-							select: {
-								username: true,
-							},
-						},
-					},
-
-				},
+				Author_Recipe: true,
 				category_name: true,
 				recipe_type: true,
 				Ingredients_Recipes: {
@@ -302,6 +294,10 @@ export async function getRecipeById(request: number) {
 				},
 			},
 		});
+		console.log('request', request);
+
+		console.log('recipe------- 296', recipe);
+
 
 		return recipe;
 	} catch (error) {

@@ -126,7 +126,6 @@ type NewRecipeRequest = {
 	amount: string[];
 };
 
-
 type RecipeData = {
 	id: number;
 	recipe_name: string;
@@ -143,14 +142,18 @@ type RecipeData = {
 	created_at: Date;
 	updated_at: Date;
 	ingredients: ingredientsAPI[];
-	author?: string;
+	author?: string | null; // Update the type here
 }
+
+
+
 type ingredientsAPI = {
-	ing_amount: string[] | null
+	ing_amount: string[] | null;
 	ingredient: {
 		ingredients_name: string;
 	};
 };
+
 
 type UpdateRecipeRequest = {
 	id: number; // O ID da receita a ser atualizada

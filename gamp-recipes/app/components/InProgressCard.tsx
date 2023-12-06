@@ -6,12 +6,19 @@ import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import FavButton from '@/app/components/FavoriteButton';
 import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 import { SnackbarProvider } from 'notistack';
+
+
 type inProgressData =
 	{
 		recipe: RecipeData,
 		detailed: string
 	};
 export default function InProgressCard(inProgressData: inProgressData) {
+
+
+	const btnClearLocalStorage = () => {
+		localStorage.clear();
+	};
 
 	const timestampObj: Date = new Date(inProgressData.recipe.updated_at);
 
@@ -22,24 +29,11 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	});
 
 
-	console.log(timestampObj);
-
-	let author = inProgressData.recipe.author;
-	console.log('17', author);
-
+	let author = inProgressData.recipe?.author;
 
 	if (inProgressData.recipe.author === null || inProgressData.recipe.author === '' || inProgressData.recipe.author === undefined) {
 		author = 'Jacquin';
 	}
-
-	console.log('24', author);
-
-	console.log(inProgressData.recipe.author);
-	console.log(author);
-
-
-
-
 
 
 	const { share } = useBehaviorContext();
@@ -58,7 +52,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 		}
 		);
 
-		console.log('amount', amount);
+
 
 		if (amount === undefined) {
 			return { ingredients, amount: [] };
@@ -75,8 +69,6 @@ export default function InProgressCard(inProgressData: inProgressData) {
 		);
 	}
 	);
-
-	console.log(instructions);
 
 
 	return (
@@ -102,6 +94,8 @@ export default function InProgressCard(inProgressData: inProgressData) {
 									Author:   <span className='text-yellow'>{author} </span>
 									Date:   <span className='text-yellow ml-1'>{formattedDate} </span>
 								</h4>
+
+								<button onClick={btnClearLocalStorage}>CLEAR</button>
 							</div>
 						</div>
 					</div>

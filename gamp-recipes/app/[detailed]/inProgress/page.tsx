@@ -1,25 +1,52 @@
 import React from 'react';
 import { detailedParams } from '@/types';
 
-
 import InProgressCard from '@/app/components/InProgressCard';
-import { getRecipeById } from '@/app/lib/recipeUtils';
+
+import prisma from '@/prisma/client';
 
 
 export default async function InProgress({
 	params: { detailed },
 }: detailedParams) {
 
-	const recipe = await getRecipeById(detailed);
-	console.log('recipe', recipe);
 
-	const test = async (detailed: number) => {
-		const recipe = await getRecipeById(detailed);
-		console.log('19', recipe);
+	const recipe = await prisma.recipes.findUnique({
+		where: {
+			id: Number(detailed),
+		},
+		include: {
+			Author_Recipe: {
+				select: {
+					author: {
+						select: {
+							username: true,
 
-	};
+						}
+					}
+				},
+			},
 
-	await test(parseInt(detailed));
+			category_name: true,
+			recipe_type: true,
+			Ingredients_Recipes: {
+				select: {
+					ing_amount: true,
+					ingredient: {
+						select: {
+							ingredients_name: true,
+						},
+					},
+				},
+
+			},
+		},
+	});
+
+	console.log('recipe line 39', recipe?.Author_Recipe[0]?.author?.username);
+
+
+
 
 	if (!recipe) return null;
 
@@ -41,7 +68,7 @@ export default async function InProgress({
 
 			category_name: recipe.category_name.name,
 			recipe_type_name: recipe.recipe_type.name,
-			author: recipe.Author_Recipe,
+			author: recipe?.Author_Recipe[0]?.author?.username
 		}} detailed={detailed} />
 	);
 }

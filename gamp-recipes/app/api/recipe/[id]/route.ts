@@ -4,12 +4,15 @@ import { getRecipeById } from '../recipe.service';
 import { HttpStatusCode } from '@/app/lib/HTTPHandler';
 
 
+
 export async function GET(req: NextRequest) {
 
 	try {
 		const route = req.nextUrl.pathname.split('/');
 		const id = route[route.length - 1];
 		console.log('route', route);
+
+
 
 
 		const recipe = await getRecipeById(parseInt(id));
