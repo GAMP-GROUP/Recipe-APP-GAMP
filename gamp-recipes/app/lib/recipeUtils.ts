@@ -10,10 +10,15 @@ export const getRecipes = async () => {
 
 export const getRecipeById = async (id: string) => {
 	const recipe = fetch(`http://localhost:3000/api/recipe/${id}`, {
+
 		method: 'GET',
 
 	}).then((res) => {
 		return res.json();
 	});
+	console.log('utils ------- id', id);
+
+
+
 	return recipe;
 };

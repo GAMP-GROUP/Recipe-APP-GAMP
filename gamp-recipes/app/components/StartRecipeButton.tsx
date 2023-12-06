@@ -15,6 +15,8 @@ export default function StartRecipeButton({ id }: ButtonProps) {
 		if (status === 'unauthenticated') router.replace('/auth/signin');
 		const id = (e.target as Element).id;
 		isStarted ? null : localStorage.setItem('recipes', JSON.stringify([...started, id]));
+
+
 		router.push(`${id}/inProgress`);
 	}
 
@@ -22,10 +24,10 @@ export default function StartRecipeButton({ id }: ButtonProps) {
 	return (
 		<>
 			<button
-				onClick={(e) => { startHandle(e);}}
+				onClick={(e) => { startHandle(e); }}
 				className='rounded-full bg-yellow bg-auto p-5 my-2 uppercase'
 				id={id}
-			>{isStarted ? 'Continue Recipe' : 'Start Recipe' }
+			>{isStarted ? 'Continue Recipe' : 'Start Recipe'}
 			</button>
 		</>
 	);

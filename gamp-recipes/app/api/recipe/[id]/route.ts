@@ -4,6 +4,7 @@ import { getRecipeById } from '../recipe.service';
 import { HttpStatusCode } from '@/app/lib/HTTPHandler';
 
 
+
 export async function GET(req: NextRequest) {
 
 	try {
@@ -12,11 +13,14 @@ export async function GET(req: NextRequest) {
 		console.log('route', route);
 
 
+
+
 		const recipe = await getRecipeById(parseInt(id));
 
-		return new NextResponse(JSON.stringify(recipe), { status: HttpStatusCode.OK });
+
+		return NextResponse.json(recipe, { status: 200 });
 	} catch (error) {
 		console.error('Error caught in GET request:', error);
-		return new NextResponse(JSON.stringify(error), { status: HttpStatusCode.InternalServerError });
+		return NextResponse.json(error, { status: HttpStatusCode.InternalServerError });
 	}
 }

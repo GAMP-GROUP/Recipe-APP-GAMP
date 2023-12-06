@@ -1,14 +1,16 @@
 import { detailedParams } from '@/types';
 import prisma from '@/prisma/client';
 import React from 'react';
-import StartRecipeButton from '../components/StartRecipeButton'; 
+import StartRecipeButton from '../components/StartRecipeButton';
 import FavButton from '../components/FavoriteButton';
 
-export default async function Details ({ params: { detailed } }: detailedParams) {
+export default async function Details({ params: { detailed } }: detailedParams) {
 	const id = Number(detailed);
+	console.log('9-details', id);
+
 	const recipe = await prisma.recipes.findUnique({
 		where: {
-			id 
+			id
 		},
 		include: {
 			Ingredients_Recipes: {
@@ -47,7 +49,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 				<h2
 					className='text-3xl text-center uppercase'
 				>
-          Instructions
+					Instructions
 				</h2>
 				<p
 					className='text-center'
@@ -78,13 +80,13 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 			</ul>
 
 			<div
-				className={ recipe?.recipe_type_id === 1 ? '' : 'aspect-video w-3/4'
+				className={recipe?.recipe_type_id === 1 ? '' : 'aspect-video w-3/4'
 				}>
 				{
-					recipe?.video_source === null 
+					recipe?.video_source === null
 						? <p
 							className="text-center"
-						>{`Type: ${recipe.alcoholic}`}</p> 
+						>{`Type: ${recipe.alcoholic}`}</p>
 						: <iframe
 							className='rounded-md'
 							id="recipe video"
@@ -96,7 +98,7 @@ export default async function Details ({ params: { detailed } }: detailedParams)
 				}
 			</div>
 			<div
-				className='mb-8 flex flex-col items-center'	
+				className='mb-8 flex flex-col items-center'
 			>
 				<FavButton id={id.toString()} />
 				<StartRecipeButton id={id.toString()} />
