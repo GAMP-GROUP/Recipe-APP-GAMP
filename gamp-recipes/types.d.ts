@@ -141,19 +141,15 @@ type RecipeData = {
 	recipe_type_id: number;
 	created_at: Date;
 	updated_at: Date;
-	ingredients: ingredientsAPI[];
-	author?: string | null; // Update the type here
-}
-
-
-
+	ingredients: (ingredientsAPI | null)[]; // Allow null for each ingredient
+	author?: string | null;
+};
 type ingredientsAPI = {
-	ing_amount: string[] | null;
+	ing_amount: string | string[] | null; // Allow string or array of strings or null
 	ingredient: {
 		ingredients_name: string;
 	};
 };
-
 
 type UpdateRecipeRequest = {
 	id: number; // O ID da receita a ser atualizada

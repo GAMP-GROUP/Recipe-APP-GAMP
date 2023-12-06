@@ -40,18 +40,21 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 
 	const getIngredientsAndAmount = () => {
-		const ingredients = inProgressData.recipe?.ingredients.map(({ ingredient: { ingredients_name } }) => {
-			const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
-			return ingName;
+
+		const ingredients = inProgressData.recipe?.ingredients.map((item) => {
+			const ingredients_name = item?.ingredient?.ingredients_name;
+
+			if (ingredients_name) {
+				const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
+				return ingName;
+			}
+			return null;
 		});
 
 
-
-		const amount = inProgressData.recipe?.ingredients.map(({ ing_amount }) => {
-			return ing_amount;
-		}
-		);
-
+		const amount = inProgressData.recipe?.ingredients.map((ingredient) => {
+			return ingredient?.ing_amount; // Check if ingredient exists before accessing ing_amount
+		});
 
 
 		if (amount === undefined) {
