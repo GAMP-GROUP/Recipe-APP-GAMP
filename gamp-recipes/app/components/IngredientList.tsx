@@ -51,13 +51,14 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 			allItemsAreChecked(JSON.parse(ingredientsLocal)) ? setIsDisabled(false) : setIsDisabled(true);
 			console.log('allItemsAreChecked', allItemsAreChecked(JSON.parse(ingredientsLocal)));
 
+			if (JSON.parse(ingredientsLocal).length === ingredients.length && allItemsAreChecked(JSON.parse(ingredientsLocal))) {
+				setIsDisabled(false);
+			}
+
+			console.log('ingredientsLocal', ingredientsLocal);
+
+
 		}
-
-		if (ingredientsLocal?.length === ingredients.length) {
-			setIsDisabled(false);
-
-		}
-
 
 
 	}, []);
@@ -80,7 +81,10 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 
-		setItemsChecked((prev) => ({ ...prev, [name]: checked }));
+		setItemsChecked((prev) => ({
+			...prev,
+			[name]: checked,
+		}));
 
 
 		setCount((prevCount) => {
@@ -95,9 +99,24 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		if (updatedCount === ingredients.length || updatedCount > ingredients.length) {
 			updatedCount = ingredients.length;
 			setIsDisabled(false);
-		} else {
-			setIsDisabled(true);
 		}
+
+
+		const ingredientsLocal: string | null = localStorage.getItem(`ingredients recipe ${id}`);
+		console.log('ingredientsLocal', ingredientsLocal);
+
+		if (ingredientsLocal) {
+
+			if (JSON.parse(ingredientsLocal).length === ingredients.length && allItemsAreChecked(JSON.parse(ingredientsLocal))) {
+				setIsDisabled(false);
+			}
+		}
+
+		console.log('updatedCount', updatedCount);
+
+
+		setIsDisabled(updatedCount !== ingredients.length);
+
 
 
 
@@ -199,7 +218,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 				<button
 					onClick={handleFinishBtn}
 					disabled={isDisabled}
-					className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-fit p-2 text-sm rounded inline-flex items-center">
+					className={` ${isDisabled? 'bg-gray-700' : 'bg-black text-white'}  hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-fit p-2 text-sm rounded inline-flex items-center`}>
 
 					Finish Recipe
 				</button>

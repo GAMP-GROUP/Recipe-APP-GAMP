@@ -20,9 +20,7 @@ type inProgressData =
 export default function InProgressCard(inProgressData: inProgressData) {
 
 
-	const btnClearLocalStorage = () => {
-		localStorage.clear();
-	};
+
 
 	const timestampObj: Date = new Date(inProgressData.recipe.updated_at);
 
@@ -44,18 +42,21 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 
 	const getIngredientsAndAmount = () => {
-		const ingredients = inProgressData.recipe?.ingredients.map(({ ingredient: { ingredients_name } }) => {
-			const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
-			return ingName;
+
+		const ingredients = inProgressData.recipe?.ingredients.map((item) => {
+			const ingredients_name = item?.ingredient?.ingredients_name;
+
+			if (ingredients_name) {
+				const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
+				return ingName;
+			}
+			return null;
 		});
 
 
-
-		const amount = inProgressData.recipe?.ingredients.map(({ ing_amount }) => {
-			return ing_amount;
-		}
-		);
-
+		const amount = inProgressData.recipe?.ingredients.map((ingredient) => {
+			return ingredient?.ing_amount;
+		});
 
 
 		if (amount === undefined) {
@@ -78,7 +79,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={' bg-slate-50 ml-7 mr-7  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
+			className={' bg-slate-50 ml-7 mr-7 mt-2  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
 		>
 
 
@@ -94,12 +95,12 @@ export default function InProgressCard(inProgressData: inProgressData) {
 							</h2>
 							<div className='flex gap-2 lg:mb-2'>
 								<h4 className='text-gray-600 font-lato  text-md  lg:max-w-2xl    lg:  lg:text-gray-500 lg:font-semibold'>
-									Category:   <span className='text-yellow mr-1'>{inProgressData.recipe?.category_name} </span>
-									Author:   <span className='text-yellow'>{author} </span>
-									Date:   <span className='text-yellow ml-1'>{formattedDate} </span>
+									Category:   <span className='text-gray-700 font-semibold mr-1'>{inProgressData.recipe?.category_name} </span>
+									Author:   <span className='text-gray-700 font-semibold'>{author} </span>
+									Date:   <span className='text-gray-700  ml-1 font-semibold'>{formattedDate} </span>
 								</h4>
 
-								<button onClick={btnClearLocalStorage}>CLEAR</button>
+
 							</div>
 						</div>
 					</div>
