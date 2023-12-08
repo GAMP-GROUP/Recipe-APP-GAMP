@@ -270,8 +270,10 @@ export async function getRecipes() {
 
 
 export async function getRecipeById(request: number) {
+
+
 	try {
-		const recipe = await prisma.recipes.findFirst({
+		const recipe = await prisma.recipes.findUnique({
 			where: {
 				id: request,
 			},
@@ -292,6 +294,10 @@ export async function getRecipeById(request: number) {
 				},
 			},
 		});
+		console.log('request', request);
+
+		console.log('recipe------- 296', recipe);
+
 
 		return recipe;
 	} catch (error) {
