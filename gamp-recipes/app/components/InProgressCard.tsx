@@ -16,9 +16,7 @@ type inProgressData =
 export default function InProgressCard(inProgressData: inProgressData) {
 
 
-	const btnClearLocalStorage = () => {
-		localStorage.clear();
-	};
+
 
 	const timestampObj: Date = new Date(inProgressData.recipe.updated_at);
 
@@ -93,12 +91,12 @@ export default function InProgressCard(inProgressData: inProgressData) {
 							</h2>
 							<div className='flex gap-2 lg:mb-2'>
 								<h4 className='text-gray-600 font-lato  text-md  lg:max-w-2xl    lg:  lg:text-gray-500 lg:font-semibold'>
-									Category:   <span className='text-yellow mr-1'>{inProgressData.recipe?.category_name} </span>
-									Author:   <span className='text-yellow'>{author} </span>
-									Date:   <span className='text-yellow ml-1'>{formattedDate} </span>
+									Category:   <span className='text-gray-700 font-semibold mr-1'>{inProgressData.recipe?.category_name} </span>
+									Author:   <span className='text-gray-700 font-semibold'>{author} </span>
+									Date:   <span className='text-gray-700  ml-1 font-semibold'>{formattedDate} </span>
 								</h4>
 
-								<button onClick={btnClearLocalStorage}>CLEAR</button>
+
 							</div>
 						</div>
 					</div>

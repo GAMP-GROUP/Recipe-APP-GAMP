@@ -218,7 +218,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 				<button
 					onClick={handleFinishBtn}
 					disabled={isDisabled}
-					className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-fit p-2 text-sm rounded inline-flex items-center">
+					className={` ${isDisabled? 'bg-gray-700' : 'bg-black text-white'}  hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-fit p-2 text-sm rounded inline-flex items-center`}>
 
 					Finish Recipe
 				</button>
