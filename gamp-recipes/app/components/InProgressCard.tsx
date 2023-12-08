@@ -5,7 +5,7 @@ import IngredientList from '@/app/components/IngredientList';
 import FavButton from '@/app/components/FavoriteButton';
 import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 import { SnackbarProvider } from 'notistack';
-
+import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 
 type inProgressData =
 	{
