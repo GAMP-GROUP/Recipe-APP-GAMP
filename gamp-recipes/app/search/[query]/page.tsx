@@ -3,8 +3,8 @@ import RecipesFeed from '@/app/components/RecipesFeed';
 import Image from 'next/image';
 import React from 'react';
 
-type searchProps = {
-    params: { query: string }
+type TSearchFeedProps = {
+    params: { query: string };
 }
 
 type TRecipesFeed = {
@@ -15,8 +15,8 @@ type TRecipesFeed = {
         image: string;
         tags: string;
         video_source: string | null;
-        area: string | null; alcoholic:
-        string | null;
+        area: string | null;
+		alcoholic: string | null;
         recipe_type_id: number;
         created_at: Date;
         updated_at: Date;
@@ -25,7 +25,7 @@ type TRecipesFeed = {
     totalRecipes: number,
 }
 
-export default async function SearchFeed({ params: { query } }: searchProps) {    
+export default async function SearchFeed({ params: { query } }: TSearchFeedProps) {   
 	// Troca os espaços na pesquisa por traço   
 	const modifiedQuery = query.replace('%20', ' ');
 	const recipesFeed: TRecipesFeed = {
@@ -106,26 +106,26 @@ export default async function SearchFeed({ params: { query } }: searchProps) {
 		<main>
 			{ totalRecipes > 0
 				?
-				<>
-					<h1 className="text-center mx-auto mt-5 font-extrabold text-lg">
-						{ `Showing ${totalRecipes} ${totalRecipes > 1 ? 'results' : 'result' }` }
+				<section>
+					<h1 className={ 'text-center mx-auto mt-5 font-extrabold text-lg' }>
+						{ `Showing ${ totalRecipes } ${ totalRecipes > 1 ? 'results' : 'result' }` }
 					</h1>
 					<RecipesFeed
-						recipesQuantity={25}
+						recipesQuantity={ 25 }
 						feedType={ recipesFeed.feedType }
-						recipes={recipesFeed.recipes}
+						recipes={ recipesFeed.recipes }
 					/>
-				</>
+				</section>
 				: 
-				<section className="h-[600px] w-screen flex flex-col justify-center items-center">
+				<section className="h-screen w-screen flex flex-col justify-center items-center">
 					<h1 className="text-center font-extrabold text-lg">
-                    No results have been found
+						No results have been found
 					</h1>
 					<Image
 						alt='Sad emoji'
 						src='/icons/sad.png'
-						width={35}
-						height={35}
+						width={ 35 }
+						height={ 35 }
 						className="mt-2"
 					/>
 				</section>

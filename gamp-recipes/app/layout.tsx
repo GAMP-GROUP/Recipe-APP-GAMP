@@ -1,9 +1,9 @@
 import './reset.css';
 import './globals.css';
+import './animations.css';
 import type { Metadata } from 'next';
 import Providers from '@/contextAPI/provider/providers';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import NavigationBar from './components/NavigationBar';
 import UserMenu from './components/UserMenu';
 import SearchBar from './components/SearchBar';
 import React from 'react';
@@ -21,15 +21,15 @@ export default function RootLayout({
 }) {
 
 	return (
-		<html lang='en'>
-			<body className='flex-col'>
+		<html lang='en' className='w-screen h-full'>
+			<body className={ `w-screen h-full bg-white overflow-x-hidden flex justify-center
+			` }>
 				<Providers>
 					<AuthProvider>
 						<SearchBar />
+						{ children }
 						<UserMenu />
-						<Header />
-						{children}
-						<Footer />
+						<NavigationBar />
 					</AuthProvider>
 				</Providers>
 			</body>

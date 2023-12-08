@@ -7,6 +7,19 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Poppins:wght@500&display=swap');
 
 @layer base {
+<<<<<<< HEAD
+  html {
+    font-family: 'Lato', sans-serif;
+    @apply w-screen
+  }
+  h3 {
+    @apply text-5xl font-bold
+  }
+  h4 {
+    @apply text-xs my-1
+  }
+}
+=======
 	html {
 		font-family: 'Lato', sans-serif;
 	}
@@ -46,3 +59,4 @@
 		}
 	}
 }
+>>>>>>> 0322e5c53a4e4726e5e3d9ba079b67f2bae4b52b
