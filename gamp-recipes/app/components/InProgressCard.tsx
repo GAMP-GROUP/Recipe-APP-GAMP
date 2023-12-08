@@ -74,7 +74,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={' bg-slate-50 ml-7 mr-7 mt-2  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
+			className={' bg-slate-50 ml-7 mr-7 mt-2 mb-10 lg:mb-5 lg:w-fit lg:h-max overflow-x-hidden xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
 		>
 
 
