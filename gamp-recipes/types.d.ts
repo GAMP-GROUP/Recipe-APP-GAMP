@@ -65,7 +65,6 @@ type recipePost = {
 type ButtonProps = {
 	id: string,
 	ImgClass?: string
-
 }
 
 type mealAPI = {

@@ -1,5 +1,4 @@
 'use client';
-
 import React from 'react';
 import { ButtonProps } from '@/types';
 import { useSession } from 'next-auth/react';
@@ -26,15 +25,12 @@ export default function FavButton({ id, ImgClass }: ButtonProps) {
 		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
 		window.alert(favState);
 	}
-	const BtnClass = 'rounded-full w - 14 h - 14 z - 3';
-
-
 
 	return (
 		<button
 			id={id}
 			onClick={(e) => favHandle(e)}
-			className={BtnClass}
+			className={ 'rounded-full bg-yellow p-2 w-[2.35em] h-[2.35em] z-3 absolute top-8 right-8' }
 		>
 			<picture
 				id={id}
@@ -43,7 +39,7 @@ export default function FavButton({ id, ImgClass }: ButtonProps) {
 					id={id}
 					alt='Favorite button'
 					src='/icons/favorites-notactive.png'
-					className={ImgClass}
+					className={ ImgClass }
 				/>
 			</picture>
 		</button>

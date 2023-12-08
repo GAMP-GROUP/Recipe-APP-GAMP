@@ -9,7 +9,7 @@ export default function UserMenu() {
 	const { menu, setMenu } = useBehaviorContext();
 	const { width } = useWindowDimensions();
 	const [, allowScroll] = useScrollBlock();
-	const menuItems = ['Profile', 'Meals', 'Drinks', 'Favorites'];
+	const menuItems = ['Profile', 'Meals', 'Drinks', 'Favorites', 'Create'];
 
 	function closeMenu() {
 		const menuIcon = document.querySelector('#menu-icon') as HTMLInputElement;

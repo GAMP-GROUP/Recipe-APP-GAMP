@@ -22,17 +22,10 @@ const config: Config = {
 				'lato': ['Lato', 'sans-serif'],
 				'argentum': ['Argentum-Sans-Bold',],
 				'poppins': ['Poppins', 'sans-serif'],
-
 			},
 			backgroundColor: {
-
-
 				semiwhite: 'rgb(249, 250, 251)'
 			}
-
-
-
-
 		},
 	},
 	plugins: [
