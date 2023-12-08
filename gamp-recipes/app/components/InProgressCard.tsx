@@ -2,11 +2,6 @@
 import React from 'react';
 import { RecipeData } from '@/types';
 import IngredientList from '@/app/components/IngredientList';
-<<<<<<< HEAD
-
-=======
-import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
->>>>>>> 0322e5c53a4e4726e5e3d9ba079b67f2bae4b52b
 import FavButton from '@/app/components/FavoriteButton';
 import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 import { SnackbarProvider } from 'notistack';
