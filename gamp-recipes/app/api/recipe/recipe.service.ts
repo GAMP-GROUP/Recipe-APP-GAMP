@@ -2,6 +2,7 @@ import { HttpStatusCode } from '@/app/lib/HTTPHandler';
 import { userAuth } from '@/app/middlewares/authToken';
 import prisma from '@/prisma/client';
 import { NewRecipeResponse, UpdateRecipeRequest, Request } from '@/types';
+import { use } from 'chai';
 
 
 
@@ -306,16 +307,27 @@ export async function getRecipeById(request: number) {
 }
 
 
-export async function finishRecipe (request: number) {
+export async function finishRecipe (request: Request) {
 	try {
+		const { message, user } = await userAuth(request);
+		console.log('user', message, user);
+		
+		
+
+		if (message !== 'success' || user == undefined) return { message, TYPE: HttpStatusCode.Unauthorized };
+
 		const recipe = await prisma.finished_Recipes.create({
 			data: {
 				recipe_id: request,
-				user_id: 1,
+				user_id: user.id,
 				
 			},
 		});
 
+		console.log('recipe', recipe);
+		console.log(user.id);
+		
+		
 		return recipe;
 	} catch (error) {
 		console.error('Error finishing recipe:', error);

@@ -3,6 +3,9 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import React from 'react';
 import { motion } from 'framer-motion';
+import { finishRecipe } from '../lib/recipeApi';
+import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 
 
 
@@ -13,7 +16,15 @@ type ingredientListProps = {
 	amount: string[] | [];
 };
 
+
+
 export default function IngredientList({ ingredients, id, amount }: ingredientListProps) {
+
+	const router = useRouter();
+	const session = useSession();
+	console.log('ingredients', session);
+	
+
 
 
 	if (localStorage.getItem(`ingredients recipe ${id}`) === null ||!localStorage.getItem(`ingredients recipe ${id}`)) {
@@ -29,11 +40,18 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 	const handleFinishBtn = async () => {
-		console.log(isDisabled);
 
+		if (session.status === 'unauthenticated') {
+			window.alert('You need to sign in or register in GAMP in order to finish recipes');
+			return;
+		}
 		
+		const sendRecipe = await finishRecipe(id.toString());
+		console.log('sendRecipe', sendRecipe);
 
-
+		if (sendRecipe) {
+			window.alert('Recipe finished!');
+		}
 
 	};
 
@@ -63,19 +81,11 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 			if(Object.values(itemsChecked).length === 0) {
 				setIsDisabled(true);
 			}
-			console.log('aaaaaad', allItemsAreChecked(JSON.parse(ingredientsLocal)));
-			console.log(Object.values(JSON.parse(ingredientsLocal)).length);
-			
-			console.log(isDisabled);
-			console.log(Object.values(itemsChecked).length === ingredients.length);
-			console.log(ingredients.length);
-			
-			
+
 			
 			if(allItemsAreChecked(JSON.parse(ingredientsLocal)) && Object.values(JSON.parse(ingredientsLocal)).length === ingredients.length) {
 				setIsDisabled(false);
 
-				
 			}
 
 		}

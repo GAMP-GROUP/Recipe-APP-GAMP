@@ -1,9 +1,8 @@
 import { detailedParams } from '@/types';
-import prisma from '@/prisma/client';
 import React from 'react';
 
 import InProgressCard from '../components/InProgressCard';
-import { getRecipeById } from '../lib/recipeUtils';
+import { getRecipeById } from '../lib/recipeApi';
 
 export default async function Details({ params: { detailed } }: detailedParams) {
 	const id = Number(detailed);
@@ -17,7 +16,7 @@ export default async function Details({ params: { detailed } }: detailedParams) 
 
 	return (
 		<InProgressCard recipe={{
-			id: recipe.id,
+			id: recipe.id, 
 			recipe_name: recipe.recipe_name,
 			instructions: recipe.instructions,
 			image: recipe.image,

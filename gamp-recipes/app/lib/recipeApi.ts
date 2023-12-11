@@ -22,3 +22,17 @@ export const getRecipeById = async (id: string) => {
 
 	return recipe;
 };
+
+
+export const finishRecipe = async (id: string) => {
+	const recipe = fetch(`http://localhost:3000/api/recipe/${id}`, {
+		cache: 'no-cache',
+		method: 'POST',
+
+	}).then((res) => {
+		return res.json();
+	});
+
+	return recipe;
+
+};
