@@ -17,7 +17,7 @@ type recipeProps = {
 export default function RecipesCard({ id, image, title, type }: recipeProps): JSX.Element {
 	return (
 		<div className={ `p-6 text-center mb-4 relative
-		2xl:w-64` }>
+		2xl:w-64 2xl:mx-auto` }>
 			<Link href={`/${id}`} replace>
 				<picture>
 					<img

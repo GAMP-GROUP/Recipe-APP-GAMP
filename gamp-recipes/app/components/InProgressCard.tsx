@@ -13,18 +13,12 @@ type inProgressData =
 		detailed: string
 	};
 export default function InProgressCard(inProgressData: inProgressData) {
-
-
-
-
 	const timestampObj: Date = new Date(inProgressData.recipe.updated_at);
-
 	const formattedDate: string = timestampObj.toLocaleDateString('en-US', {
 		year: 'numeric',
 		month: '2-digit',
 		day: '2-digit',
 	});
-
 
 	let author = inProgressData.recipe?.author;
 
@@ -32,9 +26,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 		author = 'Jacquin';
 	}
 
-
 	const { share } = useBehaviorContext();
-
 
 	const getIngredientsAndAmount = () => {
 
@@ -48,7 +40,6 @@ export default function InProgressCard(inProgressData: inProgressData) {
 			return null;
 		});
 
-
 		const amount = inProgressData.recipe?.ingredients.map((ingredient) => {
 			return ingredient?.ing_amount;
 		});
@@ -60,7 +51,6 @@ export default function InProgressCard(inProgressData: inProgressData) {
 		return { ingredients, amount };
 	};
 
-
 	const { ingredients, amount } = getIngredientsAndAmount();
 
 	const instructions = inProgressData.recipe?.instructions.split('\n').map((instruction, index) => {
@@ -70,14 +60,11 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	}
 	);
 
-
 	return (
 		<div
 
 			className={' bg-slate-50 ml-7 mr-7 mt-2  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
 		>
-
-
 			<section className='text-left     xl:justify-end  lg:flex lg:justify-end lg:items-center order-1 '>
 				<div
 					className={' gap-4  ml-3 sm:10 mb-5 min-h-min lg:shadow-none lg:ml-4 w-fit lg:justify-end lg:items-center	 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
@@ -94,8 +81,6 @@ export default function InProgressCard(inProgressData: inProgressData) {
 									Author:   <span className='text-gray-700 font-semibold'>{author} </span>
 									Date:   <span className='text-gray-700  ml-1 font-semibold'>{formattedDate} </span>
 								</h4>
-
-
 							</div>
 						</div>
 					</div>
