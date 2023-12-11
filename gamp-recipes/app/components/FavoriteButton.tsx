@@ -4,7 +4,7 @@ import { ButtonProps } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-export default function FavButton({ id, ImgClass }: ButtonProps) {
+export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 	const session = useSession();
 	const router = useRouter();
 
@@ -25,12 +25,12 @@ export default function FavButton({ id, ImgClass }: ButtonProps) {
 		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
 		window.alert(favState);
 	}
-
+	// 'rounded-full bg-yellow p-2 w-[2.35em] h-[2.35em] z-3 absolute top-8 right-8'
 	return (
 		<button
 			id={id}
 			onClick={(e) => favHandle(e)}
-			className={ 'rounded-full bg-yellow p-2 w-[2.35em] h-[2.35em] z-3 absolute top-8 right-8' }
+			className={ btnClass || 'rounded-full bg-yellow p-2 w-[2.35em] h-[2.35em] z-3 absolute top-8 right-8' }
 		>
 			<picture
 				id={id}

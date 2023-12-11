@@ -27,11 +27,7 @@ export default function SignInForm() {
 			return window.alert('Please fill in all fields');
 		}
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 0322e5c53a4e4726e5e3d9ba079b67f2bae4b52b
 		try {
 			const signInResponse = await signIn('credentials', {
 				redirect: false,
@@ -135,14 +131,11 @@ export default function SignInForm() {
 						<span>Continue with Google</span>
 					</button>
 				</div>
-<<<<<<< HEAD
-=======
 
 
 
 
 
->>>>>>> 0322e5c53a4e4726e5e3d9ba079b67f2bae4b52b
 			</form>
 		</div>
 

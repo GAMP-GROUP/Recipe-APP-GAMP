@@ -74,7 +74,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={' bg-slate-50 ml-7 mr-7 mt-2 lg:h-max  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
+			className={' bg-slate-50 ml-7 mr-7 mt-2 lg:h-max mb-10 lg:mb-5  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
 
 		>
 
@@ -109,6 +109,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 								<FavButton
 									id={inProgressData.detailed.toString()}
 									ImgClass='w-full h-6 m-auto'
+									btnClass=' w-full'
 								/>
 							</div>
 							<div className={`flex   flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} lg:self-center `}>
@@ -130,10 +131,10 @@ export default function InProgressCard(inProgressData: inProgressData) {
 				</section>
 			</div>
 			<section className=' col-span-2 lg:ml-2  row-span-3 lg:mt-2  order-2  lg:border-t-2  lg:flex  lg:flex-col  lg:justify-end lg:items-center lg:border-gray-200 lg:border-solid  '>
-				<div className='lg:mb-5 lg:mr-2  lg:max-w-4xl  '>
+				<div className=' lg:mr-2  lg:max-w-4xl lg:mb-10 '>
 					<section className='lg:w-full '>
 						<h2
-							className={'lg:text-xl ml-2 text-2xl   text-left mt-2 lg:ml-1 font-bold text-gray-700 font-lato lg:text-left'}
+							className={'lg:text-xl ml-2 text-2xl    text-left mt-2 lg:ml-1 font-bold text-gray-700 font-lato lg:text-left'}
 						>
 							Instructions
 						</h2>

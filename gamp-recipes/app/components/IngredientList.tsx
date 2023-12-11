@@ -1,7 +1,5 @@
 'use client';
 
-
-
 import { ChangeEvent, useEffect, useState } from 'react';
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -17,7 +15,7 @@ type ingredientListProps = {
 export default function IngredientList({ ingredients, id, amount }: ingredientListProps) {
 
 
-	if (localStorage.getItem(`ingredients recipe ${id}`) === null) {
+	if (localStorage.getItem(`ingredients recipe ${id}`) === null ||!localStorage.getItem(`ingredients recipe ${id}`)) {
 		localStorage.setItem(`ingredients recipe ${id}`, JSON.stringify({}));
 	}
 
@@ -26,7 +24,6 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 	const [count, setCount] = useState<number>(0);
 
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
-
 
 
 	const handleFinishBtn = () => {
@@ -54,21 +51,23 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 			if (JSON.parse(ingredientsLocal).length === ingredients.length && allItemsAreChecked(JSON.parse(ingredientsLocal))) {
 				setIsDisabled(false);
 			}
-
 			console.log('ingredientsLocal', ingredientsLocal);
 
+			if(Object.values(itemsChecked).length === 0) {
+				setIsDisabled(true);
+			}
 
 		}
 
 
 	}, []);
 
+
 	useEffect(() => {
 		localStorage.setItem(`ingredients recipe ${id}`, JSON.stringify(itemsChecked));
 
-
-
 	}, [itemsChecked]);
+
 
 
 	const handleCheckboxClick = (event: ChangeEvent<HTMLInputElement>) => {
@@ -166,7 +165,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		<div className='flex-col gap-3 min-w-[358px] w-full flex lg:flex-col lg:flex  mr-3 '>
 
 			<h2
-				className='text-lg text-left ml-3 text-gray-700 font-lato font-semibold  h-fit'
+				className='text-lg text-left ml-3 text-gray-700 font-lato font-semibold lg:border-yellow lg:border-solid border-b-4   w-fit  h-fit'
 			>Ingredients</h2>
 
 
@@ -214,11 +213,11 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 			</section>
 
-			<div className='flex justify-center lg:justify-end items-center'>
+			<div className='flex justify-center lg:justify-start lg:ml-4  items-center'>
 				<button
 					onClick={handleFinishBtn}
 					disabled={isDisabled}
-					className={` ${isDisabled? 'bg-gray-700' : 'bg-black text-white'}  hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-fit p-2 text-sm rounded inline-flex items-center`}>
+					className={` ${isDisabled? 'bg-gray-700' : 'bg-black text-white'} lg:w-[163px]  hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-fit p-2 text-sm rounded inline-flex items-center`}>
 
 					Finish Recipe
 				</button>
