@@ -21,7 +21,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 
 	const [itemsChecked, setItemsChecked] = useState<Record<string, boolean>>({});
-	const [count, setCount] = useState<number>(0);
+
 
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
@@ -103,10 +103,6 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		}));
 
 
-		setCount((prevCount) => {
-			// Incrementa se checked é true, decrementa se checked é false
-			return checked ? initialCount + 1 : Math.max(prevCount - 1, 0); // Ensure count is not negative
-		});
 
 		// Este código será executado após o estado ser atualizado
 		let updatedCount = initialCount  + (checked ? 1 : -1);
@@ -128,17 +124,10 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 			}
 		}
 
-		console.log('updatedCount', updatedCount);
-
 
 		setIsDisabled(updatedCount !== ingredients.length);
 
 
-
-
-
-		console.log('count', updatedCount);
-		console.log('ingredients.length', ingredients.length);
 	};
 
 
