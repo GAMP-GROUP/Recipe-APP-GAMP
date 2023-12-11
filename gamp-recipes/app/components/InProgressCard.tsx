@@ -103,7 +103,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 					<div className='lg:h-fit lg:w-[672px] flex max-w-xs  lg:max-w-2xl lg:flex lg:justify-end mr-20  lg:items-center lg:-mt-5'>
 						<img className={'  shadow-md rounded-sm lg:h-80 lg:w-[360px] w-60  lg:rounded-sm lg:max-w-3xl max-w-xs '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 					</div>
-					<div className='lg:w-[672px] lg:self-end lg:mr-2 lg:-mt-3    mb-5 min-h-min'>
+					<div className='lg:w-[362px]  lg:mr-2 lg:-mt-3    mb-5 min-h-min'>
 						<div className=' flex  lg:justify-center lg:items-center gap-1  '>
 							<div className='flex gap-2'>
 								<FavButton

@@ -37,7 +37,7 @@ export default function ShareButton({ id, setState, shareModal, btnClass }: Shar
 		<button
 			id={id}
 			onClick={() => ShareHandle()}
-			className={btnClass || 'w-fit h-8 flex justify-center flex-row-reverse   bg-yellow border-2 items-center gap-3  px-2 text-xs font-semibold focus:outline-none hover:bg-cyan-300  rounded-full bg-gray-white border-solid border-black'}
+			className={btnClass || 'w-fit h-8 flex justify-between flex-row-reverse   bg-yellow border-2 items-center gap-3  px-2 text-xs font-semibold focus:outline-none   rounded-md bg-gray-white  '}
 		>
 			<picture
 				id={id}
