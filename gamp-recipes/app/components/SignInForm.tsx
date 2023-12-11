@@ -131,11 +131,6 @@ export default function SignInForm() {
 						<span>Continue with Google</span>
 					</button>
 				</div>
-
-
-
-
-
 			</form>
 		</div>
 

@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 
 
 
+
 type ingredientListProps = {
 	id: number;
 	ingredients: string[];
@@ -26,11 +27,14 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
 
 
-	const handleFinishBtn = () => {
+
+	const handleFinishBtn = async () => {
 		console.log(isDisabled);
 
+		
 
-		console.log('finish');
+
+
 	};
 
 	const allItemsAreChecked = (itemsChecked: Record<string, boolean>) => {
