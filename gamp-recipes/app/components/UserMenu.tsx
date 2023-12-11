@@ -3,11 +3,9 @@ import React, { useEffect } from 'react';
 import Link from '@/node_modules/next/link';
 import { useScrollBlock } from '../hooks/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
-import useWindowDimensions from '../hooks/useWindowDimensions';
 
 export default function UserMenu() {
 	const { menu, setMenu } = useBehaviorContext();
-	const { width } = useWindowDimensions();
 	const [, allowScroll] = useScrollBlock();
 	const menuItems = ['Profile', 'Meals', 'Drinks', 'Favorites', 'Create'];
 
@@ -39,7 +37,7 @@ export default function UserMenu() {
 	return (
 		<menu
 			id='user-menu'
-			className={`w-screen fixed top-0 left-0 right-0 transition-transform duration-300 ${ width <= 1536 ? menu ? 'translate-x-0' : '-translate-x-full' : '' }
+			className={`w-screen fixed top-0 left-0 right-0 transition-transform duration-300 ${ menu ? 'translate-x-0' : '-translate-x-full' }
 			2xl:hidden` }
 		>
 			<ul className='flex-row h-full w-screen'>
@@ -48,13 +46,13 @@ export default function UserMenu() {
 						<li
 							onClick={() => closeMenu()}
 							onTouchStart={() => closeMenu()}
-							className={`relative flex-1 py-4 pl-4 w-full text-lg font-bold ${index === 0 ? 'font-extrabold text-black' : 'font-medium text-gray-500'} flex items-center`}
+							className={ `relative flex-1 py-4 pl-4 w-full text-lg font-bold ${ index === 0 ? 'font-extrabold text-black' : 'font-medium text-gray-500' } flex items-center` }
 						>
 							<picture>
 								<img
-									src={`/icons/${item.toLowerCase()}.svg`}
-									alt={`${item} icon`}
-									className={`w-6 mr-6 ${index === 0 ? 'opacity-100' : 'opacity-20'}`}
+									src={ `/icons/${item.toLowerCase()}.svg` }
+									alt={ `${item} icon` }
+									className={ `w-6 mr-6 ${index === 0 ? 'opacity-100' : 'opacity-20'}` }
 								/>
 							</picture>
 							{item}
