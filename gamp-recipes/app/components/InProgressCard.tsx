@@ -5,6 +5,7 @@ import IngredientList from '@/app/components/IngredientList';
 import FavButton from '@/app/components/FavoriteButton';
 import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 import { SnackbarProvider } from 'notistack';
+import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 
 
 type inProgressData =
@@ -74,7 +75,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={' bg-slate-50 ml-7 mr-7 mt-2  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
+			className={' bg-slate-50 ml-7 mr-7 mt-2 lg:h-max  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
 		>
 
 
