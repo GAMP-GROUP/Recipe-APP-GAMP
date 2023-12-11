@@ -88,7 +88,7 @@ export default function SignUpForm() {
 						value={username}
 						onChange={handleInputChange}
 						placeholder='username'
-						className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+						className='username shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					/>
 
 					{ buttonClicked && !validateUsername(username) && (
@@ -106,7 +106,7 @@ export default function SignUpForm() {
 						value={nationality}
 						onChange={handleInputChange}
 						placeholder='BR'
-						className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+						className='nationality shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					/>
 					{ buttonClicked && !validateNationality(nationality) && (
 						<span className='text-rose-500 text-xs italic'>
@@ -123,7 +123,7 @@ export default function SignUpForm() {
 						onChange={handleInputChange}
 						id='helper-text'
 						aria-describedby='helper-text-explanation'
-						className=' shadow appearance-none border rounded w-full py-2 px-3 text-stone-800 leading-tight focus:outline-none focus:shadow-outline '
+						className='email shadow appearance-none border rounded w-full py-2 px-3 text-stone-800 leading-tight focus:outline-none focus:shadow-outline '
 						placeholder='example@email.com'
 					/>
 					{ buttonClicked && !validateEmail(email) && (
@@ -141,7 +141,7 @@ export default function SignUpForm() {
 						value={password}
 						onChange={handleInputChange}
 						placeholder='******'
-						className='shadow appearance-none border rounded w-full py-2 px-3 text-stone-800  leading-tight focus:outline-none focus:shadow-outline'
+						className='password shadow appearance-none border rounded w-full py-2 px-3 text-stone-800  leading-tight focus:outline-none focus:shadow-outline'
 					/>
 					{ buttonClicked && !validatePassword(password) && (
 						<p className='text-rose-500 text-xs italic'>
@@ -153,7 +153,7 @@ export default function SignUpForm() {
 						<button
 							type='button'
 							onClick={() => handleSignUpBtn()}
-							className="w-80 mt-4 content-center flex items-center justify-center bg-yellow border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+							className="signup w-80 mt-4 content-center flex items-center justify-center bg-yellow border border-gray-300 rounded-lg shadow-md px-6 py-2 text-sm font-medium text-gray-800 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
 
 							SIGN UP
 						</button>
