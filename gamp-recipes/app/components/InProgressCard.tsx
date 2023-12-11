@@ -74,19 +74,19 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={' bg-slate-50 ml-7 mr-7 mt-2 lg:h-max mb-10 lg:mb-5  lg:w-fit xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
+			className={ 'bg-slate-50 ml-7 mr-7 mt-2 lg:h-max pb-10  h-full lg:mb-5   lg:w-max xl:w-screen lg:ml-10 lg:mr-10 lg:grid lg:grid-cols-2 lg:grid-rows-1 overflow-hidden overflow-y-scroll  no-scrollbar  text-center flex flex-col  lg:justify-center font-lato     text-lg sm:text-s overflow-scroll-y no-scroll'}
 
 		>
 
 
 			<section className='text-left     xl:justify-end  lg:flex lg:justify-end lg:items-center order-1 '>
 				<div
-					className={' gap-4  ml-3 sm:10 mb-5 min-h-min lg:shadow-none lg:ml-4 w-fit lg:justify-end lg:items-center	 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
+					className={' gap-4   ml-3 sm:10 mb-5 min-h-min lg:shadow-none lg:ml-4 w-fit lg:justify-end lg:items-center	 lg:max-w-7x lg:flex lg:flex-col lg:h-fit'}
 				>
 					<div className='lg:flex lg:justify-end mr-20  items-center lg:w-[672px] '>
 						<div className='lg:max-w-[360] lg:w-[360px] lg:min-w-[360px] flex flex-col justify-start items-start h-fit'>
 							<h2
-								className={'text-2xl font-bold antialiased list  font-lato  lg:text-gray-700 lg:font-extrabold'}
+								className={'text-2xl font-bold antialiased list lg:mb-2  font-lato  lg:text-gray-700 lg:font-extrabold'}
 							>{inProgressData.recipe?.recipe_name}
 							</h2>
 							<div className='flex gap-2 lg:mb-2'>
@@ -112,7 +112,8 @@ export default function InProgressCard(inProgressData: inProgressData) {
 									btnClass=' w-full'
 								/>
 							</div>
-							<div className={`flex   flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'} lg:self-center `}>
+
+							<div className={`flex   flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2  -translate-y-1/2 '} lg:self-center `}>
 								<ShareToSocialCard
 									id={inProgressData.detailed.toString()}
 									url={`https://gamp.vercel.app/${inProgressData.detailed}`}

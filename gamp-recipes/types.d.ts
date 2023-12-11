@@ -38,6 +38,7 @@ type drinkAPI = {
 type ShareBtnProps = {
 	id: string,
 	ImgClass?: string
+	btnClass?: string
 	setState: React.Dispatch<React.SetStateAction<boolean>>;
 	shareModal: boolean;
 

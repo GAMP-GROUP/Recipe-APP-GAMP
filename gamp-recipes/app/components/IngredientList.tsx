@@ -29,6 +29,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 	const handleFinishBtn = () => {
 		console.log(isDisabled);
 
+
 		console.log('finish');
 	};
 
@@ -42,6 +43,8 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 	useEffect(() => {
 		const ingredientsLocal: string | null =
 			localStorage.getItem(`ingredients recipe ${id}`);
+		console.log(isDisabled);
+			
 		if (ingredientsLocal) {
 			setItemsChecked(JSON.parse(ingredientsLocal));
 			console.log('49', JSON.parse(ingredientsLocal));
@@ -55,6 +58,20 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 			if(Object.values(itemsChecked).length === 0) {
 				setIsDisabled(true);
+			}
+			console.log('aaaaaad', allItemsAreChecked(JSON.parse(ingredientsLocal)));
+			console.log(Object.values(JSON.parse(ingredientsLocal)).length);
+			
+			console.log(isDisabled);
+			console.log(Object.values(itemsChecked).length === ingredients.length);
+			console.log(ingredients.length);
+			
+			
+			
+			if(allItemsAreChecked(JSON.parse(ingredientsLocal)) && Object.values(JSON.parse(ingredientsLocal)).length === ingredients.length) {
+				setIsDisabled(false);
+
+				
 			}
 
 		}
@@ -92,7 +109,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		});
 
 		// Este código será executado após o estado ser atualizado
-		let updatedCount = checked ? count + 1 : Math.max(count - 1, 0); // Ensure count is not negative
+		let updatedCount = initialCount  + (checked ? 1 : -1);
 		console.log('updatedCount', updatedCount);
 
 		if (updatedCount === ingredients.length || updatedCount > ingredients.length) {
@@ -213,11 +230,11 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 			</section>
 
-			<div className='flex justify-center lg:justify-start lg:ml-4  items-center'>
+			<div className='flex justify-center lg:justify-start lg:ml-4  mt-8 items-center'>
 				<button
 					onClick={handleFinishBtn}
 					disabled={isDisabled}
-					className={` ${isDisabled? 'bg-gray-700' : 'bg-black text-white'} lg:w-[163px]  hover:bg-gray-400 text-gray-800 font-bold  justify-center  w-fit p-2 text-sm rounded inline-flex items-center`}>
+					className={` ${isDisabled? 'bg-gray-200' : 'bg-black text-white'} lg:w-[163px]   text-gray-800 font-bold  justify-center  w-fit p-2 text-sm rounded inline-flex items-center`}>
 
 					Finish Recipe
 				</button>

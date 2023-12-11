@@ -36,6 +36,8 @@ export default function ShareToSocialCard({ url, img, id }: { url: string, img: 
 
 
 
+
+
 	return (
 		<div>
 			{shareModal === false ? (

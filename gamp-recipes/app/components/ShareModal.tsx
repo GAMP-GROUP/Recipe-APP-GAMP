@@ -49,8 +49,8 @@ export function ShareModal({ url, img, refModal, setState }: {
 
 
 	return (
-		<div className='overlay'>
-			<div className='flex items-center justify-center text-left h-fit w-max absolute  font-lato  lg:w-full lg:max-w-4xl lg:justify-end' ref={refModal} >
+		<div className='overlay h-full top-0 flex justify-center items-center lg:justify-center lg:items-center'>
+			<div className='  flex items-center justify-center text-left h-fit w-max absolute  font-lato  lg:w-full lg:max-w-4xl lg:justify-center' ref={refModal} >
 				<div className=' shadow-md bg-white	 w-full mx-4 p-3 rounded-xl md:w-1/2 lg:w-1/3 opacity-100 '>
 					<div
 						className="flex justify-between items center border-b border-gray-200 py-3 "
