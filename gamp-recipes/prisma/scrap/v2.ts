@@ -17,7 +17,6 @@ export async function scrapper() {
 			tags : recipe.strTags || '',
 			area : recipe.strArea || null,
 			alcoholic : recipe.strAlcoholic || null,
-			video_source : recipe.strYoutube || null,
 			instructions: recipe.strInstructions,
 		};
 		for (let i = 1; i <= 20; i += 1) {
@@ -44,7 +43,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Optional alcohol',
-			video_source: null,
 			instructions: 'Pour the Galliano liqueur over ice. Fill the remainder of the glass with ginger ale and thats all there is to it. You now have a your very own GG.'
 		},
 		ingredients: [ 'Galliano', 'Ginger ale', 'Ice' ],
@@ -59,7 +57,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Pour all ingredients into a cocktail shaker, mix and serve over ice into a chilled glass.'
 		},
 		ingredients: [ 'Gin', 'Grand Marnier', 'Lemon Juice', 'Grenadine' ],
@@ -74,7 +71,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Shake all the ingredients in a cocktail shaker and ice then strain in a cold glass.'
 		},
 		ingredients: [ 'Gin', 'Grenadine', 'Heavy cream', 'Milk', 'Egg White' ],
@@ -89,7 +85,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'pour kaluha, then Baileys, then Frangelico not chilled and not layered -- SERVE!!!'
 		},
 		ingredients: [ 'Kahlua', 'Baileys irish cream', 'Frangelico' ],
@@ -104,7 +99,6 @@ export const scrapv2 = [
 			tags: 'IBA,ContemporaryClassic',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Add the crème de cassis to the bottom of the glass, then top up with wine.'
 		},
 		ingredients: [ 'Creme de Cassis', 'Champagne' ],
@@ -119,7 +113,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Layered in a shot glass.'
 		},
 		ingredients: [ 'Amaretto', 'Baileys irish cream', 'Cognac' ],
@@ -134,7 +127,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Add both ingredients to shot glass, shoot, and get drunk quick'
 		},
 		ingredients: [ '151 proof rum', 'Wild Turkey' ],
@@ -149,7 +141,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Pour Vodka and Gin over ice, add Tonic and Stir'
 		},
 		ingredients: [ 'Absolut Vodka', 'Gin', 'Tonic water' ],
@@ -164,7 +155,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Throw it all together and serve real cold.'
 		},
 		ingredients: [ 'Red wine', 'Peach schnapps', 'Pepsi Cola', 'Orange juice' ],
@@ -179,7 +169,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Layer the Kahlua, Sambucca and Grand Marnier into a shot glas in that order. Better than B-52'
 		},
 		ingredients: [ 'Kahlua', 'Sambuca', 'Grand Marnier' ],
@@ -194,7 +183,6 @@ export const scrapv2 = [
 			tags: 'Alcoholic,Holiday',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'In a shaker half-filled with ice cubes, combine all of the ingredients. Shake well. Strain into a cocktail glass.'
 		},
 		ingredients: [ 'Dark rum', 'Lemon juice', 'Grenadine' ],
@@ -209,7 +197,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Poor in the 151 first followed by the 101 served with a Coke or Dr Pepper chaser.'
 		},
 		ingredients: [ '151 proof rum', 'Wild Turkey' ],
@@ -224,7 +211,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Mix the whisky and Baileys Cream in a beer-glass (at least 50 cl). Fill the rest of the glass with coffee.'
 		},
 		ingredients: [ 'Whisky', 'Baileys irish cream', 'Coffee' ],
@@ -239,7 +225,6 @@ export const scrapv2 = [
 			tags: 'IBA,NewEra',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Layer ingredients into a shot glass. Serve with a stirrer.'
 		},
 		ingredients: [ 'Baileys irish cream', 'Grand Marnier', 'Kahlua' ],
@@ -254,7 +239,6 @@ export const scrapv2 = [
 			tags: 'IBA,ContemporaryClassic',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Shake together in a cocktail shaker, then strain into chilled glass. Garnish and serve.'
 		},
 		ingredients: [
@@ -276,7 +260,6 @@ export const scrapv2 = [
 			tags: 'Classic,IBA',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Pour all ingredients into a mixing glass with ice. Stir. Strain into a cocktail glass. Garnish with a sprig of fresh mint in the drink.'
 		},
 		ingredients: [ 'gin', 'Peach Bitters', 'Mint' ],
@@ -291,7 +274,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Shake ingredients with ice, strain into a cocktail glass, and serve.'
 		},
 		ingredients: [ 'Applejack', 'Grapefruit juice' ],
@@ -306,7 +288,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Stir in mixing glass with ice and strain\r\n'
 		},
 		ingredients: [ 'Orange Bitters', 'Green Chartreuse', 'Gin', 'Sweet Vermouth' ],
@@ -321,7 +302,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'fill glass with crushed ice. Add vodka. Add a splash of grand-marnier. Fill with o.j.'
 		},
 		ingredients: [ 'Vanilla vodka', 'Grand Marnier', 'Orange juice' ],
@@ -336,7 +316,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Put a copper coin in a coffe-cup and fill up with coffee until you no longer see the coin, then add alcohol until you see the coin. Norwegian speciality.'
 		},
 		ingredients: [ 'Coffee', 'Grain alcohol' ],
@@ -351,7 +330,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Non alcoholic',
-			video_source: null,
 			instructions: 'Brew espresso. In a coffee mug, place 1 teaspoon of unsweetened powdered cocoa, then cover a teaspoon with honey and drizzle it into the cup. Stir while the coffee brews, this is the fun part. The cocoa seems to coat the honey without mixing, so you get a dusty, sticky mass that looks as though it will never mix. Then all at once, presto! It looks like dark chocolate sauce. Pour hot espresso over the honey, stirring to dissolve. Serve with cream.'
 		},
 		ingredients: [ 'Espresso', 'Honey', 'Cocoa powder' ],
@@ -366,7 +344,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'add all and pour black coffee and add whipped cream on top.'
 		},
 		ingredients: [ 'Sambuca', 'Baileys irish cream', 'White Creme de Menthe' ],
@@ -381,7 +358,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: '\r\n' +
         'Blend at high speed for no more than 5 seconds.\r\n' +
         '\r\n' +
@@ -418,7 +394,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Shake all ingredients with ice, strain into a chilled cocktail glass, and serve.'
 		},
 		ingredients: [
@@ -439,7 +414,6 @@ export const scrapv2 = [
 			tags: '',
 			area: null,
 			alcoholic: 'Alcoholic',
-			video_source: null,
 			instructions: 'Pour schnapps, orange juice, and cranberry juice over ice in a highball glass. Top with club soda and serve.'
 		},
 		ingredients: [
@@ -459,7 +433,6 @@ export const scrapv2 = [
 			tags: 'Soup',
 			area: 'Turkish',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=VVnZd8A84z4',
 			instructions: 'Pick through your lentils for any foreign debris, rinse them 2 or 3 times, drain, and set aside.  Fair warning, this will probably turn your lentils into a solid block that you’ll have to break up later\r\n' +
         'In a large pot over medium-high heat, sauté the olive oil and the onion with a pinch of salt for about 3 minutes, then add the carrots and cook for another 3 minutes.\r\n' +
         'Add the tomato paste and stir it around for around 1 minute. Now add the cumin, paprika, mint, thyme, black pepper, and red pepper as quickly as you can and stir for 10 seconds to bloom the spices. Congratulate yourself on how amazing your house now smells.\r\n' +
@@ -502,7 +475,6 @@ export const scrapv2 = [
 			tags: 'Streetfood, Onthego',
 			area: 'Croatian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=YsJXZwE5pdY',
 			instructions: 'Fry the finely chopped onions and minced meat in oil. Add the salt and pepper. Grease a round baking tray and put a layer of pastry in it. Cover with a thin layer of filling and cover this with another layer of filo pastry which must be well coated in oil. Put another layer of filling and cover with pastry. When you have five or six layers, cover with filo pastry, bake at 200ºC/392ºF for half an hour and cut in quarters and serve.'
 		},
 		ingredients: [ 'Filo Pastry', 'Minced Beef', 'Onion', 'Oil', 'Salt', 'Pepper' ],
@@ -517,7 +489,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'Japanese',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=ub68OxEypaY',
 			instructions: 'STEP 1\r\n' +
         'TO MAKE SUSHI ROLLS: Pat out some rice. Lay a nori sheet on the mat, shiny-side down. Dip your hands in the vinegared water, then pat handfuls of rice on top in a 1cm thick layer, leaving the furthest edge from you clear.\r\n' +
         '\r\n' +
@@ -576,7 +547,6 @@ export const scrapv2 = [
 			tags: 'SideDish',
 			area: 'Turkish',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=IEDEtZ4UVtI',
 			instructions: 'If you order kumpir in Turkey, the standard filling is first, lots of butter mashed into the potato, followed by cheese. There’s then a row of other toppings that you can just point at to your heart’s content – sweetcorn, olives, salami, coleslaw, Russian salad, allsorts – and you walk away with an over-stuffed potato because you got ever-excited by the choices on offer.\r\n' +
         '\r\n' +
         'Grate (roughly – you can use as much as you like) 150g of cheese.\r\n' +
@@ -602,7 +572,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'Filipino',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=xOQON5_S7as',
 			instructions: '0.\tMarinate beef in soy sauce, lemon (or calamansi), and ground black pepper for at least 1 hour. Note: marinate overnight for best result\r\n' +
         '1.\tHeat the cooking oil in a pan then pan-fry half of the onions until the texture becomes soft. Set aside\r\n' +
         '2.\tDrain the marinade from the beef. Set it aside. Pan-fry the beef on the same pan where the onions were fried for 1 minute per side. Remove from the pan. Set aside\r\n' +
@@ -638,7 +607,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'Egyptian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=mulqW-J3Yy4',
 			instructions: 'oak the beans in water to cover overnight.Drain. If skinless beans are unavailable, rub to loosen the skins, then discard the skins. Pat the beans dry with a towel.\r\n' +
         'Grind the beans in a food mill or meat grinder.If neither appliance is available, process them in a food processor but only until the beans form a paste. (If blended too smoothly, the batter tends to fall apart during cooking.) Add the scallions, garlic, cilantro, cumin, baking powder, cayenne, salt, pepper, and coriander, if using.  Refrigerate for at least 30 minutes.\r\n' +
         'Shape the bean mixture into 1-inch balls.Flatten slightly and coat with flour.\r\n' +
@@ -673,7 +641,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'Tunisian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=-TFf-Zu-xQU',
 			instructions: 'Peel potatoes and cut into 5cm cubes.\r\n' +
         'Pour 1-2 cm of olive oil into a large pan and heat up very hot. Fry potatoes until golden brown for 20 minutes, turning from time to time. Place on kitchen paper to drain.\r\n' +
         'Cut the peppers in half and remove seeds. Rub a little olive oil on them and place the cut side down on a baking tray. Place them under the grill. Grill until the skin is dark and bubbly. While the peppers are still hot, put them into a plastic sandwich bag and seal it. Take them out after 15 minutes and remove skins.\r\n' +
@@ -709,7 +676,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'Italian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=gfhfsBPt46s',
 			instructions: 'Heat the oil in a large saucepan. Use kitchen scissors to snip the bacon into small pieces, or use a sharp knife to chop it on a chopping board. Add the bacon to the pan and cook for just a few mins until starting to turn golden. Add the onion, celery and carrot, and cook over a medium heat for 5 mins, stirring occasionally, until softened.\r\n' +
         'Add the garlic and cook for 1 min, then tip in the mince and cook, stirring and breaking it up with a wooden spoon, for about 6 mins until browned all over.\r\n' +
         'Stir in the tomato purée and cook for 1 min, mixing in well with the beef and vegetables. Tip in the chopped tomatoes. Fill each can half full with water to rinse out any tomatoes left in the can, and add to the pan. Add the honey and season to taste. Simmer for 20 mins.\r\n' +
@@ -746,7 +712,6 @@ export const scrapv2 = [
 			tags: 'Curry,Vegetarian,Cake',
 			area: 'Indian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=J4D855Q9-jg',
 			instructions: 'Wash and soak toor dal in approx. 3 cups of water, for at least one hours. Dal will be double in volume after soaking. Drain the water.\r\n' +
         'Cook dal with 2-1/2 cups water and add salt, turmeric, on medium high heat, until soft in texture (approximately 30 mins) it should be like thick soup.\r\n' +
         'In a frying pan, heat the ghee. Add cumin seeds, and mustard seeds. After the seeds crack, add bay leaves, green chili, ginger and chili powder. Stir for a few seconds.\r\n' +
@@ -785,7 +750,6 @@ export const scrapv2 = [
 			tags: 'MainMeal',
 			area: 'Chinese',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=9h9No18ZyCI',
 			instructions: 'Combine pork, garlic, ginger, soy sauce, sesame oil, and vegetables in a bowl.\r\n' +
         'Separate wonton skins.\r\n' +
         'Place a heaping teaspoon of filling in the center of the wonton.\r\n' +
@@ -831,7 +795,6 @@ export const scrapv2 = [
 			tags: 'UnHealthy,Speciality,HangoverFood',
 			area: 'Canadian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=UVAMAoA2_WU',
 			instructions: 'Heat oil in a deep fryer or deep heavy skillet to 365°F (185°C).\r\n' +
         'Warm gravy in saucepan or microwave.\r\n' +
         'Place the fries into the hot oil, and cook until light brown, about 5 minutes.\r\n' +
@@ -851,7 +814,6 @@ export const scrapv2 = [
 			tags: 'Snack,Treat',
 			area: 'Canadian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=fFLn1h80AGQ',
 			instructions: 'Sift together dry ingredients.\r\n' +
         'Mix together wet ingredients and incorporate into dry. Stir until smooth.\r\n' +
         'Drop by teaspoonfuls(no bigger) into hot oil (365 degrees, no hotter), turning after a few moments until golden brown on all sides.\r\n' +
@@ -886,7 +848,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'Egyptian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=y0d2ZMZBW4Y',
 			instructions: 'Cook the lentils. Bring lentils and 4 cups of water to a boil in a medium pot or saucepan over high heat. Reduce the heat to low and cook until lentils are just tender (15-17 minutes). Drain from water and season with a little salt. (Note: when the lentils are ready, they should not be fully cooked. They should be only par-cooked and still have a bite to them as they need to finish cooking with the rice).\r\n' +
         'Now, for the rice. Drain the rice from its soaking water. Combine the par-cooked lentils and the rice in the saucepan over medium-high heat with 1 tbsp cooking oil, salt, pepper, and coriander. Cook for 3 minutes, stirring regularly. Add warm water to cover the rice and lentil mixture by about 1 1/2 inches (you’ll probably use about 3 cups of water here). Bring to a boil; the water should reduce a bit. Now cover and cook until all the liquid has been absorbed and both the rice and lentils are well cooked through (about 20 minutes).  Keep covered and undisturbed for 5 minutes or so.\r\n' +
         'Now make the pasta. While the rice and lentils are cooking, make the pasta according to package instructions by adding the elbow pasta to boiling water with a dash of salt and a little oil. Cook until the pasta is al dente. Drain.\r\n' +
@@ -927,7 +888,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'American',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=C5J39YnnPsg',
 			instructions: 'For the Big Mac sauce, combine all the ingredients in a bowl, season with salt and chill until ready to use.\r\n' +
         '2. To make the patties, season the mince with salt and pepper and form into 4 balls using about 1/3 cup mince each. Place each onto a square of baking paper and flatten to form into four x 15cm circles. Heat oil in a large frypan over high heat. In 2 batches, cook beef patties for 1-2 minutes each side until lightly charred and cooked through. Remove from heat and keep warm. Repeat with remaining two patties.\r\n' +
         '3. Carefully slice each burger bun into three acrossways, then lightly toast.\r\n' +
@@ -969,7 +929,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'Egyptian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=3lxUIeKDgic',
 			instructions: 'Combine the marinade ingredients in a large ziplock bag (or bowl).\r\n' +
         'Add the chicken and use your hands to make sure each piece is coated. If using a ziplock bag, I find it convenient to close the bag then massage the bag to disperse the rub all over each chicken piece.\r\n' +
         'Marinate overnight or up to 24 hours.\r\n' +
@@ -1008,7 +967,6 @@ export const scrapv2 = [
 			tags: 'Savory,Breakfast',
 			area: 'Dutch',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=hTrSXryX31A',
 			instructions: '\r\n' +
         'Wash and peel the potatoes and cut into similarly sized pieces for even cooking.\r\n' +
         '\r\n' +
@@ -1054,7 +1012,6 @@ export const scrapv2 = [
 			tags: 'Snack',
 			area: 'Dutch',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=UIcuiU1kV8I',
 			instructions: 'Cut the meat into strips. Heat oil in a pan and fry the strips for 6 minutes until it\'s ready.\r\n' +
         'Bake the fries until golden brown in a deep fryrer. When ready transfer to a backing dish. Make sure the fries are spread over the whole dish.\r\n' +
         'Cover the fries with a new layer of meat and spread evenly.\r\n' +
@@ -1088,7 +1045,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'British',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=_Pw1I1-SItE',
 			instructions: 'For the rice, heat the oil in a large, lidded pan, add the onion, then gently fry for 5 mins until softened but not coloured. Add the spices, season with salt, then continue to fry until the mix start to go brown and fragrant; about 3 mins.\r\n' +
         'Add the rice and stir in well. Add 600ml water, stir, then bring to the boil. Reduce to a simmer, then cover for 10 mins. Take off the heat and leave to stand, covered, for 10-15 mins more. The rice will be perfectly cooked if you do not lift the lid before the end of the cooking.\r\n' +
         'Meanwhile, put the haddock and bay leaves in a frying pan, cover with the milk, then poach for 10 mins until the flesh flakes. Remove from the milk, peel away the skin, then flake the flesh into thumbsize pieces. Place the eggs in a pan, cover with water, bring to the boil, then reduce to a simmer. Leave for 4½-5 mins, plunge into cold water, then peel and cut the eggs into quarters. Gently mix the fish, eggs, parsley, coriander and rice together in the pan. Serve hot, sprinkled with a few extra herbs.'
@@ -1124,7 +1080,6 @@ export const scrapv2 = [
 			tags: 'Fish,Pie,Breakfast,Baking',
 			area: 'British',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=2sX4fCgg-UI',
 			instructions: '01.Put the potatoes in a large pan of cold salted water and bring to the boil. Lower the heat, cover, then simmer gently for 15 minutes until tender. Drain, then return to the pan over a low heat for 30 seconds to drive off any excess water. Mash with 1 tbsp olive oil, then season.\r\n' +
         '02.Meanwhile put the milk in a large sauté pan, add the fish and bring to the boil. Remove from the heat, cover and stand for 3 minutes. Remove the fish (reserving the milk) and pat dry with kitchen paper, then gently flake into an ovenproof dish, discarding the skin and any bones.\r\n' +
         '03.Heat the remaining oil in a pan, stir in the flour and cook for 30 seconds. Gradually stir in 200-250ml of the reserved milk (discard the rest). Grate in nutmeg, season, then bubble until thick. Stir in the cream.\r\n' +
@@ -1168,7 +1123,6 @@ export const scrapv2 = [
 			tags: 'Tart',
 			area: 'French',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=vT0q5c880Rg',
 			instructions: 'For the pastry, sift the flour and salt into the bowl of a food processor, add the butter and lard, then whizz together briefly until the mixture looks like fine breadcrumbs. Tip the mixture into a bowl, then stir in the cheese and enough of the water for the mixture to come together. Tip out onto a lightly floured surface and knead briefly until smooth. Roll out thinly and line a 23cm x 4cm loose-?bottomed fluted flan tin. Prick the base with a fork. Chill for 20 minutes.\r\n' +
         '02.Melt the 75g butter in a saucepan over a low heat, then add the leeks and the salt. Cover and cook for ?10 minutes until soft. Uncover the pan, increase the heat and cook ?for 2 minutes, stirring occasionally, until the liquid has evaporated. Spoon onto a plate and leave to cool.\r\n' +
         '03.Preheat the oven to 200°C/fan180°C/gas 6. Line the pastry case with baking paper and baking beans or rice and blind bake for 15-20 minutes until the edges are biscuit-coloured. Remove the paper and beans/rice and return the case to the oven for 7-10 minutes until the base is crisp and lightly golden. Remove and set aside. Reduce the oven temperature to 190°C/fan170°C/gas 5.\r\n' +
@@ -1202,7 +1156,6 @@ export const scrapv2 = [
 			tags: 'Breakfast,Desert,Sweet,Fruity',
 			area: 'American',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=LWuuCndtJr0',
 			instructions: 'Put the flour, eggs, milk, 1 tbsp oil and a pinch of salt into a bowl or large jug, then whisk to a smooth batter. Set aside for 30 mins to rest if you have time, or start cooking straight away.\r\n' +
         'Set a medium frying pan or crêpe pan over a medium heat and carefully wipe it with some oiled kitchen paper. When hot, cook your pancakes for 1 min on each side until golden, keeping them warm in a low oven as you go.\r\n' +
         'Serve with lemon wedges and sugar, or your favourite filling. Once cold, you can layer the pancakes between baking parchment, then wrap in cling film and freeze for up to 2 months.'
@@ -1235,7 +1188,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'Greek',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=8U_29i9Qp5U',
 			instructions: 'Heat the grill to high. Brown the beef in a deep ovenproof frying pan over a high heat for 5 mins. Meanwhile, prick the aubergine with a fork, then microwave on High for 3-5 mins until soft. Mix the yogurt, egg and parmesan together, then add a little seasoning.\r\n' +
         '\r\n' +
         'Stir the tomatoes, purée and potatoes in with the beef with some seasoning and heat through. Smooth the surface of the beef mixture with the back of a spoon, then slice the cooked aubergine and arrange on top. Pour the yogurt mixture over the aubergines, smooth out evenly, then grill until the topping has set and turned golden.'
@@ -1266,7 +1218,6 @@ export const scrapv2 = [
 			tags: 'Dairy,Fruity,Desert,Treat,Speciality',
 			area: 'British',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=43WgiNq54L8',
 			instructions: 'Purée half the strawberries in a blender. Chop the remaining strawberries, reserving four for decoration.\r\n' +
         'Whip the double cream until stiff peaks form, then fold in the strawberry purée and crushed meringue. Fold in the chopped strawberries and ginger cordial, if using.\r\n' +
         'Spoon equal amounts of the mixture into four cold wine glasses. Serve garnished with the remaining strawberries and a sprig of mint.'
@@ -1289,7 +1240,6 @@ export const scrapv2 = [
 			tags: 'LowCalorie',
 			area: 'Japanese',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=5Iy0MCowSvA',
 			instructions: 'Boil some water in a large saucepan. Add 250ml cold water and the udon noodles. (As they are so thick, adding cold water helps them to cook a little bit slower so the middle cooks through). If using frozen or fresh noodles, cook for 2 mins or until al dente; dried will take longer, about 5-6 mins. Drain and leave in the colander.\r\n' +
         'Heat 1 tbsp of the oil, add the onion and cabbage and sauté for 5 mins until softened. Add the mushrooms and some spring onions, and sauté for 1 more min. Pour in the remaining sesame oil and the noodles. If using cold noodles, let them heat through before adding the ingredients for the sauce – otherwise tip in straight away and keep stir-frying until sticky and piping hot. Sprinkle with the remaining spring onions.'
 		},
@@ -1322,7 +1272,6 @@ export const scrapv2 = [
 			tags: '',
 			area: 'Malaysian',
 			alcoholic: null,
-			video_source: 'https://www.youtube.com/watch?v=cl4YH8wblRs',
 			instructions: 'Mix all the ingredients in a bowl.\r\n' +
         'Heat a pan or griddle with a little vegetable oil.\r\n' +
         'Pour the mixture onto the pan and place a piece of open-faced baguette on top.\r\n' +
