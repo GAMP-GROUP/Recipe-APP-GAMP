@@ -16,7 +16,7 @@ export const getRecipeById = async (id: string) => {
 	}).then((res) => {
 		return res.json();
 	});
-	console.log('utils ------- id', id);
+
 
 
 

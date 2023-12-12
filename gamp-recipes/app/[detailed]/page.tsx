@@ -33,6 +33,6 @@ export default async function Details({ params: { detailed } }: detailedParams) 
 			category_name: recipe.category_name.name,
 			recipe_type_name: recipe.recipe_type.name,
 			author: recipe?.Author_Recipe[0]?.author?.username
-		}} detailed={detailed} />
+		}} detailed={detailed}  />
 	);
 }

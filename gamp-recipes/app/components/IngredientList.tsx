@@ -45,13 +45,15 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 			window.alert('You need to sign in or register in GAMP in order to finish recipes');
 			return;
 		}
-		
-		const sendRecipe = await finishRecipe(id.toString());
-		console.log('sendRecipe', sendRecipe);
+		const recipe = await finishRecipe(id.toString());
 
-		if (sendRecipe) {
+		console.log('recipe', recipe);
+
+		if (recipe) {
 			window.alert('Recipe finished!');
 		}
+		
+		return recipe;
 
 	};
 

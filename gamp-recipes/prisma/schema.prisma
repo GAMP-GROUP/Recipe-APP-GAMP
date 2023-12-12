@@ -86,7 +86,6 @@ model Favorite_Recipes {
    user_id   Int
    recipe_id Int
    fav       Boolean
-   finished  Boolean
    user      User    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
    recipe    Recipes @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
@@ -100,4 +99,6 @@ model Finished_Recipes {
    user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
    recipe     Recipes  @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
    created_at DateTime @default(now())
+
+   @@unique([user_id, recipe_id])
 }

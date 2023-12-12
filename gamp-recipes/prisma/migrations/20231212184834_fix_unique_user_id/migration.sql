@@ -1,17 +1,8 @@
-/*
-  Warnings:
-
-  - Added the required column `finished` to the `Favorite_Recipes` table without a default value. This is not possible if the table is not empty.
-
-*/
 -- DropForeignKey
 ALTER TABLE `Ingredients_Recipes` DROP FOREIGN KEY `Ingredients_Recipes_ingredient_id_fkey`;
 
 -- DropForeignKey
 ALTER TABLE `Ingredients_Recipes` DROP FOREIGN KEY `Ingredients_Recipes_recipe_id_fkey`;
-
--- AlterTable
-ALTER TABLE `Favorite_Recipes` ADD COLUMN `finished` BOOLEAN NOT NULL;
 
 -- AlterTable
 ALTER TABLE `Ingredients_Recipes` MODIFY `recipe_id` INTEGER NULL;
@@ -23,6 +14,7 @@ CREATE TABLE `Finished_Recipes` (
     `recipe_id` INTEGER NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
+    UNIQUE INDEX `Finished_Recipes_user_id_recipe_id_key`(`user_id`, `recipe_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
