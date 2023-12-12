@@ -2,7 +2,7 @@ import React from 'react';
 import prisma from '@/prisma/client';
 import RecipesFeed from './components/RecipesFeed';
 import FullBanner from './components/FullBanner';
-// import MiniBanner from './components/MiniBanner';
+import MiniBanner from './components/MiniBanner';
 
 export default async function Home() {
 	const mealsRecipes = await prisma.recipes.findMany({
@@ -24,7 +24,7 @@ export default async function Home() {
 			className='lg:flex-col lg:mt-16'
 		>
 			<FullBanner />
-			{/* <MiniBanner /> */}
+			<MiniBanner />
 			<RecipesFeed
 				recipesQuantity={25}
 				feedType={'all'}

@@ -64,7 +64,7 @@ export default function UserMenu() {
 			<aside
 				id='outside-menu'
 				className={`h-screen w-screen
-				2xl:hidden` }
+				xl:hidden` }
 				onClick={() => closeMenu()}
 			></aside>
 		</menu>
