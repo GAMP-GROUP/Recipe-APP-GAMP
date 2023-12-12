@@ -37,7 +37,7 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) 
 			<section
 				id='recipes-feed'
 				className={ `transition-opacity duration-500 ${ menu ? 'opacity-0' : 'opacity-100' } 
-				xl:mx-auto xl:grid xl:grid-cols-3 xl:w-8/12 xl:transition-none` }
+				xl:mt-10 xl:mx-auto xl:grid xl:grid-cols-3 xl:w-8/12 xl:transition-none` }
 			>
 				{	filteredRecipes.length <= 0 ? <LoadingScreen /> : 
 					filteredRecipes.map((recipe, index) => (
