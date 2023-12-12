@@ -1,5 +1,4 @@
 import { detailedParams } from '@/types';
-import prisma from '@/prisma/client';
 import React from 'react';
 
 import InProgressCard from '../components/InProgressCard';
@@ -7,10 +6,6 @@ import { getRecipeById } from '../lib/recipeUtils';
 
 export default async function Details({ params: { detailed } }: detailedParams) {
 	const id = Number(detailed);
-
-
-	console.log('9-details', id);
-
 	const recipe = await getRecipeById(id.toString());
 
 	if (!recipe) return null;

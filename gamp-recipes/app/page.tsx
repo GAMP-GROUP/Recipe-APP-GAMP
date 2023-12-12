@@ -21,7 +21,7 @@ export default async function Home() {
 
 	return (
 		<section
-			className='2x:flex 2xl:flex-row'
+			className='lg:flex-col lg:mt-16'
 		>
 			<FullBanner />
 			{/* <MiniBanner /> */}
