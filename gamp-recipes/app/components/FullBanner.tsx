@@ -50,7 +50,7 @@ export default function FullBanner() {
 				clearInterval(timerId as NodeJS.Timeout);
 			}
 		};
-	}, [timerId]);
+	}, [bannerIndex]);
 	
 
 	return (
