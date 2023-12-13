@@ -25,7 +25,7 @@ export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
 		window.alert(favState);
 	}
-	// 'rounded-full bg-yellow p-2 w-[2.35em] h-[2.35em] z-3 absolute top-8 right-8'
+
 	return (
 		<button
 			id={id}

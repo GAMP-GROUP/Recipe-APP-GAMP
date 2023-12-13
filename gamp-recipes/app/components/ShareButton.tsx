@@ -5,15 +5,9 @@ import { ShareBtnProps } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-
-
 export default function ShareButton({ id, setState, shareModal, btnClass }: ShareBtnProps) {
 	const session = useSession();
 	const router = useRouter();
-
-
-
-
 
 	async function ShareHandle() {
 		if (session.status === 'unauthenticated') {
@@ -22,22 +16,15 @@ export default function ShareButton({ id, setState, shareModal, btnClass }: Shar
 			return;
 		}
 
-
-
-
 		setState(!shareModal);
-		console.log(shareModal);
-
 
 	}
-
-
 
 	return (
 		<button
 			id={id}
 			onClick={() => ShareHandle()}
-			className={btnClass || 'w-fit h-8 flex justify-between flex-row-reverse   bg-yellow border-2 items-center gap-3  px-2 text-xs font-semibold focus:outline-none   rounded-md bg-gray-white  '}
+			className={btnClass || 'w-fit h-8 flex justify-between flex-row-reverse bg-yellow border-2 items-center gap-3 px-2 text-xs font-semibold focus:outline-none  rounded-md bg-gray-white '}
 		>
 			<picture
 				id={id}
@@ -46,12 +33,14 @@ export default function ShareButton({ id, setState, shareModal, btnClass }: Shar
 					id={id}
 					alt='Favorite button'
 					src='/icons/share.png'
-					className='w-fit h-5  text'
+					className='w-fit h-5 text'
 				/>
 			</picture>
 
 			Share 
+	
 		</button>
+
 	);
 
 }
