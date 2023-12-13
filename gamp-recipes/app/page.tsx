@@ -26,7 +26,7 @@ export default async function Home() {
 			<FullBanner />
 			<MiniBanner />
 			<RecipesFeed
-				recipesQuantity={25}
+				recipesQuantity={30}
 				feedType={'all'}
 				recipes={allRecipes}
 			/>

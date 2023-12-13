@@ -7,11 +7,11 @@ import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 import { SnackbarProvider } from 'notistack';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 
-type inProgressData =
-	{
-		recipe: RecipeData,
-		detailed: string
-	};
+type inProgressData = {
+	recipe: RecipeData,
+	detailed: string
+};
+
 export default function InProgressCard(inProgressData: inProgressData) {
 	const timestampObj: Date = new Date(inProgressData.recipe.updated_at);
 	const formattedDate: string = timestampObj.toLocaleDateString('en-US', {
