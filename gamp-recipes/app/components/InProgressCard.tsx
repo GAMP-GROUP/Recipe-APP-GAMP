@@ -6,6 +6,8 @@ import FavButton from '@/app/components/FavoriteButton';
 import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 import { SnackbarProvider } from 'notistack';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+import { useRouter } from 'next/navigation';
+
 
 type inProgressData =
 	{
@@ -14,6 +16,8 @@ type inProgressData =
 	};
 	
 export default function InProgressCard(inProgressData: inProgressData) {
+
+	const router = useRouter();
 
 	const timestampObj: Date = new Date(inProgressData.recipe.updated_at);
 
@@ -66,6 +70,11 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	}
 	);
 
+	const handlePreviousPage = () => {
+		router.push('/');
+	};
+
+
 	return (
 		<div
 
@@ -75,7 +84,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 			<section className='text-left xl:justify-end xl:flex xl:items-center order-1 '>
 
 				<div
-					className={' gap-4 ml-3 sm:10 mb-5 xl:shadow-none xl:ml-4 w-fit xl:justify-end xl:items-center xl:max-w-7x xl:flex xl:flex-col xl:h-fit'}
+					className={' gap-4 ml-3 sm:10 mb-5 xl:shadow-none xl:ml-4 w-fit xl:justify-end xl:items-center xl:max-w-7x flex xl:flex-col flex-col xl:h-fit'}
 				>
 
 					<div className='xl:flex xl:justify-end mr-20 items-center xl:w-[672px] '>
@@ -88,10 +97,13 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 							<div className='flex gap-2 xl:mb-2'>
 
-								<h4 className='text-gray-600 font-lato text-md xl:max-w-2xl xl:text-gray-500 xl:font-semibold'>
-									Category: <span className='text-gray-700 font-semibold mr-1'>{inProgressData.recipe?.category_name} </span>
-									Author: <span className='text-gray-700 font-semibold'>{author} </span>
-									Date: <span className='text-gray-700 ml-1 font-semibold'>{formattedDate} </span>
+								<h4 className='text-gray-600 font-lato text-base xl:max-w-2xl xl:text-gray-500 xl:font-semibold'>
+									Category: 
+									<span className='text-gray-700 font-semibold mr-1'>{inProgressData.recipe?.category_name} </span>
+									Author: 
+									<span className='text-gray-700 font-semibold'>{author} </span>
+									Date: 
+									<span className='text-gray-700 ml-1 font-semibold'>{formattedDate} </span>
 								</h4>
 							</div>
 
@@ -104,28 +116,31 @@ export default function InProgressCard(inProgressData: inProgressData) {
 						<img className={' shadow-md rounded-sm xl:h-80 xl:w-[360px] w-60 xl:rounded-sm xl:max-w-3xl max-w-xs '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 					</div>
 
-					<div className='xl:w-[362px] xl:mr-2 xl:-mt-3 mb-5 min-h-min'>
+					<div className='xl:w-[362px] order-first xl:order-last xl:mr-2 xl:-mt-3 mb-5 min-h-min'>
 
-						<div className=' flex xl:justify-center xl:items-center gap-1 '>
+						<div className=' flex xl:flex-row justify-between mt-2 xl:justify-center xl:items-center gap-1 '>
 
-							<div className='flex gap-2'>
 
-								<FavButton
-									id={inProgressData.detailed.toString()}
-									ImgClass='w-full h-6 m-auto'
-									btnClass=' w-full'
-								/>
-
-							</div>
-
-							<div className={`flex flex-row justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '} xl:self-center `}>
+							<div className={` order-3 self-end flex flex-row xl:justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '} xl:self-center `}>
 								
 								<ShareToSocialCard
 									id={inProgressData.detailed.toString()}
 									url={`https://gamp.vercel.app/${inProgressData.detailed}`}
 									img={inProgressData?.recipe.image as string}
+			
 								/>
 
+								<FavButton
+									id={inProgressData.detailed.toString()}
+									ImgClass='w-6 h-6 m-auto'
+									btnClass=' w-full'
+								/>
+
+							</div>
+							<div>
+								<button onClick={handlePreviousPage}>
+									<img src="/images/seta-esquerda.png" alt="seta para esquerda" className='w-6 xl:hidden order-1 my-auto' />
+								</button>
 							</div>
 							
 						</div>
@@ -136,7 +151,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 			</section >
 			
-			<div className=' text-left xl:h-fit ml-2 xl:w-full justify-center flex flex-col order-3 xl:order-2 '>
+			<div className='text-left xl:h-fit ml-2 xl:w-full justify-center flex flex-col order-3 xl:order-2 '>
 
 				<section
 					className={' w-[358px] -ml-2 xl:-ml-0 xl:self-start xl:w-3/4 xl:justify-start xl:flex xl:mt-0 xl:items-center xl:min-h-[432px]'}

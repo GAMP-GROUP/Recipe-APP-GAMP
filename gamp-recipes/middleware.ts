@@ -21,13 +21,13 @@ export async function middleware(req: NextRequest) {
 
 	}
 
-	// if (route.includes('recipe')) {
+	if (route.includes('recipe')) {
 
-	// 	const recipe = await validateRecipeMiddleware(req);
+		const recipe = await validateRecipeMiddleware(req);
 
-	// 	if (recipe?.message !== 'success') {
-	// 		return NextResponse.json({ message: recipe?.message }, { status: recipe?.status });
-	// 	}
-	// }
+		if (recipe?.message !== 'success') {
+			return NextResponse.json({ message: recipe?.message }, { status: recipe?.status });
+		}
+	}
 
 }

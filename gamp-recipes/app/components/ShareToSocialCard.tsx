@@ -4,7 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import ShareButton from './ShareButton';
 import { ShareModal } from './ShareModal';
 
-export default function ShareToSocialCard({ url, img, id }: { url: string, img: string, id: string }) {
+export default function ShareToSocialCard({ url, img, id, btnClass }: { url: string, img: string, id: string, btnClass?:string }) {
 
 	const [shareModal, setShareModal] = React.useState(false);
 
@@ -32,7 +32,7 @@ export default function ShareToSocialCard({ url, img, id }: { url: string, img: 
 	return (
 		<div>
 			{shareModal === false ? (
-				<ShareButton shareModal={shareModal} setState={setShareModal} id={id} />
+				<ShareButton shareModal={shareModal} setState={setShareModal} btnClass={btnClass} id={id} />
 			) : (
 
 				<ShareModal

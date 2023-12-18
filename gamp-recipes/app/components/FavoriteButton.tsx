@@ -4,9 +4,13 @@ import { ButtonProps } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
+
 export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 	const session = useSession();
 	const router = useRouter();
+
+
+	const [liked, setLiked] = React.useState(false);
 
 	async function favHandle(e: React.MouseEvent<HTMLButtonElement>) {
 		if (session.status === 'unauthenticated') {
@@ -23,8 +27,12 @@ export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 
 		const { message: { fav } } = await res.json();
 		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
+
+		setLiked(!liked);
 		window.alert(favState);
 	}
+
+	const img = liked ? '/images/liked.png' : '/icons/favorites-notactive.png';
 
 	return (
 		<button
@@ -38,7 +46,7 @@ export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 				<img
 					id={id}
 					alt='Favorite button'
-					src='/icons/favorites-notactive.png'
+					src={ img}
 					className={ ImgClass }
 				/>
 			</picture>
