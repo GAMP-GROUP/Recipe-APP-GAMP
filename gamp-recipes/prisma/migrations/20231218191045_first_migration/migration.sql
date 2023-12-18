@@ -78,6 +78,17 @@ CREATE TABLE `Favorite_Recipes` (
     `user_id` INTEGER NOT NULL,
     `recipe_id` INTEGER NOT NULL,
     `fav` BOOLEAN NOT NULL,
+    `finished` BOOLEAN NOT NULL,
+    `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Finished_Recipes` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `user_id` INTEGER NOT NULL,
+    `recipe_id` INTEGER NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`id`)
@@ -106,3 +117,9 @@ ALTER TABLE `Favorite_Recipes` ADD CONSTRAINT `Favorite_Recipes_user_id_fkey` FO
 
 -- AddForeignKey
 ALTER TABLE `Favorite_Recipes` ADD CONSTRAINT `Favorite_Recipes_recipe_id_fkey` FOREIGN KEY (`recipe_id`) REFERENCES `Recipes`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Finished_Recipes` ADD CONSTRAINT `Finished_Recipes_user_id_fkey` FOREIGN KEY (`user_id`) REFERENCES `User`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Finished_Recipes` ADD CONSTRAINT `Finished_Recipes_recipe_id_fkey` FOREIGN KEY (`recipe_id`) REFERENCES `Recipes`(`id`) ON DELETE CASCADE ON UPDATE CASCADE;
