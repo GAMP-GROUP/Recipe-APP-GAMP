@@ -304,3 +304,20 @@ export async function getRecipeById(request: number) {
 		console.error('Error getting recipe:', error);
 	}
 }
+
+
+export async function finishRecipe (request: number) {
+	try {
+		const recipe = await prisma.finished_Recipes.create({
+			data: {
+				recipe_id: request,
+				user_id: 1,
+				
+			},
+		});
+
+		return recipe;
+	} catch (error) {
+		console.error('Error finishing recipe:', error);
+	}
+}

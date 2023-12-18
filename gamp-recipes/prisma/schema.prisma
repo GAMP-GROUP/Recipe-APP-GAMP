@@ -20,6 +20,7 @@ model User {
    created_at       DateTime           @default(now())
    Author_Recipe    Author_Recipe[]
    Favorite_Recipes Favorite_Recipes[]
+   Finished_Recipes Finished_Recipes[]
 }
 
 model Category {
@@ -56,7 +57,6 @@ model Recipes {
    image          String
    tags           String
    category       Int
-   video_source   String?
    area           String?
    alcoholic      String?
    recipe_type_id Int
@@ -68,6 +68,7 @@ model Recipes {
    Author_Recipe       Author_Recipe[]
    Ingredients_Recipes Ingredients_Recipes[]
    Favorite_Recipes    Favorite_Recipes[]
+   Finished_Recipes    Finished_Recipes[]
 }
 
 model Ingredients_Recipes {
@@ -80,10 +81,21 @@ model Ingredients_Recipes {
 }
 
 model Favorite_Recipes {
+   id        Int     @id @default(autoincrement())
+   user_id   Int
+   recipe_id Int
+   fav       Boolean
+   finished  Boolean
+   user      User    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   recipe    Recipes @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+   created_at DateTime @default(now())
+}
+
+model Finished_Recipes {
    id         Int      @id @default(autoincrement())
    user_id    Int
    recipe_id  Int
-   fav        Boolean
    user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
    recipe     Recipes  @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
    created_at DateTime @default(now())
