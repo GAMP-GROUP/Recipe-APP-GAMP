@@ -57,7 +57,6 @@ model Recipes {
    image          String
    tags           String
    category       Int
-   video_source   String?
    area           String?
    alcoholic      String?
    recipe_type_id Int
