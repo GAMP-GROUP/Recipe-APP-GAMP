@@ -2,53 +2,99 @@ import Image from '@/node_modules/next/image';
 import React from 'react';
 
 export default function Footer() {
-	const siteMap = ['About us', 'Advertise', 'Contact us', 'Cookie policy', 'Privacy policy'];
+	const siteMap1 = ['About us', 'Advertise', 'Careers', 'Contact'];
+	const siteMap2 = ['Terms of Service', 'Cookie policy', 'Privacy policy'];
 	const externalLinks = ['Facebook', 'Instagram', 'YouTube', 'Pinterest', 'Twitter'];
+	const quickLinks = ['Meals', 'Drinks', 'Under 10\'', 'Mystery Recipe' ];
 
 	return (
-		<footer className='pb-6 px-6 w-full mx-auto bg-black text-white text-center'>
-			<section className='mb-6 font-normal'>
+		<footer className='hidden xl:grid grid-cols-3 gap-6 py-12 px-80 w-full mx-auto bg-yellow text-black text-center items-center'>
+			<section
+				// Primeira coluna, contém logo, redes sociais e formulário para newsletter
+				className='col-span-3 flex flex-col text-center'
+			>
 				<Image
-					src='/images/logo-white.png'
-					width='155'
-					height='155'
-					alt='Gamp logo in black lines only'
+					src='/images/logo-black.png'
+					width={ 155 }
+					height={ 155 }
 					className='mx-auto'
+					alt='Gamp logo in black lines only'
 				/>
-				<p className='text-sm'>
-					Whether you are an experienced chef or just starting your culinary journey,
-					Gamp offers a delightful array of recipes for both meals and beverages.
-					As your digital culinary companion, Gamp presents a treasure trove of global recipes,
-					aiding you in discovering, saving, and organizing your favorite creations.
-				</p>
-			</section>
-			<hr className="my-4 border-t-2 border-black" />
-			<section>
-				<span className='font-bold text-lg'>Follow us</span>
-				<div className='flex justify-evenly my-4 px-6'>
-					{externalLinks.map((link, index) => (
-						<Image
-							src={`/icons/${link.toLowerCase()}.png`}
-							key={index} width='40' height='40' alt={`${link} icon`} />
-					))
-					}
+				<div
+					className='mx-auto flex flex-row flex-wrap'
+				>
+					{ externalLinks.map((link, index) => (
+						<>
+							<Image
+								key={ index }
+								src={ `/icons/${link.toLowerCase()}.png` }
+								width={ 30 }
+								height={ 30 }
+								alt='Social media icon'
+								className='mx-2'
+							/>
+						</>
+					)) }
 				</div>
+				<form
+					className='mt-6'
+				>
+					<label
+						className='font-semibold'
+						htmlFor='newsletter-register'
+					>
+						Sign our weekly newsletter!
+					</label>
+					<fieldset
+						className='mt-2'
+					>
+						<input
+							type='text'
+							name='newsletter-register'
+							id='newsletter-register'
+							className='rounded-l-xl bg-gray-200 py-1 px-3 text-sm'
+							placeholder='Enter your best e-mail'
+						/>
+						<button
+							className='bg-black py-1 px-2 rounded-r-xl text-white text-sm font-bold'
+						>
+							Register
+						</button>
+					</fieldset>
+				</form>
 			</section>
-			<section className='flex flex-wrap px-12 justify-center'>
-				{siteMap.map((navItem, index) => (
-					<p className='w-28 font-medium' key={index}>{navItem}</p>
-				))}
+			<section
+				// Coluna da esquerda do grid, mostrando links de navegação rápida
+				id='footer-left-col'
+				className='my-auto'
+			>
+				{ quickLinks.map((link, index) => (
+					<p
+						key={ index }
+						className='font-semibold underline text-md my-2'
+					>
+						{ link }
+					</p>
+				)) }	
 			</section>
-			{/* <ul className='flex flex-col justify-between h-full'>
-                { siteMap.map((navItem, index) => (
-                    <li
-                        key={ index }
-                        className='flex-grow font-medium'
-                    >
-                        { navItem }
-                    </li>
-                )) }
-            </ul> */}
+			<section
+				// Coluna do centro, mostrando mapa do site com links corporativos
+				id='footer-center-col'
+				className='flex-col my-auto'
+			>
+				{ siteMap1.map((navItem, index) => (
+					<p className='text-sm my-2' key={index}>{navItem}</p>
+				)) }
+			</section>
+			<section
+				// Coluna da direita, com links para termos de serviço e responsabilidade online
+				id="footer-right-col"
+			>
+				{ siteMap2.map((navItem, index) => (
+					<p className='text-sm my-2' key={index}>{navItem}</p>
+				)) }
+			</section>
 		</footer>
+		
 	);
 }

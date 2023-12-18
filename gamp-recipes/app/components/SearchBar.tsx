@@ -63,18 +63,18 @@ export default function SearchBar() {
 		<section
 			id='searchBar'
 			className={`z-[99] w-screen fixed top-0 transition-transform ${ searchBar ? 'translate-y-0' : '-translate-y-16' }
-			2xl:top-16 2xl:w-96` }
+			xl:top-16 xl:w-96` }
 		>
 			{/* A tela toda */}
 			<section
-				className={ 'w-full h-16 bg-white py-3 px-6 flex justify-between items-center 2xl:bg-transparent' }
+				className={ 'w-full h-16 bg-white py-3 px-6 flex justify-between items-center xl:bg-transparent' }
 			> {/* O container branco */}
 				<fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center'>
 					<input
 						id='search-input'
 						type='text'
 						placeholder='Recipe or ingredient'
-						className='bg-gray-200 ml-3 w-full 2xl:bg-transparent'
+						className='bg-gray-200 ml-3 w-full xl:bg-transparent'
 						value={currentSearch}
 						onChange={(element) => setCurrentSearch(element.target.value)}
 						onKeyDown={(event) => handleSearchClick(event)}
@@ -99,7 +99,7 @@ export default function SearchBar() {
 							src='/icons/close-white.png'
 							alt='Close icon'
 							className={ `bg-gray-800 rounded-full p-1 w-5
-							2xl:hidden` }
+							xl:hidden` }
 						/> {/* Botão para fechar a barra de pesquisa */}
 					</picture>
 				</button>

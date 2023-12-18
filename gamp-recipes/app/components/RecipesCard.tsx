@@ -17,13 +17,13 @@ type recipeProps = {
 export default function RecipesCard({ id, image, title, type }: recipeProps): JSX.Element {
 	return (
 		<div className={ `p-6 text-center mb-4 relative
-		2xl:w-64` }>
+		xl:w-64 xl:mx-auto` }>
 			<Link href={`/${id}`} replace>
 				<picture>
 					<img
 						alt={title}
 						src={image}
-						className="rounded-3xl"
+						className='rounded-3xl w-64 shadow-lg'
 					/>
 				</picture>
 			</Link>

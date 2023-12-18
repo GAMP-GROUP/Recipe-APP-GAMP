@@ -6,12 +6,12 @@ import { useScrollBlock } from '../hooks/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { signOut, useSession } from 'next-auth/react';
 import MenuIcon from './MenuIcon';
+// import BigScreenNavigationOptions from './BigScreenNavigationOptions';
 
 export default function NavigationBar() {
 	const [blockScroll, allowScroll] = useScrollBlock();
 	const { searchBar, setSearchBar, menu, setMenu } = useBehaviorContext();
 	const { status } = useSession();
-	const screenWidth = window.innerWidth;
 	const sessionStatus = status === 'authenticated' ? true : false;
 
 	// Abre a barra de pesquisa e impossibilita a rolagem da página pelo usuário
@@ -42,22 +42,13 @@ export default function NavigationBar() {
 		}
 	}
 
-	function toggleMenuIcon(screenWidth: number): boolean {
-		if (screenWidth >= 1536) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
 	return (
 		<nav
 			id='navigation-bar'
 			className={`fixed w-screen bottom-0 h-16 px-4 bg-yellow z-60 flex justify-evenly items-center gap-8 shadow-lg
-			2xl:w-screen 2xl:top-0 2xl:justify-between 2xl:rounded-none 2xl:shadow-none` }
+			xl:w-screen xl:top-0 xl:justify-between xl:rounded-none xl:shadow-none xl:px-96` }
 		>
 			<MenuIcon
-				hidden={toggleMenuIcon}
 				menu={menu}
 				toggleMenu={toggleMenu}
 			/>
@@ -67,12 +58,12 @@ export default function NavigationBar() {
 				width='25'
 				height='25'
 				alt='A magnifiyng glass vectorized, representing the search icon'
-				onClick={() => toggleSearchBar()}
+				onClick={ () => toggleSearchBar() }
 			/>
 
 			<Link
 				href='/'
-				className={`${screenWidth >= 1536 ? 'order-first' : ''}`}
+				className={'xl:order-first'}
 			>
 				<Image
 					src={'/images/logo-simple.png'}
@@ -100,7 +91,6 @@ export default function NavigationBar() {
 
 				)
 			}
-
 		</nav>
 	);
 }
