@@ -10,6 +10,7 @@ export default function Footer() {
 	return (
 		<footer className='hidden xl:grid grid-cols-3 gap-6 py-12 px-80 w-full mx-auto bg-yellow text-black text-center items-center'>
 			<section
+				// Primeira coluna, contém logo, redes sociais e formulário para newsletter
 				className='col-span-3 flex flex-col text-center'
 			>
 				<Image
@@ -62,9 +63,8 @@ export default function Footer() {
 					</fieldset>
 				</form>
 			</section>
-
 			<section
-				// Coluna da esquerda do grid, mostrando o logo e descrição da aplicação
+				// Coluna da esquerda do grid, mostrando links de navegação rápida
 				id='footer-left-col'
 				className='my-auto'
 			>
@@ -78,7 +78,7 @@ export default function Footer() {
 				)) }	
 			</section>
 			<section
-				// Coluna do centro, mostrando mapa do site com links de acesso rápido
+				// Coluna do centro, mostrando mapa do site com links corporativos
 				id='footer-center-col'
 				className='flex-col my-auto'
 			>
@@ -87,7 +87,7 @@ export default function Footer() {
 				)) }
 			</section>
 			<section
-				// Coluna da direita, com formulário para newsletter e redes sociais
+				// Coluna da direita, com links para termos de serviço e responsabilidade online
 				id="footer-right-col"
 			>
 				{ siteMap2.map((navItem, index) => (
