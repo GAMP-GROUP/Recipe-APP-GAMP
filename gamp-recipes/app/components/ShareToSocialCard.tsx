@@ -30,7 +30,7 @@ export default function ShareToSocialCard({ url, img, id, btnClass }: { url: str
 	}, [shareModal]);
 
 	return (
-		<div>
+		<div className={ shareModal ? '' : 'flex justify-center items-center'}>
 			{shareModal === false ? (
 				<ShareButton shareModal={shareModal} setState={setShareModal} btnClass={btnClass} id={id} />
 			) : (

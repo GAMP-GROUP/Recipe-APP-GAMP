@@ -116,12 +116,12 @@ export default function InProgressCard(inProgressData: inProgressData) {
 						<img className={' shadow-md rounded-sm xl:h-80 xl:w-[360px] w-60 xl:rounded-sm xl:max-w-3xl max-w-xs '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 					</div>
 
-					<div className='xl:w-[362px] order-first xl:order-last xl:mr-2 xl:-mt-3 mb-5 min-h-min'>
+					<div className='xl:w-[672px] xl:mr-20 order-first xl:order-last xl:-mt-3 mb-5   min-h-min'>
 
 						<div className=' flex xl:flex-row justify-between mt-2 xl:justify-center xl:items-center gap-1 '>
 
 
-							<div className={` order-3 self-end flex flex-row xl:justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '} xl:self-center `}>
+							<div className={` order-3 gap-2 self-end flex flex-row xl:justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '} xl:self-center `}>
 								
 								<ShareToSocialCard
 									id={inProgressData.detailed.toString()}
@@ -132,7 +132,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 								<FavButton
 									id={inProgressData.detailed.toString()}
-									ImgClass='w-6 h-6 m-auto'
+									ImgClass='w-[24px] h-[24px] m-auto'
 									btnClass=' w-full'
 								/>
 

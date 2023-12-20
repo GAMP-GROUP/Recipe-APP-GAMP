@@ -3,6 +3,7 @@ import React from 'react';
 import { ButtonProps } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 
 export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
@@ -19,20 +20,20 @@ export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 			return;
 		}
 		const id = (e.target as Element).id;
-
-		const res = await fetch(`http://localhost:3000/${id}/favorite`, {
+		
+		await fetch(`http://localhost:3000/${id}/favorite`, {
 			method: 'POST',
 			body: JSON.stringify({ id }),
 		});
 
-		const { message: { fav } } = await res.json();
-		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
+
+
 
 		setLiked(!liked);
-		window.alert(favState);
+
 	}
 
-	const img = liked ? '/images/liked.png' : '/icons/favorites-notactive.png';
+	const img = liked ? '/images/heart-fill.png' : '/images/heart-line.png';
 
 	return (
 		<button
@@ -43,12 +44,15 @@ export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 			<picture
 				id={id}
 				className='m-auto'>
-				<img
+
+				<motion.img
 					id={id}
 					alt='Favorite button'
 					src={ img}
-					className={ ImgClass }
-				/>
+					whileTap={{ transition: { duration: 0.1 }, scale: 0.9 }}
+					className={ ImgClass }></motion.img>
+				
+			
 			</picture>
 		</button>
 	);
