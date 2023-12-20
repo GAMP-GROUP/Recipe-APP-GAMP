@@ -6,10 +6,6 @@ import { getRecipeById } from '../lib/recipeApi';
 
 export default async function Details({ params: { detailed } }: detailedParams) {
 	const id = Number(detailed);
-
-
-	console.log('9-details', id);
-
 	const recipe = await getRecipeById(id.toString());
 
 	if (!recipe) return null;

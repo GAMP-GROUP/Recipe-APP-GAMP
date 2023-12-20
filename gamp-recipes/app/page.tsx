@@ -1,6 +1,9 @@
 import React from 'react';
 import prisma from '@/prisma/client';
 import RecipesFeed from './components/RecipesFeed';
+import FullBanner from './components/FullBanner';
+import MiniBanner from './components/MiniBanner';
+import Footer from './components/Footer';
 
 export default async function Home() {
 	const mealsRecipes = await prisma.recipes.findMany({
@@ -18,10 +21,17 @@ export default async function Home() {
 	allRecipes.sort(getRandomNumber);
 
 	return (
-		<RecipesFeed
-			recipesQuantity={25}
-			feedType={'all'}
-			recipes={allRecipes}
-		/>
+		<section
+			className='lg:flex-col lg:mt-16'
+		>
+			<FullBanner />
+			<MiniBanner />
+			<RecipesFeed
+				recipesQuantity={30}
+				feedType={'all'}
+				recipes={allRecipes}
+			/>
+			<Footer />
+		</section>
 	);
 }
