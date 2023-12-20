@@ -157,10 +157,10 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 		<div className='flex-col gap-3 min-w-[358px] w-full flex mr-3 '>
 
 			<h2
-				className='text-lg text-left ml-3 text-gray-700 font-lato font-semibold lg:border-yellow lg:border-solid border-b-4 w-fit h-fit'
+				className='text-xl text-left ml-3 text-gray-700 font-lato font-semibold xl:border-yellow xl:border-solid border-b-4 w-fit h-fit'
 			>Ingredients</h2>
 
-			<section className=' w-fit overflow-y-auto scrollbar-thumb-slate-400 hover:scrollbar-thumb-slate-700 max-h-96 scrollbar-thin scrollbar-track-slate-100 lg:h-fit lg:max-h-80'>
+			<section className=' w-fit overflow-y-auto scrollbar-thumb-slate-400 hover:scrollbar-thumb-slate-700 max-h-96 scrollbar-thin scrollbar-track-slate-100 xl:h-fit xl:max-h-80'>
 
 				{ingredients.map((property, index) => (
 					<motion.div
@@ -171,9 +171,9 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 								: 'hsl(0, 0%, 100%)', // Branco para false
 						}}
 
-						className={`flex mb-3 flex-row justify-between shadow-lg lg:min-w-[171px] items-center max-h-11 lg:rounded-md rounded-lg h-fit lg:max-w-sm lg:h-10 ml-3 mr-10 ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
+						className={`flex mb-3 flex-row justify-between shadow-xl xl:min-w-[171px] items-center max-h-11 xl:rounded-md rounded-xl h-fit xl:max-w-sm xl:h-10 ml-3 mr-10 ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
 						<ul
-							className='self-center w-full lg:mt-2 lg:h-fit '
+							className='self-center w-full xl:mt-2 xl:h-fit '
 						>
 							<li>
 
@@ -190,7 +190,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 									<div className='flex row items-center justify-around mb-2 ml-2 h-12 '>
 
 										{svgOptions[itemsChecked[property] ? 'option1' : 'option2']}
-										<p className='text-left ml-2 w-full text-lg mt-2 lg:text-xs font-semibold text-gray-600 h-fit '>{amount[index]} {property}</p>
+										<p className='text-left ml-2 w-full text-xl mt-2 xl:text-xs font-semibold text-gray-600 h-fit '>{amount[index]} {property}</p>
 
 									</div>
 
@@ -205,11 +205,11 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 			</section>
 
-			<div className='flex justify-center lg:justify-start lg:ml-4 mt-8 items-center'>
+			<div className='flex justify-center xl:justify-start xl:ml-4 mt-8 items-center'>
 				<button
 					onClick={handleFinishBtn}
 					disabled={isDisabled}
-					className={` ${isDisabled? 'bg-gray-200' : 'bg-black text-white'} lg:w-[163px] text-gray-800 font-bold justify-center w-fit p-2 text-sm rounded inline-flex items-center`}>
+					className={` ${isDisabled? 'bg-gray-200' : 'bg-black text-white'} xl:w-[163px] text-gray-800 font-bold justify-center w-fit p-2 text-sm rounded inline-flex items-center`}>
 
 					Finish Recipe
 				</button>

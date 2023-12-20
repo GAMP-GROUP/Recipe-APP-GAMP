@@ -4,7 +4,6 @@ import React from 'react';
 import { ShareBtnProps } from '@/types';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { CiShare1 } from 'react-icons/ci';
 
 export default function ShareButton({ id, setState, shareModal, btnClass }: ShareBtnProps) {
 	const session = useSession();

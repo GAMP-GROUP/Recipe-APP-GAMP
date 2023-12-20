@@ -78,7 +78,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={ 'bg-slate-50 ml-7 mr-7 mt-2 xl:h-max pb-10 h-full xl:mb-5 xl:w-max xl:ml-10 xl:mr-10 xl:grid xl:grid-cols-2 xl:grid-rows-1 overflow-hidden overflow-y-scroll no-scrollbar text-center flex flex-col xl:justify-center font-lato text-xl sm:text-s overflow-scroll-y no-scroll'}
+			className={ 'ml-7 mr-7 mt-2 xl:h-max pb-10 h-full xl:mb-5 xl:w-max xl:ml-10 xl:mr-10 xl:grid xl:grid-cols-2 xl:grid-rows-1 overflow-hidden overflow-y-scroll no-scrollbar text-center flex flex-col xl:justify-center font-lato text-xl sm:text-s overflow-scroll-y no-scroll'}
 
 		>
 			<section className='text-left xl:justify-end xl:flex xl:items-center order-1 '>
@@ -116,7 +116,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 						<img className={' shadow-md rounded-sm xl:h-80 xl:w-[360px] w-60 xl:rounded-sm xl:max-w-3xl max-w-xs '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 					</div>
 
-					<div className='xl:w-[672px] xl:mr-20 order-first xl:order-last xl:-mt-3 mb-5   min-h-min'>
+					<div className='xl:w-[672px] xl:mr-20 order-first xl:order-last xl:-mt-3 mb-5 min-h-min'>
 
 						<div className=' flex xl:flex-row justify-between mt-2 xl:justify-center xl:items-center gap-1 '>
 
@@ -137,9 +137,9 @@ export default function InProgressCard(inProgressData: inProgressData) {
 								/>
 
 							</div>
-							<div>
+							<div className='flex justify-center items-center'>
 								<button onClick={handlePreviousPage}>
-									<img src="/images/seta-esquerda.png" alt="seta para esquerda" className='w-6 xl:hidden order-1 my-auto' />
+									<img src="/images/seta-esquerda.png" alt="seta para esquerda" className='w-5 xl:hidden order-1 my-auto' />
 								</button>
 							</div>
 							
