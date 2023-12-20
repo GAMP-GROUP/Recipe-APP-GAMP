@@ -171,7 +171,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 								: 'hsl(0, 0%, 100%)', // Branco para false
 						}}
 
-						className={`flex mb-3 flex-row justify-between shadow-xl xl:min-w-[171px] items-center max-h-11 xl:rounded-md rounded-xl h-fit xl:max-w-sm xl:h-10 ml-3 mr-10 ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
+						className={`flex mb-3 flex-row justify-between shadow-md xl:min-w-[171px] items-center max-h-11 xl:rounded-md rounded-xl h-fit xl:max-w-sm xl:h-10 ml-3 mr-10 ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
 						<ul
 							className='self-center w-full xl:mt-2 xl:h-fit '
 						>
@@ -206,13 +206,20 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 			</section>
 
 			<div className='flex justify-center xl:justify-start xl:ml-4 mt-8 items-center'>
-				<button
+				<motion.button
 					onClick={handleFinishBtn}
 					disabled={isDisabled}
-					className={` ${isDisabled? 'bg-gray-200' : 'bg-black text-white'} xl:w-[163px] text-gray-800 font-bold justify-center w-fit p-2 text-sm rounded inline-flex items-center`}>
+					animate={{
+						backgroundColor: isDisabled
+							? 'rgb(229 231 235)'
+							: 'rgb(0, 0, 0)',
 
+					}}
+					transition={{ duration: 0.5 }}
+					className={`${isDisabled ? '' : 'text-white'} xl:w-[163px] text-gray-800 font-bold justify-center w-fit p-2 text-sm rounded inline-flex items-center`}>
+					
 					Finish Recipe
-				</button>
+				</motion.button>
 
 			</div>
 
