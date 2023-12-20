@@ -6,6 +6,7 @@ import { useScrollBlock } from '../hooks/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { signOut, useSession } from 'next-auth/react';
 import MenuIcon from './MenuIcon';
+import GampLogo from './GampLogo';
 // import BigScreenNavigationOptions from './BigScreenNavigationOptions';
 
 export default function NavigationBar() {
@@ -61,17 +62,7 @@ export default function NavigationBar() {
 				onClick={ () => toggleSearchBar() }
 			/>
 
-			<Link
-				href='/'
-				className={'xl:order-first'}
-			>
-				<Image
-					src={'/images/logo-simple.png'}
-					width={60}
-					height={60}
-					alt='logo'
-				/>
-			</Link>
+			<GampLogo />
 
 			{
 				sessionStatus ? (
