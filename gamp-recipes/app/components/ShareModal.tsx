@@ -70,7 +70,7 @@ export function ShareModal({ url, img, refModal, setState }: {
 
 					<div className="my-4">
 
-						<p className="text-xl">Share this via</p>
+						<p className="text-xl font-semibold text-gray-700">Share this via</p>
 
 						<div className="flex justify-between gap-5 my-4" >
 
@@ -108,13 +108,13 @@ export function ShareModal({ url, img, refModal, setState }: {
 
 						</div>
 
-						<p className="text-xl">Or copy link</p>
+						<p className="text-xl font-semibold text-gray-700">Or copy link</p>
 
 						<div className="border-2 border-gray-200 flex justify-between items-center mt-4 py-2">
 
 							<input
 								onChange={(event) => setInputText(event.target.value)}
-								className="w-full outline-none bg-transparent text-xl truncate" type="text" placeholder="link" value={url} />
+								className="w-full outline-none bg-transparent text-xl truncate font-semibold text-gray-700" type="text" placeholder="link" value={url} />
 
 
 							<button

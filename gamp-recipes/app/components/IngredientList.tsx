@@ -154,7 +154,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 	};
 
 	return (
-		<div className='flex-col gap-3 min-w-[358px] w-full flex mr-3 '>
+		<div className='flex-col gap-3 min-w-[358px] w-full flex mr-3 mt-3'>
 
 			<h2
 				className='text-xl text-left ml-3 text-gray-700 font-lato font-semibold xl:border-yellow xl:border-solid border-b-4 w-fit h-fit'
@@ -171,7 +171,7 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 								: 'hsl(0, 0%, 100%)', // Branco para false
 						}}
 
-						className={`flex mb-3 flex-row justify-between shadow-md xl:min-w-[171px] items-center max-h-11 xl:rounded-md rounded-xl h-fit xl:max-w-sm xl:h-10 ml-3 mr-10 ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
+						className={`flex mb-3 flex-row justify-between shadow-md xl:min-w-[171px] items-center max-h-11 rounded-md  h-fit xl:max-w-sm xl:h-10 ml-3 mr-10 ${itemsChecked[property] ? 'bg-green-300' : ''}`} key={index}>
 						<ul
 							className='self-center w-full xl:mt-2 xl:h-fit '
 						>
@@ -216,7 +216,8 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 					}}
 					transition={{ duration: 0.5 }}
-					className={`${isDisabled ? '' : 'text-white'} xl:w-[163px] text-gray-800 font-bold justify-center w-fit p-2 text-sm rounded inline-flex items-center`}>
+					className={
+						`${isDisabled ? '' : 'text-white'} xl:w-[163px] text-gray-800 font-bold justify-center w-2/3 h-2/3 p-2 text-lg rounded inline-flex items-center`}>
 					
 					Finish Recipe
 				</motion.button>
