@@ -1,7 +1,5 @@
 'use client';
-import React from 'react';
-
-import {
+import React, {
 	useState,
 	useContext,
 	createContext,
@@ -9,6 +7,7 @@ import {
 	SetStateAction,
 	ReactNode,
 } from 'react';
+import { TRecipesType } from '@/app/components/RecipesFeed';
 
 type Props = {
 	children: ReactNode;
@@ -19,27 +18,27 @@ type BehaviorProps = {
 	share: boolean;
 	setShare: Dispatch<SetStateAction<boolean>>;
 	setMenu: Dispatch<SetStateAction<boolean>>;
-	searchBar: boolean;
-	setSearchBar: Dispatch<SetStateAction<boolean>>;
 	recipeSearch: string;
 	setRecipeSearch: Dispatch<SetStateAction<string>>;
+	recipesType: TRecipesType,
+	setRecipesType: Dispatch<SetStateAction<TRecipesType>>
 };
 
 export const BehaviorContext = createContext({
 	menu: false,
 	setMenu: () => {},
-	searchBar: false,
-	setSearchBar: () => {},
 	recipeSearch: '',
 	setRecipeSearch: () => {},
+	recipesType: 'all',
+	setRecipesType: () => {}
 } as unknown as BehaviorProps);
 
 export function BehaviorProvider({ children }: Props) {
-	const [menu, setMenu] = useState(false);
-	const [open, setOpen] = useState(false);
-	const [share, setShare] = useState(false);
-	const [searchBar, setSearchBar] = useState(false);
-	const [recipeSearch, setRecipeSearch] = useState('');
+	const [menu, setMenu] = useState<boolean>(false);
+	const [open, setOpen] = useState<boolean>(false);
+	const [share, setShare] = useState<boolean>(false);
+	const [recipeSearch, setRecipeSearch] = useState<string>('');
+	const [recipesType, setRecipesType] = useState<TRecipesType>('all');
 
 	const behaviorSettings = {
 		menu,
@@ -48,10 +47,10 @@ export function BehaviorProvider({ children }: Props) {
 		share,
 		setShare,
 		setMenu,
-		searchBar,
-		setSearchBar,
 		recipeSearch,
 		setRecipeSearch,
+		recipesType,
+		setRecipesType,
 	};
 
 	return (

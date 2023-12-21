@@ -5,7 +5,6 @@ import type { Metadata } from 'next';
 import Providers from '@/contextAPI/provider/providers';
 import NavigationBar from './components/NavigationBar';
 import UserMenu from './components/UserMenu';
-import SearchBar from './components/SearchBar';
 import React from 'react';
 import AuthProvider from './api/auth/[...nextauth]/authProvider';
 
@@ -25,7 +24,6 @@ export default function RootLayout({
 			<body className='w-screen h-full bg-white flex justify-center'>
 				<Providers>
 					<AuthProvider>
-						<SearchBar />
 						{ children }
 						<UserMenu />
 						<NavigationBar />

@@ -4,24 +4,35 @@ import FullBanner from './FullBanner';
 import MiniBanner from './MiniBanner';
 import WelcomeBar from './WelcomeBar';
 import WeeklyRecipe from './WeeklyRecipe';
-import RecipesFeed, { TRecipesFeedProps } from './RecipesFeed';
+import RecipesFeed, { TRecipeObject } from './RecipesFeed';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+import SearchBar from './SearchBar';
+import MealDrinKFilter from './MealDrinkFilter';
 
-export default function HomePageFeatures({ recipesQuantity, recipes }: TRecipesFeedProps) {
-	const { menu } = useBehaviorContext();
+type THomePageFeaturesProps = {
+	recipes: TRecipeObject[],
+	recipesQuantity: number
+}
+
+export default function HomePageFeatures({ recipesQuantity, recipes }: THomePageFeaturesProps) {
+	const { menu, recipesType, setRecipesType } = useBehaviorContext();
 
 	return (
 		<section
-			className={ `transition-opacity duration-500 ${ menu ? 'opacity-0' : 'opacity-100' }` }
+			className={`flex flex-col gap-4 transition-opacity duration-500 ${menu ? 'opacity-0' : 'opacity-100'}`}
 		>
 			<FullBanner />
 			<MiniBanner />
 			<WelcomeBar />
+			<SearchBar />
 			<WeeklyRecipe />
+			<MealDrinKFilter
+				setRecipesType={setRecipesType}
+			/>
 			<RecipesFeed
-				recipesQuantity={ recipesQuantity }
-				feedType={ 'all' }
-				recipes={ recipes }
+				recipesType={recipesType}
+				recipesQuantity={recipesQuantity}
+				recipes={recipes}
 			/>
 		</section>
 	);

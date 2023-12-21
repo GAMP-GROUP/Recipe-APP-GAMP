@@ -1,10 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+// import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import RecipesCard from './RecipesCard';
-import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import LoadingScreen from './LoadingScreen';
 
-type TRecipesProps = {
+export type TRecipeObject = {
 	id: number | null;
 	recipe_name: string;
 	instructions: string;
@@ -20,12 +20,15 @@ type TRecipesProps = {
 
 export type TRecipesFeedProps = {
 	recipesQuantity: number,
-	feedType: 'drink' | 'meal' | 'all',
-	recipes: TRecipesProps[],
+	recipesType: TRecipesType
+	recipes: TRecipeObject[],
 }
 
+export type TRecipesType = 'all' | 'meals' | 'drinks'
+
 export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeedProps) {
-	const [filteredRecipes, setFilteredRecipes] = useState<TRecipesProps[]>([]);
+	// const { recipesType } = useBehaviorContext();
+	const [filteredRecipes, setFilteredRecipes] = useState<TRecipeObject[]>([]);
 
 	useEffect(() => {
 		setFilteredRecipes(recipes.slice(0, recipesQuantity));
@@ -35,20 +38,20 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeedPr
 		<>
 			<section
 				id='recipes-feed'
-				className={ `flex flex-col items-center gap-8 
+				className={`flex flex-col items-center gap-8
 				xl:mt-10 xl:mx-auto xl:grid xl:grid-cols-3 xl:w-8/12 xl:transition-none` }
 			>
-				{	filteredRecipes.length <= 0 ? <LoadingScreen /> : 
+				{ filteredRecipes.length <= 0 ? <LoadingScreen /> :
 					filteredRecipes.map((recipe, index) => (
-						<div key={ index }>
+						<div key={index}>
 							<RecipesCard
-								type={ recipe.recipe_type_id }
-								id={ recipe.id }
-								title={ recipe.recipe_name }
-								tags={ recipe.tags }
-								image={ recipe.image }
-								area={ recipe.recipe_type_id === 2 ? recipe.area : null }
-								alcoholic={ recipe.recipe_type_id === 1 ? recipe.alcoholic : null }
+								type={recipe.recipe_type_id}
+								id={recipe.id}
+								title={recipe.recipe_name}
+								tags={recipe.tags}
+								image={recipe.image}
+								area={recipe.recipe_type_id === 2 ? recipe.area : null}
+								alcoholic={recipe.recipe_type_id === 1 ? recipe.alcoholic : null}
 							/>
 						</div>
 					)) }

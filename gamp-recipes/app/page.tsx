@@ -23,10 +23,8 @@ export default async function Home() {
 			className='lg:flex-col lg:mt-16'
 		>
 			<HomePageFeatures
-				feedType='all'
 				recipes={ allRecipes }
 				recipesQuantity={ 30 }
-				key={ 0 }
 			/>
 			<Footer />
 		</section>
