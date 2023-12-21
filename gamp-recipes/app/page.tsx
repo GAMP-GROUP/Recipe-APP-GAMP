@@ -4,6 +4,7 @@ import RecipesFeed from './components/RecipesFeed';
 import FullBanner from './components/FullBanner';
 import MiniBanner from './components/MiniBanner';
 import Footer from './components/Footer';
+import DesktopMenu from './components/DesktopMenu';
 
 export default async function Home() {
 	const mealsRecipes = await prisma.recipes.findMany({
@@ -24,6 +25,7 @@ export default async function Home() {
 		<section
 			className='lg:flex-col lg:mt-16'
 		>
+			<DesktopMenu />
 			<FullBanner />
 			<MiniBanner />
 			<RecipesFeed

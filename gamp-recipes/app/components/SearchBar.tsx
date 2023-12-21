@@ -63,13 +63,13 @@ export default function SearchBar() {
 		<section
 			id='searchBar'
 			className={`z-[99] w-screen fixed top-0 transition-transform ${ searchBar ? 'translate-y-0' : '-translate-y-16' }
-			xl:top-16 xl:w-96` }
+			xl:top-16 xl:w-80 xl:relative xl:place-self-center` }
 		>
 			{/* A tela toda */}
 			<section
-				className={ 'w-full h-16 bg-white py-3 px-6 flex justify-between items-center xl:bg-transparent' }
+				className={ 'w-full h-16 bg-white py-3 px-6 flex justify-between items-center xl:bg-transparent xl:p-0' }
 			> {/* O container branco */}
-				<fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center'>
+				<fieldset className='w-11/12 bg-gray-200 rounded-xl py-1 mr-3 self-center flex justify-between place-items-center xl:mx-auto'>
 					<input
 						id='search-input'
 						type='text'
