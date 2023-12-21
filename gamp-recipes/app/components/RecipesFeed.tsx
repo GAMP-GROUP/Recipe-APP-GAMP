@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-// import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import RecipesCard from './RecipesCard';
 import LoadingScreen from './LoadingScreen';
 
@@ -27,13 +27,27 @@ export type TRecipesFeedProps = {
 export type TRecipesType = 'all' | 'meals' | 'drinks'
 
 export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeedProps) {
-	// const { recipesType } = useBehaviorContext();
+	const { recipesType } = useBehaviorContext();
 	const [filteredRecipes, setFilteredRecipes] = useState<TRecipeObject[]>([]);
 
 	useEffect(() => {
-		setFilteredRecipes(recipes.slice(0, recipesQuantity));
-	}, [recipes, recipesQuantity]);
+		let newFilteredRecipes: TRecipeObject[] = [];
 
+		if (recipesType !== 'all') {
+			// Filter based on recipe_type_id when recipesType is 'meals' or 'drinks'
+			newFilteredRecipes = recipes.filter(recipe => (
+				(recipesType === 'meals' && recipe.recipe_type_id === 2) ||
+				(recipesType === 'drinks' && recipe.recipe_type_id === 1)
+			));
+		} else {
+			// Include all recipes when recipesType is 'all'
+			newFilteredRecipes = recipes;
+		}
+
+		// Slice the required quantity of recipes
+		setFilteredRecipes(newFilteredRecipes.slice(0, recipesQuantity));
+	}, [recipes, recipesQuantity, recipesType]);
+	
 	return (
 		<>
 			<section

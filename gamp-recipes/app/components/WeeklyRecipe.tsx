@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function WeeklyRecipe() {
 	return (
-		<div className='xl:hidden mb-4 relative'>
+		<div className='xl:hidden relative'>
 			<div
 				className='w-mobile bg-black rounded-3xl overflow-hidden relative'
 			>
