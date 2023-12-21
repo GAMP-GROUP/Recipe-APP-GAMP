@@ -18,14 +18,13 @@ type TRecipesProps = {
 	updated_at: Date;
 }
 
-type TRecipesFeed = {
+export type TRecipesFeedProps = {
 	recipesQuantity: number,
 	feedType: 'drink' | 'meal' | 'all',
 	recipes: TRecipesProps[],
 }
 
-export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) {
-	const { menu } = useBehaviorContext();
+export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeedProps) {
 	const [filteredRecipes, setFilteredRecipes] = useState<TRecipesProps[]>([]);
 
 	useEffect(() => {
@@ -36,7 +35,7 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) 
 		<>
 			<section
 				id='recipes-feed'
-				className={ `transition-opacity duration-500 flex flex-col items-center gap-8 ${ menu ? 'opacity-0' : 'opacity-100' } 
+				className={ `flex flex-col items-center gap-8 
 				xl:mt-10 xl:mx-auto xl:grid xl:grid-cols-3 xl:w-8/12 xl:transition-none` }
 			>
 				{	filteredRecipes.length <= 0 ? <LoadingScreen /> : 

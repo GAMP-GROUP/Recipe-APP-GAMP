@@ -23,12 +23,12 @@ export default function RecipesCard({ id, image, title, type }: recipeProps): JS
 					<img
 						alt={title}
 						src={image}
-						className='object-cover rounded-3xl w-[22.38rem] h-48 shadow-lg'
+						className='object-cover rounded-3xl w-mobile h-48 shadow-lg'
 					/>
 				</picture>
 			</Link>
 			<section className='px-4 flex items-left text-left justify-between'>
-				<div>
+				<div className='flex flex-col gap-2'>
 					<h2 className="text-[1.75rem] font-black">{title}</h2>
 					<p className={ `text-[0.8rem] w-20 text-white text-center rounded-xl uppercase font-[600] tracking-[0.075rem] ${ type === 2 ? 'bg-red' : 'bg-blue-600' }` }>
 						{ type === 2 ? 'meal' : 'drink' }
