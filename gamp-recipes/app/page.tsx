@@ -4,6 +4,7 @@ import RecipesFeed from './components/RecipesFeed';
 import FullBanner from './components/FullBanner';
 import MiniBanner from './components/MiniBanner';
 import Footer from './components/Footer';
+import WelcomeBar from './components/WelcomeBar';
 
 export default async function Home() {
 	const mealsRecipes = await prisma.recipes.findMany({
@@ -26,6 +27,7 @@ export default async function Home() {
 		>
 			<FullBanner />
 			<MiniBanner />
+			<WelcomeBar />
 			<RecipesFeed
 				recipesQuantity={30}
 				feedType={'all'}

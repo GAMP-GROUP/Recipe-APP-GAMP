@@ -30,7 +30,7 @@ export default function FavButton({ id, ImgClass }: ButtonProps) {
 		<button
 			id={id}
 			onClick={(e) => favHandle(e)}
-			className={ 'rounded-full bg-yellow p-2 w-[2.35em] h-[2.35em] z-3 absolute top-8 right-8' }
+			className={ 'rounded-full bg-yellow p-2 w-[2.5em] h-[2.5em] z-3 absolute top-2 right-2' }
 		>
 			<picture
 				id={id}

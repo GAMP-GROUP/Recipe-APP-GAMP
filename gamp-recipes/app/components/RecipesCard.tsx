@@ -16,18 +16,18 @@ type recipeProps = {
 
 export default function RecipesCard({ id, image, title, type }: recipeProps): JSX.Element {
 	return (
-		<div className={ `p-6 text-center mb-4 relative
+		<div className={ `text-center mb-4 relative flex flex-col gap-2
 		xl:w-64 xl:mx-auto` }>
 			<Link href={`/${id}`} replace>
 				<picture>
 					<img
 						alt={title}
 						src={image}
-						className='rounded-3xl w-64 shadow-lg'
+						className='object-cover rounded-3xl w-[22.38rem] h-48 shadow-lg'
 					/>
 				</picture>
 			</Link>
-			<section className="mt-2 px-4 flex items-left text-left justify-between">
+			<section className='px-4 flex items-left text-left justify-between'>
 				<div>
 					<h2 className="text-[1.75rem] font-black">{title}</h2>
 					<p className={ `text-[0.8rem] w-20 text-white text-center rounded-xl uppercase font-[600] tracking-[0.075rem] ${ type === 2 ? 'bg-red' : 'bg-blue-600' }` }>
