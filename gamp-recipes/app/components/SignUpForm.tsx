@@ -71,15 +71,15 @@ export default function SignUpForm() {
 	}, [status]);
 
 	const content = (
-		<div className='flex flex-col bg-white shadow-lg py-6 px-4 rounded-lg w-11/12 max-w-md overflow-hidden'>
+		<div className='flex flex-col bg-white shadow-lg py-6 px-4 rounded-lg font-lato w-11/12 max-w-md overflow-hidden'>
 			<div className='  sm:mx-auto sm:w-full sm:max-w-sm'>
 				<h2 className='text-center text-2xl font-bold text-gray-900 my-2'>
-					Create account
+					Create Your Account
 				</h2>
 			</div>
 			<form onSubmit={handleSubmit}>
-				<div className='bg-white text-slate-950  flex-row items-center justify-between p-5'>
-					<label className='block text-sm font-bold mb-2' htmlFor='username'>
+				<div className=' text-slate-950 flex  flex-col  gap-2 '>
+					<label className='block text-sm font-bold' htmlFor='username'>
 						Username:
 					</label>
 					<input
@@ -88,7 +88,7 @@ export default function SignUpForm() {
 						value={username}
 						onChange={handleInputChange}
 						placeholder='username'
-						className='username shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+						className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
 					/>
 
 					{ buttonClicked && !validateUsername(username) && (
@@ -96,8 +96,8 @@ export default function SignUpForm() {
 							Your username must be at least 4 characters long
 						</span>
 					) }
-					<br />
-					<label className='block text-sm font-bold mb-2' htmlFor='Nationality'>
+				
+					<label className='block text-sm font-bold' htmlFor='Nationality'>
 						Nationality:
 					</label>
 					<input
@@ -113,7 +113,7 @@ export default function SignUpForm() {
 							Your nationality must be 2 characters long
 						</span>
 					) }
-					<label className='block text-gray-700 text-sm font-bold mb-2 mt-1'>
+					<label className='block text-gray-700 text-sm font-bold '>
 						Email:
 					</label>
 					<input
@@ -131,8 +131,8 @@ export default function SignUpForm() {
 							Your email must be in this format: example@example.com.
 						</span>
 					) }
-					<br />
-					<label className='block text-stone-800 text-sm font-bold mb-2 mt-1'>
+					
+					<label className='block text-stone-800 text-sm font-bold'>
 						Password:
 					</label>
 					<input

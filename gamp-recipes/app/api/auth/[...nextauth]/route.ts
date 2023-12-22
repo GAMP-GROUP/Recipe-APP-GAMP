@@ -90,17 +90,18 @@ export const authOptions: AuthOptions = {
 			}
 		},
 	},
+	
 	session: {
 		strategy: 'jwt',
 		maxAge: 30 * 24 * 60 * 60, // 30 days
 		updateAge: 24 * 60 * 60, // 24 hours
 	},
+
 	callbacks: {
 		async session(params: { session: Session; token: JWT; user: User }) {
+			
 			if (params.session.user) {
 				params.session.user.email = params.token.email;
-
-
 			}
 
 			return params.session;
@@ -127,8 +128,6 @@ export const authOptions: AuthOptions = {
 			}
 
 			const profileWithLocale = profile as ProfileWithLocale;
-			console.log(profileWithLocale);
-
 
 			if (profile?.email) {
 				await prisma.user.upsert({
