@@ -39,17 +39,26 @@ export default function InProgressCard(inProgressData: inProgressData) {
  * Retorna um objeto com as listas de ingredientes e quantidades.
  */
 	const getIngredientsAndAmount = () => {
+		
+		const allIngredientsName: string[] = [];
 
 		const ingredients = inProgressData.recipe?.ingredients.map((item) => {
 			const ingredients_name = item?.ingredient?.ingredients_name;
 
 			if (ingredients_name) {
 				const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
+
+				if (allIngredientsName.some((item: string) => item === ingName)) {
+					return null;
+				}
+
+				allIngredientsName.push(ingName);
+
 				return ingName;
 			}
+
 			return null;
 		});
-
 		const amount = inProgressData.recipe?.ingredients.map((ingredient) => {
 			return ingredient?.ing_amount;
 		});
@@ -61,6 +70,8 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	};
 
 	const { ingredients, amount } = getIngredientsAndAmount();
+
+	console.log(ingredients, amount);
 	
 	const instructions = inProgressData.recipe?.instructions.split('\n').map((instruction, index) => {
 		return (
@@ -156,7 +167,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 					className={' w-[358px] -ml-2 xl:-ml-0 xl:self-start xl:w-3/4 xl:justify-start xl:flex xl:mt-0 xl:items-center xl:min-h-[432px]'}
 				>
 
-					<IngredientList id={parseInt(inProgressData.detailed)} amount={amount as unknown as string[]} ingredients={ingredients as string[]} />
+					<IngredientList id={parseInt(inProgressData.detailed)} amount={amount as unknown as string[]} ingredients={ingredients as  unknown as string[]} />
 
 				</section>
 
