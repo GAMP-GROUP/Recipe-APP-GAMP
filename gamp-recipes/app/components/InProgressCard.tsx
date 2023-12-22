@@ -39,11 +39,11 @@ export default function InProgressCard(inProgressData: inProgressData) {
  * Retorna um objeto com as listas de ingredientes e quantidades.
  */
 	const getIngredientsAndAmount = () => {
-		
+
 		const allIngredientsName: string[] = [];
 
 		const ingredients = inProgressData.recipe?.ingredients.map((item) => {
-			const ingredients_name = item?.ingredient?.ingredients_name;
+			const ingredients_name = item?.ingredient_name;
 
 			if (ingredients_name) {
 				const ingName = ingredients_name.charAt(0).toUpperCase() + ingredients_name.slice(1);
