@@ -3,8 +3,6 @@ import { userAuth } from '@/app/middlewares/authToken';
 import prisma from '@/prisma/client';
 import { NewRecipeResponse, UpdateRecipeRequest, Request } from '@/types';
 
-
-
 export async function createRecipe(request: Request): Promise<NewRecipeResponse> {
 	const { recipe_type_id, recipe_name, instructions, image, tags, category, ingredients, amount } = await request.json();
 	const { message, user } = await userAuth(request);
@@ -111,9 +109,6 @@ export async function createRecipe(request: Request): Promise<NewRecipeResponse>
 
 	return { message: response, TYPE: HttpStatusCode.Created };
 }
-
-
-
 
 
 export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRecipeResponse> {
@@ -294,9 +289,7 @@ export async function getRecipeById(request: number) {
 				},
 			},
 		});
-		console.log('request', request);
 
-		console.log('recipe------- 296', recipe);
 
 
 		return recipe;
@@ -306,16 +299,24 @@ export async function getRecipeById(request: number) {
 }
 
 
-export async function finishRecipe (request: number) {
+export async function finishRecipe (request: Request) {
+	
 	try {
+		const { message, user } = await userAuth(request);
+		console.log('user', message, user);
+		
+	
+		if (message !== 'success' || user == undefined) return { message, TYPE: HttpStatusCode.Unauthorized };
+
 		const recipe = await prisma.finished_Recipes.create({
 			data: {
 				recipe_id: request,
-				user_id: 1,
+				user_id: user.id,
 				
 			},
 		});
 
+		
 		return recipe;
 	} catch (error) {
 		console.error('Error finishing recipe:', error);

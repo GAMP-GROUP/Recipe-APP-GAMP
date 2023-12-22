@@ -38,6 +38,7 @@ type drinkAPI = {
 type ShareBtnProps = {
 	id: string,
 	ImgClass?: string
+	btnClass?: string
 	setState: React.Dispatch<React.SetStateAction<boolean>>;
 	shareModal: boolean;
 
@@ -65,6 +66,7 @@ type recipePost = {
 type ButtonProps = {
 	id: string,
 	ImgClass?: string
+	btnClass?: string
 }
 
 type mealAPI = {
@@ -126,29 +128,33 @@ type NewRecipeRequest = {
 };
 
 type RecipeData = {
-	id: number;
-	recipe_name: string;
-	instructions: string;
-	image: string;
-	tags: string;
-	category: number;
-	category_name?: string;
-	recipe_type_name?: string;
-	video_source?: string | null;
-	area?: string | null;
-	alcoholic?: string | null;
-	recipe_type_id: number;
-	created_at: Date;
-	updated_at: Date;
-	ingredients: (ingredientsAPI | null)[]; // Allow null for each ingredient
-	author?: string | null;
+  id: number;
+  recipe_name: string;
+  instructions: string;
+  image: string;
+  tags: string;
+  category: number;
+  category_name?: string;
+  recipe_type_name?: string;
+  video_source?: string | null;
+  area?: string | null;
+  alcoholic?: string | null;
+  recipe_type_id: number;
+  created_at: Date;
+  updated_at: Date;
+  ingredients: (RecipeIngredient | null)[]; // Allow null for each ingredient
+  author?: string | null;
+  amount?: string[];
 };
-type ingredientsAPI = {
-	ing_amount: string | string[] | null; // Allow string or array of strings or null
-	ingredient: {
-		ingredients_name: string;
-	};
+
+type RecipeIngredient = {
+  ingredient_name: string;
+  ing_amount: string | null;
+  ingredients?: {
+	ingredients_name: string;
+  };
 };
+
 
 type UpdateRecipeRequest = {
 	id: number; // O ID da receita a ser atualizada

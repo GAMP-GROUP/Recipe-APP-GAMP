@@ -1,22 +1,17 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-
-
-
 import ShareButton from './ShareButton';
 import { ShareModal } from './ShareModal';
 
-export default function ShareToSocialCard({ url, img, id }: { url: string, img: string, id: string }) {
+export default function ShareToSocialCard({ url, img, id, btnClass }: { url: string, img: string, id: string, btnClass?:string }) {
 
 	const [shareModal, setShareModal] = React.useState(false);
 
 	const modal = useRef<HTMLDivElement>(null);
 
-
 	function handleClick(event: MouseEvent) {
 		if (modal.current && !modal.current.contains(event.target as Node)) {
-			console.log('You clicked outside of me!');
 
 			setShareModal(false);
 		}
@@ -34,12 +29,10 @@ export default function ShareToSocialCard({ url, img, id }: { url: string, img: 
 
 	}, [shareModal]);
 
-
-
 	return (
-		<div>
+		<div className={ shareModal ? '' : 'flex justify-center items-center'}>
 			{shareModal === false ? (
-				<ShareButton shareModal={shareModal} setState={setShareModal} id={id} />
+				<ShareButton shareModal={shareModal} setState={setShareModal} btnClass={btnClass} id={id} />
 			) : (
 
 				<ShareModal
