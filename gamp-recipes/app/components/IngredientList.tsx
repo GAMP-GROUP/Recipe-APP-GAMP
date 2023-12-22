@@ -34,7 +34,15 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 		if (recipe) {
 			window.alert('Recipe finished!');
+			setItemsChecked({});
+			localStorage.setItem(`ingredients recipe ${id}`, JSON.stringify({}));
+			console.log('recipe', recipe);
+			
+			return recipe;
+
 		}
+
+		
 
 		return recipe;
 

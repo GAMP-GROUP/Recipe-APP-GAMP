@@ -21,7 +21,7 @@ export async function middleware(req: NextRequest) {
 
 	}
 
-	if (route.includes('recipe')) {
+	if (!route.includes('finished') && route.includes('recipe')) {
 
 		const recipe = await validateRecipeMiddleware(req);
 
