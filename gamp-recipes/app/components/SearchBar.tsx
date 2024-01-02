@@ -34,8 +34,8 @@ export default function SearchBar() {
 		<section
 			// O container branco
 			id='searchBar'
-			className={`w-full pb-4
-			xl:top-16 xl:w-96` }
+			className={`w-full
+			xl:mx-auto xl:w-96` }
 		>
 			<fieldset
 				// Todo container que abrange o campo input mais o botão

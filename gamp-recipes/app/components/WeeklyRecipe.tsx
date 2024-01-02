@@ -1,8 +1,9 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function WeeklyRecipe() {
 	return (
-		<div className='xl:hidden relative'>
+		<Link href='/29' className='xl:hidden'>
 			<div
 				className='w-mobile bg-black rounded-3xl overflow-hidden relative'
 			>
@@ -23,6 +24,6 @@ export default function WeeklyRecipe() {
                     Shawarma
 				</h1>
 			</div>
-		</div>
+		</Link>
 	);
 }

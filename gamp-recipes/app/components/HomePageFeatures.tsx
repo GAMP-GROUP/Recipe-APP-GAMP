@@ -7,7 +7,7 @@ import WeeklyRecipe from './WeeklyRecipe';
 import RecipesFeed, { TRecipeObject } from './RecipesFeed';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import SearchBar from './SearchBar';
-import MealDrinKFilter from './MealDrinkFilter';
+import MealsDrinksFilter from './MealsDrinksFilter';
 
 type THomePageFeaturesProps = {
 	recipes: TRecipeObject[],
@@ -15,20 +15,20 @@ type THomePageFeaturesProps = {
 }
 
 export default function HomePageFeatures({ recipesQuantity, recipes }: THomePageFeaturesProps) {
-	const { menu, recipesType, setRecipesType } = useBehaviorContext();
+	const { menu, recipesType } = useBehaviorContext();
 
 	return (
 		<section
-			className={`flex flex-col gap-4 transition-opacity duration-500 ${menu ? 'opacity-0' : 'opacity-100'}`}
+			className={`flex flex-col gap-4 transition-opacity duration-500 ${ menu ? 'opacity-0' : 'opacity-100' }`}
 		>
-			<FullBanner />
-			<MiniBanner />
+			<section>
+				<FullBanner />
+				<MiniBanner />
+			</section>
 			<WelcomeBar />
 			<SearchBar />
 			<WeeklyRecipe />
-			<MealDrinKFilter
-				setRecipesType={setRecipesType}
-			/>
+			<MealsDrinksFilter />
 			<RecipesFeed
 				recipesType={recipesType}
 				recipesQuantity={recipesQuantity}

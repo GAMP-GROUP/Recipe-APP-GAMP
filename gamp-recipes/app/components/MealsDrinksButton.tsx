@@ -2,11 +2,11 @@
 import React from 'react';
 import { TRecipesType } from './RecipesFeed';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
-import { THandleRecipesTypeProps } from './MealDrinkFilter';
+import { THandleRecipesTypeProps } from './MealsDrinksFilter';
 
 type TMealsDrinksButtonProps = {
-    handleRecipesType: (params: THandleRecipesTypeProps) => void,
-    newRecipesType: TRecipesType
+	handleRecipesType: (params: THandleRecipesTypeProps) => void,
+	newRecipesType: TRecipesType
 }
 
 export default function MealsDrinksButton({ handleRecipesType, newRecipesType }: TMealsDrinksButtonProps) {
@@ -15,11 +15,11 @@ export default function MealsDrinksButton({ handleRecipesType, newRecipesType }:
 
 	return (
 		<button
-			onClick={ () => handleRecipesType({ currentRecipesType: recipesType, newRecipesType, setRecipesType }) }
-			className={ `flex px-3 py-2 gap-2 ${ newRecipesType === recipesType ? 'bg-yellow' : 'bg-gray-200' } rounded-xl font-bold` }
+			onClick={() => handleRecipesType({ currentRecipesType: recipesType, newRecipesType, setRecipesType })}
+			className={`flex px-3 py-2 gap-2 ${newRecipesType === recipesType ? 'bg-yellow' : 'bg-gray-200'} rounded-xl font-bold`}
 		>
-			<img src={ `/icons/${ newRecipesType.toLowerCase() }.svg` } className='w-6' />
-			{ capitalizedRecipeType }
+			<img src={`/icons/${newRecipesType.toLowerCase()}.svg`} className='w-6' />
+			{capitalizedRecipeType}
 		</button>
 	);
 }

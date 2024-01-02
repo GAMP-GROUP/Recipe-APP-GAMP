@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from '@/node_modules/next/image';
 import Link from '@/node_modules/next/link';
 import { useScrollBlock } from '../hooks/useScrollBlock';
@@ -10,6 +10,8 @@ import MenuIcon from './MenuIcon';
 
 export default function NavigationBar() {
 	const [blockScroll, allowScroll] = useScrollBlock();
+	const [userScroll, setUserScroll] = useState(true);
+	const [scrollPosition, setScrollPosition] = useState(0);
 	const { menu, setMenu } = useBehaviorContext();
 	const { status } = useSession();
 	const sessionStatus = status === 'authenticated' ? true : false;
@@ -25,10 +27,27 @@ export default function NavigationBar() {
 		}
 	}
 
+	// Verifica em qual direção o usuário está rolando a página
+	function scrollPage(): void {
+		const currentScrollY = window.scrollY;
+		const showHeader = scrollPosition > currentScrollY;
+
+		setUserScroll(showHeader);
+		setScrollPosition(currentScrollY);
+	}
+
+	useEffect(() => {
+		window.addEventListener('scroll', scrollPage);
+		return () => {
+			window.removeEventListener('scroll', scrollPage);
+		};
+	}, [scrollPosition]);
+
 	return (
 		<nav
 			id='navigation-bar'
-			className={`fixed w-screen bottom-0 h-16 px-4 bg-yellow z-60 flex justify-evenly items-center gap-8 shadow-lg
+			className={`fixed w-screen bottom-0 h-16 px-4 bg-yellow z-60 flex justify-evenly items-center gap-8 shadow-lg transition-transform duration-500
+            ${ userScroll ? 'transform translate-y-0' : 'translate-y-full' }
 			xl:w-screen xl:top-0 xl:justify-between xl:rounded-none xl:shadow-none xl:px-96` }
 		>
 			<MenuIcon

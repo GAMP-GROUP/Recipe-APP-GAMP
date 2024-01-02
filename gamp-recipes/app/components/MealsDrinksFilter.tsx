@@ -9,7 +9,7 @@ export type THandleRecipesTypeProps = {
 	setRecipesType: Dispatch<SetStateAction<TRecipesType>>
 }
 
-export default function MealDrinKFilter() {
+export default function MealsDrinksFilter() {
 	function handleRecipesType({ currentRecipesType, newRecipesType, setRecipesType }: THandleRecipesTypeProps) {
 		if (currentRecipesType === newRecipesType) {
 			setRecipesType('all');
@@ -19,15 +19,15 @@ export default function MealDrinKFilter() {
 	}
 
 	return (
-		<section className='flex flex-col gap-2 pb-4'>
+		<section className='flex flex-col gap-2 pb-4 xl:mx-auto'>
 			<h2 className='place-self-start'>Discover new recipes</h2>
-			<div className='flex gap-2'>
+			<div className='flex gap-2 xl:justify-around'>
 				<MealsDrinksButton
-					handleRecipesType={ handleRecipesType }
+					handleRecipesType={handleRecipesType}
 					newRecipesType='meals'
 				/>
 				<MealsDrinksButton
-					handleRecipesType={ handleRecipesType }
+					handleRecipesType={handleRecipesType}
 					newRecipesType='drinks'
 				/>
 			</div>
