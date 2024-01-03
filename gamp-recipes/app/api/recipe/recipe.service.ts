@@ -3,9 +3,6 @@ import { userAuth } from '@/app/middlewares/authToken';
 import prisma from '@/prisma/client';
 import { NewRecipeResponse, UpdateRecipeRequest, Request } from '@/types';
 
-
-
-
 export async function createRecipe(request: Request): Promise<NewRecipeResponse> {
 	const { recipe_type_id, recipe_name, instructions, image, tags, category, ingredients, amount } = await request.json();
 	const { message, user } = await userAuth(request);
@@ -112,9 +109,6 @@ export async function createRecipe(request: Request): Promise<NewRecipeResponse>
 
 	return { message: response, TYPE: HttpStatusCode.Created };
 }
-
-
-
 
 
 export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRecipeResponse> {

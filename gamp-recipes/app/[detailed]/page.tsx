@@ -1,6 +1,5 @@
 import { detailedParams } from '@/types';
 import React from 'react';
-
 import InProgressCard from '../components/InProgressCard';
 import { getRecipeById } from '../lib/recipeApi';
 
