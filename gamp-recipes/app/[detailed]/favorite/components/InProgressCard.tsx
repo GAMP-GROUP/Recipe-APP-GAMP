@@ -85,7 +85,6 @@ export default function InProgressCard(inProgressData: inProgressData) {
 		router.push('/');
 	};
 
-
 	return (
 		<div
 
