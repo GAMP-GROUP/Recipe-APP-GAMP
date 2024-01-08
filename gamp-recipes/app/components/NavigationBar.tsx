@@ -6,7 +6,6 @@ import { useScrollBlock } from '../hooks/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { signOut, useSession } from 'next-auth/react';
 import MenuIcon from './MenuIcon';
-// import BigScreenNavigationOptions from './BigScreenNavigationOptions';
 
 export default function NavigationBar() {
 	const [blockScroll, allowScroll] = useScrollBlock();
@@ -82,7 +81,6 @@ export default function NavigationBar() {
 							Sign In
 						</button>
 					</Link>
-
 				)
 			}
 		</nav>

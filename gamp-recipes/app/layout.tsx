@@ -1,23 +1,21 @@
+'use client';
 import './reset.css';
 import './globals.css';
 import './animations.css';
-import type { Metadata } from 'next';
+import { usePathname } from 'next/navigation';
 import Providers from '@/contextAPI/provider/providers';
 import NavigationBar from './components/NavigationBar';
 import UserMenu from './components/UserMenu';
 import React from 'react';
 import AuthProvider from './api/auth/[...nextauth]/authProvider';
 
-export const metadata: Metadata = {
-	title: 'Gamp Recipes',
-	description: 'Your library of recipes',
-};
-
 export default function RootLayout({
 	children,
 }: {
 	children: React.ReactNode;
 }) {
+	const pathname = usePathname();
+	const isOnboarding = pathname === '/onboarding' ? true : false;
 
 	return (
 		<html lang='en' className='w-screen h-full overflow-x-hidden'>
@@ -25,8 +23,12 @@ export default function RootLayout({
 				<Providers>
 					<AuthProvider>
 						{ children }
-						<UserMenu />
-						<NavigationBar />
+						{ !isOnboarding && (
+							<>
+								<UserMenu />
+								<NavigationBar />
+							</>
+						) }
 					</AuthProvider>
 				</Providers>
 			</body>
