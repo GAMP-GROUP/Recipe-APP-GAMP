@@ -8,7 +8,6 @@ import { SnackbarProvider } from 'notistack';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { useRouter } from 'next/navigation';
 
-
 type inProgressData =
 	{
 		recipe: RecipeData,
@@ -76,7 +75,8 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	
 	const instructions = inProgressData.recipe?.instructions.split('\n').map((instruction, index) => {
 		return (
-			<p key={index} className={'text-xl font-semibold max-w-4xl text-left p-2 xl:-ml-1 text-gray-600 font-lato m xl:min-w-[896px] xl:text-left '}>{instruction}</p>
+			<p key={index} 
+				className={'text-xl font-semibold max-w-4xl text-left p-2 xl:-ml-1 text-gray-600 font-lato m xl:min-w-[896px] xl:text-left '}>{instruction}</p>
 		);
 	}
 	);
@@ -96,7 +96,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 				<div
 					className={' gap-4 ml-3 sm:10 mb-5 xl:shadow-none xl:ml-4 w-fit xl:justify-end xl:items-center xl:max-w-7x flex xl:flex-col flex-col xl:h-fit'}
 				>
-
+					
 					<div className='xl:flex xl:justify-end mr-20 items-center xl:w-[672px] '>
 
 						<div className='xl:max-w-[360] xl:w-[360px] xl:min-w-[360px] flex flex-col justify-start items-start h-fit'>

@@ -1,6 +1,5 @@
 import { detailedParams } from '@/types';
 import React from 'react';
-
 import InProgressCard from './favorite/components/InProgressCard';
 import { getRecipeById } from '../lib/recipeApi';
 
@@ -26,7 +25,6 @@ export default async function Details({ params: { detailed } }: detailedParams) 
 				created_at: recipe.created_at,
 				updated_at: recipe.updated_at,
 				ingredients: recipe.Ingredients_Recipes,
-
 				category_name: recipe.category_name.name,
 				recipe_type_name: recipe.recipe_type.name,
 				author: recipe?.Author_Recipe[0]?.author?.username
