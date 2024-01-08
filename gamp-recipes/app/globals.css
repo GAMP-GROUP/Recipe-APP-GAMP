@@ -11,11 +11,17 @@
 		font-family: 'Lato', sans-serif;
 		@apply w-screen
 	}
+	h1 {
+		@apply text-3xl font-black
+	}
+	h2 {
+		@apply text-2xl font-extrabold
+	}
 	h3 {
-		@apply text-5xl font-bold
+		@apply text-xl font-semibold
 	}
 	h4 {
-		@apply text-xs my-1
+		@apply text-lg
 	}
 }
 

@@ -26,11 +26,7 @@ export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 			body: JSON.stringify({ id }),
 		});
 
-
-
-
 		setLiked(!liked);
-
 	}
 
 	const img = liked ? '/images/heart-fill.png' : '/images/heart-line.png';

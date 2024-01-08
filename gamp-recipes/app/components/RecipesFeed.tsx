@@ -1,10 +1,10 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import RecipesCard from './RecipesCard';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+import RecipesCard from './RecipesCard';
 import LoadingScreen from './LoadingScreen';
 
-type TRecipesProps = {
+export type TRecipeObject = {
 	id: number | null;
 	recipe_name: string;
 	instructions: string;
@@ -18,38 +18,54 @@ type TRecipesProps = {
 	updated_at: Date;
 }
 
-type TRecipesFeed = {
+export type TRecipesFeedProps = {
 	recipesQuantity: number,
-	feedType: 'drink' | 'meal' | 'all',
-	recipes: TRecipesProps[],
+	recipesType: TRecipesType
+	recipes: TRecipeObject[],
 }
 
-export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeed) {
-	const { menu } = useBehaviorContext();
-	const [filteredRecipes, setFilteredRecipes] = useState<TRecipesProps[]>([]);
+export type TRecipesType = 'all' | 'meals' | 'drinks'
+
+export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeedProps) {
+	const { recipesType } = useBehaviorContext();
+	const [filteredRecipes, setFilteredRecipes] = useState<TRecipeObject[]>([]);
 
 	useEffect(() => {
-		setFilteredRecipes(recipes.slice(0, recipesQuantity));
-	}, [recipes, recipesQuantity]);
+		let newFilteredRecipes: TRecipeObject[] = [];
 
+		if (recipesType !== 'all') {
+			// Filter based on recipe_type_id when recipesType is 'meals' or 'drinks'
+			newFilteredRecipes = recipes.filter(recipe => (
+				(recipesType === 'meals' && recipe.recipe_type_id === 2) ||
+				(recipesType === 'drinks' && recipe.recipe_type_id === 1)
+			));
+		} else {
+			// Include all recipes when recipesType is 'all'
+			newFilteredRecipes = recipes;
+		}
+
+		// Slice the required quantity of recipes
+		setFilteredRecipes(newFilteredRecipes.slice(0, recipesQuantity));
+	}, [recipes, recipesQuantity, recipesType]);
+	
 	return (
 		<>
 			<section
 				id='recipes-feed'
-				className={ `transition-opacity duration-500 ${ menu ? 'opacity-0' : 'opacity-100' } 
+				className={`flex flex-col items-center gap-8
 				xl:mt-10 xl:mx-auto xl:grid xl:grid-cols-3 xl:w-8/12 xl:transition-none` }
 			>
-				{	filteredRecipes.length <= 0 ? <LoadingScreen /> : 
+				{ filteredRecipes.length <= 0 ? <LoadingScreen /> :
 					filteredRecipes.map((recipe, index) => (
-						<div key={ index }>
+						<div key={index}>
 							<RecipesCard
-								type={ recipe.recipe_type_id }
-								id={ recipe.id }
-								title={ recipe.recipe_name }
-								tags={ recipe.tags }
-								image={ recipe.image }
-								area={ recipe.recipe_type_id === 2 ? recipe.area : null }
-								alcoholic={ recipe.recipe_type_id === 1 ? recipe.alcoholic : null }
+								type={recipe.recipe_type_id}
+								id={recipe.id}
+								title={recipe.recipe_name}
+								tags={recipe.tags}
+								image={recipe.image}
+								area={recipe.recipe_type_id === 2 ? recipe.area : null}
+								alcoholic={recipe.recipe_type_id === 1 ? recipe.alcoholic : null}
 							/>
 						</div>
 					)) }

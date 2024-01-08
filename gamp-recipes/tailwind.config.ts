@@ -11,6 +11,7 @@ const config: Config = {
 			width: {
 				'big': '105px',
 				'small': '75px',
+				'mobile': '380px'
 			},
 			colors: {
 				'yellow': '#F2E635',
