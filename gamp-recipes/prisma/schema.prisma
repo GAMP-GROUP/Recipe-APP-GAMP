@@ -2,87 +2,101 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client-js"
-  binaryTargets = ["native", "linux-musl"]
+   provider      = "prisma-client-js"
+   binaryTargets = ["native", "linux-musl"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+   provider = "mysql"
+   url      = env("DATABASE_URL")
 }
 
 model User {
-  id               Int                @id @default(autoincrement())
-  username         String
-  email            String             @unique
-  password_hash    String
-  nationality      String
-  created_at       DateTime           @default(now())
-  Author_Recipe    Author_Recipe[]
-  Favorite_Recipes Favorite_Recipes[]
+   id               Int                @id @default(autoincrement())
+   username         String
+   email            String             @unique
+   password_hash    String
+   nationality      String
+   created_at       DateTime           @default(now())
+   Author_Recipe    Author_Recipe[]
+   Favorite_Recipes Favorite_Recipes[]
+   Finished_Recipes Finished_Recipes[]
 }
 
 model Category {
-  id        Int         @id @default(autoincrement())
-  name      String
-  Recipes   Recipes[]
+   id      Int       @id @default(autoincrement())
+   name    String
+   Recipes Recipes[]
 }
 
 model Recipe_types {
-  id      Int       @id @default(autoincrement())
-  name    String
-  Recipes Recipes[]
+   id      Int       @id @default(autoincrement())
+   name    String
+   Recipes Recipes[]
 }
 
 model Ingredients {
-  id                  Int                   @id @default(autoincrement())
-  ingredients_name    String
-  Ingredients_Recipes Ingredients_Recipes[]
+   id                  Int                   @id @default(autoincrement())
+   ingredients_name    String
+   Ingredients_Recipes Ingredients_Recipes[]
 }
 
 model Author_Recipe {
-  id          Int @id @default(autoincrement())
-  author_id   Int
-  recipe_id   Int @unique
-  author      User  @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  recipes     Recipes @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   id        Int @id @default(autoincrement())
+   author_id Int
+   recipe_id Int @unique
+
+   author  User    @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   recipes Recipes @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model Recipes {
-  id                  Int                   @id @default(autoincrement())
-  recipe_name         String
-  instructions        String @db.VarChar(3000)
-  image               String
-  tags                String
-  category            Int
-  video_source        String?
-  area                String?
-  alcoholic           String?
-  recipe_type_id      Int
-  category_name       Category              @relation(fields: [category], references: [id])
-  created_at          DateTime              @default(now())
-  updated_at          DateTime              @updatedAt
-  recipe_type         Recipe_types          @relation(fields: [recipe_type_id], references: [id])
+   id             Int          @id @default(autoincrement())
+   recipe_name    String
+   instructions   String       @db.VarChar(3000)
+   image          String
+   tags           String
+   category       Int
+   area           String?
+   alcoholic      String?
+   recipe_type_id Int
+   category_name  Category     @relation(fields: [category], references: [id])
+   created_at     DateTime     @default(now())
+   updated_at     DateTime     @updatedAt
+   recipe_type    Recipe_types @relation(fields: [recipe_type_id], references: [id])
 
-  Author_Recipe       Author_Recipe[]
-  Ingredients_Recipes Ingredients_Recipes[]
-  Favorite_Recipes    Favorite_Recipes[]
+   Author_Recipe       Author_Recipe[]
+   Ingredients_Recipes Ingredients_Recipes[]
+   Favorite_Recipes    Favorite_Recipes[]
+   Finished_Recipes    Finished_Recipes[]
 }
 
 model Ingredients_Recipes {
-  id            Int         @id @default(autoincrement())
-  recipe_id     Int
-  ingredient_id Int
-  recipe        Recipes     @relation(fields: [recipe_id], references: [id])
-  ingredient    Ingredients @relation(fields: [ingredient_id], references: [id])
-  ing_amount    String?
+   id            Int         @id @default(autoincrement())
+   recipe_id     Int?
+   ingredient_id Int
+   recipe        Recipes?    @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   ingredient    Ingredients @relation(fields: [ingredient_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   ing_amount    String?
 }
 
 model Favorite_Recipes {
-  id         Int      @id @default(autoincrement())
-  user_id    Int
-  recipe_id  Int
-  user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  recipe     Recipes  @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  created_at DateTime @default(now())
+   id        Int     @id @default(autoincrement())
+   user_id   Int
+   recipe_id Int
+   fav       Boolean
+   finished  Boolean
+   user      User    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   recipe    Recipes @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+   created_at DateTime @default(now())
+}
+
+model Finished_Recipes {
+   id         Int      @id @default(autoincrement())
+   user_id    Int
+   recipe_id  Int
+   user       User     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   recipe     Recipes  @relation(fields: [recipe_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+   created_at DateTime @default(now())
 }

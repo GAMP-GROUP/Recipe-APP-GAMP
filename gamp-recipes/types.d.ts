@@ -35,30 +35,57 @@ type drinkAPI = {
 	[drinks: string]: externalRes;
 };
 
+type ShareBtnProps = {
+	id: string,
+	ImgClass?: string
+	setState: React.Dispatch<React.SetStateAction<boolean>>;
+	shareModal: boolean;
+
+}
+
+type ingredientForm = {
+	ingredient_name: string,
+	pk: number,
+}
+
+type amountNullable = string | null
+
+type recipePost = {
+	recipe_name: string,
+	instructions: string,
+	recipe_type_id: number,
+	category: number,
+	image: string,
+	tags: string,
+	amount: amountNullable[],
+	ingredients: ingredientForm[],
+}
+
+
 type ButtonProps = {
-	id: string;
-	type: string;
-};
+	id: string,
+	ImgClass?: string
+}
 
 type mealAPI = {
 	[meals: string]: externalRes;
 };
 type MealRes = {
-	idMeal: string;
-	strMeal: string;
-	strDrinkAlternate: string | null;
-	strCategory: string;
-	strArea: string;
-	strInstructions: string;
-	strMealThumb: string;
-	strTags: string;
-	strYoutube: string;
-	strSource: string | null;
-	strImageSource: string | null;
-	strCreativeCommonsConfirmed: string | null;
-	dateModified: string | null;
-	[index: string]: string;
-};
+	'idMeal': string,
+	'strMeal': string,
+	'strDrinkAlternate': string | null,
+	'strCategory': string,
+	'strArea': string,
+	'strInstructions': string,
+	'strMealThumb': string,
+	'strTags': string,
+	'strYoutube': string,
+	'strSource': string | null,
+	'strImageSource': string | null,
+	'strCreativeCommonsConfirmed': string | null,
+	'dateModified': string | null,
+	[index: string]: string,
+}
 
 type DrinkRes = {
 	idDrink: string;
@@ -84,3 +111,61 @@ type DrinkRes = {
 	dateModified: null | string;
 	[index: string]: string;
 };
+
+type NewRecipeRequest = {
+	recipe_type_id: number;
+	recipe_name: string;
+	instructions: string;
+	image: string;
+	tags: string;
+	category: number;
+	ingredients: {
+		ingredient_name: string;
+	}[];
+	amount: string[];
+};
+
+type RecipeData = {
+	id: number;
+	recipe_name: string;
+	instructions: string;
+	image: string;
+	tags: string;
+	category: number;
+	category_name?: string;
+	recipe_type_name?: string;
+	video_source?: string | null;
+	area?: string | null;
+	alcoholic?: string | null;
+	recipe_type_id: number;
+	created_at: Date;
+	updated_at: Date;
+	ingredients: (ingredientsAPI | null)[]; // Allow null for each ingredient
+	author?: string | null;
+};
+type ingredientsAPI = {
+	ing_amount: string | string[] | null; // Allow string or array of strings or null
+	ingredient: {
+		ingredients_name: string;
+	};
+};
+
+type UpdateRecipeRequest = {
+	id: number; // O ID da receita a ser atualizada
+	recipe_name: tring; // Campos atualizáveis (adicione todos os campos que podem ser atualizados)
+	instructions?: string;
+	image?: string;
+	tags?: string;
+	category?: number;
+	ingredients?: {
+		ingredient_name: string;
+		ing_amount?: string;
+	}[];
+	amount?: string[];
+	recipe_type_id?: number;
+}
+
+type Request = NewRecipeRequest | NextRequest
+
+type NewRecipeResponse = { message: string | RecipeData, TYPE: number };
+

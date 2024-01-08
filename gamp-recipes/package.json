@@ -10,7 +10,8 @@
     "dev": "prisma generate && prisma migrate reset --force && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@prisma/client": "^5.2.0",
@@ -19,12 +20,16 @@
     "autoprefixer": "10.4.14",
     "bcrypt": "^5.1.1",
     "eslint-config-next": "13.4.13",
+    "framer-motion": "^10.16.16",
     "jsonwebtoken": "^9.0.2",
     "next": "13.4.13",
     "next-auth": "^4.23.1",
+    "next-share": "^0.27.0",
+    "notistack": "^3.0.1",
     "postcss": "8.4.27",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-share": "^4.4.1",
     "tailwindcss": "3.3.3",
     "typescript": "5.1.6"
   },
@@ -34,9 +39,11 @@
     "@types/node": "^20.6.0",
     "@typescript-eslint/eslint-plugin": "^6.7.0",
     "@typescript-eslint/parser": "^6.7.0",
+    "cypress": "^13.5.0",
     "eslint": "^8.49.0",
     "eslint-plugin-react": "^7.33.2",
     "prisma": "^5.2.0",
+    "tailwind-scrollbar": "^3.0.5",
     "ts-node": "^10.9.1"
   }
 }

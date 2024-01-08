@@ -1,38 +1,49 @@
 'use client';
-
+import React from 'react';
 import { ButtonProps } from '@/types';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 
-export default function FavButton({ id, type }: ButtonProps) {
-	function favHandle(e: React.MouseEvent<HTMLButtonElement>) {
-		const { drink, meal } = JSON.parse(
-			localStorage.getItem('favorite') as string
-		) || { drink: [], meal: [] };
-		const typeAndId = (e.target as Element).id;
-		const [type, id] = typeAndId.split(' ');
-		const recipeType = type === 'drink';
-		const favoriteState = recipeType
-			? drink.some((each: string) => each === id)
-			: meal.some((each: string) => each === id);
-		let temp = {};
-		if (favoriteState) {
-			recipeType
-				? (temp = { drink: drink.filter((each: string) => each !== id), meal })
-				: (temp = { drink, meal: meal.filter((each: string) => each !== id) });
+export default function FavButton({ id, ImgClass }: ButtonProps) {
+	const session = useSession();
+	const router = useRouter();
+
+	async function favHandle(e: React.MouseEvent<HTMLButtonElement>) {
+		if (session.status === 'unauthenticated') {
+			window.alert('You need to sign in or register in GAMP in order to favorite recipes');
+			router.replace('/auth/signin');
+			return;
 		}
-		if (!favoriteState) {
-			recipeType
-				? (temp = { drink: [...drink, id], meal })
-				: (temp = { meal: [...meal, id], drink });
-		}
-		localStorage.setItem('favorite', JSON.stringify(temp));
+		const id = (e.target as Element).id;
+
+		const res = await fetch(`http://localhost:3000/${id}/favorite`, {
+			method: 'POST',
+			body: JSON.stringify({ id }),
+		});
+
+		const { message: { fav } } = await res.json();
+		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
+		window.alert(favState);
 	}
+
 	return (
 		<button
-			id={`${type} ${id}`}
+			id={id}
 			onClick={(e) => favHandle(e)}
-			className='rounded-full bg-yellow bg-auto p-5 mb-4 uppercase'
+			className={ 'rounded-full bg-yellow p-2 w-[2.35em] h-[2.35em] z-3 absolute top-8 right-8' }
 		>
-			ADD TO FAVORITES
+			<picture
+				id={id}
+				className='m-auto'>
+				<img
+					id={id}
+					alt='Favorite button'
+					src='/icons/favorites-notactive.png'
+					className={ ImgClass }
+				/>
+			</picture>
 		</button>
 	);
+
 }
+

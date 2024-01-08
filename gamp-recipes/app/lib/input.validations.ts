@@ -1,3 +1,5 @@
+import prisma from '@/prisma/client';
+
 export const validateEmail = (email: string) => {
 	const re = /\S+@\S+\.\S+/;
 	if (re.test(email)) return true;
@@ -25,7 +27,7 @@ export const validateUsername = (username: string) => {
 	if (username.length > characters && username.length < 10) return true;
 
 	return false;
-};
+}; 
 
 export const validateLogin = (
 	email: string,
@@ -41,3 +43,19 @@ export const validateLogin = (
 
 	return teste;
 };
+
+
+export const isEmailRegistred = async (email: string) => {
+	const isEmailRegistred = await prisma.user.findUnique({
+		where: {
+			email: email,
+		},
+	});
+
+	if (!isEmailRegistred) {
+		return false;
+	}
+
+	return true;
+};
+

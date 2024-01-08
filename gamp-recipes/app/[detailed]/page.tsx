@@ -1,91 +1,34 @@
 import { detailedParams } from '@/types';
-import { getMealById, getDrinkById } from '../lib/externalAPI';
-import { formatResponse } from '../lib/formatResponse';
-import StartRecipeButton from '../components/StartRecipeButton'; 
-import Link from 'next/link';
-import FavButton from '../components/FavoriteButton';
+import React from 'react';
 
-export default async function Details ({ params: { detailed } }: detailedParams) {
-  const [api, id] = detailed.split('-');
+import InProgressCard from '../components/InProgressCard';
+import { getRecipeById } from '../lib/recipeUtils';
 
-  if (api !== 'meal' && api !== 'drink') return <h1>Invalid route {api}</h1>
+export default async function Details({ params: { detailed } }: detailedParams) {
+	const id = Number(detailed);
+	const recipe = await getRecipeById(id.toString());
 
-  const fetchRecipe = api === 'meal' ? await getMealById(id) : await getDrinkById(id);
-  const recipe = formatResponse(fetchRecipe, api);
+	if (!recipe) return null;
 
-  return (
-    <main
-      className='flex flex-col items-center gap-4 w-full'
-    >
-      <h1
-        className='text-4xl font-semibold antialiased'
-      >{recipe.title}</h1>
-      <picture>
-        <img
-          className='rounded-md w-10/12 mx-auto'
-          src={recipe.thumb as string}
-          alt={recipe.title as string}
-        />
-      </picture>
-      <div
-      className='flex flex-row gap-8'
-      >
-        <p
-          className='text-xs'
-          >{`Category: ${recipe.category}`}</p>
-        <p
-          className='text-xs'
-          >{`Tags: ${recipe.tags}`}</p>
-      </div>
-      <section
-        className='w-9/12'
-      >
-        <h2
-          className='text-3xl text-center uppercase'
-        >
-          Instructions
-        </h2>
-        <p
-        className='text-justify'
-        >
-          {recipe.instructions}
-        </p>
-      </section>
-      <h2
-        className='text-2xl uppercase'
-      >Ingredients</h2>
-      <ul>
-        {recipe.ingredients.map((ingredient: string, index: number) => { return (
-          <li
-            key={ingredient + index}
-          >
-            {`${recipe.measurements[index] || ''} || ${ingredient} `}
-          </li>
-        )})}
-      </ul>
+	return (
+		<InProgressCard recipe={{
+			id: recipe.id,
+			recipe_name: recipe.recipe_name,
+			instructions: recipe.instructions,
+			image: recipe.image,
+			tags: recipe.tags,
+			category: recipe.category,
+			video_source: recipe.video_source,
+			area: recipe.area,
+			alcoholic: recipe.alcoholic,
+			recipe_type_id: recipe.recipe_type_id,
+			created_at: recipe.created_at,
+			updated_at: recipe.updated_at,
+			ingredients: recipe.Ingredients_Recipes,
 
-      <div
-        className='aspect-video w-9/12 mb-18'
-      >
-        {
-          api === 'drink' 
-          ? <p
-              className="text-center"
-            >{`Type: ${recipe.isAlcoholic}`}</p> 
-          : <iframe
-              className='rounded-md'
-              id="recipe video"
-              width="100%"
-              height="100%"
-              title={`video recipe for ${recipe.title}`}
-              src={`https://www.youtube.com/embed/${recipe.videoURL as string}`}
-            />
-        }
-      </div>
-      <Link href={`${detailed}/inProgress`}>
-        <StartRecipeButton type={api} id={id} />
-      </Link>
-      <FavButton type={api} id={id} />
-    </main>
-  )
+			category_name: recipe.category_name.name,
+			recipe_type_name: recipe.recipe_type.name,
+			author: recipe?.Author_Recipe[0]?.author?.username
+		}} detailed={detailed} />
+	);
 }

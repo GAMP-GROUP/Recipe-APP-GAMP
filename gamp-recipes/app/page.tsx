@@ -1,59 +1,37 @@
-import { getAllDrinks, getAllMeals } from './lib/externalAPI';
-import RecipesCard from './components/RecipesCard';
 import React from 'react';
+import prisma from '@/prisma/client';
+import RecipesFeed from './components/RecipesFeed';
+import FullBanner from './components/FullBanner';
+import MiniBanner from './components/MiniBanner';
+import Footer from './components/Footer';
 
 export default async function Home() {
-	const dataAllMeals = await getAllMeals();
-	const dataAllDrinks = await getAllDrinks();
-	return (
-		<div>
-			<main className='h-full'>
-				<section className='p'>
-					{dataAllMeals.map(
-						(
-							{ strMeal, idMeal, strMealThumb, strArea, strCategory },
-							index
-						) => {
-							return (
-								index < 6 && (
-									<div key={index}>
-										<RecipesCard
-											type='meal'
-											id={idMeal}
-											title={strMeal}
-											thumb={strMealThumb}
-											area={strArea}
-											category={strCategory}
-										/>
-									</div>
-								)
-							);
-						}
-					)}
+	const mealsRecipes = await prisma.recipes.findMany({
+		where: { recipe_type_id: 2 }
+	});
+	const drinksRecipes = await prisma.recipes.findMany({
+		where: { recipe_type_id: 1 }
+	});
+	const allRecipes = [...mealsRecipes, ...drinksRecipes];
 
-					{dataAllDrinks.map(
-						(
-							{ strDrink, idDrink, strDrinkThumb, strAlcoholic, strCategory },
-							index
-						) => {
-							return (
-								index < 6 && (
-									<div key={index}>
-										<RecipesCard
-											type='drink'
-											id={idDrink}
-											title={strDrink}
-											thumb={strDrinkThumb}
-											area={strAlcoholic}
-											category={strCategory}
-										/>
-									</div>
-								)
-							);
-						}
-					)}
-				</section>
-			</main>
-		</div>
+	function getRandomNumber() {
+		return Math.random() - 0.5;
+	}
+
+	allRecipes.sort(getRandomNumber);
+
+	return (
+		<section
+			className='lg:flex-col lg:mt-16'
+		>
+			<FullBanner />
+			<MiniBanner />
+			<RecipesFeed
+				recipesQuantity={30}
+				feedType={'all'}
+				recipes={allRecipes}
+			/>
+			<Footer />
+		</section>
 	);
 }
