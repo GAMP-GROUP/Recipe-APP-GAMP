@@ -6,7 +6,7 @@ import FavButton from '@/app/components/FavoriteButton';
 import ShareToSocialCard from '@/app/components/ShareToSocialCard';
 import { SnackbarProvider } from 'notistack';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
-import { useRouter } from 'next/navigation';
+import { PreviousPageButton } from '@/app/components/PreviousPageButton';
 
 type inProgressData =
 	{
@@ -15,8 +15,6 @@ type inProgressData =
 	};
 	
 export default function InProgressCard(inProgressData: inProgressData) {
-
-	const router = useRouter();
 
 	const timestampObj: Date = new Date(inProgressData.recipe.updated_at);
 	const formattedDate: string = timestampObj.toLocaleDateString('en-US', {
@@ -81,10 +79,6 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	}
 	);
 
-	const handlePreviousPage = () => {
-		router.push('/');
-	};
-
 	return (
 		<div
 
@@ -148,9 +142,7 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 							</div>
 							<div className='flex justify-center items-center'>
-								<button onClick={handlePreviousPage}>
-									<img src="/images/seta-esquerda.png" alt="seta para esquerda" className='w-5 xl:hidden order-1 my-auto' />
-								</button>
+								<PreviousPageButton />
 							</div>
 							
 						</div>

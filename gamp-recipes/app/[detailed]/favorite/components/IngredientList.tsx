@@ -16,10 +16,6 @@ export default function IngredientList({ ingredients, id, amount }: ingredientLi
 
 	const session = useSession();
 
-	if (localStorage.getItem(`ingredients recipe ${id}`) === null ||!localStorage.getItem(`ingredients recipe ${id}`)) {
-		localStorage.setItem(`ingredients recipe ${id}`, JSON.stringify({}));
-	}
-
 	const [itemsChecked, setItemsChecked] = useState<Record<string, boolean>>({});
 
 	const [isDisabled, setIsDisabled] = useState<boolean>(true);
