@@ -4,20 +4,14 @@ import { HttpStatusCode } from '@/app/lib/HTTPHandler';
 import { userAuth } from '@/app/middlewares/authToken';
 import prisma from '@/prisma/client';
 
-
-
 export async function POST(req: NextRequest) {
 	
 	try {
 		
 		const route = req.nextUrl.pathname.split('/');
 		const id = route[route.length - 1];
-		console.log('route', route);
-
 
 		const { message, user } = await userAuth(req);
-		console.log('user', message, user);
-		
 	
 		if (message !== 'success' || user == undefined) return { message, TYPE: HttpStatusCode.Unauthorized };
 
@@ -39,8 +33,6 @@ export async function POST(req: NextRequest) {
 			},
 		});
 
-
-		
 		return NextResponse.json(recipe, { status: 200 });
 
 	} catch (error) {

@@ -2,11 +2,6 @@ import { HttpStatusCode } from '@/app/lib/HTTPHandler';
 import { NextResponse } from 'next/server';
 import prisma from '@/prisma/client';
 
-
-
-
-
-
 export async function GET() {
 
 	try {
