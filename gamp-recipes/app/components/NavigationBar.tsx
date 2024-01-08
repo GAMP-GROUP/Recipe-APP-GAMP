@@ -1,12 +1,14 @@
 'use client';
 import React from 'react';
 import Image from '@/node_modules/next/image';
-import Link from '@/node_modules/next/link';
 import { useScrollBlock } from '../hooks/useScrollBlock';
 import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
 import { signOut, useSession } from 'next-auth/react';
 import MenuIcon from './MenuIcon';
-// import BigScreenNavigationOptions from './BigScreenNavigationOptions';
+import GampLogo from './GampLogo';
+import SearchBar from './SearchBar';
+import SignOutButton from './SignOutButton';
+import SignInButton from './SignInButton';
 
 export default function NavigationBar() {
 	const [blockScroll, allowScroll] = useScrollBlock();
@@ -45,8 +47,8 @@ export default function NavigationBar() {
 	return (
 		<nav
 			id='navigation-bar'
-			className={`fixed w-screen bottom-0 h-16 px-4 bg-yellow z-60 flex justify-evenly items-center gap-8 shadow-lg
-			xl:w-screen xl:top-0 xl:justify-between xl:rounded-none xl:shadow-none xl:px-96` }
+			className={`fixed w-screen bottom-0 h-16 px-4 bg-yellow z-60 flex justify-evenly items-center gap-4 shadow-lg
+			xl:w-screen xl:top-0 xl:grid xl:grid-cols-3 xl:gap-y-0 xl:rounded-none xl:shadow-none xl:px-80` }
 		>
 			<MenuIcon
 				menu={menu}
@@ -58,37 +60,19 @@ export default function NavigationBar() {
 				width='25'
 				height='25'
 				alt='A magnifiyng glass vectorized, representing the search icon'
+				className='xl:hidden'
 				onClick={ () => toggleSearchBar() }
 			/>
 
-			<Link
-				href='/'
-				className={'xl:order-first'}
-			>
-				<Image
-					src={'/images/logo-simple.png'}
-					width={60}
-					height={60}
-					alt='logo'
-				/>
-			</Link>
+			<SearchBar />
+
+			<GampLogo />
 
 			{
 				sessionStatus ? (
-					<button
-						onClick={() => signOut()}
-						className='text-sm font-semibold px-5 py-1 bg-black text-white rounded-2xl'
-					>
-						Sign Out
-					</button>
-
+					<SignOutButton signOut={ signOut } />
 				) : (
-					<Link href='/auth/signin'>
-						<button className='text-sm font-semibold px-4 py-1 bg-black text-white rounded-2xl'>
-							Sign In
-						</button>
-					</Link>
-
+					<SignInButton />
 				)
 			}
 		</nav>
