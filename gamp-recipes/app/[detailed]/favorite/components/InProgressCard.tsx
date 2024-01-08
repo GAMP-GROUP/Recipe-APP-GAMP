@@ -82,13 +82,13 @@ export default function InProgressCard(inProgressData: inProgressData) {
 	return (
 		<div
 
-			className={ 'ml-7 mr-7 mt-2 xl:h-max pb-10 h-full xl:mb-5 xl:w-max xl:ml-10 xl:mr-10 xl:grid xl:grid-cols-2 xl:grid-rows-1 overflow-hidden overflow-y-scroll no-scrollbar text-center flex flex-col xl:justify-center font-lato text-xl sm:text-s overflow-scroll-y no-scroll'}
+			className={ 'overflow-hidden overflow-y-scroll no-scrollbar text-center flex flex-col mx-7 mt-2 pb-10 h-full xl:mb-5 xl:w-max xl:ml-10 xl:mr-10 xl:grid xl:grid-cols-2 xl:grid-rows-1 sm:text-s xl:h-max xl:justify-center text-xl overflow-scroll-y no-scroll'}
 
 		>
 			<section className='text-left xl:justify-end xl:flex xl:items-center order-1 '>
 
 				<div
-					className={' gap-4 ml-3 sm:10 mb-5 xl:shadow-none xl:ml-4 w-fit xl:justify-end xl:items-center xl:max-w-7x flex xl:flex-col flex-col xl:h-fit'}
+					className={'flex flex-col w-fit gap-4 ml-3 mb-5 xl:shadow-none xl:ml-4 xl:justify-end xl:items-center xl:max-w-7x xl:flex-col xl:h-fit'}
 				>
 					
 					<div className='xl:flex xl:justify-end mr-20 items-center xl:w-[672px] '>
@@ -101,11 +101,11 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 							<div className='flex gap-2 xl:mb-2'>
 
-								<h4 className='text-gray-900 font-lato text-base xl:max-w-2xl xl:text-gray-500 font-bold'>
+								<h4 className='text-gray-900  font-lato text-base xl:max-w-2xl xl:text-gray-500 font-bold'>
 									Category: 
-									<span className='text-gray-500 font-semibold mr-1'>{inProgressData.recipe?.category_name} </span>
+									<span className='text-gray-500 font-semibold mx-1'>{inProgressData.recipe?.category_name} </span>
 									Author: 
-									<span className='text-gray-500 font-semibold'>{author} </span>
+									<span className='text-gray-500 font-semibold mx-1'>{author} </span>
 									Date: 
 									<span className='text-gray-500 ml-1 font-semibold'>{formattedDate} </span>
 								</h4>
@@ -115,15 +115,14 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 					</div>
 
-					<div className='xl:h-fit xl:w-[672px] flex max-w-xs xl:max-w-2xl xl:flex xl:justify-end mr-20 xl:items-center xl:-mt-5'>
+					<div className='mr-20 flex max-w-xs xl:max-w-2xl xl:flex xl:justify-end xl:items-center xl:h-fit xl:w-[672px] xl:-mt-5'>
 
-						<img className={' shadow-md rounded-sm xl:h-80 xl:w-[360px] w-60 xl:rounded-sm xl:max-w-3xl max-w-xs '} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
+						<img className={'w-60 max-w-xs shadow-md rounded-sm xl:h-80 xl:w-[360px] xl:rounded-sm xl:max-w-3xl'} src={inProgressData?.recipe.image} alt={inProgressData?.recipe.recipe_name}></img>
 					</div>
 
-					<div className='xl:w-[672px] xl:mr-16 order-first xl:order-last xl:-mt-3 mb-5 '>
+					<div className='order-first  mb-5 xl:w-[672px] xl:mr-16 xl:order-last xl:-mt-3'>
 
-						<div className=' flex xl:flex-row justify-between mt-2 mr-2 xl:justify-center xl:items-center gap-1 '>
-
+						<div className='gap-1 flex justify-between mt-2 mr-2 xl:justify-center xl:flex-row  xl:items-center'>
 
 							<div className={` order-3 gap-2 self-end flex flex-row xl:justify-center items-center ${!share ? '' : 'absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 '} xl:self-center `}>
 								
