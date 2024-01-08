@@ -7,6 +7,8 @@ export async function POST(request: NextRequest) {
 	try {
 		const { id } = await request.json();
 		const { message, user, error, code } = await userAuth(request);
+		console.log('user-linha', user);
+		
 
 		if (message !== 'success' || user == undefined) return NextResponse.json({ message, error }, { status: code });
 		

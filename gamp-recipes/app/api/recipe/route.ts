@@ -2,8 +2,6 @@ import { HttpStatusCode } from '@/app/lib/HTTPHandler';
 import { createRecipe, deleteRecipe, getRecipes, updateRecipe } from './recipe.service';
 import { NextRequest, NextResponse } from 'next/server';
 
-
-
 export async function POST(request: NextRequest) {
 
 	try {
@@ -58,8 +56,6 @@ export async function DELETE(request: NextRequest) {
 		return NextResponse.json(error, { status: HttpStatusCode.InternalServerError });
 	}
 }
-
-
 
 export async function GET() {
 

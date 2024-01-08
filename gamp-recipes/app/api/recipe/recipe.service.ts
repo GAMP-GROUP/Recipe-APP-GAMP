@@ -3,8 +3,6 @@ import { userAuth } from '@/app/middlewares/authToken';
 import prisma from '@/prisma/client';
 import { NewRecipeResponse, UpdateRecipeRequest, Request } from '@/types';
 
-
-
 export async function createRecipe(request: Request): Promise<NewRecipeResponse> {
 	const { recipe_type_id, recipe_name, instructions, image, tags, category, ingredients, amount } = await request.json();
 	const { message, user } = await userAuth(request);
@@ -12,7 +10,6 @@ export async function createRecipe(request: Request): Promise<NewRecipeResponse>
 	if (message !== 'success' || user == undefined) return { message, TYPE: HttpStatusCode.Unauthorized };
 
 	const ingredientIds: number[] = [];
-
 
 	for (const { ingredient_name } of ingredients) {
 
@@ -98,7 +95,6 @@ export async function createRecipe(request: Request): Promise<NewRecipeResponse>
 		amount: amount,
 	};
 
-
 	const addAuthor = await prisma.author_Recipe.create({
 		data: {
 			author_id: user.id,
@@ -112,15 +108,8 @@ export async function createRecipe(request: Request): Promise<NewRecipeResponse>
 	return { message: response, TYPE: HttpStatusCode.Created };
 }
 
-
-
-
-
 export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRecipeResponse> {
 	const { id, recipe_name, instructions, image, tags, category, ingredients, amount, recipe_type_id } = request;
-
-
-
 	const ingredientIds: number[] = [];
 
 	if (ingredients) {
@@ -156,8 +145,6 @@ export async function updateRecipe(request: UpdateRecipeRequest): Promise<NewRec
 	if (!ingredientRecipe) {
 		return { message: 'Receita não encontrada', TYPE: HttpStatusCode.NotFound };
 	}
-
-
 
 	const updateRecipe = await prisma.recipes.update({
 		where: { id },
@@ -294,10 +281,6 @@ export async function getRecipeById(request: number) {
 				},
 			},
 		});
-		console.log('request', request);
-
-		console.log('recipe------- 296', recipe);
-
 
 		return recipe;
 	} catch (error) {
@@ -306,16 +289,23 @@ export async function getRecipeById(request: number) {
 }
 
 
-export async function finishRecipe (request: number) {
+export async function finishRecipe (request: Request) {
+	
 	try {
+		const { message, user } = await userAuth(request);
+		console.log('user', message, user);
+		
+	
+		if (message !== 'success' || user == undefined) return { message, TYPE: HttpStatusCode.Unauthorized };
+
 		const recipe = await prisma.finished_Recipes.create({
 			data: {
 				recipe_id: request,
-				user_id: 1,
+				user_id: user.id,
 				
 			},
 		});
-
+		
 		return recipe;
 	} catch (error) {
 		console.error('Error finishing recipe:', error);
