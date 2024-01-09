@@ -28,7 +28,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 			value={{
 				user,
 				handleInputChange,
-
 			}}
 		>
 			<>{children}</>
