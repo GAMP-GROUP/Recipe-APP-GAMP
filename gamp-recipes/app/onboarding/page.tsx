@@ -1,15 +1,18 @@
+'use client';
 import React from 'react';
+import SwiperWrapper from './components/SwipperWrapper';
+import { useBehaviorContext } from '@/contextAPI/context/behavior.context';
+import StepsBar from './components/StepsBar';
 
 export default function Onboarding() {
+	const { currentSlide } = useBehaviorContext();
+	
 	return (
-		<section
-			className='h-full w-full bg-yellow flex flex-col justify-center items-center'
-		>
-			<img src='/images/logo-black.png' className='w-60' alt='' />
-			<h1>Welcome</h1>
-			<div>
-                    skip next
-			</div>
-		</section>
+		<main className='h-screen w-screen overflow-hidden'>
+			<StepsBar />
+			<SwiperWrapper
+				currentSlide={ currentSlide }
+			/>
+		</main>
 	);
 }

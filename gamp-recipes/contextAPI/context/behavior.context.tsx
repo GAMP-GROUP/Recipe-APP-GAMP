@@ -14,24 +14,30 @@ type Props = {
 };
 
 type BehaviorProps = {
-	menu: boolean;
-	share: boolean;
-	setShare: Dispatch<SetStateAction<boolean>>;
-	setMenu: Dispatch<SetStateAction<boolean>>;
-	recipeSearch: string;
-	setRecipeSearch: Dispatch<SetStateAction<string>>;
+	menu: boolean,
+	share: boolean,
+	setShare: Dispatch<SetStateAction<boolean>>,
+	setMenu: Dispatch<SetStateAction<boolean>>,
+	recipeSearch: string,
+	setRecipeSearch: Dispatch<SetStateAction<string>>,
 	recipesType: TRecipesType,
-	setRecipesType: Dispatch<SetStateAction<TRecipesType>>
+	setRecipesType: Dispatch<SetStateAction<TRecipesType>>,
+	currentSlide: number,
+	setCurrentSlide: Dispatch<SetStateAction<number>>,
 };
 
 export const BehaviorContext = createContext({
 	menu: false,
+	share: false,
+	setShare: () => {},
 	setMenu: () => {},
 	recipeSearch: '',
 	setRecipeSearch: () => {},
 	recipesType: 'all',
-	setRecipesType: () => {}
-} as unknown as BehaviorProps);
+	setRecipesType: () => {},
+	currentSlide: 0,
+	setCurrentSlide: () => {},
+} as BehaviorProps);
 
 export function BehaviorProvider({ children }: Props) {
 	const [menu, setMenu] = useState<boolean>(false);
@@ -39,18 +45,21 @@ export function BehaviorProvider({ children }: Props) {
 	const [share, setShare] = useState<boolean>(false);
 	const [recipeSearch, setRecipeSearch] = useState<string>('');
 	const [recipesType, setRecipesType] = useState<TRecipesType>('all');
+	const [currentSlide, setCurrentSlide] = useState<number>(0);
 
 	const behaviorSettings = {
 		menu,
+		setMenu,
 		open,
 		setOpen,
 		share,
 		setShare,
-		setMenu,
 		recipeSearch,
 		setRecipeSearch,
 		recipesType,
 		setRecipesType,
+		currentSlide,
+		setCurrentSlide,
 	};
 
 	return (
