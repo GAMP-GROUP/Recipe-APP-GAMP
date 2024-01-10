@@ -1,11 +1,14 @@
 import React from 'react';
+import Link from 'next/link';
 
 export default function SkipOnboardingButton() {
 	return (
-		<button
-			className='py-2'
-		>
+		<Link href='/'>
+			<button
+				className='py-2'
+			>
             Skip
-		</button>
+			</button>
+		</Link>
 	);
 }
