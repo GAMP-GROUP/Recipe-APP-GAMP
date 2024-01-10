@@ -48,7 +48,7 @@ export default function FilterForm(props: {
 	function dispatchSearch() {
 		const payload = {
 			recipe_type: recipeType,
-			setRecipeType,
+			categories: category,
 			ingredient,
 		};
 
