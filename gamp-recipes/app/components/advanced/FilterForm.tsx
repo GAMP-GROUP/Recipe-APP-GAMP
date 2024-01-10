@@ -1,13 +1,14 @@
 'use client';
 import React, {useState} from 'react';
 import SelectList from './SelectList';
+import DataInput from './DataInput';
 
 export default function FilterForm(props: {
     dataIngredients: string[],
     types: string[],
     categories: string[],
 }) {
-	const [recypeType, setRecypeType] = useState('');
+	const [recipeType, setRecipeType] = useState<string[]>([]);
 	const [category, setCategory] = useState<string[]>([]);
 	const [ingredient, setIngredient] = useState('');
 	const [alert, setAlert] = useState(false);
@@ -18,23 +19,21 @@ export default function FilterForm(props: {
 		type: string,
 	) {
 		const setterId =  type === 'category';
+		const reader = setterId ? category : recipeType;
+		const setter = setterId ? setCategory : setRecipeType;
 		
-		if (setterId) {
-			if (category.some((e => e === writable))) {
-				const categories = category.filter(e => e != writable);
-				setCategory(categories);
-				return; 
-			}
-			
-			const categories = [...category, writable];
-			setCategory(categories);
-			return;
+		if (reader.some((e => e === writable))) {
+			const payload = reader.filter(e => e != writable);
+			setter(payload);
+			return; 
 		}
-
-		setRecypeType(writable);
+			
+		const payload = [...reader, writable];
+		setter(payload);
+	
 	}
 
-	function chekcIng(ingredient: string) {
+	function checkIng(ingredient: string) {
 		const validIngredient = dataIngredients
 			.some((each) => each == ingredient);
 
@@ -48,8 +47,8 @@ export default function FilterForm(props: {
 
 	function dispatchSearch() {
 		const payload = {
-			recipe_type: recypeType,
-			category,
+			recipe_type: recipeType,
+			setRecipeType,
 			ingredient,
 		};
 
@@ -60,37 +59,23 @@ export default function FilterForm(props: {
 		<section>
 			<h1>Filter Form</h1>
 			<SelectList options={types} label='recipe type' writeState={handleSetter}/>
-			<SelectList options={categories} label='category' writeState={handleSetter} />
-			<div>
-				<label htmlFor="select-ingredients">Ingredient</label>
-				<input list="ingredients" id="select-ingredients" onBlur={e => chekcIng(e.target.value)} />
-				
-				{	alert 
-					?
-					<div role="alert"
-						onClick={() => setAlert(false)}
-					>
-						<div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-						Ingredient Not Found!
-						</div>
-						<div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-							<p>`Sorry, we dont have any recipes with that ingredient!`</p>
-						</div>
+			<SelectList options={categories} label='category' writeState={handleSetter} />	
+			{	alert 
+				?
+				<div role="alert"
+					onClick={() => setAlert(false)}
+				>
+					<div className="bg-red-500 text-black font-bold rounded-t px-4 py-2">
+						<p>Click here to dismiss</p>
 					</div>
-					:
-					null
-				}
-				<datalist id="ingredients">
-					{dataIngredients.map((each, index) => {
-						return (
-							<option
-								value={each}
-								key={each + index}
-							/>
-						);
-					})}
-				</datalist>
-			</div>
+					<div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+						<p>Ingredient Not Found!</p>
+						<p>Sorry, we dont have any recipes with that ingredient!</p>
+					</div>
+				</div>
+				:
+				<DataInput dataList={dataIngredients} checkIng={checkIng}/>
+			}
 			<button
 				className='text-lg font-bold px-5 py-1 mr-2 mt-4 bg-black text-white rounded-2xl'
 				onClick={dispatchSearch}

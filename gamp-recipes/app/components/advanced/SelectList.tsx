@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export default function SelectList(props: {
     options: string[],
@@ -30,15 +31,22 @@ export default function SelectList(props: {
 			>
 				{options.map((each, index) => {
 					return (
-						<button 
-							className='text-lg font-bold px-5 py-1 mr-2 mt-4 bg-yellow text-black rounded-2xl'
+						<motion.button
+							key={index + index}
+							animate={{
+								backgroundColor: toggle[each]
+									? 'rgb(122, 222, 149)'
+									: 'rgb(242,230,53)',
+							}}
+							className='text-lg font-bold px-5 py-1 mr-2 mt-4 text-black rounded-2xl'
 							onClick={e => handleActive(e, label)}
 							value={each}
 							name={each}
-							key={each+index}    
-						>
+						>  
+							
 							{each}
-						</button>
+							
+						</motion.button>
 					);
 				})}
 			</section>
