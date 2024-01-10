@@ -19,7 +19,6 @@ const config: Config = {
 				'red': '#F21D55',
 			},
 			fontFamily: {
-				'croissant': ['Croissant One', 'cursive'],
 				'lato': ['Lato', 'sans-serif'],
 				'argentum': ['Argentum-Sans-Bold',],
 				'poppins': ['Poppins', 'sans-serif'],

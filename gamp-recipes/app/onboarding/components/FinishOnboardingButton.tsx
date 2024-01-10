@@ -8,7 +8,7 @@ export default function NextSlideButton() {
 			<button
 				className='w-full bg-black text-white rounded-xl py-2'
 			>
-                Let&apos;s Start
+                Let&apos;s go!
 			</button>
 		</Link>
 	);

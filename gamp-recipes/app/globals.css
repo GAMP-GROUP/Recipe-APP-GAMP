@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Croissant+One&display=swap');
-@import '/Recipe-APP-GAMP/gamp-recipes/public/Argentum-Sans-Bold.ttf.woff';
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Poppins:wght@500&display=swap');
+@import '/Recipe-APP-GAMP/gamp-recipes/public/Argentum-Sans-Bold.ttf.woff';
 
 @layer base {
 	html {
@@ -59,5 +58,14 @@
 	min-width: 100vw;
 	box-sizing: border-box;
 	overflow-y: hidden;
-}
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 2rem;
+	padding: 0 3rem;
+	align-items: center;
+	position: relative;
+	text-align: center;
+	font-size: 1.125rem; /* You may need to adjust the value based on your design */
+  }
 	  

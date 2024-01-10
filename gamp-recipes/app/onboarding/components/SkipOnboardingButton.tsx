@@ -7,7 +7,7 @@ export default function SkipOnboardingButton() {
 			<button
 				className='py-2'
 			>
-            Skip
+				Skip
 			</button>
 		</Link>
 	);
