@@ -6,9 +6,9 @@ export default function Slide1() {
 		<section
 			className='swiper-slide bg-yellow'
 		>
+			<h1>Welcome!</h1>
 			<img src='/images/slide1.png' />
 			<div className='pb-8'>
-				<h1>Welcome!</h1>
 				<p>Let&apos;s get ready to chop some onions and start <span className='line-through'>crying</span> <span className='font-bold'>cooking!</span></p>
 			</div>
 			<ButtonSection
