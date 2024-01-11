@@ -30,4 +30,14 @@ export async function middleware(req: NextRequest) {
 		}
 	}
 
+	if(route.includes('author')){
+		const token = authToken(req);
+		console.log('token', token);
+		
+		if (token.message !== 'success') {
+			const { message, error, code } = token;
+			return NextResponse.json({ message, error }, { status: code });
+		}
+	}
+
 }

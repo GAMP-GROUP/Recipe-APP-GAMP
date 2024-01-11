@@ -5,11 +5,9 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 
-
 export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 	const session = useSession();
 	const router = useRouter();
-
 
 	const [liked, setLiked] = React.useState(false);
 
@@ -20,11 +18,16 @@ export default function FavButton({ id, ImgClass, btnClass}: ButtonProps) {
 			return;
 		}
 		const id = (e.target as Element).id;
-		
-		await fetch(`http://localhost:3000/${id}/favorite`, {
+		const res = await fetch(`http://localhost:3000/${id}/favorite`, {
 			method: 'POST',
 			body: JSON.stringify({ id }),
 		});
+		const { message: { fav } } = await res.json();
+
+		console.log('resssss---- ' + fav);
+		
+		const favState = (fav ? 'Added to Favorites' : 'Removed from Favorites') || 'cold start';
+		window.alert(favState);
 
 		setLiked(!liked);
 	}

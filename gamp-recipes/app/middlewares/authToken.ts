@@ -15,7 +15,8 @@ export function authToken(req: NextRequest) {
 export async function userAuth(req: NextRequest) {
 	try {
 		const cookie = req.cookies.get('next-auth.session-token');
-
+		console.log('cookie', cookie);
+		
 		if (cookie === undefined) return { message: 'Unauthorized, access denied', error: 'UNAUTHORIZED', code: 401 };
 
 		const payload = {
