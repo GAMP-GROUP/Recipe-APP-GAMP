@@ -9,10 +9,9 @@ export default function Slide2() {
 			<h1>No need for magic tricks</h1>
 			<img src='/images/slide2.png'/>
 			<div className='pb-8'>
-				<p><span className='font-bold'>Follow</span> your favorite cooks and</p>
-				<p><span className='font-bold'> discover</span> your cooking skills</p>
+				<p><span className='font-bold'>Discover</span> your favorite recipes and</p>
+				<p>develop your cooking <span className='italic'>(and mixing)</span> skills</p>
 			</div>
-
 			<ButtonSection
 				nextSlideNumber={2}
 			/>

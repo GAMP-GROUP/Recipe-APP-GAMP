@@ -8,14 +8,14 @@ type TButtonSectionProps = {
 
 export default function ButtonSection({ nextSlideNumber }: TButtonSectionProps) {
 	return (
-		<div
+		<section
 			className='flex flex-col w-11/12 gap-2 absolute bottom-8 font-bold'
 		>
 			<NextSlideButton
 				nextSlideNumber={ nextSlideNumber }
 			/>
 			<SkipOnboardingButton />
-		</div>
+		</section>
 
 	);
 }

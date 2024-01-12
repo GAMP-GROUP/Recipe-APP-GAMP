@@ -33,9 +33,9 @@ export default function UserMenu() {
 								className={ `flex-1 py-4 pl-4 w-full text-lg font-bold ${ index === 0 ? 'font-extrabold text-black' : 'font-medium text-gray-500' } flex items-center border-b-gray-500 border-1 shadow` }>
 								<picture>
 									<img
-										src={ `/icons/${item.toLowerCase()}.png` }
+										src={ `/icons/${item.toLowerCase()}.svg` }
 										alt={ `${item} icon` }
-										className={ `invert w-6 mr-6 ${ index === 0 ? 'opacity-100' :  'opacity-20' }` }
+										className={ `w-6 mr-6 ${ index === 0 ? 'opacity-100' :  'opacity-20' }` }
 									/>
 								</picture>
 								{ item }
