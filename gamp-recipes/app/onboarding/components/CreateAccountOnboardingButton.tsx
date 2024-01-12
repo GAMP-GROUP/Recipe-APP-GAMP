@@ -7,7 +7,7 @@ export default function CreateAccountOnboardingButton() {
 			href='http://localhost:3000/auth/signup'
 		>
 			<button
-				className='w-full bg-black text-white rounded-xl py-2'
+				className='w-full bg-yellow text-black rounded-xl py-2'
 			>
             Create account
 			</button>

@@ -4,7 +4,7 @@ import ButtonSection from '../components/ButtonSection';
 export default function Slide1() {
 	return (
 		<section
-			className='swiper-slide bg-yellow'
+			className='swiper-slide'
 		>
 			<h1>Welcome!</h1>
 			<img src='/images/slide1.png' />

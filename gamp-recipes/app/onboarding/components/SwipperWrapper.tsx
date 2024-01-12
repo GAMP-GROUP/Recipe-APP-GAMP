@@ -10,7 +10,7 @@ type TSwiperWrapperProps = {
 export default function SwiperWrapper({ currentSlide }: TSwiperWrapperProps) {
 
 	return (
-		<section id='swiper-container'>
+		<section id='swiper-container' className={ currentSlide < 2 ? 'bg-yellow' : 'bg-black text-white transition-colors duration-[2000ms]' }>
 			<section id='swiper-wrapper' style={{ transform: `translateX(-${currentSlide * 100}%)` }} className='flex'>
 				<Slide1 />
 				<Slide2 />
