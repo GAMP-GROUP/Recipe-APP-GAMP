@@ -13,16 +13,5 @@ export default function Slide3() {
 			</div>
 			<FinishOnboardingButtonSection />
 		</section>
-		// <section
-		// 	className='swiper-slide bg-yellow'
-		// >
-		// 	<h1>Unlock all content</h1>
-		// 	<img src='/images/slide2.png'/>
-		// 	<p>Sign up for <strong>free!</strong></p>
-		// 	<div className='flex flex-col w-11/12 gap-2 absolute bottom-20 font-bold'>
-		// 		<FinishOnboardingButton />
-		// 		<button className='py-2'>Login</button>
-		// 	</div>
-		// </section>
 	);
 }
