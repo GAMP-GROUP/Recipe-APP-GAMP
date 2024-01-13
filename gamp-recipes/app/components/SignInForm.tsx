@@ -52,7 +52,7 @@ export default function SignInForm() {
 	}, [status]);
 
 	return (
-		<div className='flex flex-col items-center gap-8 bg-white shadow-xl pt-6 pb-10 px-2 rounded-lg font-lato w-11/12'>
+		<section className='flex flex-col items-center gap-8 bg-white shadow-xl pt-6 pb-10 px-2 rounded-xl font-lato w-11/12'>
 			<section className='flex flex-col items-center'>
 				<img src='/images/logo-black.png' alt='logo icon' className='w-32' />
 				<h2 className='text-center text-2xl font-bold text-gray-900 py-2'>
@@ -128,6 +128,6 @@ export default function SignInForm() {
 					<GoogleSignInButton />
 				</section>
 			</form>
-		</div>
+		</section>
 	);
 }
