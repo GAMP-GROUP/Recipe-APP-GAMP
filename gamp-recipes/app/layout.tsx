@@ -15,7 +15,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	const pathname = usePathname();
-	const isOnboarding = pathname === '/onboarding' ? true : false;
+	const noNavBarRoutes = ['/onboarding', '/auth/signin', '/auth/signup'];
+	const checkNoNavBarRoutes = noNavBarRoutes.includes(pathname) ? true : false;
 
 	return (
 		<html lang='en' className='w-screen h-full overflow-x-hidden'>
@@ -23,7 +24,7 @@ export default function RootLayout({
 				<Providers>
 					<AuthProvider>
 						{ children }
-						{ !isOnboarding && (
+						{ !checkNoNavBarRoutes && (
 							<>
 								<UserMenu />
 								<NavigationBar />
