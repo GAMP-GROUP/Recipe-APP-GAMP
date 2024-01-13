@@ -14,39 +14,31 @@ import React from 'react';
 import { signUp } from '../actions/users/signUp';
 import { useSession } from 'next-auth/react';
 import { useEffect } from 'react';
-import GoogleSignInButton from './GoogleSignInButton';
+import SignInSignUpHeader from './SignInSignUpHeader';
+import SignInSignUpButtonSection from './SignInSignButtonSection';
 
 export default function SignUpForm() {
 	const [buttonClicked, setButtonClicked] = useState(false);
 	const {status} = useSession();
 	const router = useRouter();
+	const { handleInputChange, user: { email, password, nationality, username }	} = useContext(UserContext);
 
-	const {
-		handleInputChange,
-		user: { email, password, nationality, username },
-	} = useContext(UserContext);
+	function handleSubmit (event: React.FormEvent) {
+		return (
+			event.preventDefault()
+		);
+	}
 
-	const handleSubmit = (event: React.FormEvent) => {
-		event.preventDefault();
-
-		console.log('login!');
-	};
-
-	const validations = (
-		email: string,
-		password: string,
-		nationality: string,
-		username: string
-	) => {
+	function validateForm( email: string, password: string,	nationality: string, username: string) {
 		if (email && password && nationality && username) {
 			const validation = validateLogin(email, password, username, nationality);
 			return validation;
 		}
-	};
+	}
 
-	const handleSignUpBtn = async () => {
+	async function handleSignUpBtn() {
 		setButtonClicked(true);
-		const validationsResult = validations(
+		const validationsResult = validateForm(
 			email,
 			password,
 			nationality,
@@ -60,8 +52,7 @@ export default function SignUpForm() {
 			return window.alert('User with that email already exists.');
 		}
 		router.push('/auth/signin');
-		console.log(status);
-	};
+	}
 
 	useEffect(() => {
 		if (status === 'authenticated') {
@@ -72,21 +63,11 @@ export default function SignUpForm() {
 
 	return (
 		<section className='flex flex-col items-center gap-8 bg-white shadow-xl pt-6 pb-10 px-2 rounded-xl font-lato w-11/12'>
-			<section className='flex flex-col items-center'>
-				<img src='/images/logo-black.png' alt='logo icon' className='w-32' />
-				<h2 className='text-center text-2xl font-bold text-gray-900 my-2'>
-					Create Your Account
-				</h2>
+			<SignInSignUpHeader
+				type='signup'
+			/>
 
-				<p className="text-center text-sm text-gray-500">Already registered?
-					<a href="/auth/signin"
-						className=" mt-2 font-semibold text-gray-700 focus:text-gray-800 focus:outline-none">
-						{' '}Login here.
-					</a>
-				</p>
-			</section>
-
-			<form onSubmit={handleSubmit} className='flex flex-col gap-8'>
+			<form onSubmit={ handleSubmit } className='flex flex-col gap-8'>
 				<section className='bg-white text-slate-950 flex flex-col gap-4 items-center w-full'>
 					<fieldset
 						className='w-full'
@@ -174,33 +155,12 @@ export default function SignUpForm() {
 							</p>
 						) }
 					</fieldset>
-				</section>
-				
-				<section
-					className='flex flex-col items-center gap-2'
-				>
-					<button
-						type='button'
-						onClick={ () => handleSignUpBtn() }
-						className={
-							`w-80 bg-yellow border border-gray-300 rounded-lg shadow-md py-2
-							text-sm font-bold text-gray-700 hover:bg-gray-200
-							focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`
-						}>
-						SIGN UP
-					</button>
-
-					<section className='flex items-center h-10 w-11/12'>
-						<div className='h-[0.05rem] w-4/6 bg-gray-300' />
-						<p className='leading-none px-4 text-xs text-gray-600 tracking-wide font-medium'>
-							Or
-						</p>
-						<div className='h-[0.05rem] w-4/6 bg-gray-300' />
-					</section>
-
-					<GoogleSignInButton />
-				</section>
+				</section>				
 			</form>
+
+			<SignInSignUpButtonSection
+				type='signup' handleClickBtn={ handleSignUpBtn }
+			/>
 		</section>
 	);
 }

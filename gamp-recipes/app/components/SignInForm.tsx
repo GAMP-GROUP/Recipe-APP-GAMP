@@ -4,22 +4,22 @@ import { UserContext } from '@/contextAPI/context';
 import { useSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect } from 'react';
-import GoogleSignInButton from './GoogleSignInButton';
+import SignInSignUpHeader from './SignInSignUpHeader';
+import SignInSignUpButtonSection from './SignInSignButtonSection';
 
 export default function SignInForm() {
 	const router = useRouter();
 	const { status } = useSession();
-
 	const { handleInputChange, user: { email, password } } = useContext(UserContext);
 
-	function handleSubmit (event: React.FormEvent) {
+	function handleSubmit(event: React.FormEvent) {
 		// Função que previne a alteração da página
 		return (
 			event.preventDefault()
 		);
 	}
 
-	async function handleSignInBtn () {
+	async function handleSignInBtn() {
 		// Função responsável por verificar se os campos
 		// de login estão preenchidos e faz o redirecionamento em caso de sucesso
 		if (email === '' || password === '') {
@@ -53,27 +53,17 @@ export default function SignInForm() {
 
 	return (
 		<section className='flex flex-col items-center gap-8 bg-white shadow-xl pt-6 pb-10 px-2 rounded-xl font-lato w-11/12'>
-			<section className='flex flex-col items-center'>
-				<img src='/images/logo-black.png' alt='logo icon' className='w-32' />
-				<h2 className='text-center text-2xl font-bold text-gray-900 py-2'>
-					Sign In
-				</h2>
+			<SignInSignUpHeader
+				type='signin'
+			/>
 
-				<p className="text-center text-sm text-gray-500">Don&#x27;t have an account yet?
-					<a href="/auth/signup"
-						className=" mt-2 font-semibold text-gray-700 focus:text-gray-800 focus:outline-none">
-						{' '}Sign up.
-					</a>
-				</p>
-			</section>
-			
 			<form onSubmit={ handleSubmit } className='flex flex-col gap-8'>
 				<section className='bg-white text-slate-950 flex flex-col gap-8 items-center w-full'>
 					<fieldset
-						className='w-full'	
+						className='w-full'
 					>
 						<label className='text-gray-700 text-sm font-bold self-start'>
-						Email:
+							Email:
 						</label>
 						<input
 							type='email'
@@ -90,7 +80,7 @@ export default function SignInForm() {
 						className='w-full'
 					>
 						<label className='text-gray-700 text-sm font-bold self-start'>
-						Password:
+							Password:
 						</label>
 						<input
 							type='password'
@@ -102,32 +92,11 @@ export default function SignInForm() {
 						/>
 					</fieldset>
 				</section>
-
-				<section
-					className='flex flex-col items-center gap-2'
-				>
-					<button
-						type='button'
-						onClick={ () => handleSignInBtn() }
-						className={
-							`w-80 bg-yellow border border-gray-300 rounded-lg shadow-md py-2
-							text-sm font-bold text-gray-700 hover:bg-gray-200
-							focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`
-						}>
-						SIGN IN
-					</button>
-
-					<section className='flex items-center h-10 w-11/12'>
-						<div className='h-[0.05rem] w-4/6 bg-gray-300' />
-						<p className='leading-none px-4 text-xs text-gray-600 tracking-wide font-medium'>
-							Or
-						</p>
-						<div className='h-[0.05rem] w-4/6 bg-gray-300' />
-					</section>
-
-					<GoogleSignInButton />
-				</section>
 			</form>
+
+			<SignInSignUpButtonSection
+				type='signin' handleClickBtn={ handleSignInBtn }
+			/>
 		</section>
 	);
 }
