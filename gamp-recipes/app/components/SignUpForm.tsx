@@ -1,12 +1,8 @@
 'use client';
 import React, { useContext } from 'react';
 import { UserContext } from '@/contextAPI/context';
-import {
-	validateEmail,
-	validatePassword,
-	validateNationality,
-	validateUsername,
-} from '@/app/lib/input.validations';
+import { validateEmail, validatePassword, validateNationality, validateUsername } from '@/app/lib/input.validations';
+import { handleSubmit } from '../lib/signInSignUpUtils';
 
 type TSignUpFormProps = {
 	buttonClicked: boolean,
@@ -14,12 +10,6 @@ type TSignUpFormProps = {
 
 export default function SignUpForm({ buttonClicked }: TSignUpFormProps) {
 	const { handleInputChange, user: { email, password, nationality, username }	} = useContext(UserContext);
-
-	function handleSubmit (event: React.FormEvent) {
-		return (
-			event.preventDefault()
-		);
-	}
 
 	return (
 		<form onSubmit={ handleSubmit } className='flex flex-col gap-8'>

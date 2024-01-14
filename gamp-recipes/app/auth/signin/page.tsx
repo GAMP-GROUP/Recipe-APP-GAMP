@@ -6,7 +6,7 @@ import SignInSignUpHeader from '@/app/components/SignInSignUpHeader';
 import SignInForm from '@/app/components/SignInForm';
 import SignInSignUpButtonSection from '@/app/components/SignInSignButtonSection';
 
-function SignIn() {
+export default function SignIn() {
 	const { user: { email, password } } = useContext(UserContext);
 
 	async function handleSignInBtn() {
@@ -46,8 +46,5 @@ function SignIn() {
 				/>
 			</section>
 		</div>
-	
 	);
 }
-
-export default SignIn;

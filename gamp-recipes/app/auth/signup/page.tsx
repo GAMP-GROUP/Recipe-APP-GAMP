@@ -15,7 +15,10 @@ export default function SignUp() {
 	const [buttonClicked, setButtonClicked] = useState(false);
 	const { user: { email, password, nationality, username }	} = useContext(UserContext);
 
-	function validateForm( email: string, password: string,	nationality: string, username: string) {
+	function validateForm(email: string, password: string,	nationality: string, username: string): boolean | undefined {
+		// Função responsável por verificar
+		// se todos campos foram preenchidos corretamente
+		// retorna true (caso de sucesso) ou undefined
 		if (email && password && nationality && username) {
 			const validation = validateLogin(email, password, username, nationality);
 			return validation;
@@ -23,6 +26,9 @@ export default function SignUp() {
 	}
 
 	async function handleSignUpBtn() {
+		// Chama a função que tem como objetivo válidar o formulário.
+		// com sucesso, permite o usuário finalizar o cadastro
+
 		setButtonClicked(true);
 		const validationsResult = validateForm(
 			email,

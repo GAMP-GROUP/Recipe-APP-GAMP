@@ -4,18 +4,12 @@ import { UserContext } from '@/contextAPI/context';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect } from 'react';
+import { handleSubmit } from '../lib/signInSignUpUtils';
 
 export default function SignInForm() {
 	const router = useRouter();
 	const { status } = useSession();
 	const { handleInputChange, user: { email, password } } = useContext(UserContext);
-
-	function handleSubmit(event: React.FormEvent) {
-		// Função que previne o recarregamento da página
-		return (
-			event.preventDefault()
-		);
-	}
 
 	useEffect(() => {
 		if (status === 'authenticated') {
