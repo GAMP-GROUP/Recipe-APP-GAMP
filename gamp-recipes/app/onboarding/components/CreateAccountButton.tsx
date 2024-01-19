@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
-export default function CreateAccountOnboardingButton() {
+export default function CreateAccountButton() {
 	return (
 		<Link
 			href='http://localhost:3000/auth/signup'
@@ -9,7 +9,7 @@ export default function CreateAccountOnboardingButton() {
 			<button
 				className='w-full bg-yellow text-black rounded-xl py-2'
 			>
-            Create account
+				Create account
 			</button>
 		</Link>
 	);

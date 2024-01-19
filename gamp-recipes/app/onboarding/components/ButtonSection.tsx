@@ -1,6 +1,6 @@
 import React from 'react';
 import NextSlideButton from '../components/NextSlideButton';
-import SkipOnboardingButton from '../components/SkipOnboardingButton';
+import AlreadyRegisteredButton from './AlreadyRegisteredButton';
 
 type TButtonSectionProps = {
     nextSlideNumber: number,
@@ -14,7 +14,7 @@ export default function ButtonSection({ nextSlideNumber }: TButtonSectionProps) 
 			<NextSlideButton
 				nextSlideNumber={ nextSlideNumber }
 			/>
-			<SkipOnboardingButton />
+			<AlreadyRegisteredButton />
 		</section>
 
 	);
