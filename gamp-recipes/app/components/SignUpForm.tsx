@@ -2,7 +2,6 @@
 import React, { useContext } from 'react';
 import { UserContext } from '@/contextAPI/context';
 import { validateEmail, validatePassword, validateNationality, validateUsername } from '@/app/lib/input.validations';
-import { handleSubmit } from '../lib/signInSignUpUtils';
 
 type TSignUpFormProps = {
 	buttonClicked: boolean,
@@ -12,7 +11,7 @@ export default function SignUpForm({ buttonClicked }: TSignUpFormProps) {
 	const { handleInputChange, user: { email, password, nationality, username }	} = useContext(UserContext);
 
 	return (
-		<form onSubmit={ handleSubmit } className='flex flex-col gap-8'>
+		<form onSubmit={ (event) => event?.preventDefault() } className='flex flex-col gap-8'>
 			<section className='bg-white text-slate-950 flex flex-col gap-4 items-center w-full'>
 				<fieldset
 					className='w-full'

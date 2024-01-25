@@ -4,7 +4,6 @@ import { UserContext } from '@/contextAPI/context';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useContext, useEffect } from 'react';
-import { handleSubmit } from '../lib/signInSignUpUtils';
 
 export default function SignInForm() {
 	const router = useRouter();
@@ -19,7 +18,7 @@ export default function SignInForm() {
 	}, [status]);
 
 	return (
-		<form onSubmit={ handleSubmit } className='flex flex-col gap-8'>
+		<form onSubmit={ (event) => event?.preventDefault() } className='flex flex-col gap-8'>
 			<section className='bg-white text-slate-950 flex flex-col gap-8 items-center w-full'>
 				<fieldset
 					className='w-full'

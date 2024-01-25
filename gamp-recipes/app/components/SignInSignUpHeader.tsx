@@ -17,7 +17,7 @@ export default function SignInSignUpHeader({ type }: TSignInSignUpHeaderProps) {
 			<p className="text-center text-sm text-gray-500">
 				{isSignIn ? 'Don\'t have an account yet?' : 'Already registered?'}
 				<a
-					href={isSignIn ? '/auth/signin' : '/auth/signup'}
+					href={ isSignIn ? '/auth/signup' : '/auth/signin' }
 					className=" mt-2 font-semibold text-gray-700 focus:text-gray-800 focus:outline-none"
 				>
 					{isSignIn ? ' Register here.' : ' Login here.'}
