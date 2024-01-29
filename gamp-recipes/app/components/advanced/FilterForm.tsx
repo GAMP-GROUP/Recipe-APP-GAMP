@@ -2,6 +2,8 @@
 import React, {useState} from 'react';
 import SelectList from './SelectList';
 import DataInput from './DataInput';
+import { AnimatePresence } from 'framer-motion';
+import MotionNotFound from './MotionNotFound';
 
 export default function FilterForm(props: {
     dataIngredients: string[],
@@ -60,22 +62,20 @@ export default function FilterForm(props: {
 			<h1>Filter Form</h1>
 			<SelectList options={types} label='recipe type' writeState={handleSetter}/>
 			<SelectList options={categories} label='category' writeState={handleSetter} />	
-			{	alert 
-				?
-				<div role="alert"
-					onClick={() => setAlert(false)}
-				>
-					<div className="bg-red-500 text-black font-bold rounded-t px-4 py-2">
-						<p>Click here to dismiss</p>
-					</div>
-					<div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-						<p>Ingredient Not Found!</p>
-						<p>Sorry, we dont have any recipes with that ingredient!</p>
-					</div>
-				</div>
-				:
-				<DataInput dataList={dataIngredients} checkIng={checkIng}/>
-			}
+			<AnimatePresence>
+				{	alert 
+					?
+					<MotionNotFound 
+						setAlert={setAlert}
+						message={'Ingredient not found! we dont have any recipes with that ingredient'}
+					/>
+					:
+					<DataInput 
+						dataList={dataIngredients}
+						dataType='ingredients'
+						checkIng={checkIng}/>
+				}
+			</AnimatePresence>
 			<button
 				className='text-lg font-bold px-5 py-1 mr-2 mt-4 bg-black text-white rounded-2xl'
 				onClick={dispatchSearch}
