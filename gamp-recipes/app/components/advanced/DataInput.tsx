@@ -10,6 +10,7 @@ export default function DataInput(props: {
     
 	return (
 		<motion.div
+			className='flex flex-col items-center'
 			initial={{
 				y: '10%',
 				opacity: 0,
@@ -23,8 +24,18 @@ export default function DataInput(props: {
 				duration: 0.1,
 			}}
 		>
-			<label htmlFor="select-ingredients">Ingredient</label>
-			<input list={dataType} id={`select-${dataType}`} onBlur={e => checkIng(e.target.value)} />
+			<label 
+				className='my-2'
+				htmlFor="select-ingredients"
+			>
+				Include an ingredient?
+			</label>
+			<input 
+				list={dataType}
+				id={`select-${dataType}`}
+				onBlur={e => checkIng(e.target.value)}
+				className='border-solid border-2 border-black rounded-lg'
+			/>
 			<datalist id={dataType}>
 				{dataList.map((each, index) => {
 					return (

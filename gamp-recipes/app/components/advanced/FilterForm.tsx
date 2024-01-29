@@ -13,6 +13,7 @@ export default function FilterForm(props: {
 	const [recipeType, setRecipeType] = useState<string[]>([]);
 	const [category, setCategory] = useState<string[]>([]);
 	const [ingredient, setIngredient] = useState('');
+	const [term, setTerm] = useState<string>('');
 	const [alert, setAlert] = useState(false);
 	const {dataIngredients, types, categories} = props;
 
@@ -51,6 +52,7 @@ export default function FilterForm(props: {
 		const payload = {
 			recipe_type: recipeType,
 			categories: category,
+			recipe_name: term,
 			ingredient,
 		};
 
@@ -58,24 +60,44 @@ export default function FilterForm(props: {
 	}
 
 	return (
-		<section>
-			<h1>Filter Form</h1>
-			<SelectList options={types} label='recipe type' writeState={handleSetter}/>
-			<SelectList options={categories} label='category' writeState={handleSetter} />	
-			<AnimatePresence>
-				{	alert 
-					?
-					<MotionNotFound 
-						setAlert={setAlert}
-						message={'Ingredient not found! we dont have any recipes with that ingredient'}
-					/>
-					:
-					<DataInput 
-						dataList={dataIngredients}
-						dataType='ingredients'
-						checkIng={checkIng}/>
-				}
-			</AnimatePresence>
+		<section
+			className='flex flex-col items-center'
+		>
+			<h1>Filter component</h1>
+			<SelectList options={types} label='recipe type' writeState={handleSetter} />
+			<SelectList options={categories} label='category' writeState={handleSetter} />
+			<div
+				className='flex flex-col items-center my-2'
+			>
+				<label
+					className='text-center'
+					htmlFor='recipe-title'
+				>Recipe Title</label>
+				<input
+					className='border-solid border-2 border-black rounded-lg'
+					id='recipe-title'
+					onChange={e => setTerm(e.target.value)}
+					type="text"
+				/>	
+			</div>
+			<div
+				className='w-1/2 h-36'
+			>
+				<AnimatePresence>
+					{	alert 
+						?
+						<MotionNotFound 
+							setAlert={setAlert}
+							message={'Ingredient not found! we dont have any recipes that use such ingredient'}
+						/>
+						:
+						<DataInput 
+							dataList={dataIngredients}
+							dataType='ingredients'
+							checkIng={checkIng}/>
+					}
+				</AnimatePresence>
+			</div>
 			<button
 				className='text-lg font-bold px-5 py-1 mr-2 mt-4 bg-black text-white rounded-2xl'
 				onClick={dispatchSearch}

@@ -10,7 +10,7 @@ export default function MotionNotFound(props: {
 		<motion.div 
 			role="alert"
 			key='box'
-			className="box bg-red-500 text-black font-bold rounded-t px-4 py-2"
+			className="text-center my-2 flex flex-col items-center"
 			initial={{
 				y: '50%',
 				opacity: 0,
@@ -26,8 +26,12 @@ export default function MotionNotFound(props: {
 			}}
 			onClick={() => setAlert(false)}
 		>
-			<p>Click here to dismiss</p>
-			<p>{message}</p>
+			<h4
+				className='text-lg font-bold'
+			>Click here to dismiss</h4>
+			<p
+				className='w-3/4 text-sm'
+			>{message}</p>
 		</motion.div>
 	);
 }

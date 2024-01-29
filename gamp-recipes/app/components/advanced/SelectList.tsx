@@ -19,14 +19,16 @@ export default function SelectList(props: {
 		const ref = {...toggle };
 		ref[writable] = !ref[writable];
 		setToggle(ref);
-		console.log(ref);
 		writeState(writable, label);
 	}
 
 	return (
-		<div>
+		<div
+			className='flex flex-col items-center my-2'
+		>
 			<label htmlFor={selectLabel}>Choose a {label}: </label>
 			<section  
+				className='flex flex-row flex-wrap justify-center'
 				id={selectLabel}
 			>
 				{options.map((each, index) => {
@@ -43,9 +45,7 @@ export default function SelectList(props: {
 							value={each}
 							name={each}
 						>  
-							
 							{each}
-							
 						</motion.button>
 					);
 				})}
