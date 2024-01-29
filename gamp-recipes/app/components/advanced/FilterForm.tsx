@@ -4,11 +4,13 @@ import SelectList from './SelectList';
 import DataInput from './DataInput';
 import { AnimatePresence } from 'framer-motion';
 import MotionNotFound from './MotionNotFound';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function FilterForm(props: {
-    dataIngredients: string[],
-    types: string[],
-    categories: string[],
+		dataIngredients: string[],
+		types: string[],
+		categories: string[],
+		params:{ query: string},
 }) {
 	const [recipeType, setRecipeType] = useState<string[]>([]);
 	const [category, setCategory] = useState<string[]>([]);
@@ -16,6 +18,8 @@ export default function FilterForm(props: {
 	const [term, setTerm] = useState<string>('');
 	const [alert, setAlert] = useState(false);
 	const {dataIngredients, types, categories} = props;
+	const path = usePathname();
+	const router = useRouter();
 
 	function handleSetter(
 		writable: string,
@@ -49,14 +53,14 @@ export default function FilterForm(props: {
 	}
 
 	function dispatchSearch() {
-		const payload = {
-			recipe_type: recipeType,
-			categories: category,
-			recipe_name: term,
-			ingredient,
-		};
-
-		console.log(payload);
+		const cat = category.length <= 0 ? '' : category.join();
+		const type = recipeType.length <= 0 ? '' : recipeType.join();
+		const params = new URLSearchParams();
+		params.set('category', cat);
+		params.set('recipe_type', type);
+		params.set('recipe_name', term);
+		params.set('ingredient', ingredient);
+		router.push(`${path}/filter?${params.toString()}`);
 	}
 
 	return (
