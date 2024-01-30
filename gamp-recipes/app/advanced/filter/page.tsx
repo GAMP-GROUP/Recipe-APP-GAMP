@@ -7,7 +7,8 @@ export default async function AdvRender(props: {
 		category: string,
 		recipe_type: string,
 		recipe_name: string,
-		ingredient: string, 
+		ingredient: string,
+		area: string,
 	}
 }) {
 	const { searchParams: {
@@ -15,6 +16,7 @@ export default async function AdvRender(props: {
 		recipe_type,
 		recipe_name,
 		ingredient,
+		area,
 	} } = props;
 
 	const categories = await prisma.category.findMany();
@@ -44,18 +46,26 @@ export default async function AdvRender(props: {
 			.includes(recipe_name.toLowerCase())
 		) 
 		: filteredQuery;
-	
+
 	const ingredient_query = ingredient 
 		? recipe_query
 			.filter(e => e.Ingredients_Recipes
 				.some(e => e.ingredient.ingredients_name === ingredient))
 		: recipe_query;
 
+	const area_query = area 
+		? filteredQuery.filter(e => e.area === area)
+		: ingredient_query;
+
+
+	//incluir Area, remover titulo, tratativa notFound
+	//toggle entre category e area
+
 	return (
 		<section>
 			<RecipesFeed
-				recipes={ingredient_query}
-				recipesQuantity={ingredient_query.length}
+				recipes={area_query}
+				recipesQuantity={area_query.length}
 				recipesType='all'
 			/>
 		</section>	

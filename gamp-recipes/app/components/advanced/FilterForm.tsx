@@ -5,19 +5,20 @@ import DataInput from './DataInput';
 import { AnimatePresence } from 'framer-motion';
 import MotionNotFound from './MotionNotFound';
 import { usePathname, useRouter } from 'next/navigation';
+import LinkList from './LinkList';
 
 export default function FilterForm(props: {
+		areas: string[],
 		dataIngredients: string[],
 		types: string[],
 		categories: string[],
-		params:{ query: string},
 }) {
 	const [recipeType, setRecipeType] = useState<string[]>([]);
 	const [category, setCategory] = useState<string[]>([]);
 	const [ingredient, setIngredient] = useState('');
-	const [term, setTerm] = useState<string>('');
+	const [browseBy, setBrowseBy] = useState(true);
 	const [alert, setAlert] = useState(false);
-	const {dataIngredients, types, categories} = props;
+	const {dataIngredients, types, categories, areas} = props;
 	const path = usePathname();
 	const router = useRouter();
 
@@ -58,32 +59,16 @@ export default function FilterForm(props: {
 		const params = new URLSearchParams();
 		params.set('category', cat);
 		params.set('recipe_type', type);
-		params.set('recipe_name', term);
 		params.set('ingredient', ingredient);
 		router.push(`${path}/filter?${params.toString()}`);
 	}
 
-	return (
+	const inclusiveFilter = (
 		<section
 			className='flex flex-col items-center'
 		>
-			<h1>Filter component</h1>
 			<SelectList options={types} label='recipe type' writeState={handleSetter} />
 			<SelectList options={categories} label='category' writeState={handleSetter} />
-			<div
-				className='flex flex-col items-center my-2'
-			>
-				<label
-					className='text-center'
-					htmlFor='recipe-title'
-				>Recipe Title</label>
-				<input
-					className='border-solid border-2 border-black rounded-lg'
-					id='recipe-title'
-					onChange={e => setTerm(e.target.value)}
-					type="text"
-				/>	
-			</div>
 			<div
 				className='w-1/2 h-36'
 			>
@@ -106,8 +91,28 @@ export default function FilterForm(props: {
 				className='text-lg font-bold px-5 py-1 mr-2 mt-4 bg-black text-white rounded-2xl'
 				onClick={dispatchSearch}
 			>
-                Search
+			Search
 			</button>
+		</section>
+	);
+
+	return (
+		<section
+			className='flex flex-col items-center'
+		>	
+			<h1>Filter component</h1>
+			<button
+				onClick={() => setBrowseBy(!browseBy)}
+			>
+				Click here to filter by {browseBy ? 'nationality' : 'categories'}
+			</button>
+			{ browseBy 
+				? inclusiveFilter
+				: <LinkList
+					label='nationality'
+					options={areas}
+				/>
+			}
 		</section>
 	);
 }
