@@ -22,16 +22,18 @@ export default function AreaList(props: {
 			>
 				{options.map((each, index) => {
 					return (
-						<button
-							key={index + index}
-							className='text-lg font-bold px-5 py-1 mr-2 mt-4 text-black rounded-2xl bg-yellow'
-							value={each}
-							name={each}
-						>  
-							<Link href={`${path}/filter?area=${each}`}> 
+						<Link 
+							key={each + index + 'link'}
+							href={`${path}/filter?area=${each}`}> 
+							<button
+								key={index + index}
+								className='text-lg font-bold px-5 py-1 mr-2 mt-4 text-black rounded-2xl bg-yellow'
+								value={each}
+								name={each}
+							>  
 								{each}
-							</Link>
-						</button>
+							</button>
+						</Link>
 					);
 				})}
 			</div>
