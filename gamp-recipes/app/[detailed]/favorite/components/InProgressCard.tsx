@@ -69,7 +69,6 @@ export default function InProgressCard(inProgressData: inProgressData) {
 
 	const { ingredients, amount } = getIngredientsAndAmount();
 
-	console.log(ingredients, amount);
 	
 	const instructions = inProgressData.recipe?.instructions.split('\n').map((instruction, index) => {
 		return (

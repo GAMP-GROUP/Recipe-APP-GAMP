@@ -17,9 +17,6 @@ export const getRecipeById = async (id: string) => {
 		return res.json();
 	});
 
-
-
-
 	return recipe;
 };
 
@@ -35,4 +32,17 @@ export const finishRecipe = async (id: string) => {
 
 	return recipe;
 
+};
+
+export const finishedRecipes = async () => {
+
+	const recipes = fetch('http://localhost:3000/api/recipe/finished', {
+		cache: 'no-cache',
+		method: 'GET',
+
+	}).then((res) => {
+		return res.json();
+	});
+
+	return recipes;
 };
