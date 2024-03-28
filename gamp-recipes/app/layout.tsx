@@ -8,6 +8,14 @@ import NavigationBar from './components/NavigationBar';
 import UserMenu from './components/UserMenu';
 import React from 'react';
 import AuthProvider from './api/auth/[...nextauth]/authProvider';
+import { Lato } from 'next/font/google';
+
+const lato = Lato({
+	weight: ['100', '300', '400', '700', '900'],
+	display: 'swap',
+	subsets: ['latin'],
+	variable: '--lato-font'
+});
 
 export default function RootLayout({
 	children,
@@ -18,7 +26,7 @@ export default function RootLayout({
 	const isOnboarding = pathname === '/onboarding' ? true : false;
 
 	return (
-		<html lang='en' className='w-screen h-full overflow-x-hidden'>
+		<html lang='en' className={ `w-screen h-full overflow-x-hidden ${ lato.className }` }>
 			<body className='w-screen h-full bg-white flex justify-center'>
 				<Providers>
 					<AuthProvider>
