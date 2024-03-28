@@ -7,25 +7,50 @@ const config: Config = {
 		'./app/**/*.{js,ts,jsx,tsx,mdx}',
 	],
 	theme: {
+		fontSize:{
+			'heading1': ['3rem', {
+				fontWeight: '900',
+				lineHeight: '4.5rem'
+			}],
+			'heading2': ['2rem', {
+				fontWeight: '700',
+				lineHeight: '2.25rem'
+			}],
+			'heading3': ['1.5rem', {
+				fontWeight: '700',
+				lineHeight: '1.5rem'
+			}],
+			'strong': ['1rem', {
+				fontWeight: '700'
+			}],
+			'base': ['1rem', {
+				fontWeight: '400'
+			}],
+			'light': ['1rem', {
+				fontWeight: '300'
+			}],
+		},
 		extend: {
-			width: {
-				'big': '105px',
-				'small': '75px',
-				'mobile': '380px'
-			},
 			colors: {
 				'yellow': '#F2E635',
-				'gold': '#F2BA52',
-				'red': '#F21D55',
+				'black': '#060606',
+				'white': '#F0F1F2',
+				'gray1': '#D1D5DB',
+				'gray2': '#6B7280',
+				'gray3': '#4B5563',
+				'pasta': '#FBBF24',
+				'pork': '#FB7185',
+				'chicken': '#F1B56C',
+				'vegetarian': '#4ADE80',
+				'beef': '#F21D55',
+				'alcoholic': '#C084FC',
+				'nonalcoholic': '#60A5FA',
 			},
 			fontFamily: {
 				'croissant': ['Croissant One', 'cursive'],
 				'lato': ['Lato', 'sans-serif'],
 				'argentum': ['Argentum-Sans-Bold',],
 				'poppins': ['Poppins', 'sans-serif'],
-			},
-			backgroundColor: {
-				semiwhite: 'rgb(249, 250, 251)'
 			}
 		},
 	},

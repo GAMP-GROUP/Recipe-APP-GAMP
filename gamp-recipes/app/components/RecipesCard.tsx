@@ -23,7 +23,7 @@ export default function RecipesCard({ id, image, title, type }: recipeProps): JS
 					<img
 						alt={title}
 						src={image}
-						className='object-cover rounded-3xl w-mobile h-48 shadow-lg'
+						className='object-cover rounded-3xl w-96 h-48 shadow-lg'
 					/>
 				</picture>
 			</Link>

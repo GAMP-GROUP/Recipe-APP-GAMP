@@ -1,27 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Croissant+One&display=swap');
-@import '/Recipe-APP-GAMP/gamp-recipes/public/Argentum-Sans-Bold.ttf.woff';
-@import url('https://fonts.googleapis.com/css2?family=PT+Sans&family=Poppins:wght@500&display=swap');
 
 @layer base {
 	html {
-		font-family: 'Lato', sans-serif;
+		font-family: var('--lato-font');
 		@apply w-screen
-	}
-	h1 {
-		@apply text-3xl font-black
-	}
-	h2 {
-		@apply text-2xl font-extrabold
-	}
-	h3 {
-		@apply text-xl font-semibold
-	}
-	h4 {
-		@apply text-lg
 	}
 }
 

@@ -5,7 +5,7 @@ export default function WeeklyRecipe() {
 	return (
 		<Link href='/29' className='xl:hidden'>
 			<div
-				className='w-mobile bg-black rounded-3xl overflow-hidden relative'
+				className='w-96 bg-black rounded-3xl overflow-hidden relative'
 			>
 				<img
 					src='/images/shawarma.jpg'
