@@ -10,6 +10,7 @@ export type TRecipeObject = {
 	instructions: string;
 	image: string;
 	tags: string;
+	category: string;
 	video_source?: string | null;
 	area?: string | null;
 	alcoholic?: string | null;
