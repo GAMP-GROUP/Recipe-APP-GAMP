@@ -4,17 +4,20 @@ import Footer from './components/Footer';
 import HomePageFeatures from './components/HomePageFeatures';
 
 export default async function Home() {
-	const mealsRecipes = await prisma.recipes.findMany({
-		where: { recipe_type_id: 2 }
-	});
-	const drinksRecipes = await prisma.recipes.findMany({
-		where: { recipe_type_id: 1 }
-	});
-	const allRecipes = [...mealsRecipes, ...drinksRecipes];
-
 	function getRandomNumber() {
 		return Math.random() - 0.5;
 	}
+
+	const data = await prisma.recipes.findMany({
+		include: { category_name: true },
+	});
+
+	const allRecipes = data.map((e) => { 
+		return { 
+			...e,
+			category: e.category_name.name
+		}; 
+	});
 
 	allRecipes.sort(getRandomNumber);
 

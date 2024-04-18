@@ -10,6 +10,7 @@ export type TRecipeObject = {
 	instructions: string;
 	image: string;
 	tags: string;
+	category: string;
 	video_source?: string | null;
 	area?: string | null;
 	alcoholic?: string | null;
@@ -63,6 +64,7 @@ export default function RecipesFeed({ recipesQuantity, recipes }: TRecipesFeedPr
 								id={recipe.id}
 								title={recipe.recipe_name}
 								tags={recipe.tags}
+								category={recipe.category}
 								image={recipe.image}
 								area={recipe.recipe_type_id === 2 ? recipe.area : null}
 								alcoholic={recipe.recipe_type_id === 1 ? recipe.alcoholic : null}
